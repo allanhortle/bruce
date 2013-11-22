@@ -1,0 +1,25 @@
+
+/*
+|--------------------------------------------------------------------------
+| Tunic
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin tunic-fontface(
+	$font-family,
+	$path,
+	$weight: normal,
+	$style: normal
+){
+	@font-face {
+		font-family:$font-family;
+		src: url('#{$path}.eot');
+		src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
+			 url('#{$path}.woff') format('woff'),
+			 url('#{$path}.ttf') format('truetype'),
+			 url('#{$path}.svg##{$font-family}') format('svg');
+		font-weight:$weight;
+		font-style:$style;
+	}
+}
