@@ -45,21 +45,45 @@
 |
 */
 
-@mixin tunic-ellipsis($cutoff:16px){	 
+%tunic-ellipsis{
 	overflow:hidden;
-	box-sizing:border-box; 
-	padding-right:$cutoff; 
 	text-overflow:ellipsis;
 	white-space:nowrap;
 }
 
+@mixin tunic-ellipsis($cutoff:n){
+	@extend	%tunic-ellipsis;
+	@if $cutoff != n {
+		padding-right:$cutoff; 		
+	}	
+}
+
+/*
+|--------------------------------------------------------------------------
+| Size
+|--------------------------------------------------------------------------
+|
+| One declaration for width and height 
+|
+*/
+
+@mixin tunic-size($w, $h:null){
+	@if $h != null {
+		width:$w;
+		height:$h;	
+	}
+	@else{
+		width:$w;
+		height:$w;
+	}
+}
 
 /*
 |--------------------------------------------------------------------------
 | Flood
 |--------------------------------------------------------------------------
 |
-| Absolutley position and element as far as it's containing elements bounds
+| Absolutley position an element as far as it's containing elements bounds
 |
 */
 
@@ -70,6 +94,35 @@
 	bottom:0;
 	right:0;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Columns
+|--------------------------------------------------------------------------
+|
+| Uses borders to create columns. 
+|
+*/
+
+@mixin tunic-columns($spacing:4px, $color:transparent){
+	border-right:$spacing solid $color;
+	border-left:$spacing solid $color;
+	&:first-child{
+		border-left:none;
+	}
+	&:last-child{
+		border-right:none;
+	}
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Clearfix
+|--------------------------------------------------------------------------
+|
+*/
 
 %tunic-clearfix{
 	&:after{
@@ -86,6 +139,7 @@
 |--------------------------------------------------------------------------
 |
 */
+
 
 %_box-sizing{
 	box-sizing:border-box;
@@ -188,6 +242,15 @@
 | Useful functions for to save dev from tearing their hair out.
 |
 */
+
+@function repeatChar($char, $ammount){
+	$a: $char;
+	@for $i from 0 through $ammount{		
+		$a: $a + $char;
+	}
+	@return $a;
+}
+
 
 @function inverse($var){
 	@return $var *-1;
