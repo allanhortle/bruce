@@ -12,6 +12,26 @@
 
 /*
 |--------------------------------------------------------------------------
+| Wrappers
+|--------------------------------------------------------------------------
+|
+| Page width an auto margins. Stock standard rappin'.
+|
+*/
+
+%tunic-wrapper{
+	$tunic-pageWidth: 1024px !default;
+	margin:0 auto;
+	width:$tunic-pageWidth; 
+}
+
+.l-wrapper{
+	@extend %tunic-wrapper; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
 | Widths
 |--------------------------------------------------------------------------
 |
@@ -91,13 +111,28 @@
 
 /*
 |--------------------------------------------------------------------------
-| Misc
+| Spacing
 |--------------------------------------------------------------------------
 |
 */
 
+$tunic-unit: 16px !default;
 
-.l-row{
-	margin-bottom:32px;
+%tunic-spaced{
+	margin-bottom: $tunic-unit;
+}
+
+%tunic-spaced--x2{
+	margin-bottom: $tunic-unit * 2;
+}
+
+
+
+.l-spaced{
+	@extend %tunic-spaced; 
+}
+
+.l-spaced--x2{
+	@extend %tunic-spaced--x2; 
 }
 
