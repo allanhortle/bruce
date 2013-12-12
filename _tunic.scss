@@ -156,6 +156,19 @@
 |
 */
 
+
+%tunic-treset{
+	$tunic-fontSize:13px !default;
+	font-size: $tunic-fontSize;
+}
+
+.t-reset{
+	@extend %tunic-treset; 
+}
+
+
+
+
 %_typ-icon{
 
 }
@@ -213,6 +226,12 @@
 }
 
 %_act-button{
+	-webkit-touch-callout: none;
+	user-select: none;
+	cursor:pointer;
+}
+
+%tunic-behave--button{
 	-webkit-touch-callout: none;
 	user-select: none;
 	cursor:pointer;

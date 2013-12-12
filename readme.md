@@ -1,12 +1,12 @@
 Tunic
 =====
 
-A utility base for Sass
+A utility base for Sass. Nothing Schmancy.
 
 Importing
 ---------
 
-Tunic is just a bunch of Sass helpers. To use just import as you like, before your real sass. 
+Tunic is just a bunch of Sass helpers. To use it just import as you like, before your real sass. 
 
     @import 
     	"tunic/tunic",
@@ -23,7 +23,7 @@ Tunic is just a bunch of Sass helpers. To use just import as you like, before yo
 Varaible Overrides
 ------------------
 
-All unit values in Tunic are based off variables. Also there is not stupid long list of already defined variables.
+All unit values in Tunic are based off variables. There is not stupid long list of already defined variables.
 If you dont like something, just define it before your tunic imports.
 
     $tunic-pageWidth:	1024px		// Width of wrapper classes
