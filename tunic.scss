@@ -1,0 +1,458 @@
+
+/*======\                      __           	
+|        \                    |  \          	
+ \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
+   | $$   |  \  |  \|       \ |  \ /       \	
+   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$	
+   | $$   | $$  | $$| $$  | $$| $$| $$      	
+   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 	
+   | $$    \$$    $$| $$  | $$| $$ \$$     \  »»----> LAYOUT	
+    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/ 
+
+
+/*
+|--------------------------------------------------------------------------
+| Wrappers
+|--------------------------------------------------------------------------
+|
+| Page width an auto margins. Stock standard rappin'.
+|
+*/
+
+%tunic-wrapper{
+	$tunic-pageWidth: 1024px !default;
+	margin:0 auto;
+	width:$tunic-pageWidth; 
+}
+
+.l-wrapper{
+	@extend %tunic-wrapper; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Widths
+|--------------------------------------------------------------------------
+|
+| Force an element to a percentage width;
+|
+*/
+
+@for $i from 0 through 10{
+	.l-#{$i}0{	width:percentage($i)/10   !important; }
+	.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+} 
+.l-00{
+	width:1% !important;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Floats
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-right{
+	float:right !important;
+}
+
+.l-left{
+	float:left !important;
+}
+
+.l-floatAlign{
+	overflow:hidden
+}
+
+.l-clearfix{
+	@extend %tunic-clearfix; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Display & Postioning
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-block{
+	display:block !important;
+}
+
+.l-inlineBlock{
+	display: inline-block;
+}
+
+.l-relative{
+	position: relative;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Vertical Align
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-vert{
+	display:table;
+	height:100%;
+	width:100%;
+}
+
+.l-middle{
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Spacing
+|--------------------------------------------------------------------------
+|
+*/
+
+$tunic-unit: 16px !default;
+
+%tunic-spaced{
+	margin-bottom: $tunic-unit;
+}
+
+%tunic-spaced--x2{
+	margin-bottom: $tunic-unit * 2;
+}
+
+
+
+.l-spaced{
+	@extend %tunic-spaced; 
+}
+
+.l-spaced--x2{
+	@extend %tunic-spaced--x2; 
+}
+
+
+
+/*======\                      __           	
+|        \                    |  \          	
+ \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
+   | $$   |  \  |  \|       \ |  \ /       \	
+   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$	
+   | $$   | $$  | $$| $$  | $$| $$| $$      	
+   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 	
+   | $$    \$$    $$| $$  | $$| $$ \$$     \	
+    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Font Face
+|--------------------------------------------------------------------------
+|
+| @List [font-name file-path,]
+|  
+| Chains all you font face declataritons into one include.
+|
+*/
+
+@mixin tunic-fontface($lists...){
+	@each $i in $lists{
+		@font-face {
+			font-family:#{nth($i,1)};
+			src: url('#{nth($i,2)}.eot');
+			src: url('#{nth($i,2)}.eot?#iefix') format('embedded-opentype'),
+				 url('#{nth($i,2)}.woff') format('woff'),
+				 url('#{nth($i,2)}.ttf') format('truetype'),
+				 url('#{nth($i,2)}.svg##{nth($i,1)}') format('svg');
+			font-weight:normal;
+			font-style:normal;
+		}
+	}
+	
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Ellipsis
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-ellipsis{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+@mixin tunic-ellipsis($cutoff:n){
+	@extend	%tunic-ellipsis;
+	@if $cutoff != n {
+		padding-right:$cutoff; 		
+	}	
+}
+
+/*
+|--------------------------------------------------------------------------
+| Size
+|--------------------------------------------------------------------------
+|
+| One declaration for width and height 
+|
+*/
+
+@mixin tunic-size($w, $h:null){
+	@if $h != null {
+		width:$w;
+		height:$h;	
+	}
+	@else{
+		width:$w;
+		height:$w;
+	}
+}
+
+/*
+|--------------------------------------------------------------------------
+| Flood
+|--------------------------------------------------------------------------
+|
+| Absolutley position an element as far as it's containing elements bounds
+|
+*/
+
+%tunic-flood{
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Columns
+|--------------------------------------------------------------------------
+|
+| Uses borders to create columns. 
+|
+*/
+
+@mixin tunic-columns($spacing:4px, $color:transparent){
+	border-right:$spacing solid $color;
+	border-left:$spacing solid $color;
+	&:first-child{
+		border-left:none;
+	}
+	&:last-child{
+		border-right:none;
+	}
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Clearfix
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-clearfix{
+	&:after{
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Box Model Extends
+|--------------------------------------------------------------------------
+|
+*/
+
+
+%_box-sizing{
+	box-sizing:border-box;
+}
+
+%_box-padded1{
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Type Extends
+|--------------------------------------------------------------------------
+|
+*/
+
+
+%tunic-treset{
+	$tunic-fontSize:13px !default;
+	font-size: $tunic-fontSize;
+}
+
+.t-reset{
+	@extend %tunic-treset; 
+}
+
+
+
+
+%_typ-icon{
+
+}
+
+%_typ-ellipsis{
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Color Extends
+|--------------------------------------------------------------------------
+|
+*/
+
+%_col-bgc--red{
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| iOS Extends
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+%_ios-highlight{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+%_ios-scroll{
+	-webkit-overflow-scrolling:touch;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Behaviours
+|--------------------------------------------------------------------------
+|
+| Change the default behaviour of an element.
+|
+*/
+
+%_act-notselectable{
+	-webkit-touch-callout: none;  
+	user-select: none;
+}
+
+%_act-button{
+	-webkit-touch-callout: none;
+	user-select: none;
+	cursor:pointer;
+}
+
+%tunic-behave--button{
+	-webkit-touch-callout: none;
+	user-select: none;
+	cursor:pointer;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Browser Performance Hacks
+|--------------------------------------------------------------------------
+|
+*/
+
+%_hak-hardware{
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	perspective: 1000;
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+|
+| Useful functions for to save dev from tearing their hair out.
+|
+*/
+
+@function repeatChar($char, $ammount){
+	$a: $char;
+	@for $i from 0 through $ammount{		
+		$a: $a + $char;
+	}
+	@return $a;
+}
+
+
+@function inverse($var){
+	@return $var *-1;
+}
+
+@function grey($var:50){
+	@return hsl(0,0,$var);
+}
+
+@function pastel($var, $des:10, $light:10){
+	@return lighten(desaturate($var,$des),$light);
+}
+
+@function t($var){
+	@return #{$var}ms;
+}
+
+
+/*======\                      __           	
+|        \                    |  \          	
+ \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
+   | $$   |  \  |  \|       \ |  \ /       \	
+   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$	
+   | $$   | $$  | $$| $$  | $$| $$| $$      	
+   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 	
+   | $$    \$$    $$| $$  | $$| $$ \$$     \  »»----> TYPEOGRPAHY	
+    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/ 
+
+
+/*
+|--------------------------------------------------------------------------
+| Text Transforms
+|--------------------------------------------------------------------------
+|
+*/
+
+// Capitalize
+
+%t-capitalize{
+	text-transform: capitalize;
+}
+.t-capitalize{
+	@extend %t-capitalize; 
+}
