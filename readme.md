@@ -34,8 +34,9 @@ Dev Usage
 ---------
 
 For those that would like to have their own control of the repo, there is a grunt task that will copy a compiled version of Tunic
-into the required folders. Just create a file called `config.json` in the root directory.
-Then just fill up an array called `copyDirs` with the paths you would like to copy to.
+into the required folders. Create a file called `config.json` in the root directory.
+Then fill up an array called `copyDirs` with the paths you would like.
+
 
 ```
 {
@@ -47,5 +48,4 @@ Then just fill up an array called `copyDirs` with the paths you would like to co
 }
 ```
 
-Becuase of the limitations of Grunt. You will have to make the paths relative to `Gruntfile.js`
-Now you can edit the `_*.scss` files to your hearts content.
+Because of the limitations of Grunt you will have to make the paths relative to `Gruntfile.js`.
