@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-	
-
 	// Project configuration.
 	grunt.initConfig({
 		config: grunt.file.readJSON('config.json'),
