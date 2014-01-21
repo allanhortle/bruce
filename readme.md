@@ -35,7 +35,8 @@ Dev Usage
 
 For those that would like to have their own control of the repo, there is a grunt task that will copy a compiled version of Tunic
 into the required folders. Create a file called `config.json` in the root directory.
-Then fill up an array called `copyDirs` with the paths you would like.
+Then fill up an array called `copyDirs` with the paths you would like. Now a quick `grunt` from the Tunic directory will copy compiled versions of Tunic
+all over the place.
 
 
 ```
