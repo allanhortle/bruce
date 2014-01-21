@@ -33,8 +33,7 @@
 			font-weight:normal;
 			font-style:normal;
 		}
-	}
-	
+	}	
 }
 
 
@@ -252,6 +251,46 @@
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| Breakpoints
+|--------------------------------------------------------------------------
+|
+| Returns a media query based on the content of $bp.
+| 
+| $bp: number;				@media only screen and (min-width: number)
+| $bp: string number;		@media only screen and (string: number)
+| $bp: number number;		@media only screen and (min-width: number) and (max-width: number)
+*/
+
+@mixin tunic-breakpoint($bp) {
+	// Standard 
+	@if type-of($bp) == 'number'{
+		@media only screen and (min-width: #{$bp})  { 
+			@content; 
+		}
+	}
+
+	@if type-of($bp) == 'list'{
+		$first:  nth($bp,1);
+		$second: nth($bp,2);
+
+		@if type-of($first) == 'string'{
+			@media only screen and (#{$first}: #{$second}) { 
+				@content; 
+			}
+		}
+		@elseif type-of($first) == 'number'{
+			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+				@content; 
+			}
+		}
+		@else{
+			@warn 'tunic-breakpoint: wrong syntax';
+		}
+	}
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -270,19 +309,22 @@
 	@return $a;
 }
 
-
+// Invert Color
 @function inverse($var){
 	@return $var *-1;
 }
 
+// Returns a grey value from 0 - 100
 @function grey($var:50){
 	@return hsl(0,0,$var);
 }
 
+// Lightens and desaturates a color
 @function pastel($var, $des:10, $light:10){
 	@return lighten(desaturate($var,$des),$light);
 }
 
+// Time. Returns $var+'ms'
 @function t($var){
 	@return #{$var}ms;
 }
