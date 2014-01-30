@@ -25,6 +25,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', function(){
 		grunt.log.writeln(String('TUNIC')['magenta'].bold);
 		grunt.config('files', generateFiles());
+		grunt.config('concat.options.banner', generateBanner());
 		grunt.task.run([
 			'concat', 
 			'copy'
@@ -43,6 +44,24 @@ module.exports = function(grunt) {
 			});
 		};
 		return ret;
+	}
+
+	function generateBanner(){
+		var lines = [
+			'',
+			'/*======\\                      __              	',
+			'|        \\                    |  \\          		',
+			' \\$$$$$$$$|=\\   |=\\ |======\\   \\$$  /=====\\ 	',
+			'   | $$   |  \\  |  \\|       \\ |  \\ /       \\	',
+			'   | $$   | $$  | $$| $$$$$$$\\| $$|  $$$$$$$		',
+			'   | $$   | $$  | $$| $$  | $$| $$| $$      		',
+			'   | $$   | $$==/ $$| $$  | $$| $$| $$====\\ 		',
+			'   | $$    \\$$    $$| $$  | $$| $$ \\$$     \\	',
+			'    \\$$     \\$$$$$$  \\$$   \\$$ \\$$  \\$$$$$*/ ',
+			'',
+			''
+		];
+		return lines.join('\r\n');
 	}
 
 

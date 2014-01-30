@@ -1,15 +1,4 @@
 
-/*======\                      __           	
-|        \                    |  \          	
- \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
-   | $$   |  \  |  \|       \ |  \ /       \	
-   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$	
-   | $$   | $$  | $$| $$  | $$| $$| $$      	
-   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 	
-   | $$    \$$    $$| $$  | $$| $$ \$$     \	
-    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/
-
-
 /*
 |--------------------------------------------------------------------------
 | Font Face
@@ -18,7 +7,7 @@
 | @List [font-name file-path,]
 |  
 | Chains all you font face declataritons into one include.
-|
+|`
 */
 
 @mixin tunic-fontface($lists...){
@@ -219,20 +208,13 @@
 |
 */
 
-%_act-notselectable{
+%tunic-behave--notselectable{
 	-webkit-touch-callout: none;  
 	user-select: none;
 }
 
-%_act-button{
-	-webkit-touch-callout: none;
-	user-select: none;
-	cursor:pointer;
-}
-
 %tunic-behave--button{
-	-webkit-touch-callout: none;
-	user-select: none;
+	@extend %tunic-behave--notselectable; 
 	cursor:pointer;
 }
 
@@ -289,6 +271,25 @@
 			@warn 'tunic-breakpoint: wrong syntax';
 		}
 	}
+}
+
+@mixin tunic-retina($dpi:2){
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+		@content;
+	}
+}
+
+/*
+|--------------------------------------------------------------------------
+| Opacity
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin tunic-opacity($val){
+	$ie: $val * 100;
+	opacity:$val;
+	filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie})";
 }
 
 
