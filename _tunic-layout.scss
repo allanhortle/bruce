@@ -8,15 +8,11 @@
 |
 */
 
-%tunic-wrapper{
-	$tunic-pageWidth: 1024px !default;
+@mixin tunic-wrapper($width:1024px){
+	width:$width;
 	margin:0 auto;
-	width:$tunic-pageWidth; 
 }
 
-.l-wrapper{
-	@extend %tunic-wrapper; 
-}
 
 
 /*

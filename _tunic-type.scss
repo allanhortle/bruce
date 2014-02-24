@@ -14,3 +14,32 @@
 .t-capitalize{
 	@extend %t-capitalize; 
 }
+
+
+
+
+
+// !!!
+
+%_typ-ellipsis{
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Link Hover
+|--------------------------------------------------------------------------
+|
+| lighten color on hover.
+|
+*/
+
+@mixin tunic-hover($color, $amount:10){
+	color:$color;
+	&:hover{
+		color:lighten($color,$amount);
+	}
+}

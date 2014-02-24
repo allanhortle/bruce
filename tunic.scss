@@ -19,15 +19,11 @@
 |
 */
 
-%tunic-wrapper{
-	$tunic-pageWidth: 1024px !default;
+@mixin tunic-wrapper($width:1024px){
+	width:$width;
 	margin:0 auto;
-	width:$tunic-pageWidth; 
 }
 
-.l-wrapper{
-	@extend %tunic-wrapper; 
-}
 
 
 /*
@@ -275,54 +271,6 @@ $tunic-unit: 16px !default;
 	box-sizing:border-box;
 }
 
-%_box-padded1{
-
-}
-
-/*
-|--------------------------------------------------------------------------
-| Type Extends
-|--------------------------------------------------------------------------
-|
-*/
-
-
-%tunic-treset{
-	$tunic-fontSize:13px !default;
-	font-size: $tunic-fontSize;
-}
-
-.t-reset{
-	@extend %tunic-treset; 
-}
-
-
-
-
-%_typ-icon{
-
-}
-
-%_typ-ellipsis{
-	white-space:nowrap; 
-	overflow:hidden; 
-	text-overflow:ellipsis; 
-}
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Color Extends
-|--------------------------------------------------------------------------
-|
-*/
-
-%_col-bgc--red{
-
-}
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -390,7 +338,7 @@ $tunic-unit: 16px !default;
 @mixin tunic-breakpoint($bp) {
 	// Standard 
 	@if type-of($bp) == 'number'{
-		@media only screen and (min-width: #{$bp})  { 
+		@media only screen and (max-width: #{$bp})  { 
 			@content; 
 		}
 	}
@@ -416,7 +364,7 @@ $tunic-unit: 16px !default;
 }
 
 @mixin tunic-retina($dpi:2){
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dppx) { 
 		@content;
 	}
 }
@@ -428,10 +376,41 @@ $tunic-unit: 16px !default;
 |
 */
 
-@mixin tunic-opacity($val){
-	$ie: $val * 100;
-	opacity:$val;
-	filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie})";
+@mixin tunic-opacity($val:0.5, $color:'null'){
+	
+	@if $color == 'null'{
+		$ie: $val * 100;
+		opacity:$val;
+		filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie})";
+	}
+	@else{
+		$color:rgba($color,$val);
+		$ie: ie-hex-str($color);
+
+		filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie})";
+		background-color: $color;
+	}
+	
+	
+	
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Arrows
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin tunic-arrow($width,$direction,$color){
+	display: block;
+	content:"";
+	border:$width solid $color;
+	width:0;
+	height:0;
+	border-color: transparent;
+	border-#{$direction}-color:$color;
 }
 
 
@@ -487,4 +466,33 @@ $tunic-unit: 16px !default;
 }
 .t-capitalize{
 	@extend %t-capitalize; 
+}
+
+
+
+
+
+// !!!
+
+%_typ-ellipsis{
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Link Hover
+|--------------------------------------------------------------------------
+|
+| lighten color on hover.
+|
+*/
+
+@mixin tunic-hover($color, $amount:10){
+	color:$color;
+	&:hover{
+		color:lighten($color,$amount);
+	}
 }
