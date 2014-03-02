@@ -5,11 +5,13 @@ module.exports = function(grunt) {
 		config: grunt.file.readJSON('config.json'),
 		concat: {
 			dist: {
-				src: [
-					'*.scss', 
-					'!tunic.scss'
-				],
-				dest: 'tunic.scss'
+				files: {
+				    'tunic.scss': [
+				        '_tunic-main.scss',
+				        '_tunic-layout.scss',
+				        '_tunic-type.scss'
+				    ]
+				}
 			}
 		},
 		copy: {

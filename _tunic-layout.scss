@@ -1,6 +1,18 @@
 
 /*
 |--------------------------------------------------------------------------
+| Boxsizing
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-boxsizing{
+	box-sizing:border-box;
+}
+
+
+/*
+|--------------------------------------------------------------------------
 | Wrappers
 |--------------------------------------------------------------------------
 |
@@ -11,6 +23,63 @@
 @mixin tunic-wrapper($width:1024px){
 	width:$width;
 	margin:0 auto;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Grid
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin tunic-grid($col:'col--'){
+	$gutter: $tunic-grid_gutter;
+	@extend %tunic-boxsizing;
+	display:table;
+	width:100%;
+	table-layout: fixed;
+
+	& > [class*=#{$col}] {
+		@extend %boxsizing;
+		display:table-cell;
+		border-right: $gutter solid transparent;
+		border-left: $gutter solid transparent;
+		vertical-align: top;
+		&:first-child{
+			border-left:none;
+		}
+		&:last-child{
+			border-right:none;
+		}
+	}
+
+	// Alignment
+	&.is-middle{
+		& > [class*=#{$col}] {
+			vertical-align: middle;
+		}
+	}
+	&.is-bottom{
+		& > [class*=#{$col}] {
+			vertical-align: bottom;
+		}
+	}
+
+	// Sizing
+	&.is-tight{
+		& > [class*=#{$col}] {
+			border-width:$gutter / 2;
+		}
+	}
+}
+
+@mixin tunic-grid_col($col:'col--',$num:12){
+	@for $i from 1 through $num{
+		.#{$col}#{$i}{
+			width:(100% / $num) * $i;
+		}
+	} 
 }
 
 
@@ -25,12 +94,12 @@
 */
 
 @for $i from 0 through 10{
+	@if $i == 0{
+		.l-#{$i}0{	width:1%}
+	}
 	.l-#{$i}0{	width:percentage($i)/10   !important; }
 	.l-#{$i}5{	width:percentage($i)/10+5 !important; }
 } 
-.l-00{
-	width:1% !important;
-}
 
 
 /*
@@ -103,8 +172,6 @@
 |--------------------------------------------------------------------------
 |
 */
-
-$tunic-unit: 16px !default;
 
 %tunic-spaced{
 	margin-bottom: $tunic-unit;

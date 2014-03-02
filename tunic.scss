@@ -12,130 +12,17 @@
 
 /*
 |--------------------------------------------------------------------------
-| Wrappers
+| Variables
 |--------------------------------------------------------------------------
 |
-| Page width an auto margins. Stock standard rappin'.
-|
-*/
-
-@mixin tunic-wrapper($width:1024px){
-	width:$width;
-	margin:0 auto;
-}
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Widths
-|--------------------------------------------------------------------------
-|
-| Force an element to a percentage width;
+| description 
+| description 
+| description 
 |
 */
 
-@for $i from 0 through 10{
-	.l-#{$i}0{	width:percentage($i)/10   !important; }
-	.l-#{$i}5{	width:percentage($i)/10+5 !important; }
-} 
-.l-00{
-	width:1% !important;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Floats
-|--------------------------------------------------------------------------
-|
-*/
-
-.l-right{
-	float:right !important;
-}
-
-.l-left{
-	float:left !important;
-}
-
-.l-floatAlign{
-	overflow:hidden
-}
-
-.l-clearfix{
-	@extend %tunic-clearfix; 
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Display & Postioning
-|--------------------------------------------------------------------------
-|
-*/
-
-.l-block{
-	display:block !important;
-}
-
-.l-inlineBlock{
-	display: inline-block;
-}
-
-.l-relative{
-	position: relative;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Vertical Align
-|--------------------------------------------------------------------------
-|
-*/
-
-.l-vert{
-	display:table;
-	height:100%;
-	width:100%;
-}
-
-.l-middle{
-	display:table-cell;
-	vertical-align:middle;
-	text-align:center;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Spacing
-|--------------------------------------------------------------------------
-|
-*/
-
-$tunic-unit: 16px !default;
-
-%tunic-spaced{
-	margin-bottom: $tunic-unit;
-}
-
-%tunic-spaced--x2{
-	margin-bottom: $tunic-unit * 2;
-}
-
-
-
-.l-spaced{
-	@extend %tunic-spaced; 
-}
-
-.l-spaced--x2{
-	@extend %tunic-spaced--x2; 
-}
-
-
+$tunic-unit: 			16px 	!default;
+$tunic-grid_gutter: 	8px 	!default;
 
 /*
 |--------------------------------------------------------------------------
@@ -450,6 +337,200 @@ $tunic-unit: 16px !default;
 @function t($var){
 	@return #{$var}ms;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Boxsizing
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-boxsizing{
+	box-sizing:border-box;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Wrappers
+|--------------------------------------------------------------------------
+|
+| Page width an auto margins. Stock standard rappin'.
+|
+*/
+
+@mixin tunic-wrapper($width:1024px){
+	width:$width;
+	margin:0 auto;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Grid
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin tunic-grid($col:'col--'){
+	$gutter: $tunic-grid_gutter;
+	@extend %tunic-boxsizing;
+	display:table;
+	width:100%;
+	table-layout: fixed;
+
+	& > [class*=#{$col}] {
+		@extend %boxsizing;
+		display:table-cell;
+		border-right: $gutter solid transparent;
+		border-left: $gutter solid transparent;
+		vertical-align: top;
+		&:first-child{
+			border-left:none;
+		}
+		&:last-child{
+			border-right:none;
+		}
+	}
+
+	// Alignment
+	&.is-middle{
+		& > [class*=#{$col}] {
+			vertical-align: middle;
+		}
+	}
+	&.is-bottom{
+		& > [class*=#{$col}] {
+			vertical-align: bottom;
+		}
+	}
+
+	// Sizing
+	&.is-tight{
+		& > [class*=#{$col}] {
+			border-width:$gutter / 2;
+		}
+	}
+}
+
+@mixin tunic-grid_col($col:'col--',$num:12){
+	@for $i from 1 through $num{
+		.#{$col}#{$i}{
+			width:(100% / $num) * $i;
+		}
+	} 
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Widths
+|--------------------------------------------------------------------------
+|
+| Force an element to a percentage width;
+|
+*/
+
+@for $i from 0 through 10{
+	@if $i == 0{
+		.l-#{$i}0{	width:1%}
+	}
+	.l-#{$i}0{	width:percentage($i)/10   !important; }
+	.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+} 
+
+
+/*
+|--------------------------------------------------------------------------
+| Floats
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-right{
+	float:right !important;
+}
+
+.l-left{
+	float:left !important;
+}
+
+.l-floatAlign{
+	overflow:hidden
+}
+
+.l-clearfix{
+	@extend %tunic-clearfix; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Display & Postioning
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-block{
+	display:block !important;
+}
+
+.l-inlineBlock{
+	display: inline-block;
+}
+
+.l-relative{
+	position: relative;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Vertical Align
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-vert{
+	display:table;
+	height:100%;
+	width:100%;
+}
+
+.l-middle{
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Spacing
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-spaced{
+	margin-bottom: $tunic-unit;
+}
+
+%tunic-spaced--x2{
+	margin-bottom: $tunic-unit * 2;
+}
+
+
+
+.l-spaced{
+	@extend %tunic-spaced; 
+}
+
+.l-spaced--x2{
+	@extend %tunic-spaced--x2; 
+}
+
 
 
 /*
