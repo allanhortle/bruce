@@ -1,7 +1,7 @@
 Tunic
 =====
 
-A utility base for Sass. Nothing Schmancy.
+A utility base for Sass. Nothing Schmancy. And Stuff
 
 Importing
 ---------
