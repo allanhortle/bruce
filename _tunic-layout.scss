@@ -93,12 +93,16 @@
 |
 */
 
-@for $i from 0 through 10{
+@for $i from 0 through 10{	
+	
 	@if $i == 0{
-		.l-#{$i}0{	width:1%}
+		.l-#{$i}0{width:1% !important}
+		.l-#{$i}5{width:5% !important}
 	}
-	.l-#{$i}0{	width:percentage($i)/10   !important; }
-	.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+	@else{
+		.l-#{$i}0{	width:percentage($i)/10   !important; }
+		.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+	}
 } 
 
 

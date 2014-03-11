@@ -11,7 +11,7 @@
 */
 
 $tunic-unit: 			16px 	!default;
-$tunic-grid_gutter: 	8px 	!default;
+$tunic-grid_gutter: 	16px 	!default;
 
 /*
 |--------------------------------------------------------------------------
@@ -279,13 +279,17 @@ $tunic-grid_gutter: 	8px 	!default;
 |
 */
 
-@mixin tunic-arrow($width,$direction,$color){
+%tunic-arrow{
 	display: block;
 	content:"";
-	border:$width solid $color;
 	width:0;
 	height:0;
 	border-color: transparent;
+}
+
+@mixin tunic-arrow($width,$direction,$color){
+	@extend %tunic-arrow; 
+	border:$width solid $color;	
 	border-#{$direction}-color:$color;
 }
 
