@@ -1,0 +1,46 @@
+
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+|
+| Useful functions for to save dev from tearing their hair out.
+|
+*/
+
+@function repeatChar($char, $ammount){
+	$a: $char;
+	@for $i from 0 through $ammount{		
+		$a: $a + $char;
+	}
+	@return $a;
+}
+
+// Invert Color
+@function inverse($var){
+	@return $var *-1;
+}
+
+// Returns a grey value from 0 - 100
+@function grey($var:50){
+	@return hsl(0,0,$var);
+}
+
+// Lightens and desaturates a color
+@function pastel($var, $des:10, $light:10){
+	@return lighten(desaturate($var,$des),$light);
+}
+
+// Time. Returns $var+'ms'
+@function t($var){
+	@return #{$var}ms;
+}
+
+// List functions
+@function first($list) {
+  @return nth($list, 1);
+}
+
+@function last($list) {
+  @return nth($list, length($list));
+}

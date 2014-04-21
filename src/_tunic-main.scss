@@ -4,10 +4,6 @@
 | Variables
 |--------------------------------------------------------------------------
 |
-| description 
-| description 
-| description 
-|
 */
 
 $tunic-unit: 			16px 	!default;
@@ -40,25 +36,7 @@ $tunic-grid_gutter: 	8px 	!default;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Ellipsis
-|--------------------------------------------------------------------------
-|
-*/
 
-%tunic-ellipsis{
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-}
-
-@mixin tunic-ellipsis($cutoff:n){
-	@extend	%tunic-ellipsis;
-	@if $cutoff != n {
-		padding-right:$cutoff; 		
-	}	
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +73,10 @@ $tunic-grid_gutter: 	8px 	!default;
 	left:0;
 	bottom:0;
 	right:0;
+}
+
+@mixin tunic-flood(){
+	@extend %tunic-flood;
 }
 
 /*
@@ -134,19 +116,9 @@ $tunic-grid_gutter: 	8px 	!default;
 	}
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Box Model Extends
-|--------------------------------------------------------------------------
-|
-*/
-
-
-%_box-sizing{
-	box-sizing:border-box;
+@mixin tunic-clearfix{
+	@extend %tunic-clearfix; 
 }
-
 
 /*
 |--------------------------------------------------------------------------
@@ -156,13 +128,18 @@ $tunic-grid_gutter: 	8px 	!default;
 |
 */
 
-%_ios-highlight{
+%tunic-ios--nohighlight{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-%_ios-scroll{
+%tunic-ios--scroll{
 	-webkit-overflow-scrolling:touch;
 }
+
+@mixin tunic-ios($type){
+	@extend %tunic-ios--#{$type};
+};
+
 
 
 /*
@@ -184,6 +161,12 @@ $tunic-grid_gutter: 	8px 	!default;
 	cursor:pointer;
 }
 
+@mixin tunic-behave($type){
+	@extend %tunic-behave--#{$type};
+};
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -192,68 +175,25 @@ $tunic-grid_gutter: 	8px 	!default;
 |
 */
 
-%_hak-hardware{
+%tunic-hack--hardware{
 	transform: translateZ(0);
 	backface-visibility: hidden;
 	perspective: 1000;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Breakpoints
-|--------------------------------------------------------------------------
-|
-| Returns a media query based on the content of $bp.
-| 
-| $bp: number;				@media only screen and (min-width: number)
-| $bp: string number;		@media only screen and (string: number)
-| $bp: number number;		@media only screen and (min-width: number) and (max-width: number)
-*/
-
-@mixin tunic-breakpoint($bp) {
-	// Standard 
-	@if type-of($bp) == 'number'{
-		@media only screen and (max-width: #{$bp})  { 
-			@content; 
-		}
-	}
-
-	@if type-of($bp) == 'list'{
-		$first:  nth($bp,1);
-		$second: nth($bp,2);
-
-		@if type-of($first) == 'string'{
-			@media only screen and (#{$first}: #{$second}) { 
-				@content; 
-			}
-		}
-		@elseif type-of($first) == 'number'{
-			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-				@content; 
-			}
-		}
-		@else{
-			@warn 'tunic-breakpoint: wrong syntax';
-		}
-	}
-}
-
-@mixin tunic-retina($dpi:2){
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dppx) { 
-		@content;
-	}
-}
 
 /*
 |--------------------------------------------------------------------------
 | Opacity
 |--------------------------------------------------------------------------
+| 
+| Opacity mixin for older browsers.
 |
 */
 
 @mixin tunic-opacity($val:0.5, $color:'null'){
-	
+
 	@if $color == 'null'{
 		$ie: $val * 100;
 		opacity:$val;
@@ -265,9 +205,7 @@ $tunic-grid_gutter: 	8px 	!default;
 
 		filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie})";
 		background-color: $color;
-	}
-	
-	
+	}	
 	
 }
 
@@ -289,40 +227,3 @@ $tunic-grid_gutter: 	8px 	!default;
 	border-#{$direction}-color:$color;
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-|
-| Useful functions for to save dev from tearing their hair out.
-|
-*/
-
-@function repeatChar($char, $ammount){
-	$a: $char;
-	@for $i from 0 through $ammount{		
-		$a: $a + $char;
-	}
-	@return $a;
-}
-
-// Invert Color
-@function inverse($var){
-	@return $var *-1;
-}
-
-// Returns a grey value from 0 - 100
-@function grey($var:50){
-	@return hsl(0,0,$var);
-}
-
-// Lightens and desaturates a color
-@function pastel($var, $des:10, $light:10){
-	@return lighten(desaturate($var,$des),$light);
-}
-
-// Time. Returns $var+'ms'
-@function t($var){
-	@return #{$var}ms;
-}

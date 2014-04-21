@@ -1,0 +1,37 @@
+
+/*
+|--------------------------------------------------------------------------
+| Link Hover
+|--------------------------------------------------------------------------
+|
+| lighten color on hover.
+|
+*/
+
+@mixin tunic-hover($color, $amount:10){
+	color:$color;
+	&:hover{
+		color:lighten($color,$amount);
+	}
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Ellipsis
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-ellipsis{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+@mixin tunic-ellipsis($cutoff:null){
+	@extend	%tunic-ellipsis;
+	@if $cutoff != null {
+		padding-right:$cutoff; 		
+	}	
+}
