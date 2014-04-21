@@ -62,7 +62,7 @@
 */
 
 $tunic-unit: 			16px 	!default;
-$tunic-grid_gutter: 	8px 	!default;
+$tunic-grid_gutter: 	16px 	!default;
 
 /*
 |--------------------------------------------------------------------------
@@ -272,13 +272,17 @@ $tunic-grid_gutter: 	8px 	!default;
 |
 */
 
-@mixin tunic-arrow($width,$direction,$color){
+%tunic-arrow{
 	display: block;
 	content:"";
-	border:$width solid $color;
 	width:0;
 	height:0;
 	border-color: transparent;
+}
+
+@mixin tunic-arrow($width,$direction,$color){
+	@extend %tunic-arrow; 
+	border:$width solid $color;	
 	border-#{$direction}-color:$color;
 }
 
@@ -429,6 +433,7 @@ $tunic-grid_gutter: 	8px 	!default;
 |
 */
 
+<<<<<<< HEAD
 @mixin tunic-widths($sizes:(0,1,2,3,4,5,6,7,8,9,10)){
 	@for $i from first($sizes) through last($sizes){
 		@if $i == 0{
@@ -440,6 +445,38 @@ $tunic-grid_gutter: 	8px 	!default;
 		}
 		
 	}
+=======
+@for $i from 0 through 10{	
+	
+	@if $i == 0{
+		.l-#{$i}0{width:1% !important}
+		.l-#{$i}5{width:5% !important}
+	}
+	@else{
+		.l-#{$i}0{	width:percentage($i)/10   !important; }
+		.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+	}
+} 
+
+
+/*
+|--------------------------------------------------------------------------
+| Floats
+|--------------------------------------------------------------------------
+|
+*/
+
+.l-right{
+	float:right !important;
+}
+
+.l-left{
+	float:left !important;
+}
+
+.l-floatAlign{
+	overflow:hidden
+>>>>>>> 88c37f858b23baee39b213707a8efbc38beae798
 }
 
 /*
