@@ -17,14 +17,6 @@ Tunic is just a bunch of Sass helpers. To use it just import as you like, before
     	"embarrassingSass"
     ;
 
-Variable Overrides
-------------------
-
-All unit values in Tunic are based off variables. If you dont like something, just define it before your tunic imports.
-
-    $tunic-pageWidth:	1024px		// Width of wrapper classes
-    $tunic-unit:		16px		// Default unit of scale.
-
 
 Dev Usage
 ---------
