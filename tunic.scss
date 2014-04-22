@@ -225,7 +225,7 @@ $tunic-grid_gutter: 	16px 	!default;
 @mixin tunic-breakpoint($bp) {
 	// Standard 
 	@if type-of($bp) == 'number'{
-		@media only screen and (max-width: #{$bp})  { 
+		@media only screen and (min-width: #{$bp})  { 
 			@content; 
 		}
 	}
@@ -295,12 +295,11 @@ $tunic-grid_gutter: 	16px 	!default;
 	content:"";
 	width:0;
 	height:0;
-	border-color: transparent;
 }
 
 @mixin tunic-arrow($width,$direction,$color){
 	@extend %tunic-arrow; 
-	border:$width solid $color;	
+	border:$width solid transparent;	
 	border-#{$direction}-color:$color;
 }
 
@@ -510,7 +509,6 @@ $tunic-grid_gutter: 	16px 	!default;
 .l-middle{
 	display:table-cell;
 	vertical-align:middle;
-	text-align:center;
 }
 
 
