@@ -44,3 +44,7 @@
 @function last($list) {
   @return nth($list, length($list));
 }
+
+@function z($name){
+	@return map-get($tunic-zindexList, $name);
+}

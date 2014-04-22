@@ -17,7 +17,7 @@ $tunic-grid_gutter: 	16px 	!default;
 | @List [font-name file-path,]
 |  
 | Chains all you font face declataritons into one include.
-|`
+|
 */
 
 @mixin tunic-fontface($lists...){

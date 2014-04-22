@@ -1,4 +1,15 @@
 
+/*======\                      __              	
+|        \                    |  \          		
+ \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
+   | $$   |  \  |  \|       \ |  \ /       \	
+   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$		
+   | $$   | $$  | $$| $$  | $$| $$| $$      		
+   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 		
+   | $$    \$$    $$| $$  | $$| $$ \$$     \	
+    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/ 
+
+
 /*
 |--------------------------------------------------------------------------
 | Breakpoints
@@ -72,7 +83,7 @@ $tunic-grid_gutter: 	16px 	!default;
 | @List [font-name file-path,]
 |  
 | Chains all you font face declataritons into one include.
-|`
+|
 */
 
 @mixin tunic-fontface($lists...){
@@ -237,7 +248,6 @@ $tunic-grid_gutter: 	16px 	!default;
 }
 
 
-<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Breakpoints
@@ -283,8 +293,7 @@ $tunic-grid_gutter: 	16px 	!default;
 		@content;
 	}
 }
-=======
->>>>>>> b3cf55dc16981d8e956d7d7c1486382a5ee71b5c
+
 
 /*
 |--------------------------------------------------------------------------
@@ -379,6 +388,10 @@ $tunic-grid_gutter: 	16px 	!default;
 
 @function last($list) {
   @return nth($list, length($list));
+}
+
+@function z($name){
+	@return map-get($tunic-zindexList, $name);
 }
 
 
