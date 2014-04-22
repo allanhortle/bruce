@@ -6,11 +6,7 @@ module.exports = function(grunt) {
 		concat: {
 			dist: {
 				files: {
-				    'tunic.scss': [
-				        '_tunic-main.scss',
-				        '_tunic-layout.scss',
-				        '_tunic-type.scss'
-				    ]
+				    'tunic.scss': 'src/**/*.scss'
 				}
 			}
 		},
@@ -18,11 +14,20 @@ module.exports = function(grunt) {
 			dist: {
 				files: '<%= files %>'
 			}
+		},
+
+		sass: {
+			dist: {
+				files: {
+					'tests/test.css': 'tests/test.scss'
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 
 	grunt.registerTask('default', function(){
 		grunt.log.writeln(String('TUNIC')['magenta'].bold);
@@ -31,6 +36,13 @@ module.exports = function(grunt) {
 		grunt.task.run([
 			'concat', 
 			'copy'
+		]);
+	});
+
+	grunt.registerTask('test', function(){
+		grunt.task.run([
+			'concat', 
+			'sass'
 		]);
 	});
 

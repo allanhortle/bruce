@@ -1,23 +1,63 @@
 
-/*======\                      __              	
-|        \                    |  \          		
- \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
-   | $$   |  \  |  \|       \ |  \ /       \	
-   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$		
-   | $$   | $$  | $$| $$  | $$| $$| $$      		
-   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 		
-   | $$    \$$    $$| $$  | $$| $$ \$$     \	
-    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/ 
+/*
+|--------------------------------------------------------------------------
+| Breakpoints
+|--------------------------------------------------------------------------
+|
+| Returns a media query based on the content of $bp.
+| 
+| $bp: number;				@media only screen and (max-width: number)
+| $bp: string number;		@media only screen and (string: number)
+| $bp: number number;		@media only screen and (min-width: number) and (max-width: number)
+*/
 
+@mixin tunic-breakpoint($bp) {
+	// Standard 
+	@if type-of($bp) == 'number'{
+		@media only screen and (max-width: #{$bp})  { 
+			@content; 
+		}
+	}
+
+	@if type-of($bp) == 'list'{
+		$first:  nth($bp,1);
+		$second: nth($bp,2);
+
+		@if type-of($first) == 'string'{
+			@media only screen and (#{$first}: #{$second}) { 
+				@content; 
+			}
+		}
+		@elseif type-of($first) == 'number'{
+			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+				@content; 
+			}
+		}
+		@else{
+			@warn 'tunic-breakpoint: wrong syntax';
+		}
+	}
+}
+
+/*
+|--------------------------------------------------------------------------
+| Retina Breakpoint
+|--------------------------------------------------------------------------
+|
+| $dpi
+|
+*/
+
+@mixin tunic-retina($dpi:2){
+	@media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
+		@content;
+	}
+}
 
 /*
 |--------------------------------------------------------------------------
 | Variables
 |--------------------------------------------------------------------------
-|
-| description 
-| description 
-| description 
 |
 */
 
@@ -51,25 +91,7 @@ $tunic-grid_gutter: 	16px 	!default;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Ellipsis
-|--------------------------------------------------------------------------
-|
-*/
 
-%tunic-ellipsis{
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-}
-
-@mixin tunic-ellipsis($cutoff:n){
-	@extend	%tunic-ellipsis;
-	@if $cutoff != n {
-		padding-right:$cutoff; 		
-	}	
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +128,10 @@ $tunic-grid_gutter: 	16px 	!default;
 	left:0;
 	bottom:0;
 	right:0;
+}
+
+@mixin tunic-flood(){
+	@extend %tunic-flood;
 }
 
 /*
@@ -145,19 +171,9 @@ $tunic-grid_gutter: 	16px 	!default;
 	}
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Box Model Extends
-|--------------------------------------------------------------------------
-|
-*/
-
-
-%_box-sizing{
-	box-sizing:border-box;
+@mixin tunic-clearfix{
+	@extend %tunic-clearfix; 
 }
-
 
 /*
 |--------------------------------------------------------------------------
@@ -167,13 +183,18 @@ $tunic-grid_gutter: 	16px 	!default;
 |
 */
 
-%_ios-highlight{
+%tunic-ios--nohighlight{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-%_ios-scroll{
+%tunic-ios--scroll{
 	-webkit-overflow-scrolling:touch;
 }
+
+@mixin tunic-ios($type){
+	@extend %tunic-ios--#{$type};
+};
+
 
 
 /*
@@ -195,6 +216,12 @@ $tunic-grid_gutter: 	16px 	!default;
 	cursor:pointer;
 }
 
+@mixin tunic-behave($type){
+	@extend %tunic-behave--#{$type};
+};
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -203,13 +230,14 @@ $tunic-grid_gutter: 	16px 	!default;
 |
 */
 
-%_hak-hardware{
+%tunic-hack--hardware{
 	transform: translateZ(0);
 	backface-visibility: hidden;
 	perspective: 1000;
 }
 
 
+<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Breakpoints
@@ -255,16 +283,20 @@ $tunic-grid_gutter: 	16px 	!default;
 		@content;
 	}
 }
+=======
+>>>>>>> b3cf55dc16981d8e956d7d7c1486382a5ee71b5c
 
 /*
 |--------------------------------------------------------------------------
 | Opacity
 |--------------------------------------------------------------------------
+| 
+| Opacity mixin for older browsers.
 |
 */
 
 @mixin tunic-opacity($val:0.5, $color:'null'){
-	
+
 	@if $color == 'null'{
 		$ie: $val * 100;
 		opacity:$val;
@@ -276,9 +308,7 @@ $tunic-grid_gutter: 	16px 	!default;
 
 		filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie})";
 		background-color: $color;
-	}
-	
-	
+	}	
 	
 }
 
@@ -302,6 +332,7 @@ $tunic-grid_gutter: 	16px 	!default;
 	border:$width solid transparent;	
 	border-#{$direction}-color:$color;
 }
+
 
 
 /*
@@ -341,6 +372,15 @@ $tunic-grid_gutter: 	16px 	!default;
 	@return #{$var}ms;
 }
 
+// List functions
+@function first($list) {
+  @return nth($list, 1);
+}
+
+@function last($list) {
+  @return nth($list, length($list));
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -351,6 +391,10 @@ $tunic-grid_gutter: 	16px 	!default;
 
 %tunic-boxsizing{
 	box-sizing:border-box;
+}
+
+@mixin tunic-boxsizing(){
+	@extend %tunic-boxsizing;
 }
 
 
@@ -436,62 +480,18 @@ $tunic-grid_gutter: 	16px 	!default;
 |
 */
 
-@for $i from 0 through 10{	
-	
-	@if $i == 0{
-		.l-#{$i}0{width:1% !important}
-		.l-#{$i}5{width:5% !important}
-	}
-	@else{
+@mixin tunic-widths($sizes:(0,1,2,3,4,5,6,7,8,9,10)){
+	@for $i from first($sizes) through last($sizes){
+		@if $i == 0{
+			.l-#{$i}0{	width:1%}
+		}
 		.l-#{$i}0{	width:percentage($i)/10   !important; }
-		.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+		@if $i != 10{
+			.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+		}
+		
 	}
-} 
-
-
-/*
-|--------------------------------------------------------------------------
-| Floats
-|--------------------------------------------------------------------------
-|
-*/
-
-.l-right{
-	float:right !important;
 }
-
-.l-left{
-	float:left !important;
-}
-
-.l-floatAlign{
-	overflow:hidden
-}
-
-.l-clearfix{
-	@extend %tunic-clearfix; 
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Display & Postioning
-|--------------------------------------------------------------------------
-|
-*/
-
-.l-block{
-	display:block !important;
-}
-
-.l-inlineBlock{
-	display: inline-block;
-}
-
-.l-relative{
-	position: relative;
-}
-
 
 /*
 |--------------------------------------------------------------------------
@@ -500,72 +500,29 @@ $tunic-grid_gutter: 	16px 	!default;
 |
 */
 
-.l-vert{
+%l-verticalAlign{
 	display:table;
 	height:100%;
 	width:100%;
 }
 
-.l-middle{
+%l-verticalAlign_inner{
 	display:table-cell;
 	vertical-align:middle;
 }
 
+@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner'){
+	.#{$wrapper}{
+		@extend %l-verticalAlign;
+	}
 
-/*
-|--------------------------------------------------------------------------
-| Spacing
-|--------------------------------------------------------------------------
-|
-*/
-
-%tunic-spaced{
-	margin-bottom: $tunic-unit;
-}
-
-%tunic-spaced--x2{
-	margin-bottom: $tunic-unit * 2;
+	.#{$inner}{
+		@extend %l-verticalAlign_inner;
+	}
 }
 
 
 
-.l-spaced{
-	@extend %tunic-spaced; 
-}
-
-.l-spaced--x2{
-	@extend %tunic-spaced--x2; 
-}
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Text Transforms
-|--------------------------------------------------------------------------
-|
-*/
-
-// Capitalize
-
-%t-capitalize{
-	text-transform: capitalize;
-}
-.t-capitalize{
-	@extend %t-capitalize; 
-}
-
-
-
-
-
-// !!!
-
-%_typ-ellipsis{
-	white-space:nowrap; 
-	overflow:hidden; 
-	text-overflow:ellipsis; 
-}
 
 
 /*
@@ -582,4 +539,25 @@ $tunic-grid_gutter: 	16px 	!default;
 	&:hover{
 		color:lighten($color,$amount);
 	}
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Ellipsis
+|--------------------------------------------------------------------------
+|
+*/
+
+%tunic-ellipsis{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+@mixin tunic-ellipsis($cutoff:null){
+	@extend	%tunic-ellipsis;
+	@if $cutoff != null {
+		padding-right:$cutoff; 		
+	}	
 }
