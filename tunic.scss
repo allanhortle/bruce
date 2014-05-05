@@ -76,6 +76,10 @@ $tunic-unit: 			16px 	!default;
 $tunic-grid_gutter: 	16px 	!default;
 
 
+
+$tunic-breakpoint--small: 	21em 	!default;
+
+
 /*
 |--------------------------------------------------------------------------
 | Reset
@@ -294,30 +298,36 @@ $tunic-grid_gutter: 	16px 	!default;
 
 @mixin tunic-breakpoint($bp) {
 	// Standard 
-	@if type-of($bp) == 'number'{
-		@media only screen and (min-width: #{$bp})  { 
-			@content; 
-		}
+	@if $tunic-ie == true {
+		@content;
 	}
-
-	@if type-of($bp) == 'list'{
-		$first:  nth($bp,1);
-		$second: nth($bp,2);
-
-		@if type-of($first) == 'string'{
-			@media only screen and (#{$first}: #{$second}) { 
+	@else{
+		@if type-of($bp) == 'number'{
+			@media only screen and (min-width: #{$bp})  { 
 				@content; 
 			}
 		}
-		@elseif type-of($first) == 'number'{
-			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-				@content; 
+
+		@if type-of($bp) == 'list'{
+			$first:  nth($bp,1);
+			$second: nth($bp,2);
+
+			@if type-of($first) == 'string'{
+				@media only screen and (#{$first}: #{$second}) { 
+					@content; 
+				}
+			}
+			@elseif type-of($first) == 'number'{
+				@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+					@content; 
+				}
+			}
+			@else{
+				@warn 'tunic-breakpoint: wrong syntax';
 			}
 		}
-		@else{
-			@warn 'tunic-breakpoint: wrong syntax';
-		}
 	}
+	
 }
 
 @mixin tunic-retina($dpi:2){
@@ -465,53 +475,61 @@ $tunic-grid_gutter: 	16px 	!default;
 |
 */
 
-@mixin tunic-grid($col:'col--'){
-	$gutter: $tunic-grid_gutter;
-	@extend %tunic-boxsizing;
-	display:table;
-	width:100%;
-	table-layout: fixed;
+@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12){
+	.#{$grid}{
+		$gutter: $tunic-grid_gutter;
+		@extend %tunic-boxsizing;
+		display:table;
+		width:100%;
+		table-layout: fixed;
 
-	& > [class*=#{$col}] {
-		@extend %boxsizing;
-		display:table-cell;
-		border-right: $gutter solid transparent;
-		border-left: $gutter solid transparent;
-		vertical-align: top;
-		&:first-child{
-			border-left:none;
-		}
-		&:last-child{
-			border-right:none;
-		}
-	}
-
-	// Alignment
-	&.is-middle{
 		& > [class*=#{$col}] {
-			vertical-align: middle;
+			@extend %tunic-boxsizing;
+			display:block;
+			vertical-align: top;
+
+			@include tunic-breakpoint($tunic-breakpoint--small){
+				display:table-cell;
+				border-right: $gutter solid transparent;
+				border-left: $gutter solid transparent;
+			}
+			
+			&:first-child{
+				border-left:none;
+			}
+			&:last-child{
+				border-right:none;
+			}
 		}
-	}
-	&.is-bottom{
-		& > [class*=#{$col}] {
-			vertical-align: bottom;
+
+		// Alignment
+		&.is-middle{
+			& > [class*=#{$col}] {
+				vertical-align: middle;
+			}
+		}
+		&.is-bottom{
+			& > [class*=#{$col}] {
+				vertical-align: bottom;
+			}
+		}
+
+		// Sizing
+		&.is-tight{
+			& > [class*=#{$col}] {
+				border-width:$gutter / 2;
+			}
 		}
 	}
 
-	// Sizing
-	&.is-tight{
-		& > [class*=#{$col}] {
-			border-width:$gutter / 2;
-		}
-	}
-}
-
-@mixin tunic-grid_col($col:'col--',$num:12){
 	@for $i from 1 through $num{
-		.#{$col}#{$i}{
-			width:(100% / $num) * $i;
+		@include tunic-breakpoint($tunic-breakpoint--small){
+			.#{$col}#{$i}{
+				width:(100% / $num) * $i;
+			}
 		}
-	} 
+		
+	}	
 }
 
 

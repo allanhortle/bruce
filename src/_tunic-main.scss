@@ -10,6 +10,10 @@ $tunic-unit: 			16px 	!default;
 $tunic-grid_gutter: 	16px 	!default;
 
 
+
+$tunic-breakpoint--small: 	21em 	!default;
+
+
 /*
 |--------------------------------------------------------------------------
 | Reset
@@ -228,30 +232,36 @@ $tunic-grid_gutter: 	16px 	!default;
 
 @mixin tunic-breakpoint($bp) {
 	// Standard 
-	@if type-of($bp) == 'number'{
-		@media only screen and (min-width: #{$bp})  { 
-			@content; 
-		}
+	@if $tunic-ie == true {
+		@content;
 	}
-
-	@if type-of($bp) == 'list'{
-		$first:  nth($bp,1);
-		$second: nth($bp,2);
-
-		@if type-of($first) == 'string'{
-			@media only screen and (#{$first}: #{$second}) { 
+	@else{
+		@if type-of($bp) == 'number'{
+			@media only screen and (min-width: #{$bp})  { 
 				@content; 
 			}
 		}
-		@elseif type-of($first) == 'number'{
-			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-				@content; 
+
+		@if type-of($bp) == 'list'{
+			$first:  nth($bp,1);
+			$second: nth($bp,2);
+
+			@if type-of($first) == 'string'{
+				@media only screen and (#{$first}: #{$second}) { 
+					@content; 
+				}
+			}
+			@elseif type-of($first) == 'number'{
+				@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+					@content; 
+				}
+			}
+			@else{
+				@warn 'tunic-breakpoint: wrong syntax';
 			}
 		}
-		@else{
-			@warn 'tunic-breakpoint: wrong syntax';
-		}
 	}
+	
 }
 
 @mixin tunic-retina($dpi:2){

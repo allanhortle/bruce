@@ -37,53 +37,61 @@
 |
 */
 
-@mixin tunic-grid($col:'col--'){
-	$gutter: $tunic-grid_gutter;
-	@extend %tunic-boxsizing;
-	display:table;
-	width:100%;
-	table-layout: fixed;
+@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12){
+	.#{$grid}{
+		$gutter: $tunic-grid_gutter;
+		@extend %tunic-boxsizing;
+		display:table;
+		width:100%;
+		table-layout: fixed;
 
-	& > [class*=#{$col}] {
-		@extend %boxsizing;
-		display:table-cell;
-		border-right: $gutter solid transparent;
-		border-left: $gutter solid transparent;
-		vertical-align: top;
-		&:first-child{
-			border-left:none;
-		}
-		&:last-child{
-			border-right:none;
-		}
-	}
-
-	// Alignment
-	&.is-middle{
 		& > [class*=#{$col}] {
-			vertical-align: middle;
+			@extend %tunic-boxsizing;
+			display:block;
+			vertical-align: top;
+
+			@include tunic-breakpoint($tunic-breakpoint--small){
+				display:table-cell;
+				border-right: $gutter solid transparent;
+				border-left: $gutter solid transparent;
+			}
+			
+			&:first-child{
+				border-left:none;
+			}
+			&:last-child{
+				border-right:none;
+			}
 		}
-	}
-	&.is-bottom{
-		& > [class*=#{$col}] {
-			vertical-align: bottom;
+
+		// Alignment
+		&.is-middle{
+			& > [class*=#{$col}] {
+				vertical-align: middle;
+			}
+		}
+		&.is-bottom{
+			& > [class*=#{$col}] {
+				vertical-align: bottom;
+			}
+		}
+
+		// Sizing
+		&.is-tight{
+			& > [class*=#{$col}] {
+				border-width:$gutter / 2;
+			}
 		}
 	}
 
-	// Sizing
-	&.is-tight{
-		& > [class*=#{$col}] {
-			border-width:$gutter / 2;
-		}
-	}
-}
-
-@mixin tunic-grid_col($col:'col--',$num:12){
 	@for $i from 1 through $num{
-		.#{$col}#{$i}{
-			width:(100% / $num) * $i;
+		@include tunic-breakpoint($tunic-breakpoint--small){
+			.#{$col}#{$i}{
+				width:(100% / $num) * $i;
+			}
 		}
-	} 
+		
+	}	
 }
 
 
