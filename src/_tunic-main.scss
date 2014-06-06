@@ -8,6 +8,7 @@
 
 $tunic-unit: 			16px 	!default;
 $tunic-grid_gutter: 	16px 	!default;
+$tunic-ie:			 	false 	!default;
 
 
 
@@ -168,6 +169,11 @@ $tunic-breakpoint--small: 	21em 	!default;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+%tunic-ios--appearance{
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
 %tunic-ios--scroll{
 	-webkit-overflow-scrolling:touch;
 }
@@ -285,13 +291,13 @@ $tunic-breakpoint--small: 	21em 	!default;
 	@if $color == 'null'{
 		$ie: $val * 100;
 		opacity:$val;
-		filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie})";
+		filter: alpha(opacity=#{$ie});
 	}
 	@else{
 		$color:rgba($color,$val);
 		$ie: ie-hex-str($color);
-
-		filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie})";
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+		zoom: 1;
 		background-color: $color;
 	}	
 	
@@ -310,11 +316,12 @@ $tunic-breakpoint--small: 	21em 	!default;
 	content:"";
 	width:0;
 	height:0;
+	border:1em solid transparent;
 }
 
 @mixin tunic-arrow($width,$direction,$color){
 	@extend %tunic-arrow; 
-	border:$width solid transparent;	
+	border-width:$width;
 	border-#{$direction}-color:$color;
 }
 

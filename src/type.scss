@@ -62,3 +62,21 @@
 		padding-right:$cutoff; 		
 	}	
 }
+
+@mixin tunic-verticalRhythm($size, $fontSize, $lineHeight, $scaling) {
+    $power: $size;
+    $topMultipier: 2;
+
+    @if ($size < 2){
+        $topMultipier: 1;
+    }
+    
+    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / tunic-power($scaling, $power);
+    $lines: floor(tunic-power($scaling, $power));
+    
+    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: tunic-fixed($line * $lines, 1) + em;
+    margin-bottom: tunic-fixed($line, 1) + em;
+    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+}

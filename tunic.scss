@@ -74,6 +74,7 @@
 
 $tunic-unit: 			16px 	!default;
 $tunic-grid_gutter: 	16px 	!default;
+$tunic-ie:			 	false 	!default;
 
 
 
@@ -234,6 +235,11 @@ $tunic-breakpoint--small: 	21em 	!default;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+%tunic-ios--appearance{
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
 %tunic-ios--scroll{
 	-webkit-overflow-scrolling:touch;
 }
@@ -351,13 +357,13 @@ $tunic-breakpoint--small: 	21em 	!default;
 	@if $color == 'null'{
 		$ie: $val * 100;
 		opacity:$val;
-		filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ie})";
+		filter: alpha(opacity=#{$ie});
 	}
 	@else{
 		$color:rgba($color,$val);
 		$ie: ie-hex-str($color);
-
-		filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie})";
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+		zoom: 1;
 		background-color: $color;
 	}	
 	
@@ -376,11 +382,12 @@ $tunic-breakpoint--small: 	21em 	!default;
 	content:"";
 	width:0;
 	height:0;
+	border:1em solid transparent;
 }
 
 @mixin tunic-arrow($width,$direction,$color){
 	@extend %tunic-arrow; 
-	border:$width solid transparent;	
+	border-width:$width;
 	border-#{$direction}-color:$color;
 }
 
@@ -482,6 +489,7 @@ $tunic-breakpoint--small: 	21em 	!default;
 		display:table;
 		width:100%;
 		table-layout: fixed;
+		
 
 		& > [class*=#{$col}] {
 			@extend %tunic-boxsizing;
@@ -493,6 +501,7 @@ $tunic-breakpoint--small: 	21em 	!default;
 				border-right: $gutter solid transparent;
 				border-left: $gutter solid transparent;
 			}
+
 			
 			&:first-child{
 				border-left:none;
@@ -544,16 +553,18 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 @mixin tunic-widths($sizes:(0,1,2,3,4,5,6,7,8,9,10)){
-	@for $i from first($sizes) through last($sizes){
-		@if $i == 0{
-			.l-#{$i}0{	width:1%}
+	@include tunic-breakpoint($tunic-breakpoint--small){
+		@for $i from first($sizes) through last($sizes){
+			.l-#{$i}0{	width:percentage($i)/10   !important; }
+			@if $i != 10{
+				.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+			}
+			@if $i == 0{
+				.l-#{$i}0{	width:1% !important}
+			}
+			
 		}
-		.l-#{$i}0{	width:percentage($i)/10   !important; }
-		@if $i != 10{
-			.l-#{$i}5{	width:percentage($i)/10+5 !important; }
-		}
-		
-	}
+	}	
 }
 
 /*
@@ -586,6 +597,30 @@ $tunic-breakpoint--small: 	21em 	!default;
 
 
 
+
+@function tunic-power ($x, $n) {
+    $ret: 1;
+    @if $n == 0 {
+        @return $ret;
+    }
+    @if $n >= 0 {
+        @for $i from 1 through $n {
+            $ret: $ret * $x;
+        } 
+    } @else {
+        @for $i from $n to 0 {
+            $ret: $ret / $x;
+        }
+    }
+    
+    @return $ret;
+}
+
+
+@function tunic-fixed ($val, $places) {
+    $p: tunic-power(10, $places);
+    @return floor($val * $p) / $p;
+}
 
 
 /*
@@ -651,3 +686,22 @@ $tunic-breakpoint--small: 	21em 	!default;
 		padding-right:$cutoff; 		
 	}	
 }
+
+@mixin tunic-verticalRhythm($size, $fontSize, $lineHeight, $scaling) {
+    $power: $size;
+    $topMultipier: 2;
+
+    @if ($size < 2){
+        $topMultipier: 1;
+    }
+    
+    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / tunic-power($scaling, $power);
+    $lines: floor(tunic-power($scaling, $power));
+    
+    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: tunic-fixed($line * $lines, 1) + em;
+    margin-bottom: tunic-fixed($line, 1) + em;
+    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+}
+

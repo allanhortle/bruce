@@ -44,6 +44,7 @@
 		display:table;
 		width:100%;
 		table-layout: fixed;
+		
 
 		& > [class*=#{$col}] {
 			@extend %tunic-boxsizing;
@@ -55,6 +56,7 @@
 				border-right: $gutter solid transparent;
 				border-left: $gutter solid transparent;
 			}
+
 			
 			&:first-child{
 				border-left:none;
@@ -106,16 +108,18 @@
 */
 
 @mixin tunic-widths($sizes:(0,1,2,3,4,5,6,7,8,9,10)){
-	@for $i from first($sizes) through last($sizes){
-		@if $i == 0{
-			.l-#{$i}0{	width:1%}
+	@include tunic-breakpoint($tunic-breakpoint--small){
+		@for $i from first($sizes) through last($sizes){
+			.l-#{$i}0{	width:percentage($i)/10   !important; }
+			@if $i != 10{
+				.l-#{$i}5{	width:percentage($i)/10+5 !important; }
+			}
+			@if $i == 0{
+				.l-#{$i}0{	width:1% !important}
+			}
+			
 		}
-		.l-#{$i}0{	width:percentage($i)/10   !important; }
-		@if $i != 10{
-			.l-#{$i}5{	width:percentage($i)/10+5 !important; }
-		}
-		
-	}
+	}	
 }
 
 /*
