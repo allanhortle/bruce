@@ -1,82 +1,70 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-	// Project configuration.
-	grunt.initConfig({
-		config: grunt.file.readJSON('config.json'),
-		concat: {
-			dist: {
-				files: {
-				    'tunic.scss': 'src/**/*.scss'
-				}
-			}
-		},
-		copy: {
-			dist: {
-				files: '<%= files %>'
-			}
-		},
+    function generateFiles() {
+        var ret = [],
+            dir = grunt.file.readJSON('config.json').copyDirs;
 
-		sass: {
-			dist: {
-				files: {
-					'tests/test.css': 'tests/test.scss'
-				}
-			}
-		}
-	});
+        for (var i = dir.length - 1; i >= 0; i--) {
+            ret.push({
+                expand: true, 
+                src: ['tunic.scss'], 
+                dest: dir[i]
+            });
+        };
+        return ret;
+    }
 
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-sass');
+    // Project configuration.
+    grunt.initConfig({
+        config: grunt.file.readJSON('config.json'),
+        concat: {
+            dist: {
+                files: {
+                    'tunic.scss': 'src/**/*.scss'
+                }
+            }
+        },
+        copy: {
+            dist: {
+                files: '<%= files %>'
+            }
+        },
 
-	grunt.registerTask('default', function(){
-		grunt.log.writeln(String('TUNIC')['magenta'].bold);
-		grunt.config('files', generateFiles());
-		grunt.config('concat.options.banner', generateBanner());
-		grunt.task.run([
-			'concat', 
-			'copy'
-		]);
-	});
+        sass: {
+            dist: {
+                files: {
+                    'tests/test.css': 'tests/test.scss'
+                }
+            }
+        },
+        watch: {
+            sass: {
+                files: 'src/**/*.scss',
+                tasks: ['default']
+            }
+        }
+    });
 
-	grunt.registerTask('test', function(){
-		grunt.task.run([
-			'concat', 
-			'sass'
-		]);
-	});
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-	function generateFiles(){
-		var ret = [],
-			dir = grunt.file.readJSON('config.json').copyDirs
-		;
-		for (var i = dir.length - 1; i >= 0; i--) {
-			ret.push({
-				expand: true, 
-				src: ['tunic.scss'], 
-				dest: dir[i]
-			});
-		};
-		return ret;
-	}
+    grunt.registerTask('default', function () {
+        grunt.config('files', generateFiles());
+        grunt.task.run([
+            'concat', 
+            'copy'
+        ]);
+    });
 
-	function generateBanner(){
-		var lines = [
-			'',
-			'/*======\\                      __              	',
-			'|        \\                    |  \\          		',
-			' \\$$$$$$$$|=\\   |=\\ |======\\   \\$$  /=====\\ 	',
-			'   | $$   |  \\  |  \\|       \\ |  \\ /       \\	',
-			'   | $$   | $$  | $$| $$$$$$$\\| $$|  $$$$$$$		',
-			'   | $$   | $$  | $$| $$  | $$| $$| $$      		',
-			'   | $$   | $$==/ $$| $$  | $$| $$| $$====\\ 		',
-			'   | $$    \\$$    $$| $$  | $$| $$ \\$$     \\	',
-			'    \\$$     \\$$$$$$  \\$$   \\$$ \\$$  \\$$$$$*/ ',
-			'',
-			''
-		];
-		return lines.join('\r\n');
-	}
+    grunt.registerTask('test', function(){
+        grunt.task.run([
+            'concat', 
+            'sass'
+        ]);
+    });
+
 
 
 };

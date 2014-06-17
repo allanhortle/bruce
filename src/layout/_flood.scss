@@ -1,0 +1,20 @@
+
+//
+// Flood
+//
+// Absolutley position an element as far as it's containing elements bounds
+//
+// Styleguide 1.1.1
+//
+
+%tunic-flood {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@mixin tunic-flood() {
+    @extend %tunic-flood;
+}

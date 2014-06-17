@@ -1,0 +1,29 @@
+
+//
+// Vertical Align
+//
+// Vertical Align tools
+//
+// Styleguide 1.1.1
+//
+
+%l-verticalAlign {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+%l-verticalAlign_inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner') {
+    .#{$wrapper} {
+        @extend %l-verticalAlign;
+    }
+
+    .#{$inner} {
+        @extend %l-verticalAlign_inner;
+    }
+}

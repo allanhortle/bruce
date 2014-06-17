@@ -1,0 +1,67 @@
+
+//
+// Grid
+//
+// Uses the $sizes list to create percentage based helper classes
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
+    .#{$grid} {
+        $gutter: $tunic-grid_gutter;
+        box-sizing: border-box;
+        display: table;
+        width: 100%;
+        table-layout: fixed;        
+
+        & > [class*=#{$col}] {
+            box-sizing: border-box;
+            display: block;
+            vertical-align: top;
+
+            @include tunic-breakpoint($tunic-breakpoint--small) {
+                display: table-cell;
+                border-right: $gutter solid transparent;
+                border-left: $gutter solid transparent;
+            }
+            
+            &:first-child {
+                border-left: 0;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        // Alignment
+        &.#{$grid}-middle {
+            & > [class*=#{$col}] {
+                vertical-align: middle;
+            }
+        }
+
+        &.#{$grid}-bottom {
+            & > [class*=#{$col}] {
+                vertical-align: bottom;
+            }
+        }
+
+        // Sizing
+        &.#{$grid}-tight {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 2;
+            }
+        }
+    }
+
+    @for $i from 1 through $num {
+        @include tunic-breakpoint($tunic-breakpoint--small) {
+            .#{$col}#{$i} {
+                width: (100% / $num) * $i;
+            }
+        }
+        
+    }   
+}

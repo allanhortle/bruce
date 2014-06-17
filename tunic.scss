@@ -1,69 +1,56 @@
 
-/*======\                      __              	
-|        \                    |  \          		
- \$$$$$$$$|=\   |=\ |======\   \$$  /=====\ 	
-   | $$   |  \  |  \|       \ |  \ /       \	
-   | $$   | $$  | $$| $$$$$$$\| $$|  $$$$$$$		
-   | $$   | $$  | $$| $$  | $$| $$| $$      		
-   | $$   | $$==/ $$| $$  | $$| $$| $$====\ 		
-   | $$    \$$    $$| $$  | $$| $$ \$$     \	
-    \$$     \$$$$$$  \$$   \$$ \$$  \$$$$$*/ 
-
-
-/*
-|--------------------------------------------------------------------------
-| Breakpoints
-|--------------------------------------------------------------------------
-|
-| Returns a media query based on the content of $bp.
-| 
-| $bp: number;				@media only screen and (max-width: number)
-| $bp: string number;		@media only screen and (string: number)
-| $bp: number number;		@media only screen and (min-width: number) and (max-width: number)
-*/
+//
+// Breakpoints
+//
+// Returns a media query based on the content of $bp.
+// $bp: number;             @media only screen and (max-width: number)
+// $bp: string number;      @media only screen and (string: number)
+// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
+//
+// Styleguide 1.1.1
+//
 
 @mixin tunic-breakpoint($bp) {
-	// Standard 
-	@if type-of($bp) == 'number'{
-		@media only screen and (max-width: #{$bp})  { 
-			@content; 
-		}
-	}
+    // Standard 
+    @if type-of($bp) == 'number'{
+        @media only screen and (max-width: #{$bp})  { 
+            @content; 
+        }
+    }
 
-	@if type-of($bp) == 'list'{
-		$first:  nth($bp,1);
-		$second: nth($bp,2);
+    @if type-of($bp) == 'list'{
+        $first:  nth($bp, 1);
+        $second: nth($bp, 2);
 
-		@if type-of($first) == 'string'{
-			@media only screen and (#{$first}: #{$second}) { 
-				@content; 
-			}
-		}
-		@elseif type-of($first) == 'number'{
-			@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-				@content; 
-			}
-		}
-		@else{
-			@warn 'tunic-breakpoint: wrong syntax';
-		}
-	}
+        @if type-of($first) == 'string'{
+            @media only screen and (#{$first}: #{$second}) { 
+                @content; 
+            }
+        }
+        @elseif type-of($first) == 'number'{
+            @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+                @content; 
+            }
+        }
+        @else{
+            @warn 'tunic-breakpoint: wrong syntax';
+        }
+    }
 }
 
-/*
-|--------------------------------------------------------------------------
-| Retina Breakpoint
-|--------------------------------------------------------------------------
-|
-| $dpi
-|
-*/
 
-@mixin tunic-retina($dpi:2){
-	@media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
-		@content;
-	}
+//
+// Retina Breakpoint
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-retina($dpi:2) {
+    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
+        @content;
+    }
 }
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,71 +59,15 @@
 |
 */
 
-$tunic-unit: 			16px 	!default;
-$tunic-grid_gutter: 	16px 	!default;
-$tunic-ie:			 	false 	!default;
+$tunic-unit:            16px    !default;
+$tunic-grid_gutter:     16px    !default;
+$tunic-ie:              false   !default;
 
 
 
-$tunic-breakpoint--small: 	21em 	!default;
+$tunic-breakpoint--small:   21em    !default;
 
 
-/*
-|--------------------------------------------------------------------------
-| Reset
-|--------------------------------------------------------------------------
-|
-| http://meyerweb.com/eric/tools/css/reset/ 
-| v2.0 | 20110126
-| License: none (public domain)
-|
-*/
-
-@mixin tunic-reset(){
-	html, body, div, span, applet, object, iframe,
-	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-	a, abbr, acronym, address, big, cite, code,
-	del, dfn, em, img, ins, kbd, q, s, samp,
-	small, strike, strong, sub, sup, tt, var,
-	b, u, i, center,
-	dl, dt, dd, ol, ul, li,
-	fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td,
-	article, aside, canvas, details, embed, 
-	figure, figcaption, footer, header, hgroup, 
-	menu, nav, output, ruby, section, summary,
-	time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
-	/* HTML5 display-role reset for older browsers */
-	article, aside, details, figcaption, figure, 
-	footer, header, hgroup, menu, nav, section {
-		display: block;
-	}
-	body {
-		line-height: 1;
-	}
-	ol, ul {
-		list-style: none;
-	}
-	blockquote, q {
-		quotes: none;
-	}
-	blockquote:before, blockquote:after,
-	q:before, q:after {
-		content: '';
-		content: none;
-	}
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-}
 
 
 
@@ -151,36 +82,16 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 @mixin tunic-size($w, $h:null){
-	@if $h != null {
-		width:$w;
-		height:$h;	
-	}
-	@else{
-		width:$w;
-		height:$w;
-	}
+    @if $h != null {
+        width:$w;
+        height:$h;  
+    }
+    @else{
+        width:$w;
+        height:$w;
+    }
 }
 
-/*
-|--------------------------------------------------------------------------
-| Flood
-|--------------------------------------------------------------------------
-|
-| Absolutley position an element as far as it's containing elements bounds
-|
-*/
-
-%tunic-flood{
-	position: absolute;
-	top:0;
-	left:0;
-	bottom:0;
-	right:0;
-}
-
-@mixin tunic-flood(){
-	@extend %tunic-flood;
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -192,14 +103,14 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 @mixin tunic-columns($spacing:4px, $color:transparent){
-	border-right:$spacing solid $color;
-	border-left:$spacing solid $color;
-	&:first-child{
-		border-left:none;
-	}
-	&:last-child{
-		border-right:none;
-	}
+    border-right:$spacing solid $color;
+    border-left:$spacing solid $color;
+    &:first-child{
+        border-left:none;
+    }
+    &:last-child{
+        border-right:none;
+    }
 }
 
 
@@ -212,15 +123,15 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-clearfix{
-	&:after{
-		content: "";
-		display: table;
-		clear: both;
-	}
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 @mixin tunic-clearfix{
-	@extend %tunic-clearfix; 
+    @extend %tunic-clearfix; 
 }
 
 /*
@@ -232,20 +143,20 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-ios--nohighlight{
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 %tunic-ios--appearance{
-	-webkit-appearance: none;
-	border-radius: 0;
+    -webkit-appearance: none;
+    border-radius: 0;
 }
 
 %tunic-ios--scroll{
-	-webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling:touch;
 }
 
 @mixin tunic-ios($type){
-	@extend %tunic-ios--#{$type};
+    @extend %tunic-ios--#{$type};
 };
 
 
@@ -260,17 +171,17 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-behave--notselectable{
-	-webkit-touch-callout: none;  
-	user-select: none;
+    -webkit-touch-callout: none;  
+    user-select: none;
 }
 
 %tunic-behave--button{
-	@extend %tunic-behave--notselectable; 
-	cursor:pointer;
+    @extend %tunic-behave--notselectable; 
+    cursor:pointer;
 }
 
 @mixin tunic-behave($type){
-	@extend %tunic-behave--#{$type};
+    @extend %tunic-behave--#{$type};
 };
 
 
@@ -284,63 +195,11 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-hack--hardware{
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	perspective: 1000;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Breakpoints
-|--------------------------------------------------------------------------
-|
-| Returns a media query based on the content of $bp.
-| 
-| $bp: number;				@media only screen and (min-width: number)
-| $bp: string number;		@media only screen and (string: number)
-| $bp: number number;		@media only screen and (min-width: number) and (max-width: number)
-*/
-
-@mixin tunic-breakpoint($bp) {
-	// Standard 
-	@if $tunic-ie == true {
-		@content;
-	}
-	@else{
-		@if type-of($bp) == 'number'{
-			@media only screen and (min-width: #{$bp})  { 
-				@content; 
-			}
-		}
-
-		@if type-of($bp) == 'list'{
-			$first:  nth($bp,1);
-			$second: nth($bp,2);
-
-			@if type-of($first) == 'string'{
-				@media only screen and (#{$first}: #{$second}) { 
-					@content; 
-				}
-			}
-			@elseif type-of($first) == 'number'{
-				@media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-					@content; 
-				}
-			}
-			@else{
-				@warn 'tunic-breakpoint: wrong syntax';
-			}
-		}
-	}
-	
-}
-
-@mixin tunic-retina($dpi:2){
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dppx) { 
-		@content;
-	}
-}
 
 
 /*
@@ -354,19 +213,19 @@ $tunic-breakpoint--small: 	21em 	!default;
 
 @mixin tunic-opacity($val:0.5, $color:'null'){
 
-	@if $color == 'null'{
-		$ie: $val * 100;
-		opacity:$val;
-		filter: alpha(opacity=#{$ie});
-	}
-	@else{
-		$color:rgba($color,$val);
-		$ie: ie-hex-str($color);
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
-		zoom: 1;
-		background-color: $color;
-	}	
-	
+    @if $color == 'null'{
+        $ie: $val * 100;
+        opacity:$val;
+        filter: alpha(opacity=#{$ie});
+    }
+    @else{
+        $color:rgba($color,$val);
+        $ie: ie-hex-str($color);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+        zoom: 1;
+        background-color: $color;
+    }   
+    
 }
 
 
@@ -378,19 +237,57 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-arrow{
-	display: block;
-	content:"";
-	width:0;
-	height:0;
-	border:1em solid transparent;
+    display: block;
+    content:"";
+    width:0;
+    height:0;
+    border:1em solid transparent;
 }
 
 @mixin tunic-arrow($width,$direction,$color){
-	@extend %tunic-arrow; 
-	border-width:$width;
-	border-#{$direction}-color:$color;
+    @extend %tunic-arrow; 
+    border-width:$width;
+    border-#{$direction}-color:$color;
 }
 
+
+/* 
+
+Single Property Animation
+
+Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
+
+styleguide 1.1.1
+
+*/
+
+@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
+    @if ($fromLeave == null){
+        $fromLeave: $fromEnter;
+    }
+
+    @if ($toLeave == null){
+        $toLeave: $toEnter;
+    }
+
+    .#{$name}-enter {
+        #{$prop}: #{$fromEnter};
+
+        &.#{$name}-enter-active {
+            transition: all $duration;
+            #{$prop}: #{$toEnter};
+        }
+    }
+
+    .#{$name}-leave {
+        transition: all $duration;
+        #{$prop}: #{$fromLeave};
+
+        &.#{$name}-leave-active {
+            #{$prop}: #{$toLeave};
+        }
+    }
+}
 
 
 /*
@@ -402,201 +299,316 @@ $tunic-breakpoint--small: 	21em 	!default;
 |
 */
 
-@function repeatChar($char, $ammount){
-	$a: $char;
-	@for $i from 0 through $ammount{		
-		$a: $a + $char;
-	}
-	@return $a;
+@function repeatChar($char, $ammount) {
+    $a: $char;
+    @for $i from 0 through $ammount {        
+        $a: $a + $char;
+    }
+    @return $a;
 }
 
 // Invert Color
-@function inverse($var){
-	@return $var *-1;
+@function inverse($var) {
+    @return $var *-1;
 }
 
 // Returns a grey value from 0 - 100
-@function grey($var:50){
-	@return hsl(0,0,$var);
+@function grey($var:50) {
+    @return hsl(0, 0, $var);
 }
 
 // Lightens and desaturates a color
-@function pastel($var, $des:10, $light:10){
-	@return lighten(desaturate($var,$des),$light);
+@function pastel($var, $des:10, $light:10) {
+    @return lighten(desaturate($var, $des), $light);
 }
 
 // Time. Returns $var+'ms'
-@function t($var){
-	@return #{$var}ms;
+@function t($var) {
+    @return #{$var}ms;
 }
 
 // List functions
 @function first($list) {
-  @return nth($list, 1);
+    @return nth($list, 1);
 }
 
 @function last($list) {
-  @return nth($list, length($list));
+    @return nth($list, length($list));
 }
 
-@function z($name){
-	@return map-get($tunic-zindexList, $name);
+@function z($name) {
+    @return map-get($tunic-zindexList, $name);
 }
 
+/* 
 
-/*
-|--------------------------------------------------------------------------
-| Boxsizing
-|--------------------------------------------------------------------------
-|
+get-zindex($component);
+
+Returns the position of `$component` in `$tunic-zindexList`
+
+Markup:
+$tunic-zindexList:(
+    Button,
+    Widget,
+    Link
+);
+
+.Button {
+    z-index: get-zindex(Button);
+}
+
+styleguide 1.1.1
+
 */
 
-%tunic-boxsizing{
-	box-sizing:border-box;
-}
+@function get-zindex($component) {
+    $list: $tunic-zindexList;
+    $zindex: index($list, $component);
+    @if $zindex {
+        @return $zindex;
+    }
 
-@mixin tunic-boxsizing(){
-	@extend %tunic-boxsizing;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Wrappers
-|--------------------------------------------------------------------------
-|
-| Page width an auto margins. Stock standard rappin'.
-|
-*/
-
-@mixin tunic-wrapper($width:1024px){
-	width:$width;
-	margin:0 auto;
+    @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
+    @return null;    
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Grid
-|--------------------------------------------------------------------------
-|
-*/
+//
+// Flood
+//
+// Absolutley position an element as far as it's containing elements bounds
+//
+// Styleguide 1.1.1
+//
 
-@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12){
-	.#{$grid}{
-		$gutter: $tunic-grid_gutter;
-		@extend %tunic-boxsizing;
-		display:table;
-		width:100%;
-		table-layout: fixed;
-		
+%tunic-flood {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 
-		& > [class*=#{$col}] {
-			@extend %tunic-boxsizing;
-			display:block;
-			vertical-align: top;
-
-			@include tunic-breakpoint($tunic-breakpoint--small){
-				display:table-cell;
-				border-right: $gutter solid transparent;
-				border-left: $gutter solid transparent;
-			}
-
-			
-			&:first-child{
-				border-left:none;
-			}
-			&:last-child{
-				border-right:none;
-			}
-		}
-
-		// Alignment
-		&.is-middle{
-			& > [class*=#{$col}] {
-				vertical-align: middle;
-			}
-		}
-		&.is-bottom{
-			& > [class*=#{$col}] {
-				vertical-align: bottom;
-			}
-		}
-
-		// Sizing
-		&.is-tight{
-			& > [class*=#{$col}] {
-				border-width:$gutter / 2;
-			}
-		}
-	}
-
-	@for $i from 1 through $num{
-		@include tunic-breakpoint($tunic-breakpoint--small){
-			.#{$col}#{$i}{
-				width:(100% / $num) * $i;
-			}
-		}
-		
-	}	
+@mixin tunic-flood() {
+    @extend %tunic-flood;
 }
 
 
+//
+// Grid
+//
+// Uses the $sizes list to create percentage based helper classes
+//
+// Styleguide 1.1.1
+//
 
-/*
-|--------------------------------------------------------------------------
-| Widths
-|--------------------------------------------------------------------------
-|
-| Force an element to a percentage width;
-|
-*/
+@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
+    .#{$grid} {
+        $gutter: $tunic-grid_gutter;
+        box-sizing: border-box;
+        display: table;
+        width: 100%;
+        table-layout: fixed;        
 
-@mixin tunic-widths($sizes:(0,1,2,3,4,5,6,7,8,9,10)){
-	@include tunic-breakpoint($tunic-breakpoint--small){
-		@for $i from first($sizes) through last($sizes){
-			.l-#{$i}0{	width:percentage($i)/10   !important; }
-			@if $i != 10{
-				.l-#{$i}5{	width:percentage($i)/10+5 !important; }
-			}
-			@if $i == 0{
-				.l-#{$i}0{	width:1% !important}
-			}
-			
-		}
-	}	
+        & > [class*=#{$col}] {
+            box-sizing: border-box;
+            display: block;
+            vertical-align: top;
+
+            @include tunic-breakpoint($tunic-breakpoint--small) {
+                display: table-cell;
+                border-right: $gutter solid transparent;
+                border-left: $gutter solid transparent;
+            }
+            
+            &:first-child {
+                border-left: 0;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        // Alignment
+        &.#{$grid}-middle {
+            & > [class*=#{$col}] {
+                vertical-align: middle;
+            }
+        }
+
+        &.#{$grid}-bottom {
+            & > [class*=#{$col}] {
+                vertical-align: bottom;
+            }
+        }
+
+        // Sizing
+        &.#{$grid}-tight {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 2;
+            }
+        }
+    }
+
+    @for $i from 1 through $num {
+        @include tunic-breakpoint($tunic-breakpoint--small) {
+            .#{$col}#{$i} {
+                width: (100% / $num) * $i;
+            }
+        }
+        
+    }   
 }
 
-/*
-|--------------------------------------------------------------------------
-| Vertical Align
-|--------------------------------------------------------------------------
-|
-*/
 
-%l-verticalAlign{
-	display:table;
-	height:100%;
-	width:100%;
+//
+// Reset
+//
+// http://meyerweb.com/eric/tools/css/reset/ 
+// v2.0 | 20110126
+// License: none (public domain)
+//
+// Styleguide 1.1.1
+//
+
+$tunic-reset-elements: 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video
+;
+
+@mixin tunic-reset() {
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed, 
+    figure, figcaption, footer, header, hgroup, 
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,    
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+
+    body {
+        line-height: 1;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    blockquote,
+    q {
+        quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
 }
 
-%l-verticalAlign_inner{
-	display:table-cell;
-	vertical-align:middle;
+
+//
+// Vertical Align
+//
+// Vertical Align tools
+//
+// Styleguide 1.1.1
+//
+
+%l-verticalAlign {
+    display: table;
+    height: 100%;
+    width: 100%;
 }
 
-@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner'){
-	.#{$wrapper}{
-		@extend %l-verticalAlign;
-	}
+%l-verticalAlign_inner {
+    display: table-cell;
+    vertical-align: middle;
+}
 
-	.#{$inner}{
-		@extend %l-verticalAlign_inner;
-	}
+@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner') {
+    .#{$wrapper} {
+        @extend %l-verticalAlign;
+    }
+
+    .#{$inner} {
+        @extend %l-verticalAlign_inner;
+    }
 }
 
 
+//
+// Widths
+//
+// Uses the $sizes list to create percentage based helper classes
+//
+// Styleguide 1.1.1
+//
 
+@mixin tunic-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
+    @include tunic-breakpoint($tunic-breakpoint--small) {
+        @for $i from first($sizes) through last($sizes) {
+            .l-#{$i}0 { width: percentage($i)/10   !important; }
+            @if $i != 10 {
+                .l-#{$i}5 { 
+                    width: percentage($i)/10+5 !important; 
+                }
+            }
+            @if $i == 0 {
+                .l-#{$i}0 {
+                    width: 1% !important;
+                }
+            }
+            
+        }
+    }   
+}
 
 @function tunic-power ($x, $n) {
     $ret: 1;
@@ -634,19 +646,19 @@ $tunic-breakpoint--small: 	21em 	!default;
 |
 */
 
-@mixin tunic-fontface($lists...){
-	@each $i in $lists{
-		@font-face {
-			font-family:#{nth($i,1)};
-			src: url('#{nth($i,2)}.eot');
-			src: url('#{nth($i,2)}.eot?#iefix') format('embedded-opentype'),
-				 url('#{nth($i,2)}.woff') format('woff'),
-				 url('#{nth($i,2)}.ttf') format('truetype'),
-				 url('#{nth($i,2)}.svg##{nth($i,1)}') format('svg');
-			font-weight:normal;
-			font-style:normal;
-		}
-	}	
+@mixin tunic-fontface($lists...) {
+    @each $i in $lists {
+        @font-face {
+            font-family: #{nth($i, 1)};
+            src: url('#{nth($i, 2)}.eot');
+            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
+                 url('#{nth($i, 2)}.woff') format('woff'),
+                 url('#{nth($i, 2)}.ttf') format('truetype'),
+                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+    }   
 }
 
 
@@ -660,10 +672,10 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 @mixin tunic-hover($color, $amount:10){
-	color:$color;
-	&:hover{
-		color:lighten($color,$amount);
-	}
+    color:$color;
+    &:hover{
+        color:lighten($color,$amount);
+    }
 }
 
 
@@ -675,23 +687,28 @@ $tunic-breakpoint--small: 	21em 	!default;
 */
 
 %tunic-ellipsis{
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
 @mixin tunic-ellipsis($cutoff:null){
-	@extend	%tunic-ellipsis;
-	@if $cutoff != null {
-		padding-right:$cutoff; 		
-	}	
+    @extend %tunic-ellipsis;
+    @if $cutoff != null {
+        padding-right:$cutoff;      
+    }   
 }
 
-@mixin tunic-verticalRhythm($size, $fontSize, $lineHeight, $scaling) {
-    $power: $size;
+@mixin tunic-verticalRhythm($size, $rhythm) {
+
+    $fontSize: nth($rhythm, 1);
+    $lineHeight: nth($rhythm, 2);
+    $scaling: nth($rhythm, 3);
+
+    $power: 4 - $size;
     $topMultipier: 2;
 
-    @if ($size < 2){
+    @if ($power < 2){
         $topMultipier: 1;
     }
     
@@ -704,4 +721,8 @@ $tunic-breakpoint--small: 	21em 	!default;
     margin-bottom: tunic-fixed($line, 1) + em;
     margin-top: tunic-fixed($topMultipier * $line, 1) + em;
 }
+
+
+
+
 
