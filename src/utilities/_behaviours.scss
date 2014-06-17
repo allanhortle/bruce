@@ -1,0 +1,22 @@
+
+//
+// Behaviours
+//
+// Change the default behaviour of an element.
+//
+// Styleguide 1.1.1
+//
+
+%tunic-behave-notselectable {
+    -webkit-touch-callout: none;  
+    user-select: none;
+}
+
+%tunic-behave-button {
+    @extend %tunic-behave-notselectable; 
+    cursor: pointer;
+}
+
+@mixin tunic-behave($type) {
+    @extend %tunic-behave-#{$type};
+}

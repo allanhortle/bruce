@@ -1,0 +1,23 @@
+
+//
+// Font Face
+//
+// Chains all your font face declarations into one include.
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-fontface($lists...) {
+    @each $i in $lists {
+        @font-face {
+            font-family: #{nth($i, 1)};
+            src: url('#{nth($i, 2)}.eot');
+            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
+                 url('#{nth($i, 2)}.woff') format('woff'),
+                 url('#{nth($i, 2)}.ttf') format('truetype'),
+                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+    }   
+}

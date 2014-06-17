@@ -1,0 +1,12 @@
+
+// 
+// pastel($var, $des:10, $light:10);
+// 
+// Lightens and desaturates a color
+// 
+// styleguide 1.1.1
+// 
+
+@function pastel($var, $des:10, $light:10) {
+    @return lighten(desaturate($var, $des), $light);
+}

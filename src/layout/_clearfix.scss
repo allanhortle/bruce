@@ -1,0 +1,20 @@
+
+//
+// Clearfix
+//
+// Table Style
+//
+// Styleguide 1.1.1
+//
+
+%tunic-clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin tunic-clearfix {
+    @extend %tunic-clearfix; 
+}

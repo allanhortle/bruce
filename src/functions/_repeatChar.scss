@@ -1,0 +1,16 @@
+
+// 
+// repeatChar($char, $ammount);
+// 
+// Repeats a character by an ammount
+// 
+// styleguide 1.1.1
+// 
+
+@function repeatChar($char, $ammount) {
+    $a: $char;
+    @for $i from 0 through $ammount {        
+        $a: $a + $char;
+    }
+    @return $a;
+}

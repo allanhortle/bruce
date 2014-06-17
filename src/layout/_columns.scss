@@ -1,0 +1,21 @@
+
+//
+// Columns
+//
+// Uses borders to create columns
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-columns($spacing:4px, $color:transparent) {
+    border-right: $spacing solid $color;
+    border-left: $spacing solid $color;
+
+    &:first-child {
+        border-left: 0;
+    }
+
+    &:last-child {
+        border-right: 0;
+    }
+}

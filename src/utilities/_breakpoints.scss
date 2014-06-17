@@ -1,0 +1,58 @@
+
+//
+// Breakpoints
+//
+// Returns a media query based on the content of $bp.
+// $bp: number;             @media only screen and (max-width: number)
+// $bp: string number;      @media only screen and (string: number)
+// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-breakpoint($bp) {
+    // Standard 
+    @if $tunic-ie == true {
+        @content;
+    } 
+
+    @else {
+        @if type-of($bp) == 'number'{
+            @media only screen and (min-width: #{$bp})  { 
+                @content; 
+            }
+        }
+
+        @if type-of($bp) == 'list'{
+            $first:  nth($bp, 1);
+            $second: nth($bp, 2);
+
+            @if type-of($first) == 'string'{
+                @media only screen and (#{$first}: #{$second}) { 
+                    @content; 
+                }
+            }
+            @elseif type-of($first) == 'number'{
+                @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+                    @content; 
+                }
+            }
+            @else{
+                @warn 'tunic-breakpoint: wrong syntax';
+            }
+        }
+    }
+}
+
+
+//
+// Retina Breakpoint
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-retina($dpi:2) {
+    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
+        @content;
+    }
+}

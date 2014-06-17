@@ -1,0 +1,25 @@
+
+//
+// iOS
+//
+// Simple extends for iOS behavior
+//
+// Styleguide 1.1.1
+//
+
+%tunic-ios-nohighlight {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+%tunic-ios-reset {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+%tunic-ios-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+@mixin tunic-ios($type) {
+    @extend %tunic-ios-#{$type};
+};

@@ -1,0 +1,18 @@
+
+//
+// Browser Hacks
+//
+// Stuff that probably shouldn't exist
+//
+// Styleguide 1.1.1
+//
+
+%tunic-hack-hardware {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+@mixin tunic-hack($type) {
+    @extend %tunic-hack-#{$type};
+}

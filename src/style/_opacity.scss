@@ -1,0 +1,27 @@
+
+//
+// Opacity
+//
+// Opacity mixin for older browsers.
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-opacity($val:.5, $color:'null') {
+
+    @if $color == 'null'{
+        $ie: $val * 100;
+        opacity: $val;
+
+        filter: alpha(opacity=#{$ie});
+    }
+    @else {
+        $color: rgba($color, $val);
+        $ie: ie-hex-str($color);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+        zoom: 1;
+        background-color: $color;
+    }   
+    
+}

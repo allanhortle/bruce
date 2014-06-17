@@ -1,0 +1,13 @@
+
+// 
+// inverse($var);
+// 
+// Invert Number & Colors
+// 
+// styleguide 1.1.1
+// 
+
+
+@function inverse($var) {
+    @return $var * -1;
+}

@@ -1,0 +1,22 @@
+
+//
+// Arrow
+//
+// Trangle borders
+//
+// Styleguide 1.1.1
+//
+
+%tunic-arrow {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 1em solid transparent;
+}
+
+@mixin tunic-arrow($width, $direction, $color) {
+    @extend %tunic-arrow; 
+    border-width: $width;
+    border-#{$direction}-color: $color;
+}

@@ -1,303 +1,74 @@
 
-//
-// Breakpoints
-//
-// Returns a media query based on the content of $bp.
-// $bp: number;             @media only screen and (max-width: number)
-// $bp: string number;      @media only screen and (string: number)
-// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
-//
-// Styleguide 1.1.1
-//
-
-@mixin tunic-breakpoint($bp) {
-    // Standard 
-    @if type-of($bp) == 'number'{
-        @media only screen and (max-width: #{$bp})  { 
-            @content; 
-        }
-    }
-
-    @if type-of($bp) == 'list'{
-        $first:  nth($bp, 1);
-        $second: nth($bp, 2);
-
-        @if type-of($first) == 'string'{
-            @media only screen and (#{$first}: #{$second}) { 
-                @content; 
-            }
-        }
-        @elseif type-of($first) == 'number'{
-            @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
-                @content; 
-            }
-        }
-        @else{
-            @warn 'tunic-breakpoint: wrong syntax';
-        }
-    }
-}
-
-
-//
-// Retina Breakpoint
-//
-// Styleguide 1.1.1
-//
-
-@mixin tunic-retina($dpi:2) {
-    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
-        @content;
-    }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Variables
-|--------------------------------------------------------------------------
-|
-*/
-
 $tunic-unit:            16px    !default;
 $tunic-grid_gutter:     16px    !default;
 $tunic-ie:              false   !default;
-
-
-
 $tunic-breakpoint--small:   21em    !default;
 
 
+// 
+// grey($var:50);
+// 
+// Returns a grey value from 0 - 100
+// 
+// styleguide 1.1.1
+// 
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Size
-|--------------------------------------------------------------------------
-|
-| One declaration for width and height 
-|
-*/
-
-@mixin tunic-size($w, $h:null){
-    @if $h != null {
-        width:$w;
-        height:$h;  
-    }
-    @else{
-        width:$w;
-        height:$w;
-    }
+@function grey($var:50) {
+    @return hsl(0, 0, $var);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Columns
-|--------------------------------------------------------------------------
-|
-| Uses borders to create columns. 
-|
-*/
+// 
+// inverse($var);
+// 
+// Invert Number & Colors
+// 
+// styleguide 1.1.1
+// 
 
-@mixin tunic-columns($spacing:4px, $color:transparent){
-    border-right:$spacing solid $color;
-    border-left:$spacing solid $color;
-    &:first-child{
-        border-left:none;
-    }
-    &:last-child{
-        border-right:none;
-    }
+
+@function inverse($var) {
+    @return $var * -1;
 }
 
 
+// 
+// List functions
+// 
+// Useful things for lists
+// 
+// styleguide 1.1.1
+// 
 
-/*
-|--------------------------------------------------------------------------
-| Clearfix
-|--------------------------------------------------------------------------
-|
-*/
-
-%tunic-clearfix{
-    &:after{
-        content: "";
-        display: table;
-        clear: both;
-    }
+@function first($list) {
+    @return nth($list, 1);
 }
 
-@mixin tunic-clearfix{
-    @extend %tunic-clearfix; 
-}
-
-/*
-|--------------------------------------------------------------------------
-| iOS Extends
-|--------------------------------------------------------------------------
-|
-|
-*/
-
-%tunic-ios--nohighlight{
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-%tunic-ios--appearance{
-    -webkit-appearance: none;
-    border-radius: 0;
-}
-
-%tunic-ios--scroll{
-    -webkit-overflow-scrolling:touch;
-}
-
-@mixin tunic-ios($type){
-    @extend %tunic-ios--#{$type};
-};
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Behaviours
-|--------------------------------------------------------------------------
-|
-| Change the default behaviour of an element.
-|
-*/
-
-%tunic-behave--notselectable{
-    -webkit-touch-callout: none;  
-    user-select: none;
-}
-
-%tunic-behave--button{
-    @extend %tunic-behave--notselectable; 
-    cursor:pointer;
-}
-
-@mixin tunic-behave($type){
-    @extend %tunic-behave--#{$type};
-};
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Browser Performance Hacks
-|--------------------------------------------------------------------------
-|
-*/
-
-%tunic-hack--hardware{
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000;
+@function last($list) {
+    @return nth($list, length($list));
 }
 
 
+// 
+// pastel($var, $des:10, $light:10);
+// 
+// Lightens and desaturates a color
+// 
+// styleguide 1.1.1
+// 
 
-/*
-|--------------------------------------------------------------------------
-| Opacity
-|--------------------------------------------------------------------------
-| 
-| Opacity mixin for older browsers.
-|
-*/
-
-@mixin tunic-opacity($val:0.5, $color:'null'){
-
-    @if $color == 'null'{
-        $ie: $val * 100;
-        opacity:$val;
-        filter: alpha(opacity=#{$ie});
-    }
-    @else{
-        $color:rgba($color,$val);
-        $ie: ie-hex-str($color);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
-        zoom: 1;
-        background-color: $color;
-    }   
-    
+@function pastel($var, $des:10, $light:10) {
+    @return lighten(desaturate($var, $des), $light);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Arrows
-|--------------------------------------------------------------------------
-|
-*/
-
-%tunic-arrow{
-    display: block;
-    content:"";
-    width:0;
-    height:0;
-    border:1em solid transparent;
-}
-
-@mixin tunic-arrow($width,$direction,$color){
-    @extend %tunic-arrow; 
-    border-width:$width;
-    border-#{$direction}-color:$color;
-}
-
-
-/* 
-
-Single Property Animation
-
-Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
-
-styleguide 1.1.1
-
-*/
-
-@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
-    @if ($fromLeave == null){
-        $fromLeave: $fromEnter;
-    }
-
-    @if ($toLeave == null){
-        $toLeave: $toEnter;
-    }
-
-    .#{$name}-enter {
-        #{$prop}: #{$fromEnter};
-
-        &.#{$name}-enter-active {
-            transition: all $duration;
-            #{$prop}: #{$toEnter};
-        }
-    }
-
-    .#{$name}-leave {
-        transition: all $duration;
-        #{$prop}: #{$fromLeave};
-
-        &.#{$name}-leave-active {
-            #{$prop}: #{$toLeave};
-        }
-    }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-|
-| Useful functions for to save dev from tearing their hair out.
-|
-*/
+// 
+// repeatChar($char, $ammount);
+// 
+// Repeats a character by an ammount
+// 
+// styleguide 1.1.1
+// 
 
 @function repeatChar($char, $ammount) {
     $a: $char;
@@ -307,37 +78,17 @@ styleguide 1.1.1
     @return $a;
 }
 
-// Invert Color
-@function inverse($var) {
-    @return $var *-1;
-}
 
-// Returns a grey value from 0 - 100
-@function grey($var:50) {
-    @return hsl(0, 0, $var);
-}
+// 
+// Time function
+// 
+// Returns $var + ms
+// 
+// styleguide 1.1.1
+// 
 
-// Lightens and desaturates a color
-@function pastel($var, $des:10, $light:10) {
-    @return lighten(desaturate($var, $des), $light);
-}
-
-// Time. Returns $var+'ms'
 @function t($var) {
     @return #{$var}ms;
-}
-
-// List functions
-@function first($list) {
-    @return nth($list, 1);
-}
-
-@function last($list) {
-    @return nth($list, length($list));
-}
-
-@function z($name) {
-    @return map-get($tunic-zindexList, $name);
 }
 
 /* 
@@ -370,6 +121,49 @@ styleguide 1.1.1
 
     @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
     @return null;    
+}
+
+
+//
+// Clearfix
+//
+// Table Style
+//
+// Styleguide 1.1.1
+//
+
+%tunic-clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin tunic-clearfix {
+    @extend %tunic-clearfix; 
+}
+
+
+//
+// Columns
+//
+// Uses borders to create columns
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-columns($spacing:4px, $color:transparent) {
+    border-right: $spacing solid $color;
+    border-left: $spacing solid $color;
+
+    &:first-child {
+        border-left: 0;
+    }
+
+    &:last-child {
+        border-right: 0;
+    }
 }
 
 
@@ -486,22 +280,10 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video
-;
+!default;
 
 @mixin tunic-reset() {
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-    a, abbr, acronym, address, big, cite, code,
-    del, dfn, em, img, ins, kbd, q, s, samp,
-    small, strike, strong, sub, sup, tt, var,
-    b, u, i, center,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    table, caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed, 
-    figure, figcaption, footer, header, hgroup, 
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
+    #{$tunic-reset-elements} {
         margin: 0;
         padding: 0;
         border: 0;
@@ -549,6 +331,26 @@ time, mark, audio, video
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+}
+
+
+//
+// Flood
+//
+// One declaration for width and height 
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-size($w, $h:null) {
+    @if $h != null {
+        width: $w;
+        height: $h;  
+    } 
+    @else {
+        width: $w;
+        height: $w;
     }
 }
 
@@ -610,6 +412,301 @@ time, mark, audio, video
     }   
 }
 
+
+//
+// Arrow
+//
+// Trangle borders
+//
+// Styleguide 1.1.1
+//
+
+%tunic-arrow {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 1em solid transparent;
+}
+
+@mixin tunic-arrow($width, $direction, $color) {
+    @extend %tunic-arrow; 
+    border-width: $width;
+    border-#{$direction}-color: $color;
+}
+
+
+//
+// Opacity
+//
+// Opacity mixin for older browsers.
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-opacity($val:.5, $color:'null') {
+
+    @if $color == 'null'{
+        $ie: $val * 100;
+        opacity: $val;
+
+        filter: alpha(opacity=#{$ie});
+    }
+    @else {
+        $color: rgba($color, $val);
+        $ie: ie-hex-str($color);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+        zoom: 1;
+        background-color: $color;
+    }   
+    
+}
+
+
+//
+// Ellipsis
+//
+// ...
+//
+// Styleguide 1.1.1
+//
+
+%tunic-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin tunic-ellipsis($cutoff:null) {
+    @extend %tunic-ellipsis;
+
+    @if $cutoff != null {
+        padding-right: $cutoff;      
+    }   
+}
+
+
+//
+// Font Face
+//
+// Chains all your font face declarations into one include.
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-fontface($lists...) {
+    @each $i in $lists {
+        @font-face {
+            font-family: #{nth($i, 1)};
+            src: url('#{nth($i, 2)}.eot');
+            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
+                 url('#{nth($i, 2)}.woff') format('woff'),
+                 url('#{nth($i, 2)}.ttf') format('truetype'),
+                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+    }   
+}
+
+
+//
+// Vertical Rhythm
+//
+// Calculates margins, font size and line height for h1 - h4
+// $baseFontSize, $lineHeight, $scaling
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-verticalRhythm($size, $rhythm) {
+    $fontSize: nth($rhythm, 1);
+    $lineHeight: nth($rhythm, 2);
+    $scaling: nth($rhythm, 3);
+
+    $power: 4 - $size;
+    $topMultipier: 2;
+
+    @if ($power < 2){
+        $topMultipier: 1;
+    }
+    
+    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / tunic-power($scaling, $power);
+    $lines: floor(tunic-power($scaling, $power));
+    
+    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: tunic-fixed($line * $lines, 1) + em;
+    margin-bottom: tunic-fixed($line, 1) + em;
+    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+}
+
+/* 
+
+Single Property Animation
+
+Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
+
+styleguide 1.1.1
+
+*/
+
+@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
+    @if ($fromLeave == null){
+        $fromLeave: $fromEnter;
+    }
+
+    @if ($toLeave == null){
+        $toLeave: $toEnter;
+    }
+
+    .#{$name}-enter {
+        #{$prop}: #{$fromEnter};
+
+        &.#{$name}-enter-active {
+            transition: all $duration;
+            #{$prop}: #{$toEnter};
+        }
+    }
+
+    .#{$name}-leave {
+        transition: all $duration;
+        #{$prop}: #{$fromLeave};
+
+        &.#{$name}-leave-active {
+            #{$prop}: #{$toLeave};
+        }
+    }
+}
+
+
+//
+// Behaviours
+//
+// Change the default behaviour of an element.
+//
+// Styleguide 1.1.1
+//
+
+%tunic-behave-notselectable {
+    -webkit-touch-callout: none;  
+    user-select: none;
+}
+
+%tunic-behave-button {
+    @extend %tunic-behave-notselectable; 
+    cursor: pointer;
+}
+
+@mixin tunic-behave($type) {
+    @extend %tunic-behave-#{$type};
+}
+
+
+//
+// Breakpoints
+//
+// Returns a media query based on the content of $bp.
+// $bp: number;             @media only screen and (max-width: number)
+// $bp: string number;      @media only screen and (string: number)
+// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-breakpoint($bp) {
+    // Standard 
+    @if $tunic-ie == true {
+        @content;
+    } 
+
+    @else {
+        @if type-of($bp) == 'number'{
+            @media only screen and (min-width: #{$bp})  { 
+                @content; 
+            }
+        }
+
+        @if type-of($bp) == 'list'{
+            $first:  nth($bp, 1);
+            $second: nth($bp, 2);
+
+            @if type-of($first) == 'string'{
+                @media only screen and (#{$first}: #{$second}) { 
+                    @content; 
+                }
+            }
+            @elseif type-of($first) == 'number'{
+                @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+                    @content; 
+                }
+            }
+            @else{
+                @warn 'tunic-breakpoint: wrong syntax';
+            }
+        }
+    }
+}
+
+
+//
+// Retina Breakpoint
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-retina($dpi:2) {
+    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
+        @content;
+    }
+}
+
+
+//
+// Browser Hacks
+//
+// Stuff that probably shouldn't exist
+//
+// Styleguide 1.1.1
+//
+
+%tunic-hack-hardware {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+@mixin tunic-hack($type) {
+    @extend %tunic-hack-#{$type};
+}
+
+
+//
+// iOS
+//
+// Simple extends for iOS behavior
+//
+// Styleguide 1.1.1
+//
+
+%tunic-ios-nohighlight {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+%tunic-ios-reset {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+%tunic-ios-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+@mixin tunic-ios($type) {
+    @extend %tunic-ios-#{$type};
+};
+
 @function tunic-power ($x, $n) {
     $ret: 1;
     @if $n == 0 {
@@ -633,96 +730,3 @@ time, mark, audio, video
     $p: tunic-power(10, $places);
     @return floor($val * $p) / $p;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Font Face
-|--------------------------------------------------------------------------
-|
-| @List [font-name file-path,]
-|  
-| Chains all you font face declataritons into one include.
-|
-*/
-
-@mixin tunic-fontface($lists...) {
-    @each $i in $lists {
-        @font-face {
-            font-family: #{nth($i, 1)};
-            src: url('#{nth($i, 2)}.eot');
-            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
-                 url('#{nth($i, 2)}.woff') format('woff'),
-                 url('#{nth($i, 2)}.ttf') format('truetype'),
-                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
-    }   
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Link Hover
-|--------------------------------------------------------------------------
-|
-| lighten color on hover.
-|
-*/
-
-@mixin tunic-hover($color, $amount:10){
-    color:$color;
-    &:hover{
-        color:lighten($color,$amount);
-    }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Ellipsis
-|--------------------------------------------------------------------------
-|
-*/
-
-%tunic-ellipsis{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-}
-
-@mixin tunic-ellipsis($cutoff:null){
-    @extend %tunic-ellipsis;
-    @if $cutoff != null {
-        padding-right:$cutoff;      
-    }   
-}
-
-@mixin tunic-verticalRhythm($size, $rhythm) {
-
-    $fontSize: nth($rhythm, 1);
-    $lineHeight: nth($rhythm, 2);
-    $scaling: nth($rhythm, 3);
-
-    $power: 4 - $size;
-    $topMultipier: 2;
-
-    @if ($power < 2){
-        $topMultipier: 1;
-    }
-    
-    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
-    $line: $lineHeight / tunic-power($scaling, $power);
-    $lines: floor(tunic-power($scaling, $power));
-    
-    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
-    line-height: tunic-fixed($line * $lines, 1) + em;
-    margin-bottom: tunic-fixed($line, 1) + em;
-    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
-}
-
-
-
-
-
