@@ -8,16 +8,27 @@
 //
 
 @mixin tunic-fontface($lists...) {
-    @each $i in $lists {
+    @each $name, $path, $font-weight, $font-style in $lists {
+
+
+        @if ($font-weight == null) {
+            $font-weight: normal;
+        }
+
+        @if ($font-style == null) {
+            $font-style: normal;
+        }
+        
+
         @font-face {
-            font-family: #{nth($i, 1)};
-            src: url('#{nth($i, 2)}.eot');
-            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
-                 url('#{nth($i, 2)}.woff') format('woff'),
-                 url('#{nth($i, 2)}.ttf') format('truetype'),
-                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
-            font-weight: normal;
-            font-style: normal;
+            font-family: $name;
+            src: url('#{$path}.eot');
+            src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
+                 url('#{$path}.woff') format('woff'),
+                 url('#{$path}.ttf') format('truetype'),
+                 url('#{$path}.svg##{$name}') format('svg');
+            font-weight: $font-weight;
+            font-style: $font-style;
         }
     }   
 }

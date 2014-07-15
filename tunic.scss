@@ -1,10 +1,4 @@
 
-$tunic-unit:            16px    !default;
-$tunic-grid_gutter:     16px    !default;
-$tunic-ie:              false   !default;
-$tunic-breakpoint--small:   21em    !default;
-
-
 // 
 // grey($var:50);
 // 
@@ -13,8 +7,8 @@ $tunic-breakpoint--small:   21em    !default;
 // styleguide 1.1.1
 // 
 
-@function grey($var:50) {
-    @return hsl(0, 0, $var);
+@function grey($var:50, $opacity:1) {
+    @return hsla(0, 0, $var, $opacity);
 }
 
 
@@ -91,26 +85,25 @@ $tunic-breakpoint--small:   21em    !default;
     @return #{$var}ms;
 }
 
-/* 
 
-get-zindex($component);
-
-Returns the position of `$component` in `$tunic-zindexList`
-
-Markup:
-$tunic-zindexList:(
-    Button,
-    Widget,
-    Link
-);
-
-.Button {
-    z-index: get-zindex(Button);
-}
-
-styleguide 1.1.1
-
-*/
+// 
+// get-zindex($component);
+// 
+// Returns the position of `$component` in `$tunic-zindexList`
+// 
+// Markup:
+// $tunic-zindexList:(
+//     Button,
+//     Widget,
+//     Link
+// );
+// 
+// .Button {
+//     z-index: get-zindex(Button);
+// }
+// 
+// styleguide 1.1.1
+// 
 
 @function get-zindex($component) {
     $list: $tunic-zindexList;
@@ -121,6 +114,67 @@ styleguide 1.1.1
 
     @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
     @return null;    
+}
+
+
+$tunic-ie:                      false   !default;
+
+$tunic-grid-gutter:             16px    !default;
+$tunic-breakpoint--small:       21em    !default;
+
+
+
+
+$tunic-color-red:   #e65053;
+
+
+$tunic-fontWeights: (
+    bold: 600,
+    regular: 400,
+    light: 300,
+    thin: 100
+);
+
+// Default Breakpoints
+$tunic-breakpoints:(
+    large:  120rem,
+    medium: 64rem,
+    small:  48rem,
+    tiny:   30rem
+);
+
+
+// 
+// Input
+// 
+// Markup:
+// <input type="text" class="Input {$modifiers}" value="Lorem ipsum dolor sit"/>
+// <input type="password" class="Input {$modifiers}" value="Lorem ipsum dolor sit"/>
+// 
+// .Input-inline       - inline variation
+// 
+// Styleguide 2.1.4 
+// 
+
+%tunic-Input {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    width: 100%;
+    height: 32px;
+    border: 0;
+    border-radius: 0;
+    background-color: grey(90);
+    color: grey(40);
+    font-size: .8em;
+    cursor: text;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+}  
+
+@mixin tunic-Input() {
+    @extend %tunic-Input; 
 }
 
 
@@ -198,7 +252,7 @@ styleguide 1.1.1
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
-        $gutter: $tunic-grid_gutter;
+        $gutter: $tunic-grid-gutter;
         box-sizing: border-box;
         display: table;
         width: 100%;
@@ -209,10 +263,13 @@ styleguide 1.1.1
             display: block;
             vertical-align: top;
 
+            margin-bottom: 1rem;
+
             @include tunic-breakpoint($tunic-breakpoint--small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
+                margin: 0;
             }
             
             &:first-child {
@@ -245,14 +302,34 @@ styleguide 1.1.1
         }
     }
 
-    @for $i from 1 through $num {
-        @include tunic-breakpoint($tunic-breakpoint--small) {
+    @include tunic-breakpoint($tunic-breakpoint--small) {
+        @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;
             }
-        }
-        
+        }  
     }   
+}
+
+
+//
+// Hidden
+//
+// Uses positioing to hide but not remove
+//
+// Styleguide 1.1.1
+//
+
+%tunic-hide { 
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
+}
+
+@mixin tunic-hide() {
+    @extend %tunic-hide; 
 }
 
 
@@ -488,6 +565,19 @@ time, mark, audio, video
 
 
 //
+// Font Weight
+//
+// Uses $tunic-fontWeightList to return font weights
+//
+// Styleguide 1.1.1
+//
+
+@mixin tunic-fontWeight($name:'regular') {
+    font-weight: map-get($tunic-fontWeights, $name);
+}
+
+
+//
 // Font Face
 //
 // Chains all your font face declarations into one include.
@@ -496,16 +586,27 @@ time, mark, audio, video
 //
 
 @mixin tunic-fontface($lists...) {
-    @each $i in $lists {
+    @each $name, $path, $font-weight, $font-style in $lists {
+
+
+        @if ($font-weight == null) {
+            $font-weight: normal;
+        }
+
+        @if ($font-style == null) {
+            $font-style: normal;
+        }
+        
+
         @font-face {
-            font-family: #{nth($i, 1)};
-            src: url('#{nth($i, 2)}.eot');
-            src: url('#{nth($i, 2)}.eot?#iefix') format('embedded-opentype'),
-                 url('#{nth($i, 2)}.woff') format('woff'),
-                 url('#{nth($i, 2)}.ttf') format('truetype'),
-                 url('#{nth($i, 2)}.svg##{nth($i, 1)}') format('svg');
-            font-weight: normal;
-            font-style: normal;
+            font-family: $name;
+            src: url('#{$path}.eot');
+            src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
+                 url('#{$path}.woff') format('woff'),
+                 url('#{$path}.ttf') format('truetype'),
+                 url('#{$path}.svg##{$name}') format('svg');
+            font-weight: $font-weight;
+            font-style: $font-style;
         }
     }   
 }
@@ -608,22 +709,28 @@ styleguide 1.1.1
 // Breakpoints
 //
 // Returns a media query based on the content of $bp.
-// $bp: number;             @media only screen and (max-width: number)
-// $bp: string number;      @media only screen and (string: number)
-// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
+// $bp: number;             @media (max-width: number)
+// $bp: string number;      @media (string: number)
+// $bp: number number;      @media (min-width: number) and (max-width: number)
 //
 // Styleguide 1.1.1
 //
 
 @mixin tunic-breakpoint($bp) {
     // Standard 
+    $item: map-get($tunic-breakpoints, $bp);
+    
+    @if $item {
+        $bp: $item;
+    }
+
     @if $tunic-ie == true {
         @content;
     } 
 
     @else {
         @if type-of($bp) == 'number'{
-            @media only screen and (min-width: #{$bp})  { 
+            @media (min-width: #{$bp})  { 
                 @content; 
             }
         }
@@ -633,12 +740,12 @@ styleguide 1.1.1
             $second: nth($bp, 2);
 
             @if type-of($first) == 'string'{
-                @media only screen and (#{$first}: #{$second}) { 
+                @media (#{$first}: #{$second}) { 
                     @content; 
                 }
             }
             @elseif type-of($first) == 'number'{
-                @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+                @media (min-width: #{$first}) and (max-width: #{$second}) { 
                     @content; 
                 }
             }
@@ -660,6 +767,23 @@ styleguide 1.1.1
     @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
         @content;
     }
+}
+
+
+//
+// Dev tools.
+//
+// Things that won't make it into the live site, but are helpfull for debuging
+//
+// Styleguide 1.1.1
+//
+
+%tunic-dev-outline {
+    box-shadow: inset 0 0 2rem $tunic-color-red;
+}
+
+@mixin tunic-dev($type) {
+    @extend %tunic-dev-#{$type};
 }
 
 

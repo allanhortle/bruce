@@ -9,7 +9,7 @@
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
-        $gutter: $tunic-grid_gutter;
+        $gutter: $tunic-grid-gutter;
         box-sizing: border-box;
         display: table;
         width: 100%;
@@ -20,10 +20,13 @@
             display: block;
             vertical-align: top;
 
+            margin-bottom: 1rem;
+
             @include tunic-breakpoint($tunic-breakpoint--small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
+                margin: 0;
             }
             
             &:first-child {
@@ -56,12 +59,11 @@
         }
     }
 
-    @for $i from 1 through $num {
-        @include tunic-breakpoint($tunic-breakpoint--small) {
+    @include tunic-breakpoint($tunic-breakpoint--small) {
+        @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;
             }
-        }
-        
+        }  
     }   
 }

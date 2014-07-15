@@ -1,23 +1,22 @@
-/* 
 
-get-zindex($component);
-
-Returns the position of `$component` in `$tunic-zindexList`
-
-Markup:
-$tunic-zindexList:(
-    Button,
-    Widget,
-    Link
-);
-
-.Button {
-    z-index: get-zindex(Button);
-}
-
-styleguide 1.1.1
-
-*/
+// 
+// get-zindex($component);
+// 
+// Returns the position of `$component` in `$tunic-zindexList`
+// 
+// Markup:
+// $tunic-zindexList:(
+//     Button,
+//     Widget,
+//     Link
+// );
+// 
+// .Button {
+//     z-index: get-zindex(Button);
+// }
+// 
+// styleguide 1.1.1
+// 
 
 @function get-zindex($component) {
     $list: $tunic-zindexList;

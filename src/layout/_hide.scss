@@ -1,0 +1,20 @@
+
+//
+// Hidden
+//
+// Uses positioing to hide but not remove
+//
+// Styleguide 1.1.1
+//
+
+%tunic-hide { 
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
+}
+
+@mixin tunic-hide() {
+    @extend %tunic-hide; 
+}

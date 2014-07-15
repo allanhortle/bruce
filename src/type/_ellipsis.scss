@@ -10,6 +10,7 @@
 %tunic-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
     white-space: nowrap;
 }
 

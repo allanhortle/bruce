@@ -1,0 +1,16 @@
+
+//
+// Dev tools.
+//
+// Things that won't make it into the live site, but are helpfull for debuging
+//
+// Styleguide 1.1.1
+//
+
+%tunic-dev-outline {
+    box-shadow: inset 0 0 2rem $tunic-color-red;
+}
+
+@mixin tunic-dev($type) {
+    @extend %tunic-dev-#{$type};
+}

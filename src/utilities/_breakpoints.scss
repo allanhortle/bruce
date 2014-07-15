@@ -3,22 +3,28 @@
 // Breakpoints
 //
 // Returns a media query based on the content of $bp.
-// $bp: number;             @media only screen and (max-width: number)
-// $bp: string number;      @media only screen and (string: number)
-// $bp: number number;      @media only screen and (min-width: number) and (max-width: number)
+// $bp: number;             @media (max-width: number)
+// $bp: string number;      @media (string: number)
+// $bp: number number;      @media (min-width: number) and (max-width: number)
 //
 // Styleguide 1.1.1
 //
 
 @mixin tunic-breakpoint($bp) {
     // Standard 
+    $item: map-get($tunic-breakpoints, $bp);
+    
+    @if $item {
+        $bp: $item;
+    }
+
     @if $tunic-ie == true {
         @content;
     } 
 
     @else {
         @if type-of($bp) == 'number'{
-            @media only screen and (min-width: #{$bp})  { 
+            @media (min-width: #{$bp})  { 
                 @content; 
             }
         }
@@ -28,12 +34,12 @@
             $second: nth($bp, 2);
 
             @if type-of($first) == 'string'{
-                @media only screen and (#{$first}: #{$second}) { 
+                @media (#{$first}: #{$second}) { 
                     @content; 
                 }
             }
             @elseif type-of($first) == 'number'{
-                @media only screen and (min-width: #{$first}) and (max-width: #{$second}) { 
+                @media (min-width: #{$first}) and (max-width: #{$second}) { 
                     @content; 
                 }
             }
