@@ -4,7 +4,7 @@
 // 
 // Returns a grey value from 0 - 100
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function grey($var:50, $opacity:1) {
@@ -17,7 +17,7 @@
 // 
 // Invert Number & Colors
 // 
-// styleguide 1.1.1
+//
 // 
 
 
@@ -31,7 +31,7 @@
 // 
 // Useful things for lists
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function first($list) {
@@ -48,7 +48,7 @@
 // 
 // Lightens and desaturates a color
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function pastel($var, $des:10, $light:10) {
@@ -61,7 +61,7 @@
 // 
 // Repeats a character by an ammount
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function repeatChar($char, $ammount) {
@@ -78,7 +78,7 @@
 // 
 // Returns $var + ms
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function t($var) {
@@ -102,7 +102,7 @@
 //     z-index: get-zindex(Button);
 // }
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function get-zindex($component) {
@@ -123,7 +123,7 @@
 // Returns values from nested lists
 // https://github.com/jlong
 // 
-// styleguide 1.1.1
+//
 // 
 
 @function map-fetch($map, $keys) {
@@ -202,13 +202,76 @@ $tunic-breakpoints:(
     @extend %tunic-Input; 
 }
 
+/* 
+
+Tables
+
+
+*/
+
+@mixin tunic-component-table() {
+
+    %Table-base {
+        margin-bottom: 32px;
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        clear: both;
+        line-height: 1.5em;
+
+        th,
+        td {
+            padding: 8px;
+            vertical-align: top;
+            position: relative;
+        }
+
+        th {
+            @include tunic-behave(notselectable);
+            font-family: $f-headingRegular;
+            font-weight: normal;
+            cursor: pointer;
+        }
+    }
+
+
+    .Table {
+        @extend %Table-base;
+
+        th, 
+        td {
+            vertical-align: middle;     
+        }
+
+        th {
+            text-align: left;
+            color: grey(60);
+            font-family: $f-headingRegular;
+        }
+
+        @include tunic-breakpoint($bp-phone) {
+            th, 
+            td {
+                padding: 8px;
+            }
+        }
+    }
+
+    .Table-top {
+        td {
+            vertical-align: top;
+        }
+    }
+
+}
+
 
 //
 // Clearfix
 //
 // Table Style
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-clearfix {
@@ -229,7 +292,7 @@ $tunic-breakpoints:(
 //
 // Uses borders to create columns
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-columns($spacing:4px, $color:transparent) {
@@ -251,7 +314,7 @@ $tunic-breakpoints:(
 //
 // Absolutley position an element as far as it's containing elements bounds
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-flood {
@@ -272,7 +335,7 @@ $tunic-breakpoints:(
 //
 // Uses the $sizes list to create percentage based helper classes
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
@@ -325,6 +388,12 @@ $tunic-breakpoints:(
                 border-width: $gutter / 2;
             }
         }
+
+        &.#{$grid}-flush {
+            & > [class*=#{$col}] {
+                border: 0;
+            }
+        }
     }
 
     @include tunic-breakpoint($tunic-breakpoint--small) {
@@ -342,7 +411,7 @@ $tunic-breakpoints:(
 //
 // Uses positioing to hide but not remove
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-hide { 
@@ -365,7 +434,7 @@ $tunic-breakpoints:(
 // v2.0 | 20110126
 // License: none (public domain)
 //
-// Styleguide 1.1.1
+//
 //
 
 $tunic-reset-elements: 
@@ -442,7 +511,7 @@ time, mark, audio, video
 //
 // One declaration for width and height 
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-size($w, $h:null) {
@@ -462,7 +531,7 @@ time, mark, audio, video
 //
 // Vertical Align tools
 //
-// Styleguide 1.1.1
+//
 //
 
 %l-verticalAlign {
@@ -492,7 +561,7 @@ time, mark, audio, video
 //
 // Uses the $sizes list to create percentage based helper classes
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
@@ -520,7 +589,7 @@ time, mark, audio, video
 //
 // Trangle borders
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-arrow {
@@ -543,7 +612,7 @@ time, mark, audio, video
 //
 // Opacity mixin for older browsers.
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-opacity($val:.5, $color:'null') {
@@ -571,7 +640,6 @@ time, mark, audio, video
 //
 // ...
 //
-// Styleguide 1.1.1
 //
 
 %tunic-ellipsis {
@@ -594,7 +662,7 @@ time, mark, audio, video
 //
 // Uses $tunic-fontWeightList to return font weights
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-fontWeight($name:'regular') {
@@ -607,7 +675,7 @@ time, mark, audio, video
 //
 // Chains all your font face declarations into one include.
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-fontface($lists...) {
@@ -643,7 +711,7 @@ time, mark, audio, video
 // Calculates margins, font size and line height for h1 - h4
 // $baseFontSize, $lineHeight, $scaling
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-verticalRhythm($size, $rhythm) {
@@ -712,7 +780,7 @@ styleguide 1.1.1
 //
 // Change the default behaviour of an element.
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-behave-notselectable {
@@ -738,7 +806,7 @@ styleguide 1.1.1
 // $bp: string number;      @media (string: number)
 // $bp: number number;      @media (min-width: number) and (max-width: number)
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-breakpoint($bp) {
@@ -785,7 +853,7 @@ styleguide 1.1.1
 //
 // Retina Breakpoint
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-retina($dpi:2) {
@@ -800,7 +868,7 @@ styleguide 1.1.1
 //
 // Things that won't make it into the live site, but are helpfull for debuging
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-dev-outline {
@@ -817,7 +885,7 @@ styleguide 1.1.1
 //
 // Stuff that probably shouldn't exist
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-hack-hardware {
@@ -836,7 +904,7 @@ styleguide 1.1.1
 //
 // Simple extends for iOS behavior
 //
-// Styleguide 1.1.1
+//
 //
 
 %tunic-ios-nohighlight {

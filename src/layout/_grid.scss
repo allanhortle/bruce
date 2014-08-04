@@ -4,7 +4,7 @@
 //
 // Uses the $sizes list to create percentage based helper classes
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
@@ -55,6 +55,12 @@
         &.#{$grid}-tight {
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
+            }
+        }
+
+        &.#{$grid}-flush {
+            & > [class*=#{$col}] {
+                border: 0;
             }
         }
     }

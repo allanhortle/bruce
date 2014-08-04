@@ -7,7 +7,7 @@
 // $bp: string number;      @media (string: number)
 // $bp: number number;      @media (min-width: number) and (max-width: number)
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-breakpoint($bp) {
@@ -54,7 +54,7 @@
 //
 // Retina Breakpoint
 //
-// Styleguide 1.1.1
+//
 //
 
 @mixin tunic-retina($dpi:2) {
