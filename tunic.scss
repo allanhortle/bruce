@@ -169,18 +169,6 @@ $tunic-breakpoints:(
 );
 
 
-// 
-// Input
-// 
-// Markup:
-// <input type="text" class="Input {$modifiers}" value="Lorem ipsum dolor sit"/>
-// <input type="password" class="Input {$modifiers}" value="Lorem ipsum dolor sit"/>
-// 
-// .Input-inline       - inline variation
-// 
-// Styleguide 2.1.4 
-// 
-
 %tunic-Input {
     display: block;
     box-sizing: border-box;
@@ -204,6 +192,44 @@ $tunic-breakpoints:(
 
 /* 
 
+The Media Object
+
+Floats an image to either the left or the right and remove the text wrap from the content.
+
+Markup:
+<div class="Media {$modifiers}">
+    <div class="Media_image"><img src="http://placehold.it/64/64" /></div>
+    <div class="Media_body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, maxime, excepturi velit corporis quae placeat quia atque maiores magnam veritatis unde blanditiis sed sequi. Laborum, beatae, iste. Nulla, minima pariatur.</div>
+</div>
+
+.Media-right        - Right aligned image.
+
+*/
+@mixin tunic-component-media() {
+    .Media {
+        @extend %tunic-clearfix;
+    }
+
+    .Media_body {
+        overflow: hidden;
+    }
+
+    .Media_image {
+        float: left;
+        margin-right: 16px;
+    }
+
+    .Media-right {
+
+        > .Media_image {
+            float: right;
+            margin-left: 32px;
+        }
+    }
+}
+
+/* 
+
 Tables
 
 
@@ -223,12 +249,12 @@ Tables
         td {
             padding: 8px;
             vertical-align: top;
-            position: relative;
+            vertical-align: middle; 
         }
 
         th {
             @include tunic-behave(notselectable);
-            font-family: $f-headingRegular;
+            color: grey(60);
             font-weight: normal;
             cursor: pointer;
         }
@@ -238,23 +264,10 @@ Tables
     .Table {
         @extend %Table-base;
 
-        th, 
-        td {
-            vertical-align: middle;     
-        }
-
         th {
-            text-align: left;
-            color: grey(60);
-            font-family: $f-headingRegular;
+            text-align: left;            
         }
 
-        @include tunic-breakpoint($bp-phone) {
-            th, 
-            td {
-                padding: 8px;
-            }
-        }
     }
 
     .Table-top {
@@ -741,8 +754,6 @@ time, mark, audio, video
 Single Property Animation
 
 Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
-
-styleguide 1.1.1
 
 */
 

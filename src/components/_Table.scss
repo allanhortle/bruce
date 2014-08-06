@@ -19,12 +19,12 @@ Tables
         td {
             padding: 8px;
             vertical-align: top;
-            position: relative;
+            vertical-align: middle; 
         }
 
         th {
             @include tunic-behave(notselectable);
-            font-family: $f-headingRegular;
+            color: grey(60);
             font-weight: normal;
             cursor: pointer;
         }
@@ -34,23 +34,10 @@ Tables
     .Table {
         @extend %Table-base;
 
-        th, 
-        td {
-            vertical-align: middle;     
-        }
-
         th {
-            text-align: left;
-            color: grey(60);
-            font-family: $f-headingRegular;
+            text-align: left;            
         }
 
-        @include tunic-breakpoint($bp-phone) {
-            th, 
-            td {
-                padding: 8px;
-            }
-        }
     }
 
     .Table-top {

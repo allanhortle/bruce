@@ -4,8 +4,6 @@ Single Property Animation
 
 Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
 
-styleguide 1.1.1
-
 */
 
 @mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
