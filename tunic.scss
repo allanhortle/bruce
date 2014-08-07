@@ -144,7 +144,7 @@
 
 $tunic-ie:                      false   !default;
 
-$tunic-grid-gutter:             16px    !default;
+$tunic-grid-gutter:             1rem    !default;
 $tunic-breakpoint--small:       21em    !default;
 
 
@@ -399,6 +399,7 @@ Tables
         &.#{$grid}-tight {
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
+                margin-bottom: $gutter / 2;
             }
         }
 
@@ -466,8 +467,10 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 !default;
 
-@mixin tunic-reset() {
-    #{$tunic-reset-elements} {
+@mixin tunic-reset(
+    $elements: $tunic-reset-elements
+) {
+    #{$elements} {
         margin: 0;
         padding: 0;
         border: 0;

@@ -25,8 +25,10 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 !default;
 
-@mixin tunic-reset() {
-    #{$tunic-reset-elements} {
+@mixin tunic-reset(
+    $elements: $tunic-reset-elements
+) {
+    #{$elements} {
         margin: 0;
         padding: 0;
         border: 0;

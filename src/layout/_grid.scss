@@ -55,6 +55,7 @@
         &.#{$grid}-tight {
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
+                margin-bottom: $gutter / 2;
             }
         }
 
