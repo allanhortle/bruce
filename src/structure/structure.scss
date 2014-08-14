@@ -1,0 +1,185 @@
+
+// /* 
+// Content
+
+// Way too much of the layout rest on this wrapper.  
+// **!!! Refactor**
+
+// Markup:
+// <div class="l-content" style="height:240px;"> Content</div>
+
+// Styleguide 3.3.1
+// */
+
+// .l-content {
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     width: 100%;
+//     overflow: hidden;
+//     transition: transform t($TIME_regular);
+//     min-height: 100%;
+//     position: relative;
+//     margin-left: 0;
+//     // margin-right: 240px;
+//     // transform: translateX(240px);
+//     box-shadow: inset 0 48px 0 0 $COLOR_hero;
+
+//     @include tunic-breakpoint($bp-welter) {
+//         // width: auto;
+//         transition: transform t($TIME_regular);
+//         // margin-right: 240px;
+//     }
+// }
+
+// /* 
+// Fixed
+
+// Markup:
+// <div class="relative" style="height:256px;">
+//     <div class="frame">
+//         <div class="Well Well-dark fixed-right fixed-small">
+//             .fixed-right
+//         </div>
+//         <div class="fixed scroll">
+//             <img src="https://www.fillmurray.com/g/512/512" width="100%" />
+//         </div>
+//     </div>
+// </div>
+
+// Styleguide 3.3.1
+// */
+
+
+// .frame {
+//     @include tunic-flood();
+// }
+
+
+// .fixed {
+//     @include tunic-breakpoint($bp-feather) {
+//         box-sizing: border-box;
+//         width: auto;
+//         height: 100%;
+//         overflow: auto;
+//         position: relative;
+//     };
+    
+// }
+
+// %fixed-direction {
+//     @include tunic-breakpoint($bp-feather) {
+//         height: 100%;
+//         box-sizing: border-box;
+//     }
+// }
+
+// .fixed-right {
+//     @extend %fixed-direction;
+
+//     @include tunic-breakpoint($bp-feather) {
+//         float: right;
+//     }
+// }
+
+// .fixed-left {
+//     @extend %fixed-direction; 
+    
+//     @include tunic-breakpoint($bp-feather) {
+//         float: left;
+//     }
+// }
+
+// .fixed-small {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 20rem;
+//     }
+// }
+
+// .fixed-medium {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 30rem;
+//     }
+// }
+
+
+
+// .scroll {
+//     @include tunic-ios(scroll);
+//     @include tunic-flood();
+//     overflow-y: auto;
+//     overflow-x: hidden;
+
+//     &.is-toolbar {
+//         top: 3rem;
+//     }
+// }
+
+
+
+
+// /* 
+// Floats
+
+// box model floats and widths and tools.  
+
+// * `.l-left`  
+// * `.l-right`
+// * `.overflow`
+
+// Markup:
+// <div class="overflow">
+//     <img class="l-left column" src="https://www.fillmurray.com/g/128/128"/>
+//     <img class="l-right column" src="https://www.fillmurray.com/g/128/128"/>
+//     <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis repudiandae incidunt consequuntur unde cumque, quaerat harum tenetur quidem at laudantium, dolores quas ea aliquam sequi amet! Nobis, nisi hic molestias.</div>
+// </div>
+
+// Styleguide 3.3.4
+// */
+
+// @include tunic-widths();
+// @include tunic-verticalAlign();
+
+// .l-left {
+//     float: left;
+// }
+
+// .l-right {
+//     float: right;
+// }
+
+// .l-block {
+//     display: block;
+// }
+
+// .overflow {
+//     overflow: hidden;
+// }
+
+// .relative {
+//     position: relative;
+// }
+
+// .flood {
+//     @include tunic-flood();
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

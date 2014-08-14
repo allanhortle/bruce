@@ -1,0 +1,85 @@
+
+/* 
+Margin Tools
+
+Margin combinations are prioritized by giving them first choice on semantic short names.
+Paddings then use the same names prefixed with `padding-`
+
+* `.column, .column2`
+* `.row, .row2`
+
+Markup:
+<div class="column">Column</div>
+<div class="column2">Column2</div>
+<div class="row">Row</div>
+<div class="row2">Row2</div>
+<h2 class="hug">hug</h2>
+<h2 class="hug-top">hug-top</h2>
+<h2 class="hug-bottom">hug-bottom</h2>
+
+Tunic.Structure
+*/
+
+@mixin tunic-structure-margin {
+    @include tunic-structure-column;
+    @include tunic-structure-column2;
+    @include tunic-structure-row;
+    @include tunic-structure-row2;
+    @include tunic-structure-push;
+    @include tunic-structure-push2;
+    @include tunic-structure-hug;
+}
+
+@mixin tunic-structure-column {
+    .column {
+        margin-left: baseUnit(1);
+        margin-right: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-column2 {
+    .column2 {
+        margin-left: baseUnit(2);
+        margin-right: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-row {
+    .row {
+        margin-top: baseUnit(1);
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-row2 {
+    .row2 {
+        margin: baseUnit(2) 0;
+    }
+}
+
+@mixin tunic-structure-push {
+    .push {
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-push2 {
+    .push2 {
+        margin-bottom: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-hug {
+    .hug {
+        margin: 0;
+    }
+
+    .hug-top {
+        margin-top: 0;
+    }
+
+    .hug-bottom {
+        margin-bottom: 0;
+    }
+
+}

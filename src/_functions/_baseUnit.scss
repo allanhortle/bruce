@@ -1,0 +1,15 @@
+
+// 
+// base unit($var:50);
+// 
+// Returns a unit based 
+// 
+//
+// 
+
+@function baseUnit($val) {
+    @if ($tunic-rems) {
+        @return $val + 0rem;
+    }
+    @return ($val * $tunic-baseSize ) + 0px;
+}

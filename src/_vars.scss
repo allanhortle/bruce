@@ -4,11 +4,15 @@ $tunic-ie:                      false   !default;
 $tunic-grid-gutter:             1rem    !default;
 $tunic-breakpoint--small:       21em    !default;
 
+$tunic-rems:                    true    !default;
+$tunic-baseSize:                16      !default;
 
 
 
-$tunic-color-red:   #e65053;
 
+$tunic-color: (
+    red: #e65053
+);
 
 $tunic-fontWeights: (
     bold: 600,
@@ -19,8 +23,8 @@ $tunic-fontWeights: (
 
 // Default Breakpoints
 $tunic-breakpoints:(
-    large:  120rem,
-    medium: 64rem,
-    small:  48rem,
-    tiny:   30rem
+    large:  baseUnit(120),
+    medium: baseUnit(64),
+    small:  baseUnit(48),
+    tiny:   baseUnit(30)
 );

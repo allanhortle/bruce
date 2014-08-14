@@ -1,5 +1,21 @@
 
 // 
+// base unit($var:50);
+// 
+// Returns a unit based 
+// 
+//
+// 
+
+@function baseUnit($val) {
+    @if ($tunic-rems) {
+        @return $val + 0rem;
+    }
+    @return ($val * $tunic-baseSize ) + 0px;
+}
+
+
+// 
 // grey($var:50);
 // 
 // Returns a grey value from 0 - 100
@@ -147,11 +163,15 @@ $tunic-ie:                      false   !default;
 $tunic-grid-gutter:             1rem    !default;
 $tunic-breakpoint--small:       21em    !default;
 
+$tunic-rems:                    true    !default;
+$tunic-baseSize:                16      !default;
 
 
 
-$tunic-color-red:   #e65053;
 
+$tunic-color: (
+    red: #e65053
+);
 
 $tunic-fontWeights: (
     bold: 600,
@@ -162,10 +182,10 @@ $tunic-fontWeights: (
 
 // Default Breakpoints
 $tunic-breakpoints:(
-    large:  120rem,
-    medium: 64rem,
-    small:  48rem,
-    tiny:   30rem
+    large:  baseUnit(120),
+    medium: baseUnit(64),
+    small:  baseUnit(48),
+    tiny:   baseUnit(30)
 );
 
 
@@ -400,6 +420,7 @@ Tables
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
                 margin-bottom: $gutter / 2;
+                
             }
         }
 
@@ -598,6 +619,345 @@ time, mark, audio, video
         }
     }   
 }
+
+
+/* 
+Margin Tools
+
+Margin combinations are prioritized by giving them first choice on semantic short names.
+Paddings then use the same names prefixed with `padding-`
+
+* `.column, .column2`
+* `.row, .row2`
+
+Markup:
+<div class="column">Column</div>
+<div class="column2">Column2</div>
+<div class="row">Row</div>
+<div class="row2">Row2</div>
+<h2 class="hug">hug</h2>
+<h2 class="hug-top">hug-top</h2>
+<h2 class="hug-bottom">hug-bottom</h2>
+
+Tunic.Structure
+*/
+
+@mixin tunic-structure-margin {
+    @include tunic-structure-column;
+    @include tunic-structure-column2;
+    @include tunic-structure-row;
+    @include tunic-structure-row2;
+    @include tunic-structure-push;
+    @include tunic-structure-push2;
+    @include tunic-structure-hug;
+}
+
+@mixin tunic-structure-column {
+    .column {
+        margin-left: baseUnit(1);
+        margin-right: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-column2 {
+    .column2 {
+        margin-left: baseUnit(2);
+        margin-right: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-row {
+    .row {
+        margin-top: baseUnit(1);
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-row2 {
+    .row2 {
+        margin: baseUnit(2) 0;
+    }
+}
+
+@mixin tunic-structure-push {
+    .push {
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-push2 {
+    .push2 {
+        margin-bottom: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-hug {
+    .hug {
+        margin: 0;
+    }
+
+    .hug-top {
+        margin-top: 0;
+    }
+
+    .hug-bottom {
+        margin-bottom: 0;
+    }
+
+}
+
+
+/* 
+Padding Tools
+
+Frequent padding combinations
+
+* `.padding, .padding2` - collapses on small screens.
+* `.padding-hard`  - Won't collapse.
+* `.padding-mobile`  - Only appears on mobile.
+
+Markup:
+<div class="padding">Padding</div>
+<div class="padding2">Padding</div>
+<div class="padding-hard">Hard Padding</div>
+<div class="padding-mobile">Mobile Padding</div>
+
+Tunic.Structure
+*/
+
+@mixin tunic-structure-padding-all {
+    @include tunic-structure-padding;
+    @include tunic-structure-padding2;
+    @include tunic-structure-padding-hard;
+    @include tunic-structure-padding-mobile;
+    @include tunic-structure-padding-row;
+}
+
+
+@mixin tunic-structure-padding {
+    .padding {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(1);
+        }
+    }  
+}
+
+@mixin tunic-structure-padding2 {
+    .padding2 {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(2);
+        }
+    }
+}
+
+@mixin tunic-structure-padding-hard {
+    .padding-hard {
+        padding: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-padding-mobile {
+    .padding-mobile {
+        padding: baseUnit(1);
+        
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: 0;
+        }
+    }
+}
+
+@mixin tunic-structure-padding-row {
+    .padding-row {
+        padding-top: baseUnit(2);
+        padding-bottom: baseUnit(2);
+    }
+}
+
+
+// /* 
+// Content
+
+// Way too much of the layout rest on this wrapper.  
+// **!!! Refactor**
+
+// Markup:
+// <div class="l-content" style="height:240px;"> Content</div>
+
+// Styleguide 3.3.1
+// */
+
+// .l-content {
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     width: 100%;
+//     overflow: hidden;
+//     transition: transform t($TIME_regular);
+//     min-height: 100%;
+//     position: relative;
+//     margin-left: 0;
+//     // margin-right: 240px;
+//     // transform: translateX(240px);
+//     box-shadow: inset 0 48px 0 0 $COLOR_hero;
+
+//     @include tunic-breakpoint($bp-welter) {
+//         // width: auto;
+//         transition: transform t($TIME_regular);
+//         // margin-right: 240px;
+//     }
+// }
+
+// /* 
+// Fixed
+
+// Markup:
+// <div class="relative" style="height:256px;">
+//     <div class="frame">
+//         <div class="Well Well-dark fixed-right fixed-small">
+//             .fixed-right
+//         </div>
+//         <div class="fixed scroll">
+//             <img src="https://www.fillmurray.com/g/512/512" width="100%" />
+//         </div>
+//     </div>
+// </div>
+
+// Styleguide 3.3.1
+// */
+
+
+// .frame {
+//     @include tunic-flood();
+// }
+
+
+// .fixed {
+//     @include tunic-breakpoint($bp-feather) {
+//         box-sizing: border-box;
+//         width: auto;
+//         height: 100%;
+//         overflow: auto;
+//         position: relative;
+//     };
+    
+// }
+
+// %fixed-direction {
+//     @include tunic-breakpoint($bp-feather) {
+//         height: 100%;
+//         box-sizing: border-box;
+//     }
+// }
+
+// .fixed-right {
+//     @extend %fixed-direction;
+
+//     @include tunic-breakpoint($bp-feather) {
+//         float: right;
+//     }
+// }
+
+// .fixed-left {
+//     @extend %fixed-direction; 
+    
+//     @include tunic-breakpoint($bp-feather) {
+//         float: left;
+//     }
+// }
+
+// .fixed-small {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 20rem;
+//     }
+// }
+
+// .fixed-medium {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 30rem;
+//     }
+// }
+
+
+
+// .scroll {
+//     @include tunic-ios(scroll);
+//     @include tunic-flood();
+//     overflow-y: auto;
+//     overflow-x: hidden;
+
+//     &.is-toolbar {
+//         top: 3rem;
+//     }
+// }
+
+
+
+
+// /* 
+// Floats
+
+// box model floats and widths and tools.  
+
+// * `.l-left`  
+// * `.l-right`
+// * `.overflow`
+
+// Markup:
+// <div class="overflow">
+//     <img class="l-left column" src="https://www.fillmurray.com/g/128/128"/>
+//     <img class="l-right column" src="https://www.fillmurray.com/g/128/128"/>
+//     <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis repudiandae incidunt consequuntur unde cumque, quaerat harum tenetur quidem at laudantium, dolores quas ea aliquam sequi amet! Nobis, nisi hic molestias.</div>
+// </div>
+
+// Styleguide 3.3.4
+// */
+
+// @include tunic-widths();
+// @include tunic-verticalAlign();
+
+// .l-left {
+//     float: left;
+// }
+
+// .l-right {
+//     float: right;
+// }
+
+// .l-block {
+//     display: block;
+// }
+
+// .overflow {
+//     overflow: hidden;
+// }
+
+// .relative {
+//     position: relative;
+// }
+
+// .flood {
+//     @include tunic-flood();
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //
@@ -886,7 +1246,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 
 %tunic-dev-outline {
-    box-shadow: inset 0 0 2rem $tunic-color-red;
+    box-shadow: inset 0 0 2rem map-fetch($tunic-color, 'red');
 }
 
 @mixin tunic-dev($type) {
