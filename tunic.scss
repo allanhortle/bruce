@@ -1,4 +1,32 @@
 
+$tunic-ie:                      false   !default;
+
+$tunic-breakpoint--small:       21em    !default;
+
+$tunic-rems:                    true    !default;
+$tunic-baseSize:                16      !default;
+
+
+$tunic-color: (
+    red: #e65053
+);
+
+$tunic-fontWeights: (
+    bold: 600,
+    regular: 400,
+    light: 300,
+    thin: 100
+);
+
+// Default Breakpoints
+$tunic-breakpoints:(
+    large:  baseUnit(120),
+    medium: baseUnit(64),
+    small:  baseUnit(48),
+    tiny:   baseUnit(30)
+);
+
+
 // 
 // base unit($var:50);
 // 
@@ -156,37 +184,6 @@
         @return $value;
     }
 }
-
-
-$tunic-ie:                      false   !default;
-
-$tunic-grid-gutter:             1rem    !default;
-$tunic-breakpoint--small:       21em    !default;
-
-$tunic-rems:                    true    !default;
-$tunic-baseSize:                16      !default;
-
-
-
-
-$tunic-color: (
-    red: #e65053
-);
-
-$tunic-fontWeights: (
-    bold: 600,
-    regular: 400,
-    light: 300,
-    thin: 100
-);
-
-// Default Breakpoints
-$tunic-breakpoints:(
-    large:  baseUnit(120),
-    medium: baseUnit(64),
-    small:  baseUnit(48),
-    tiny:   baseUnit(30)
-);
 
 
 %tunic-Input {
@@ -370,6 +367,8 @@ Tables
 //
 //
 //
+
+$tunic-grid-gutter:             baseUnit(1)    !default;
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
