@@ -7,6 +7,8 @@
 //
 //
 
+$tunic-grid-gutter:             baseUnit(1)    !default;
+
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
         $gutter: $tunic-grid-gutter;
