@@ -201,6 +201,7 @@ $tunic-breakpoints:(
     cursor: text;
     appearance: none;
     -webkit-font-smoothing: antialiased;
+    
 }  
 
 @mixin tunic-Input() {
@@ -460,6 +461,21 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
     @extend %tunic-hide; 
 }
 
+
+/* styleguide
+name:           Ratio
+category:       Tunic => Structure
+description:    
+----
+*/
+
+@mixin tunic-ratio($width, $height) {
+    &:before {
+        content: '';
+        display: block;
+        padding-top: $height / $width * 100%;
+    }
+}
 
 //
 // Reset
