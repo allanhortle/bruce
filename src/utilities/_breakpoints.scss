@@ -31,15 +31,22 @@
 
         @if type-of($bp) == 'list'{
             $first:  nth($bp, 1);
-            $second: nth($bp, 2);
+            $bp: nth($bp, 2);
+
+            $item: map-get($tunic-breakpoints, $bp);
+
+            @if $item {
+                $bp: $item;   
+            }
+
 
             @if type-of($first) == 'string'{
-                @media (#{$first}: #{$second}) { 
+                @media (#{$first}: #{$bp}) { 
                     @content; 
                 }
             }
             @elseif type-of($first) == 'number'{
-                @media (min-width: #{$first}) and (max-width: #{$second}) { 
+                @media (min-width: #{$first}) and (max-width: #{$bp}) { 
                     @content; 
                 }
             }

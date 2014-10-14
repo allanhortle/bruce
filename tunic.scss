@@ -651,6 +651,7 @@ Markup:
 <div class="row">Row</div>
 <div class="row2">Row2</div>
 <h2 class="hug">hug</h2>
+
 <h2 class="hug-top">hug-top</h2>
 <h2 class="hug-bottom">hug-bottom</h2>
 
@@ -1081,14 +1082,13 @@ Tunic.Structure
             $font-style: normal;
         }
         
-
         @font-face {
             font-family: $name;
-            src: url('#{$path}.eot');
-            src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
-                 url('#{$path}.woff') format('woff'),
-                 url('#{$path}.ttf') format('truetype'),
-                 url('#{$path}.svg##{$name}') format('svg');
+            src: url("#{$path}.eot");
+            src: url("#{$path}.eot?#iefix") format("embedded-opentype"),
+                 url("#{$path}.woff") format("woff"),
+                 url("#{$path}.ttf") format("truetype"),
+                 url("#{$path}.svg##{$name}") format("svg");
             font-weight: $font-weight;
             font-style: $font-style;
         }
@@ -1219,15 +1219,22 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 
         @if type-of($bp) == 'list'{
             $first:  nth($bp, 1);
-            $second: nth($bp, 2);
+            $bp: nth($bp, 2);
+
+            $item: map-get($tunic-breakpoints, $bp);
+
+            @if $item {
+                $bp: $item;   
+            }
+
 
             @if type-of($first) == 'string'{
-                @media (#{$first}: #{$second}) { 
+                @media (#{$first}: #{$bp}) { 
                     @content; 
                 }
             }
             @elseif type-of($first) == 'number'{
-                @media (min-width: #{$first}) and (max-width: #{$second}) { 
+                @media (min-width: #{$first}) and (max-width: #{$bp}) { 
                     @content; 
                 }
             }
