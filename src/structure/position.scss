@@ -1,0 +1,16 @@
+
+/**
+ * Position Veritcal Middle
+ * @group Position
+ * 
+ */
+
+%tunic-position-verticalMiddle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin tunic-position-verticalMiddle() {
+    @extend %tunic-position-verticalMiddle;
+}

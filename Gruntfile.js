@@ -32,7 +32,6 @@ module.exports = function (grunt) {
                 files: '<%= files %>'
             }
         },
-
         sass: {
             dist: {
                 files: {
@@ -45,6 +44,16 @@ module.exports = function (grunt) {
                 files: 'src/**/*.scss',
                 tasks: ['default']
             }
+        },
+        sassdoc: {
+            docs: {
+                src: 'src',
+                dest: 'docs',
+                options: {
+                    force: true,
+                    theme: 'vulcan'
+                }
+            }
         }
     });
 
@@ -52,11 +61,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-sassdoc');
 
     grunt.registerTask('default', function () {
         grunt.config('files', generateFiles());
         grunt.task.run([
             'concat', 
+            'sassdoc',
             'copy'
         ]);
     });

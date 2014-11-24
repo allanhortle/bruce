@@ -1,13 +1,11 @@
 
-// 
-// map-fetch($map, nested keys as list);
-// 
-// Returns values from nested lists
-// https://github.com/jlong
-// 
-//
-// 
-
+/**
+ * Returns values from nested lists
+ * @link    https://github.com/jlong
+ * @param   {map}
+ * @param   {list}  Nested keys as a list    
+ * @return  {value} 
+ */
 @function map-fetch($map, $keys) {
     $key: nth($keys, 1);
     $length: length($keys);

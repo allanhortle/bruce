@@ -1,0 +1,10 @@
+
+/**
+ * Converts a string to a pixel value
+ * @group Functions
+ * @param  {unit}  
+ * @return {px} 
+ */
+@function toPixel($var) {
+    @return $var + 0px;
+}

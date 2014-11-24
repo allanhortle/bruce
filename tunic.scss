@@ -27,165 +27,6 @@ $tunic-breakpoints:(
 );
 
 
-// 
-// base unit($var:50);
-// 
-// Returns a unit based 
-// 
-//
-// 
-
-@function baseUnit($val) {
-    @if ($tunic-rems) {
-        @return $val + 0rem;
-    }
-    @return ($val * $tunic-baseSize ) + 0px;
-}
-
-
-// 
-// grey($var:50);
-// 
-// Returns a grey value from 0 - 100
-// 
-//
-// 
-
-@function grey($var:50, $opacity:1) {
-    @return hsla(0, 0, $var, $opacity);
-}
-
-
-// 
-// inverse($var);
-// 
-// Invert Number & Colors
-// 
-//
-// 
-
-
-@function inverse($var) {
-    @return $var * -1;
-}
-
-
-// 
-// List functions
-// 
-// Useful things for lists
-// 
-//
-// 
-
-@function first($list) {
-    @return nth($list, 1);
-}
-
-@function last($list) {
-    @return nth($list, length($list));
-}
-
-
-// 
-// pastel($var, $des:10, $light:10);
-// 
-// Lightens and desaturates a color
-// 
-//
-// 
-
-@function pastel($var, $des:10, $light:10) {
-    @return lighten(desaturate($var, $des), $light);
-}
-
-
-// 
-// repeatChar($char, $ammount);
-// 
-// Repeats a character by an ammount
-// 
-//
-// 
-
-@function repeatChar($char, $ammount) {
-    $a: $char;
-    @for $i from 0 through $ammount {        
-        $a: $a + $char;
-    }
-    @return $a;
-}
-
-
-// 
-// Time function
-// 
-// Returns $var + ms
-// 
-//
-// 
-
-@function t($var) {
-    @return #{$var}ms;
-}
-
-
-// 
-// get-zindex($component);
-// 
-// Returns the position of `$component` in `$tunic-zindexList`
-// 
-// Markup:
-// $tunic-zindexList:(
-//     Button,
-//     Widget,
-//     Link
-// );
-// 
-// .Button {
-//     z-index: get-zindex(Button);
-// }
-// 
-//
-// 
-
-@function get-zindex($component) {
-    $list: $tunic-zindexList;
-    $zindex: index($list, $component);
-    @if $zindex {
-        @return $zindex;
-    }
-
-    @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
-    @return null;    
-}
-
-
-// 
-// map-fetch($map, nested keys as list);
-// 
-// Returns values from nested lists
-// https://github.com/jlong
-// 
-//
-// 
-
-@function map-fetch($map, $keys) {
-    $key: nth($keys, 1);
-    $length: length($keys);
-    $value: map-get($map, $key);
-    @if ($length > 1) {
-        $rest: ();
-        @for $i from 2 through $length {
-            $rest: append($rest, nth($keys, $i))
-        }
-        @return map-fetch($value, $rest)
-    } @else {
-        @return $value;
-    }
-}
-
-
 %tunic-Input {
     display: block;
     box-sizing: border-box;
@@ -246,12 +87,10 @@ Markup:
     }
 }
 
-/* 
-
-Tables
-
-
-*/
+/**
+ * Table Component
+ * 
+ */
 
 @mixin tunic-component-table() {
 
@@ -263,18 +102,27 @@ Tables
         clear: both;
         line-height: 1.5em;
 
+        font-size: .9em;
+
+        @include tunic-breakpoint(tiny) {
+            font-size: 1em;
+        }
+
         th,
         td {
-            padding: 8px;
+            padding: 4px;
             vertical-align: top;
             vertical-align: middle; 
+
+            @include tunic-breakpoint(tiny) {
+                padding: 8px;
+            }
         }
 
         th {
             @include tunic-behave(notselectable);
             color: grey(60);
             font-weight: normal;
-            cursor: pointer;
         }
     }
 
@@ -294,6 +142,195 @@ Tables
         }
     }
 
+}
+
+
+// 
+// base unit($var:50);
+// 
+// Returns a unit based 
+// 
+//
+// 
+
+@function baseUnit($val) {
+    @if ($tunic-rems) {
+        @return $val + 0rem;
+    }
+    @return ($val * $tunic-baseSize ) + 0px;
+}
+
+
+
+/**
+ * Returns a grey value from 0 - 100
+ * @param  {number} var (50)        The level of grey from 0 to 100
+ * @param  {number} $opacity (1)    The level of opacity from 0 to 1
+ * @return {color}                  Sass HSLA that will be compiled to hex
+ */
+
+@function grey($var:50, $opacity:1) {
+    @return hsla(0, 0, $var, $opacity);
+}
+
+
+/**
+ * Inverts a number
+ * @group Functions
+ * @param  {number} $var
+ * @return {number}
+ */
+
+@function inverse($var) {
+    @return $var * -1;
+}
+
+
+// 
+// List functions
+// 
+// Useful things for lists
+// 
+//
+// 
+
+@function first($list) {
+    @return nth($list, 1);
+}
+
+@function last($list) {
+    @return nth($list, length($list));
+}
+
+
+// 
+// pastel($var, $des:10, $light:10);
+// 
+// Lightens and desaturates a color
+// 
+//
+// 
+
+@function pastel($var, $des:10, $light:10) {
+    @return lighten(desaturate($var, $des), $light);
+}
+
+
+/**
+ * Multiply `$rem` by `baseSize`
+ * @group Functions
+ * @param  {rem} $rem The rem value   
+ * @param  {px}  $baseSize ($tunic-baseSize)  The factor    
+ * @return {px} 
+ */
+@function remsToPixel($rem, $baseSize:$tunic-baseSize) {
+    @return toPixel(stripUnits($rem * $baseSize));
+}
+    
+
+// 
+// repeatChar($char, $ammount);
+// 
+// Repeats a character by an ammount
+// 
+//
+// 
+
+@function repeatChar($char, $ammount) {
+    $a: $char;
+    @for $i from 0 through $ammount {        
+        $a: $a + $char;
+    }
+    @return $a;
+}
+
+
+/**
+ * Strips the units suffix
+ * @group Functions
+ * @param  {unit}  
+ * @return {number} 
+ */
+@function stripUnits($var) {
+    @return $var / ($var * 0 + 1);
+}
+
+
+// 
+// Time function
+// 
+// Returns $var + ms
+// 
+//
+// 
+
+@function t($var) {
+    @return #{$var}ms;
+}
+
+
+/**
+ * Converts a string to a pixel value
+ * @group Functions
+ * @param  {unit}  
+ * @return {px} 
+ */
+@function toPixel($var) {
+    @return $var + 0px;
+}
+
+
+// 
+// get-zindex($component);
+// 
+// Returns the position of `$component` in `$tunic-zindexList`
+// 
+// Markup:
+// $tunic-zindexList:(
+//     Button,
+//     Widget,
+//     Link
+// );
+// 
+// .Button {
+//     z-index: get-zindex(Button);
+// }
+// 
+//
+// 
+
+@function get-zindex($component) {
+    $list: $tunic-zindexList;
+    $zindex: index($list, $component);
+    @if $zindex {
+        @return $zindex;
+    }
+
+    @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
+    @return null;    
+}
+
+
+/**
+ * Returns values from nested lists
+ * @link    https://github.com/jlong
+ * @param   {map}
+ * @param   {list}  Nested keys as a list    
+ * @return  {value} 
+ */
+@function map-fetch($map, $keys) {
+    $key: nth($keys, 1);
+    $length: length($keys);
+    $value: map-get($map, $key);
+    @if ($length > 1) {
+        $rest: ();
+        @for $i from 2 through $length {
+            $rest: append($rest, nth($keys, $i))
+        }
+        @return map-fetch($value, $rest)
+    } @else {
+        @return $value;
+    }
 }
 
 
@@ -421,6 +458,13 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
                 border-width: $gutter / 2;
                 margin-bottom: $gutter / 2;
                 
+            }
+        }
+
+        &.#{$grid}-tighter {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 4;
+                margin-bottom: $gutter / 4;                
             }
         }
 
@@ -617,22 +661,20 @@ time, mark, audio, video
 //
 
 @mixin tunic-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
-    @include tunic-breakpoint($tunic-breakpoint--small) {
-        @for $i from first($sizes) through last($sizes) {
-            .l-#{$i}0 { width: percentage($i)/10   !important; }
-            @if $i != 10 {
-                .l-#{$i}5 { 
-                    width: percentage($i)/10+5 !important; 
-                }
+    @for $i from first($sizes) through last($sizes) {
+        .l-#{$i}0 { width: percentage($i)/10   !important; }
+        @if $i != 10 {
+            .l-#{$i}5 { 
+                width: percentage($i)/10+5 !important; 
             }
-            @if $i == 0 {
-                .l-#{$i}0 {
-                    width: 1% !important;
-                }
-            }
-            
         }
-    }   
+        @if $i == 0 {
+            .l-#{$i}0 {
+                width: 1% !important;
+            }
+        }
+        
+    }
 }
 
 
@@ -787,6 +829,23 @@ Tunic.Structure
         padding-top: baseUnit(2);
         padding-bottom: baseUnit(2);
     }
+}
+
+
+/**
+ * Position Veritcal Middle
+ * @group Position
+ * 
+ */
+
+%tunic-position-verticalMiddle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin tunic-position-verticalMiddle() {
+    @extend %tunic-position-verticalMiddle;
 }
 
 
@@ -1187,16 +1246,15 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 }
 
 
-//
-// Breakpoints
-//
-// Returns a media query based on the content of $bp.
-// $bp: number;             @media (max-width: number)
-// $bp: string number;      @media (string: number)
-// $bp: number number;      @media (min-width: number) and (max-width: number)
-//
-//
-//
+/**
+ * Returns a media query based on the content of `$bp`.
+ * On several lines if you will
+ *
+ * @example
+ * $bp: number;             @media (max-width: number)
+ * $bp: string number;      @media (string: number)
+ * $bp: number number;      @media (min-width: number) and (max-width: number)
+ */
 
 @mixin tunic-breakpoint($bp) {
     // Standard 

@@ -1,0 +1,11 @@
+
+/**
+ * Inverts a number
+ * @group Functions
+ * @param  {number} $var
+ * @return {number}
+ */
+
+@function inverse($var) {
+    @return $var * -1;
+}

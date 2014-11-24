@@ -1,9 +1,7 @@
-/* 
-
-Tables
-
-
-*/
+/**
+ * Table Component
+ * 
+ */
 
 @mixin tunic-component-table() {
 
@@ -15,18 +13,27 @@ Tables
         clear: both;
         line-height: 1.5em;
 
+        font-size: .9em;
+
+        @include tunic-breakpoint(tiny) {
+            font-size: 1em;
+        }
+
         th,
         td {
-            padding: 8px;
+            padding: 4px;
             vertical-align: top;
             vertical-align: middle; 
+
+            @include tunic-breakpoint(tiny) {
+                padding: 8px;
+            }
         }
 
         th {
             @include tunic-behave(notselectable);
             color: grey(60);
             font-weight: normal;
-            cursor: pointer;
         }
     }
 

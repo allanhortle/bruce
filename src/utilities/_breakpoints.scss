@@ -1,14 +1,13 @@
 
-//
-// Breakpoints
-//
-// Returns a media query based on the content of $bp.
-// $bp: number;             @media (max-width: number)
-// $bp: string number;      @media (string: number)
-// $bp: number number;      @media (min-width: number) and (max-width: number)
-//
-//
-//
+/**
+ * Returns a media query based on the content of `$bp`.
+ * On several lines if you will
+ *
+ * @example
+ * $bp: number;             @media (max-width: number)
+ * $bp: string number;      @media (string: number)
+ * $bp: number number;      @media (min-width: number) and (max-width: number)
+ */
 
 @mixin tunic-breakpoint($bp) {
     // Standard 

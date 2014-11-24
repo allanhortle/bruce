@@ -19,10 +19,17 @@
   "homepage": "https://github.com/allanhortle/Tunic",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-sass": "~0.9.0",
-    "grunt-contrib-sass": "^0.7.3",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "~0.9.0",
+    "grunt-sassdoc": "^1.1.0"
+  },
+  "scripts": {
+    "doc": "sassdoc src docs -c .sassdocrc --no-prompt"
+  },
+  "dependencies": {
+    "sassdoc-theme-vulcan": "^0.2.0"
   }
 }

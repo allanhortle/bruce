@@ -62,6 +62,13 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
             }
         }
 
+        &.#{$grid}-tighter {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 4;
+                margin-bottom: $gutter / 4;                
+            }
+        }
+
         &.#{$grid}-flush {
             & > [class*=#{$col}] {
                 border: 0;
