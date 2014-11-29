@@ -64,7 +64,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sassdoc');
 
     grunt.registerTask('default', function () {
-        grunt.config('files', generateFiles());
+        // grunt.config('files', generateFiles());
         grunt.task.run([
             'concat', 
             'sassdoc',
