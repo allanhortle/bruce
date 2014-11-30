@@ -18,18 +18,23 @@
   },
   "homepage": "https://github.com/allanhortle/Tunic",
   "devDependencies": {
+    "autoprefixer-core": "^4.0.1",
+    "css-mqpacker": "^2.0.0",
+    "csswring": "^2.0.0",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-sass": "^0.7.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "~0.9.0",
-    "grunt-sassdoc": "^1.1.0"
+    "grunt-sassdoc": "^1.1.0",
+    "jit-grunt": "^0.9.0",
+    "postcss": "^3.0.5"
   },
   "scripts": {
     "doc": "sassdoc src docs -c .sassdocrc --no-prompt"
   },
   "dependencies": {
-    "sassdoc-theme-vulcan": "^0.2.0"
+    "tunic-theme": "file:../../../../var/folders/d7/t3y0_3qn4ts4_jp8ttt39669mz8gr1/T/npm-4481-a1d0cc0d/1417389776424-0.7124647246673703/2a171879018c934b5a7b85006acc5b9a2d42e150"
   }
 }

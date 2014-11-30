@@ -1,22 +1,27 @@
 module.exports = function (grunt) {
 
     function generateFiles() {
-        var ret = [],
-            dir = grunt.file.readJSON('config.json').copyDirs;
+        var config = grunt.file.readJSON('config.json');
+        if(config) {
+            var ret = [],
+                dir = config.copyDirs;
 
-        for (var i = dir.length - 1; i >= 0; i--) {
-            ret.push({
-                expand: true, 
-                src: ['tunic.scss'], 
-                dest: dir[i]
-            });
-        };
-        return ret;
+            for (var i = dir.length - 1; i >= 0; i--) {
+                ret.push({
+                    expand: true, 
+                    src: ['tunic.scss'], 
+                    dest: dir[i]
+                });
+            }
+            return ret;            
+        }
     }
+
+    require('jit-grunt')(grunt);
 
     // Project configuration.
     grunt.initConfig({
-        config: grunt.file.readJSON('config.json'),
+        // config: grunt.file.readJSON('config.json'),
         concat: {
             dist: {
                 files: {
@@ -32,16 +37,35 @@ module.exports = function (grunt) {
                 files: '<%= files %>'
             }
         },
+        
+
         sass: {
             dist: {
                 files: {
-                    'tests/test.css': 'tests/test.scss'
+                    'tunic-theme/assets/css/main.css' : 'tunic-theme/scss/main.scss'
                 }
             }
         },
+        
+        postcss: {
+            options: {
+                // map: true,
+                processors: [
+                    require('autoprefixer-core')({browsers: ['last 2 version', 'ie 9']}).postcss,
+                    require('css-mqpacker').postcss,
+                    require('csswring').postcss
+                ]
+            },
+            dist: {
+                src: 'tunic-theme/assets/css/*.css'
+            }
+        },
+
+
+
         watch: {
             sass: {
-                files: 'src/**/*.scss',
+                files: ['src/**/*.scss', 'tunic-theme/**/*.scss', 'tunic-theme/**/*.handlebars'],
                 tasks: ['default']
             }
         },
@@ -51,22 +75,18 @@ module.exports = function (grunt) {
                 dest: 'docs',
                 options: {
                     force: true,
-                    theme: 'vulcan'
+                    theme: 'tunic-theme'
                 }
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-sassdoc');
-
     grunt.registerTask('default', function () {
-        // grunt.config('files', generateFiles());
+        grunt.config('files', generateFiles());
         grunt.task.run([
             'concat', 
+            'sass',
+            'postcss',
             'sassdoc',
             'copy'
         ]);
