@@ -65,7 +65,7 @@ module.exports = function (grunt) {
 
         watch: {
             sass: {
-                files: ['src/**/*.scss', 'tunic-theme/**/*.scss', 'tunic-theme/**/*.handlebars'],
+                files: ['src/**/*.scss', 'node_modules/tunic-theme/assets/**/*'],
                 tasks: ['default']
             }
         },
@@ -85,8 +85,6 @@ module.exports = function (grunt) {
         grunt.config('files', generateFiles());
         grunt.task.run([
             'concat', 
-            'sass',
-            'postcss',
             'sassdoc',
             'copy'
         ]);
