@@ -1145,6 +1145,7 @@ Tunic.Structure
             font-family: $name;
             src: url("#{$path}.eot");
             src: url("#{$path}.eot?#iefix") format("embedded-opentype"),
+                 url("#{$path}.woff2") format("woff2"),
                  url("#{$path}.woff") format("woff"),
                  url("#{$path}.ttf") format("truetype"),
                  url("#{$path}.svg##{$name}") format("svg");
@@ -1246,15 +1247,14 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 }
 
 
-/**
- * Returns a media query based on the content of `$bp`.
- * On several lines if you will
- *
- * @example
- * $bp: number;             @media (max-width: number)
- * $bp: string number;      @media (string: number)
- * $bp: number number;      @media (min-width: number) and (max-width: number)
- */
+/// 
+/// Returns a media query based on the content of `$bp`.
+/// 
+/// @example
+/// \@include tunic-breakPoint(small) { ... }
+/// \@include tunic-breakPoint(max-width: small) { ... }
+/// 
+/// 
 
 @mixin tunic-breakpoint($bp) {
     // Standard 

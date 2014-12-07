@@ -1,13 +1,12 @@
 
-/**
- * Returns a media query based on the content of `$bp`.
- * On several lines if you will
- *
- * @example
- * $bp: number;             @media (max-width: number)
- * $bp: string number;      @media (string: number)
- * $bp: number number;      @media (min-width: number) and (max-width: number)
- */
+/// 
+/// Returns a media query based on the content of `$bp`.
+/// 
+/// @example
+/// \@include tunic-breakPoint(small) { ... }
+/// \@include tunic-breakPoint(max-width: small) { ... }
+/// 
+/// 
 
 @mixin tunic-breakpoint($bp) {
     // Standard 

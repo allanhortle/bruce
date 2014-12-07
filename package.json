@@ -1,5 +1,6 @@
 {
   "name": "tunic",
+  "title": "Tunic",
   "version": "0.0.0",
   "description": "SCSS Helpers",
   "repository": {
@@ -38,3 +39,4 @@
     "tunic-theme": "git://github.com/allanhortle/tunic-theme"
   }
 }
+
