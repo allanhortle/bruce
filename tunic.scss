@@ -484,7 +484,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
     }   
 }
 
-
+    
 //
 // Hidden
 //
@@ -1316,6 +1316,23 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
     }
 }
 
+
+
+@mixin tunic-visibility() {
+    @each $key, $value in $tunic-breakpoints {
+        @include tunic-breakpoint($value) {
+            .show-#{$key} {
+                display: none !important;
+            }
+        }
+
+        @include tunic-breakpoint('max-width' $value) {
+            .hide-#{$key} {
+                display: none !important;
+            }
+        }
+    }
+}
 
 //
 // Dev tools.

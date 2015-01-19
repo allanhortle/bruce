@@ -73,8 +73,14 @@
 @mixin tunic-visibility() {
     @each $key, $value in $tunic-breakpoints {
         @include tunic-breakpoint($value) {
+            .show-#{$key} {
+                display: none !important;
+            }
+        }
+
+        @include tunic-breakpoint('max-width' $value) {
             .hide-#{$key} {
-                display: none;
+                display: none !important;
             }
         }
     }
