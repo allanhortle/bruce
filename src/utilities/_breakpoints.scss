@@ -67,3 +67,15 @@
         @content;
     }
 }
+
+
+
+@mixin tunic-visibility() {
+    @each $key, $value in $tunic-breakpoints {
+        @include tunic-breakpoint($value) {
+            .hide-#{$key} {
+                display: none;
+            }
+        }
+    }
+}
