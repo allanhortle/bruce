@@ -423,7 +423,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
 
             margin-bottom: 1rem;
 
-            @include tunic-breakpoint($tunic-breakpoint--small) {
+            @include tunic-breakpoint(small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
@@ -475,7 +475,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
     }
 
-    @include tunic-breakpoint($tunic-breakpoint--small) {
+    @include tunic-breakpoint(small) {
         @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;
@@ -765,23 +765,10 @@ Tunic.Structure
 }
 
 
-/* 
-Padding Tools
-
-Frequent padding combinations
-
-* `.padding, .padding2` - collapses on small screens.
-* `.padding-hard`  - Won't collapse.
-* `.padding-mobile`  - Only appears on mobile.
-
-Markup:
-<div class="padding">Padding</div>
-<div class="padding2">Padding</div>
-<div class="padding-hard">Hard Padding</div>
-<div class="padding-mobile">Mobile Padding</div>
-
-Tunic.Structure
-*/
+/**
+ * Padding Tools
+ * @group structure
+ */
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;

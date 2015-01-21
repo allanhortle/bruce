@@ -1,21 +1,8 @@
 
-/* 
-Padding Tools
-
-Frequent padding combinations
-
-* `.padding, .padding2` - collapses on small screens.
-* `.padding-hard`  - Won't collapse.
-* `.padding-mobile`  - Only appears on mobile.
-
-Markup:
-<div class="padding">Padding</div>
-<div class="padding2">Padding</div>
-<div class="padding-hard">Hard Padding</div>
-<div class="padding-mobile">Mobile Padding</div>
-
-Tunic.Structure
-*/
+/**
+ * Padding Tools
+ * @group structure
+ */
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;
