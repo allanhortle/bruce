@@ -12,7 +12,10 @@
     @include tunic-structure-padding-row;
 }
 
-
+/**
+ * Padding Tools
+ * @group structure
+ */
 @mixin tunic-structure-padding {
     .padding {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -21,6 +24,10 @@
     }  
 }
 
+/**
+ * Padding Tools
+ * @group structure
+ */
 @mixin tunic-structure-padding2 {
     .padding2 {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -29,12 +36,20 @@
     }
 }
 
+/**
+ * Padding Tools
+ * @group structure
+ */
 @mixin tunic-structure-padding-hard {
     .padding-hard {
         padding: baseUnit(1);
     }
 }
 
+/**
+ * Padding Tools
+ * @group structure
+ */
 @mixin tunic-structure-padding-mobile {
     .padding-mobile {
         padding: baseUnit(1);
@@ -45,6 +60,10 @@
     }
 }
 
+/**
+ * Padding Tools
+ * @group structure
+ */
 @mixin tunic-structure-padding-row {
     .padding-row {
         padding-top: baseUnit(2);
