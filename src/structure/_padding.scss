@@ -3,6 +3,9 @@
 /// Padding Tools
 /// @group structure
 /// 
+/// 
+
+@debug 'padding';
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;
@@ -69,4 +72,19 @@
         padding-top: baseUnit(2);
         padding-bottom: baseUnit(2);
     }
+}
+
+@mixin tunic-structure-flush {
+    .hug {
+        margin: 0;
+    }
+
+    .hug-top {
+        margin-top: 0;
+    }
+
+    .hug-bottom {
+        margin-bottom: 0;
+    }
+
 }
