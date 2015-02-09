@@ -398,13 +398,11 @@ Markup:
 }
 
 
-//
-// Grid
-//
-// Uses the $sizes list to create percentage based helper classes
-//
-//
-//
+///
+/// 
+///
+///
+///
 
 $tunic-grid-gutter:             baseUnit(1)    !default;
 
@@ -765,10 +763,10 @@ Tunic.Structure
 }
 
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Padding Tools
+/// @group structure
+/// 
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;
@@ -778,10 +776,10 @@ Tunic.Structure
     @include tunic-structure-padding-row;
 }
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Base Padding
+/// @group structure
+/// 
 @mixin tunic-structure-padding {
     .padding {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -790,10 +788,10 @@ Tunic.Structure
     }  
 }
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Double Padding
+/// @group structure
+/// 
 @mixin tunic-structure-padding2 {
     .padding2 {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -802,20 +800,20 @@ Tunic.Structure
     }
 }
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Hard Padding
+/// @group structure
+/// 
 @mixin tunic-structure-padding-hard {
     .padding-hard {
         padding: baseUnit(1);
     }
 }
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Mobile Padding
+/// @group structure
+/// 
 @mixin tunic-structure-padding-mobile {
     .padding-mobile {
         padding: baseUnit(1);
@@ -826,10 +824,10 @@ Tunic.Structure
     }
 }
 
-/**
- * Padding Tools
- * @group structure
- */
+/// 
+/// Row Padding
+/// @group structure
+/// 
 @mixin tunic-structure-padding-row {
     .padding-row {
         padding-top: baseUnit(2);

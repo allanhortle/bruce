@@ -70,17 +70,14 @@ Tunic.Structure
     }
 }
 
-@mixin tunic-structure-hug {
-    .hug {
+@mixin tunic-structure-flush {
+    .flush {
         margin: 0;
     }
 
-    .hug-top {
-        margin-top: 0;
+    @each $name in $directionsList {
+        .flush-#{$name} {
+            margin-#{$name}: 0;
+        }
     }
-
-    .hug-bottom {
-        margin-bottom: 0;
-    }
-
 }
