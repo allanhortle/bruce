@@ -25,3 +25,11 @@ $tunic-breakpoints:(
     small:  baseUnit(48),
     tiny:   baseUnit(30)
 );
+
+
+$tunic-directionsList: (
+    top,
+    right,
+    bottom,
+    left
+);

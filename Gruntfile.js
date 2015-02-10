@@ -25,7 +25,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {
                 files: {
-                    'tunic.scss': [
+                    'tunicOld.scss': [
                         'src/_vars.scss',
                         'src/**/*.scss'
                     ]

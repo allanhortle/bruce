@@ -5,7 +5,6 @@
 /// 
 /// 
 
-@debug 'padding';
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;
@@ -13,6 +12,7 @@
     @include tunic-structure-padding-hard;
     @include tunic-structure-padding-mobile;
     @include tunic-structure-padding-row;
+    @include tunic-structure-flush;
 }
 
 /// 
@@ -75,16 +75,19 @@
 }
 
 @mixin tunic-structure-flush {
-    .hug {
-        margin: 0;
+
+    .flush {
+        padding: 0;
     }
 
-    .hug-top {
-        margin-top: 0;
+    .flush-right {
+        padding-right: 0;
     }
 
-    .hug-bottom {
-        margin-bottom: 0;
-    }
-
+    // @each $name in $tunic-directionsList {
+    //     @debug $name;
+    //     .flush-#{$name} {
+    //         padding-#{$name}: 0;
+    //     }
+    // }
 }
