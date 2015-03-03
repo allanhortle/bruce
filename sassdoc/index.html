@@ -1,0 +1,131 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Tunic - v0.0.0</title><link rel="stylesheet" href="assets/css/main.css"><link href="http://fonts.googleapis.com/css?family=Open+Sans:400,500,700" rel="stylesheet" type="text/css"><meta name="viewport" content="width=device-width"><meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"><!-- Open Graph tags --><meta property="og:title" content="Tunic - SassDoc"><meta property="og:type" content="website"><meta property="og:description" content="<p>SCSS Helpers</p>
+"><!-- Thanks to Sass-lang.com for the icons --><link href="assets/images/favicon.png" rel="shortcut icon"></head><body><aside class="sidebar" role="nav"><div class="sidebar__header"><h1 class="sidebar__title"><a href="https://github.com/allanhortle/tunic">Tunic - v0.0.0</a></h1></div><div class="sidebar__body"><button type="button" class="btn-toggle js-btn-toggle" data-alt="Open all">Close all</button><p class="sidebar__item sidebar__item--heading" data-slug="functions"><a href="#functions">functions</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="functions-function"><a href="#functions-function">functions</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="fourProps" data-type="function"><a href="#function-fourProps">fourProps</a></li><li class="sidebar__item sassdoc__item" data-name="grey" data-type="function"><a href="#function-grey">grey</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="structure"><a href="#structure">structure</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="structure-variable"><a href="#structure-variable">variables</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="tunic-grid-gutter" data-type="variable"><a href="#variable-tunic-grid-gutter">tunic-grid-gutter</a></li></ul><p class="sidebar__item sidebar__item--sub-heading" data-slug="structure-mixin"><a href="#structure-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding-all" data-type="mixin"><a href="#mixin-tunic-structure-padding-all">tunic-structure-padding-all</a></li><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding" data-type="mixin"><a href="#mixin-tunic-structure-padding">tunic-structure-padding</a></li><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding2" data-type="mixin"><a href="#mixin-tunic-structure-padding2">tunic-structure-padding2</a></li><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding-hard" data-type="mixin"><a href="#mixin-tunic-structure-padding-hard">tunic-structure-padding-hard</a></li><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding-mobile" data-type="mixin"><a href="#mixin-tunic-structure-padding-mobile">tunic-structure-padding-mobile</a></li><li class="sidebar__item sassdoc__item" data-name="tunic-structure-padding-row" data-type="mixin"><a href="#mixin-tunic-structure-padding-row">tunic-structure-padding-row</a></li><li class="sidebar__item sassdoc__item" data-name="margin" data-type="mixin"><a href="#mixin-margin">margin</a></li><li class="sidebar__item sassdoc__item" data-name="padding" data-type="mixin"><a href="#mixin-padding">padding</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="undefined"><a href="#undefined">General</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="undefined-mixin"><a href="#undefined-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="tunic-breakpoint" data-type="mixin"><a href="#mixin-tunic-breakpoint">tunic-breakpoint</a></li></ul></div></div></aside><article class="main" role="main"><header class="header" role="banner"><div class="container"><div class="sassdoc__searchbar searchbar"><label for="js-search-input" class="visually-hidden">Search</label><div class="searchbar__form" id="js-search"><input name="search" type="search" class="searchbar__field" autocomplete="off" autofocus id="js-search-input" placeholder="Search"><ul class="searchbar__suggestions" id="js-search-suggestions"></ul></div></div></div></header><section class="main__section"><h1 class="main__heading" id="functions"><div class="container">functions</div></h1><section class="main__sub-section" id="functions-function"><h2 class="main__heading--secondary"><div class="container">functions</div></h2><section class="main__item container item" id="function-fourProps"><h3 class="item__heading"><a class="item__name" href="#function-fourProps">fourProps</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@function fourProps() { 
+    $length: length($props);
+
+    $top:       nth($props, 1);
+    $right:     nth($props, 1);
+    $bottom:    nth($props, 1);
+    $left:      nth($props, 1);
+
+    @if ($length == 2) {
+        $right:     nth($props, 2);
+        $left:      nth($props, 2);
+    }
+
+    @if ($length == 3) {
+        $right:     nth($props, 2);
+        $bottom:    nth($props, 3);
+        $left:      nth($props, 2);
+    }
+
+    @if ($length == 4) {
+        $right:     nth($props, 2);
+        $bottom:    nth($props, 3);
+        $left:      nth($props, 4);
+    }
+
+
+    @return (
+        top: $top,     
+        right: $right,   
+        bottom: $bottom,  
+        left: $left  
+    );
+ }" data-collapsed="@function fourProps() { ... }"><code>@function fourProps() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>returns a map of the four property shorthand</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Returns</h3><div class="item__description item__description--inline"><code>Map</code></div></section><section class="main__item container item" id="function-grey"><h3 class="item__heading"><a class="item__name" href="#function-grey">grey</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@function grey($var, $opacity) { 
+    @return hsla(0, 0, $var, $opacity);
+ }" data-collapsed="@function grey($var, $opacity) { ... }"><code>@function grey($var, $opacity) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Returns a grey value from 0 - 100</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter</span>Name</th><th scope="col"><span class="visually-hidden">parameter</span>Description</th><th scope="col"><span class="visually-hidden">parameter</span>Type</th><th scope="col"><span class="visually-hidden">parameter</span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$var</code></th><td data-label="desc"><p>(50) The level of grey from 0 to 100</p></td><td data-label="type"><code>Number</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$opacity</code></th><td data-label="desc"><p>(1) The level of opacity from 0 to 1</p></td><td data-label="type"><code>Number</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr></tbody></table><h3 class="item__sub-heading">Returns</h3><div class="item__description item__description--inline"><code>Color</code> &mdash;<p>Sass HSLA that will be compiled to hex</p></div></section></section></section><section class="main__section"><h1 class="main__heading" id="structure"><div class="container">structure</div></h1><section class="main__sub-section" id="structure-variable"><h2 class="main__heading--secondary"><div class="container">variables</div></h2><section class="main__item container item" id="variable-tunic-grid-gutter"><h3 class="item__heading"><a class="item__name" href="#variable-tunic-grid-gutter">tunic-grid-gutter</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$tunic-grid-gutter: baseUnit(1) !default;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>The Grid</p></div></section></section><section class="main__sub-section" id="structure-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="mixin-tunic-structure-padding-all"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding-all">tunic-structure-padding-all</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding-all() { 
+    @include tunic-structure-padding;
+    @include tunic-structure-padding2;
+    @include tunic-structure-padding-hard;
+    @include tunic-structure-padding-mobile;
+    @include tunic-structure-padding-row;
+    @include tunic-structure-flush;
+ }" data-collapsed="@mixin tunic-structure-padding-all() { ... }"><code>@mixin tunic-structure-padding-all() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Padding Tools</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding"><code>tunic-structure-padding</code></a></li><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding2"><code>tunic-structure-padding2</code></a></li><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-hard"><code>tunic-structure-padding-hard</code></a></li><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-mobile"><code>tunic-structure-padding-mobile</code></a></li><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-row"><code>tunic-structure-padding-row</code></a></li></ul></section><section class="main__item container item" id="mixin-tunic-structure-padding"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding">tunic-structure-padding</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding() { 
+    .padding {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(1);
+        }
+    }  
+ }" data-collapsed="@mixin tunic-structure-padding() { ... }"><code>@mixin tunic-structure-padding() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Base Padding</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-breakpoint"><code>tunic-breakpoint</code></a></li></ul><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-all"><code>tunic-structure-padding-all</code></a></li></ul></section><section class="main__item container item" id="mixin-tunic-structure-padding2"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding2">tunic-structure-padding2</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding2() { 
+    .padding2 {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(2);
+        }
+    }
+ }" data-collapsed="@mixin tunic-structure-padding2() { ... }"><code>@mixin tunic-structure-padding2() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Double Padding</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-breakpoint"><code>tunic-breakpoint</code></a></li></ul><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-all"><code>tunic-structure-padding-all</code></a></li></ul></section><section class="main__item container item" id="mixin-tunic-structure-padding-hard"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding-hard">tunic-structure-padding-hard</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding-hard() { 
+    .padding-hard {
+        padding: baseUnit(1);
+    }
+ }" data-collapsed="@mixin tunic-structure-padding-hard() { ... }"><code>@mixin tunic-structure-padding-hard() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Hard Padding</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-all"><code>tunic-structure-padding-all</code></a></li></ul></section><section class="main__item container item" id="mixin-tunic-structure-padding-mobile"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding-mobile">tunic-structure-padding-mobile</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding-mobile() { 
+    .padding-mobile {
+        padding: baseUnit(1);
+        
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: 0;
+        }
+    }
+ }" data-collapsed="@mixin tunic-structure-padding-mobile() { ... }"><code>@mixin tunic-structure-padding-mobile() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Mobile Padding</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-breakpoint"><code>tunic-breakpoint</code></a></li></ul><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-all"><code>tunic-structure-padding-all</code></a></li></ul></section><section class="main__item container item" id="mixin-tunic-structure-padding-row"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-structure-padding-row">tunic-structure-padding-row</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-structure-padding-row() { 
+    .padding-row {
+        padding-top: baseUnit(2);
+        padding-bottom: baseUnit(2);
+    }
+ }" data-collapsed="@mixin tunic-structure-padding-row() { ... }"><code>@mixin tunic-structure-padding-row() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Row Padding</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-all"><code>tunic-structure-padding-all</code></a></li></ul></section><section class="main__item container item" id="mixin-margin"><h3 class="item__heading"><a class="item__name" href="#mixin-margin">margin</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin margin($top, $right, $bottom, $left) { 
+    $propMap: fourProp($props...);
+    margin-top: map-get($propMap, top);   
+    margin-right: map-get($propMap, right);
+    margin-bottom: map-get($propMap, bottom);
+    margin-left: map-get($propMap, left);
+ }" data-collapsed="@mixin margin($top, $right, $bottom, $left) { ... }"><code>@mixin margin($top, $right, $bottom, $left) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Returns 4 margin props</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter</span>Name</th><th scope="col"><span class="visually-hidden">parameter</span>Description</th><th scope="col"><span class="visually-hidden">parameter</span>Type</th><th scope="col"><span class="visually-hidden">parameter</span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$top</code></th><td data-label="desc"><p>margin</p></td><td data-label="type"><code>Top</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$right</code></th><td data-label="desc"><p>margin</p></td><td data-label="type"><code>Right</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$bottom</code></th><td data-label="desc"><p>margin</p></td><td data-label="type"><code>Bottom</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$left</code></th><td data-label="desc"><p>margin</p></td><td data-label="type"><code>Left</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr></tbody></table></section><section class="main__item container item" id="mixin-padding"><h3 class="item__heading"><a class="item__name" href="#mixin-padding">padding</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin padding($top, $right, $bottom, $left) { 
+    $propMap: fourProp($props...);
+    padding-top: map-get($propMap, top);   
+    padding-right: map-get($propMap, right);
+    padding-bottom: map-get($propMap, bottom);
+    padding-left: map-get($propMap, left);
+ }" data-collapsed="@mixin padding($top, $right, $bottom, $left) { ... }"><code>@mixin padding($top, $right, $bottom, $left) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Returns 4 padding props</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter</span>Name</th><th scope="col"><span class="visually-hidden">parameter</span>Description</th><th scope="col"><span class="visually-hidden">parameter</span>Type</th><th scope="col"><span class="visually-hidden">parameter</span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$top</code></th><td data-label="desc"><p>padding</p></td><td data-label="type"><code>Top</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$right</code></th><td data-label="desc"><p>padding</p></td><td data-label="type"><code>Right</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$bottom</code></th><td data-label="desc"><p>padding</p></td><td data-label="type"><code>Bottom</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$left</code></th><td data-label="desc"><p>padding</p></td><td data-label="type"><code>Left</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr></tbody></table></section></section></section><section class="main__section"><h1 class="main__heading" id="undefined"><div class="container">General</div></h1><section class="main__sub-section" id="undefined-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="mixin-tunic-breakpoint"><h3 class="item__heading"><a class="item__name" href="#mixin-tunic-breakpoint">tunic-breakpoint</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin tunic-breakpoint() { 
+    // Standard 
+    $item: map-get($tunic-breakpoints, $bp);
+    
+    @if $item {
+        $bp: $item;
+    }
+
+    @if $tunic-ie == true {
+        @content;
+    } 
+
+    @else {
+        @if type-of($bp) == &#39;number&#39;{
+            @media (min-width: #{$bp})  { 
+                @content; 
+            }
+        }
+
+        @if type-of($bp) == &#39;list&#39;{
+            $first:  nth($bp, 1);
+            $bp: nth($bp, 2);
+
+            $item: map-get($tunic-breakpoints, $bp);
+
+            @if $item {
+                $bp: $item;   
+            }
+
+
+            @if type-of($first) == &#39;string&#39;{
+                @media (#{$first}: #{$bp}) { 
+                    @content; 
+                }
+            }
+            @elseif type-of($first) == &#39;number&#39;{
+                @media (min-width: #{$first}) and (max-width: #{$bp}) { 
+                    @content; 
+                }
+            }
+            @else{
+                @warn &#39;tunic-breakpoint: wrong syntax&#39;;
+            }
+        }
+    }
+ }" data-collapsed="@mixin tunic-breakpoint() { ... }"><code>@mixin tunic-breakpoint() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Returns a media query based on the content of <code>$bp</code>.</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>\@include tunic-breakPoint(small) { ... }
+\@include tunic-breakPoint(max-width: small) { ... }
+</code></pre></div><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding"><code>tunic-structure-padding</code></a></li><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding2"><code>tunic-structure-padding2</code></a></li><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-tunic-structure-padding-mobile"><code>tunic-structure-padding-mobile</code></a></li></ul></section></section></section><footer class="footer" role="contentinfo"><div class="container"><div class="footer__project-info project-info"><!-- Name and URL --><a class="project-info__name" href="https://github.com/allanhortle/tunic">Tunic</a><!-- Version --> <span class="project-info__version">- v0.0.0</span><!-- License --> <span class="project-info__license">, under ISC</span></div><a class="footer__watermark" href="http://sassdoc.com"><img src="assets/images/logo_light_inline.svg" alt="SassDoc Logo"></a></div></footer></article><script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script><script src="assets/js/main.min.js"></script></body></html>

@@ -1,0 +1,83 @@
+%position-relative {
+    position: relative;
+}
+
+/// 
+/// Returns 4 margin props
+/// @group structure
+/// @param  {top}               top margin
+/// @param  {right}             right margin
+/// @param  {bottom}            bottom margin
+/// @param  {left}              left margin
+/// 
+
+@mixin margin($props...) {
+    $propMap: fourProps($props...);
+    margin-top: map-get($propMap, top);   
+    margin-right: map-get($propMap, right);
+    margin-bottom: map-get($propMap, bottom);
+    margin-left: map-get($propMap, left);
+}
+
+/// 
+/// Returns 4 padding props
+/// @group structure
+/// @param  {top}               top padding
+/// @param  {right}             right padding
+/// @param  {bottom}            bottom padding
+/// @param  {left}              left padding
+/// 
+
+@mixin padding($props...) {
+    $propMap: fourProps($props...);
+    padding-top: map-get($propMap, top);   
+    padding-right: map-get($propMap, right);
+    padding-bottom: map-get($propMap, bottom);
+    padding-left: map-get($propMap, left);
+}
+
+
+///
+/// CSS Styles
+/// 
+
+.hug {
+    @include margin(0);
+}
+
+.flush {
+    @include padding(0);    
+}
+
+@each $direction in ('top', 'right', 'bottom', 'left') {   
+
+    @for $i from 0 through 3 {
+        $name: $i;
+        @if ($i == 0) {
+            $i: .5;
+            $name: '05';
+        }
+
+        .margin-#{$direction}#{$name} {
+            margin-#{$direction}: #{$i}rem;
+        }
+
+        .padding-#{$direction}#{$name} {
+            margin-#{$direction}: #{$i}rem;
+        }
+
+        .#{$direction}#{$name} {
+            @extend %position-relative; 
+            margin-#{$direction}: #{$i}rem;
+        }
+    }
+
+    .hug-#{$direction} {
+        margin-#{$direction}: 0;
+    }
+
+    .flush-#{$direction} {
+        padding-#{$direction}: 0;
+    }
+
+}

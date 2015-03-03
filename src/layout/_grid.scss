@@ -1,11 +1,11 @@
 
-///
 /// 
-///
-///
-///
-
+/// The Grid
+/// 
+/// @group structure
+/// 
 $tunic-grid-gutter:             baseUnit(1)    !default;
+@debug 'tunic grid';
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {

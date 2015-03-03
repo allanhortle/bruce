@@ -1,11 +1,13 @@
 
 
-/**
- * Returns a grey value from 0 - 100
- * @param  {number} var (50)        The level of grey from 0 to 100
- * @param  {number} $opacity (1)    The level of opacity from 0 to 1
- * @return {color}                  Sass HSLA that will be compiled to hex
- */
+/// 
+/// Returns a grey value from 0 - 100
+/// 
+/// @group functions
+/// @param  {number} var (50)        The level of grey from 0 to 100
+/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
+/// @return {color}                  Sass HSLA that will be compiled to hex
+/// 
 
 @function grey($var:50, $opacity:1) {
     @return hsla(0, 0, $var, $opacity);

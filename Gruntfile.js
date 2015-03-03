@@ -72,10 +72,10 @@ module.exports = function (grunt) {
         sassdoc: {
             docs: {
                 src: 'src',
-                dest: 'docs',
                 options: {
+                    dest: 'docs',
                     force: true,
-                    theme: 'tunic-theme'
+                    theme: 'tunic'
                 }
             }
         }
@@ -85,8 +85,7 @@ module.exports = function (grunt) {
         grunt.config('files', generateFiles());
         grunt.task.run([
             'concat', 
-            'sassdoc',
-            'copy'
+            'sassdoc'
         ]);
     });
 

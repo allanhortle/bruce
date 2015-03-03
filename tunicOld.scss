@@ -1,0 +1,1397 @@
+
+$tunic-ie:                      false   !default;
+
+$tunic-breakpoint--small:       21em    !default;
+
+$tunic-rems:                    true    !default;
+$tunic-baseSize:                16      !default;
+
+
+$tunic-color: (
+    red: #e65053
+);
+
+$tunic-fontWeights: (
+    bold: 600,
+    regular: 400,
+    light: 300,
+    thin: 100
+);
+
+// Default Breakpoints
+$tunic-breakpoints:(
+    large:  baseUnit(120),
+    medium: baseUnit(64),
+    small:  baseUnit(48),
+    tiny:   baseUnit(30)
+);
+
+
+$tunic-directionsList: (
+    top,
+    right,
+    bottom,
+    left
+);
+
+
+%tunic-Input {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    width: 100%;
+    height: 32px;
+    border: 0;
+    border-radius: 0;
+    background-color: grey(90);
+    color: grey(40);
+    font-size: .8em;
+    cursor: text;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+    
+}  
+
+@mixin tunic-Input() {
+    @extend %tunic-Input; 
+}
+
+/* 
+
+The Media Object
+
+Floats an image to either the left or the right and remove the text wrap from the content.
+
+Markup:
+<div class="Media {$modifiers}">
+    <div class="Media_image"><img src="http://placehold.it/64/64" /></div>
+    <div class="Media_body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, maxime, excepturi velit corporis quae placeat quia atque maiores magnam veritatis unde blanditiis sed sequi. Laborum, beatae, iste. Nulla, minima pariatur.</div>
+</div>
+
+.Media-right        - Right aligned image.
+
+*/
+@mixin tunic-component-media() {
+    .Media {
+        @extend %tunic-clearfix;
+    }
+
+    .Media_body {
+        overflow: hidden;
+    }
+
+    .Media_image {
+        float: left;
+        margin-right: 16px;
+    }
+
+    .Media-right {
+
+        > .Media_image {
+            float: right;
+            margin-left: 32px;
+        }
+    }
+}
+
+/**
+ * Table Component
+ * 
+ */
+
+@mixin tunic-component-table() {
+
+    %Table-base {
+        margin-bottom: 32px;
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        clear: both;
+        line-height: 1.5em;
+
+        font-size: .9em;
+
+        @include tunic-breakpoint(tiny) {
+            font-size: 1em;
+        }
+
+        th,
+        td {
+            padding: 4px;
+            vertical-align: top;
+            vertical-align: middle; 
+
+            @include tunic-breakpoint(tiny) {
+                padding: 8px;
+            }
+        }
+
+        th {
+            @include tunic-behave(notselectable);
+            color: grey(60);
+            font-weight: normal;
+        }
+    }
+
+
+    .Table {
+        @extend %Table-base;
+
+        th {
+            text-align: left;            
+        }
+
+    }
+
+    .Table-top {
+        td {
+            vertical-align: top;
+        }
+    }
+
+    .Table-middle {
+        td {
+            vertical-align: middle;
+        }
+    }
+
+}
+
+
+// 
+// base unit($var:50);
+// 
+// Returns a unit based 
+// 
+//
+// 
+
+@function baseUnit($val) {
+    @if ($tunic-rems) {
+        @return $val + 0rem;
+    }
+    @return ($val * $tunic-baseSize ) + 0px;
+}
+
+
+/// 
+/// returns a map of the four property shorthand
+/// 
+/// @group functions
+/// @return  {map} 
+/// 
+@function fourProps($props...) {
+    $length: length($props);
+
+    $top:       nth($props, 1);
+    $right:     nth($props, 1);
+    $bottom:    nth($props, 1);
+    $left:      nth($props, 1);
+
+    @if ($length == 2) {
+        $right:     nth($props, 2);
+        $left:      nth($props, 2);
+    }
+
+    @if ($length == 3) {
+        $right:     nth($props, 2);
+        $bottom:    nth($props, 3);
+        $left:      nth($props, 2);
+    }
+
+    @if ($length == 4) {
+        $right:     nth($props, 2);
+        $bottom:    nth($props, 3);
+        $left:      nth($props, 4);
+    }
+
+
+    @return (
+        top: $top,     
+        right: $right,   
+        bottom: $bottom,  
+        left: $left  
+    );
+}
+
+
+
+/// 
+/// Returns a grey value from 0 - 100
+/// 
+/// @group functions
+/// @param  {number} var (50)        The level of grey from 0 to 100
+/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
+/// @return {color}                  Sass HSLA that will be compiled to hex
+/// 
+
+@function grey($var:50, $opacity:1) {
+    @return hsla(0, 0, $var, $opacity);
+}
+
+
+/**
+ * Inverts a number
+ * @group Functions
+ * @param  {number} $var
+ * @return {number}
+ */
+
+@function inverse($var) {
+    @return $var * -1;
+}
+
+
+// 
+// List functions
+// 
+// Useful things for lists
+// 
+//
+// 
+
+@function first($list) {
+    @return nth($list, 1);
+}
+
+@function last($list) {
+    @return nth($list, length($list));
+}
+
+
+// 
+// pastel($var, $des:10, $light:10);
+// 
+// Lightens and desaturates a color
+// 
+//
+// 
+
+@function pastel($var, $des:10, $light:10) {
+    @return lighten(desaturate($var, $des), $light);
+}
+
+
+/**
+ * Multiply `$rem` by `baseSize`
+ * @group Functions
+ * @param  {rem} $rem The rem value   
+ * @param  {px}  $baseSize ($tunic-baseSize)  The factor    
+ * @return {px} 
+ */
+@function remsToPixel($rem, $baseSize:$tunic-baseSize) {
+    @return toPixel(stripUnits($rem * $baseSize));
+}
+    
+
+// 
+// repeatChar($char, $ammount);
+// 
+// Repeats a character by an ammount
+// 
+//
+// 
+
+@function repeatChar($char, $ammount) {
+    $a: $char;
+    @for $i from 0 through $ammount {        
+        $a: $a + $char;
+    }
+    @return $a;
+}
+
+
+/**
+ * Strips the units suffix
+ * @group Functions
+ * @param  {unit}  
+ * @return {number} 
+ */
+@function stripUnits($var) {
+    @return $var / ($var * 0 + 1);
+}
+
+
+// 
+// Time function
+// 
+// Returns $var + ms
+// 
+//
+// 
+
+@function t($var) {
+    @return #{$var}ms;
+}
+
+
+/**
+ * Converts a string to a pixel value
+ * @group Functions
+ * @param  {unit}  
+ * @return {px} 
+ */
+@function toPixel($var) {
+    @return $var + 0px;
+}
+
+
+// 
+// get-zindex($component);
+// 
+// Returns the position of `$component` in `$tunic-zindexList`
+// 
+// Markup:
+// $tunic-zindexList:(
+//     Button,
+//     Widget,
+//     Link
+// );
+// 
+// .Button {
+//     z-index: get-zindex(Button);
+// }
+// 
+//
+// 
+
+@function get-zindex($component) {
+    $list: $tunic-zindexList;
+    $zindex: index($list, $component);
+    @if $zindex {
+        @return $zindex;
+    }
+
+    @warn 'get-zindex(): There is no item "#{$component}" in this list; choose one of: #{$list}';
+    @return null;    
+}
+
+
+/**
+ * Returns values from nested lists
+ * @link    https://github.com/jlong
+ * @group functions
+ * @param   {map}
+ * @param   {list}  Nested keys as a list    
+ * @return  {value} 
+ */
+@function map-fetch($map, $keys) {
+    $key: nth($keys, 1);
+    $length: length($keys);
+    $value: map-get($map, $key);
+    @if ($length > 1) {
+        $rest: ();
+        @for $i from 2 through $length {
+            $rest: append($rest, nth($keys, $i))
+        }
+        @return map-fetch($value, $rest)
+    } @else {
+        @return $value;
+    }
+}
+
+
+//
+// Clearfix
+//
+// Table Style
+//
+//
+//
+
+%tunic-clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin tunic-clearfix {
+    @extend %tunic-clearfix; 
+}
+
+
+//
+// Columns
+//
+// Uses borders to create columns
+//
+//
+//
+
+@mixin tunic-columns($spacing:4px, $color:transparent) {
+    border-right: $spacing solid $color;
+    border-left: $spacing solid $color;
+
+    &:first-child {
+        border-left: 0;
+    }
+
+    &:last-child {
+        border-right: 0;
+    }
+}
+
+
+//
+// Flood
+//
+// Absolutley position an element as far as it's containing elements bounds
+//
+//
+//
+
+%tunic-flood {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@mixin tunic-flood() {
+    @extend %tunic-flood;
+}
+
+
+/// 
+/// The Grid
+/// 
+/// @group structure
+/// 
+$tunic-grid-gutter:             baseUnit(1)    !default;
+@debug 'tunic grid';
+
+@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
+    .#{$grid} {
+        $gutter: $tunic-grid-gutter;
+        box-sizing: border-box;
+        display: table;
+        width: 100%;
+        table-layout: fixed;        
+
+        & > [class*=#{$col}] {
+            box-sizing: border-box;
+            display: block;
+            vertical-align: top;
+
+            margin-bottom: 1rem;
+
+            @include tunic-breakpoint(small) {
+                display: table-cell;
+                border-right: $gutter solid transparent;
+                border-left: $gutter solid transparent;
+                margin: 0;
+            }
+            
+            &:first-child {
+                border-left: 0;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        // Alignment
+        &.#{$grid}-middle {
+            & > [class*=#{$col}] {
+                vertical-align: middle;
+            }
+        }
+
+        &.#{$grid}-bottom {
+            & > [class*=#{$col}] {
+                vertical-align: bottom;
+            }
+        }
+
+        // Sizing
+        &.#{$grid}-tight {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 2;
+                margin-bottom: $gutter / 2;
+                
+            }
+        }
+
+        &.#{$grid}-tighter {
+            & > [class*=#{$col}] {
+                border-width: $gutter / 4;
+                margin-bottom: $gutter / 4;                
+            }
+        }
+
+        &.#{$grid}-flush {
+            & > [class*=#{$col}] {
+                border: 0;
+            }
+        }
+    }
+
+    @include tunic-breakpoint(small) {
+        @for $i from 1 through $num {
+            .#{$col}#{$i} {
+                width: (100% / $num) * $i;
+            }
+        }  
+    }   
+}
+
+    
+//
+// Hidden
+//
+// Uses positioing to hide but not remove
+//
+//
+//
+
+%tunic-hide { 
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
+}
+
+@mixin tunic-hide() {
+    @extend %tunic-hide; 
+}
+
+
+/* styleguide
+name:           Ratio
+category:       Tunic => Structure
+description:    
+----
+*/
+
+@mixin tunic-ratio($width, $height) {
+    &:before {
+        content: '';
+        display: block;
+        padding-top: $height / $width * 100%;
+    }
+}
+
+//
+// Reset
+//
+// http://meyerweb.com/eric/tools/css/reset/ 
+// v2.0 | 20110126
+// License: none (public domain)
+//
+//
+//
+
+$tunic-reset-elements: 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video
+!default;
+
+@mixin tunic-reset(
+    $elements: $tunic-reset-elements
+) {
+    #{$elements} {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,    
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+
+    body {
+        line-height: 1;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    blockquote,
+    q {
+        quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+}
+
+
+//
+// Flood
+//
+// One declaration for width and height 
+//
+//
+//
+
+@mixin tunic-size($w, $h:null) {
+    @if $h != null {
+        width: $w;
+        height: $h;  
+    } 
+    @else {
+        width: $w;
+        height: $w;
+    }
+}
+
+
+//
+// Vertical Align
+//
+// Vertical Align tools
+//
+//
+//
+
+%l-verticalAlign {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+%l-verticalAlign_inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@mixin tunic-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
+    .#{$wrapper} {
+        @extend %l-verticalAlign;
+    }
+
+    .#{$inner} {
+        @extend %l-verticalAlign_inner;
+    }
+}
+
+
+//
+// Widths
+//
+// Uses the $sizes list to create percentage based helper classes
+//
+//
+//
+
+@mixin tunic-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
+    @for $i from first($sizes) through last($sizes) {
+        .l-#{$i}0 { width: percentage($i)/10   !important; }
+        @if $i != 10 {
+            .l-#{$i}5 { 
+                width: percentage($i)/10+5 !important; 
+            }
+        }
+        @if $i == 0 {
+            .l-#{$i}0 {
+                width: 1% !important;
+            }
+        }
+        
+    }
+}
+
+
+/* 
+Margin Tools
+
+Margin combinations are prioritized by giving them first choice on semantic short names.
+Paddings then use the same names prefixed with `padding-`
+
+* `.column, .column2`
+* `.row, .row2`
+
+Markup:
+<div class="column">Column</div>
+<div class="column2">Column2</div>
+<div class="row">Row</div>
+<div class="row2">Row2</div>
+<h2 class="hug">hug</h2>
+
+<h2 class="hug-top">hug-top</h2>
+<h2 class="hug-bottom">hug-bottom</h2>
+
+Tunic.Structure
+*/
+
+@mixin tunic-structure-margin {
+    @include tunic-structure-column;
+    @include tunic-structure-column2;
+    @include tunic-structure-row;
+    @include tunic-structure-row2;
+    @include tunic-structure-push;
+    @include tunic-structure-push2;
+    @include tunic-structure-hug;
+}
+
+@mixin tunic-structure-column {
+    .column {
+        margin-left: baseUnit(1);
+        margin-right: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-column2 {
+    .column2 {
+        margin-left: baseUnit(2);
+        margin-right: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-row {
+    .row {
+        margin-top: baseUnit(1);
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-row2 {
+    .row2 {
+        margin: baseUnit(2) 0;
+    }
+}
+
+@mixin tunic-structure-push {
+    .push {
+        margin-bottom: baseUnit(1);
+    }
+}
+
+@mixin tunic-structure-push2 {
+    .push2 {
+        margin-bottom: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-hug {
+    .hug {
+        margin: 0;
+    }
+
+    @each $name in $tunic-directionsList {
+        .hug-#{$name} {
+            margin-#{$name}: 0;
+        }
+    }
+}
+
+
+/// 
+/// Padding Tools
+/// @group structure
+/// 
+/// 
+
+
+@mixin tunic-structure-padding-all {
+    @include tunic-structure-padding;
+    @include tunic-structure-padding2;
+    @include tunic-structure-padding-hard;
+    @include tunic-structure-padding-mobile;
+    @include tunic-structure-padding-row;
+    @include tunic-structure-flush;
+}
+
+/// 
+/// Base Padding
+/// @group structure
+/// 
+@mixin tunic-structure-padding {
+    .padding {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(1);
+        }
+    }  
+}
+
+/// 
+/// Double Padding
+/// @group structure
+/// 
+@mixin tunic-structure-padding2 {
+    .padding2 {
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: baseUnit(2);
+        }
+    }
+}
+
+/// 
+/// Hard Padding
+/// @group structure
+/// 
+@mixin tunic-structure-padding-hard {
+    .padding-hard {
+        padding: baseUnit(1);
+    }
+}
+
+/// 
+/// Mobile Padding
+/// @group structure
+/// 
+@mixin tunic-structure-padding-mobile {
+    .padding-mobile {
+        padding: baseUnit(1);
+        
+        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+            padding: 0;
+        }
+    }
+}
+
+/// 
+/// Row Padding
+/// @group structure
+/// 
+@mixin tunic-structure-padding-row {
+    .padding-row {
+        padding-top: baseUnit(2);
+        padding-bottom: baseUnit(2);
+    }
+}
+
+@mixin tunic-structure-flush {
+
+    .flush {
+        padding: 0;
+    }
+
+    .flush-right {
+        padding-right: 0;
+    }
+
+    // @each $name in $tunic-directionsList {
+    //     @debug $name;
+    //     .flush-#{$name} {
+    //         padding-#{$name}: 0;
+    //     }
+    // }
+}
+
+
+/**
+ * Position Veritcal Middle
+ * @group Position
+ * 
+ */
+
+%tunic-position-verticalMiddle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin tunic-position-verticalMiddle() {
+    @extend %tunic-position-verticalMiddle;
+}
+
+%position-relative {
+    position: relative;
+}
+
+/// 
+/// Returns 4 margin props
+/// @group structure
+/// @param  {top}               top margin
+/// @param  {right}             right margin
+/// @param  {bottom}            bottom margin
+/// @param  {left}              left margin
+/// 
+
+@mixin margin($props...) {
+    $propMap: fourProp($props...);
+    margin-top: map-get($propMap, top);   
+    margin-right: map-get($propMap, right);
+    margin-bottom: map-get($propMap, bottom);
+    margin-left: map-get($propMap, left);
+}
+
+/// 
+/// Returns 4 padding props
+/// @group structure
+/// @param  {top}               top padding
+/// @param  {right}             right padding
+/// @param  {bottom}            bottom padding
+/// @param  {left}              left padding
+/// 
+
+@mixin padding($props...) {
+    $propMap: fourProp($props...);
+    padding-top: map-get($propMap, top);   
+    padding-right: map-get($propMap, right);
+    padding-bottom: map-get($propMap, bottom);
+    padding-left: map-get($propMap, left);
+}
+
+
+///
+/// CSS Styles
+/// 
+
+.hug {
+    @include margin(0);
+}
+
+.flush {
+    @include padding(0);    
+}
+
+@each $direction in ('top', 'right', 'bottom', 'left') {   
+
+    @for $i from 0 through 3 {
+        $name: $i;
+        @if ($i == 0) {
+            $i: .5;
+            $name: '05';
+        }
+
+        .margin-#{$direction}#{$name} {
+            margin-#{$direction}: #{$i}rem;
+        }
+
+        .padding-#{$direction}#{$name} {
+            margin-#{$direction}: #{$i}rem;
+        }
+
+        .#{$direction}#{$name} {
+            @extend %position-relative; 
+            margin-#{$direction}: #{$i}rem;
+        }
+    }
+
+    .hug-#{$direction} {
+        margin-#{$direction}: 0;
+    }
+
+    .flush-#{$direction} {
+        padding-#{$direction}: 0;
+    }
+
+}
+
+//
+// Arrow
+//
+// Trangle borders
+//
+//
+//
+
+%tunic-arrow {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 1em solid transparent;
+}
+
+@mixin tunic-arrow($width, $direction, $color) {
+    @extend %tunic-arrow; 
+    border-width: $width;
+    border-#{$direction}-color: $color;
+}
+
+
+//
+// Opacity
+//
+// Opacity mixin for older browsers.
+//
+//
+//
+
+@mixin tunic-opacity($val:.5, $color:'null') {
+
+    @if $color == 'null'{
+        $ie: $val * 100;
+        opacity: $val;
+
+        filter: alpha(opacity=#{$ie});
+    }
+    @else {
+        $color: rgba($color, $val);
+        $ie: ie-hex-str($color);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie}, endColorstr=#{$ie});
+        zoom: 1;
+        background-color: $color;
+    }   
+    
+}
+
+
+//
+// Ellipsis
+//
+// ...
+//
+//
+
+%tunic-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin tunic-ellipsis($cutoff:null) {
+    @extend %tunic-ellipsis;
+
+    @if $cutoff != null {
+        padding-right: $cutoff;      
+    }   
+}
+
+
+//
+// Font Weight
+//
+// Uses $tunic-fontWeightList to return font weights
+//
+//
+//
+
+@mixin tunic-fontWeight($name:'regular') {
+    font-weight: map-get($tunic-fontWeights, $name);
+}
+
+
+//
+// Font Face
+//
+// Chains all your font face declarations into one include.
+//
+//
+//
+
+@mixin tunic-fontface($lists...) {
+    @each $name, $path, $font-weight, $font-style in $lists {
+
+
+        @if ($font-weight == null) {
+            $font-weight: normal;
+        }
+
+        @if ($font-style == null) {
+            $font-style: normal;
+        }
+        
+        @font-face {
+            font-family: $name;
+            src: url("#{$path}.eot");
+            src: url("#{$path}.eot?#iefix") format("embedded-opentype"),
+                 url("#{$path}.woff2") format("woff2"),
+                 url("#{$path}.woff") format("woff"),
+                 url("#{$path}.ttf") format("truetype"),
+                 url("#{$path}.svg##{$name}") format("svg");
+            font-weight: $font-weight;
+            font-style: $font-style;
+        }
+    }   
+}
+
+
+//
+// Vertical Rhythm
+//
+// Calculates margins, font size and line height for h1 - h4
+// $baseFontSize, $lineHeight, $scaling
+//
+//
+//
+
+@mixin tunic-verticalRhythm($size, $rhythm) {
+    $fontSize: nth($rhythm, 1);
+    $lineHeight: nth($rhythm, 2);
+    $scaling: nth($rhythm, 3);
+
+    $power: 4 - $size;
+    $topMultipier: 2;
+
+    @if ($power < 2){
+        $topMultipier: 1;
+    }
+    
+    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / tunic-power($scaling, $power);
+    $lines: floor(tunic-power($scaling, $power));
+    
+    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: tunic-fixed($line * $lines, 1) + em;
+    margin-bottom: tunic-fixed($line, 1) + em;
+    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+}
+
+/* 
+
+Single Property Animation
+
+Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
+
+*/
+
+@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
+    @if ($fromLeave == null){
+        $fromLeave: $fromEnter;
+    }
+
+    @if ($toLeave == null){
+        $toLeave: $toEnter;
+    }
+
+    .#{$name}-enter {
+        #{$prop}: #{$fromEnter};
+
+        &.#{$name}-enter-active {
+            transition: all $duration;
+            #{$prop}: #{$toEnter};
+        }
+    }
+
+    .#{$name}-leave {
+        transition: all $duration;
+        #{$prop}: #{$fromLeave};
+
+        &.#{$name}-leave-active {
+            #{$prop}: #{$toLeave};
+        }
+    }
+}
+
+
+//
+// Behaviours
+//
+// Change the default behaviour of an element.
+//
+//
+//
+
+%tunic-behave-notselectable {
+    -webkit-touch-callout: none;  
+    user-select: none;
+}
+
+%tunic-behave-button {
+    @extend %tunic-behave-notselectable; 
+    cursor: pointer;
+}
+
+@mixin tunic-behave($type) {
+    @extend %tunic-behave-#{$type};
+}
+
+
+/// 
+/// Returns a media query based on the content of `$bp`.
+/// 
+/// @example
+/// \@include tunic-breakPoint(small) { ... }
+/// \@include tunic-breakPoint(max-width: small) { ... }
+/// 
+/// 
+
+@mixin tunic-breakpoint($bp) {
+    // Standard 
+    $item: map-get($tunic-breakpoints, $bp);
+    
+    @if $item {
+        $bp: $item;
+    }
+
+    @if $tunic-ie == true {
+        @content;
+    } 
+
+    @else {
+        @if type-of($bp) == 'number'{
+            @media (min-width: #{$bp})  { 
+                @content; 
+            }
+        }
+
+        @if type-of($bp) == 'list'{
+            $first:  nth($bp, 1);
+            $bp: nth($bp, 2);
+
+            $item: map-get($tunic-breakpoints, $bp);
+
+            @if $item {
+                $bp: $item;   
+            }
+
+
+            @if type-of($first) == 'string'{
+                @media (#{$first}: #{$bp}) { 
+                    @content; 
+                }
+            }
+            @elseif type-of($first) == 'number'{
+                @media (min-width: #{$first}) and (max-width: #{$bp}) { 
+                    @content; 
+                }
+            }
+            @else{
+                @warn 'tunic-breakpoint: wrong syntax';
+            }
+        }
+    }
+}
+
+
+//
+// Retina Breakpoint
+//
+//
+//
+
+@mixin tunic-retina($dpi:2) {
+    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
+        @content;
+    }
+}
+
+
+
+@mixin tunic-visibility() {
+    @each $key, $value in $tunic-breakpoints {
+        @include tunic-breakpoint($value) {
+            .show-#{$key} {
+                display: none !important;
+            }
+        }
+
+        @include tunic-breakpoint('max-width' $value) {
+            .hide-#{$key} {
+                display: none !important;
+            }
+        }
+    }
+}
+
+//
+// Dev tools.
+//
+// Things that won't make it into the live site, but are helpfull for debuging
+//
+//
+//
+
+%tunic-dev-outline {
+    box-shadow: inset 0 0 2rem map-fetch($tunic-color, 'red');
+}
+
+@mixin tunic-dev($type) {
+    @extend %tunic-dev-#{$type};
+}
+
+
+//
+// Browser Hacks
+//
+// Stuff that probably shouldn't exist
+//
+//
+//
+
+%tunic-hack-hardware {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+@mixin tunic-hack($type) {
+    @extend %tunic-hack-#{$type};
+}
+
+
+//
+// iOS
+//
+// Simple extends for iOS behavior
+//
+//
+//
+
+%tunic-ios-nohighlight {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+%tunic-ios-reset {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+%tunic-ios-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+@mixin tunic-ios($type) {
+    @extend %tunic-ios-#{$type};
+};
+
+@function tunic-power ($x, $n) {
+    $ret: 1;
+    @if $n == 0 {
+        @return $ret;
+    }
+    @if $n >= 0 {
+        @for $i from 1 through $n {
+            $ret: $ret * $x;
+        } 
+    } @else {
+        @for $i from $n to 0 {
+            $ret: $ret / $x;
+        }
+    }
+    
+    @return $ret;
+}
+
+
+@function tunic-fixed ($val, $places) {
+    $p: tunic-power(10, $places);
+    @return floor($val * $p) / $p;
+}

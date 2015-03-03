@@ -28,15 +28,12 @@
     "grunt-contrib-sass": "^0.7.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "~0.9.0",
-    "grunt-sassdoc": "^1.1.0",
+    "grunt-sassdoc": "^2.0.0",
     "jit-grunt": "^0.9.0",
-    "postcss": "^3.0.5"
+    "postcss": "^3.0.5",
+    "sassdoc-theme-tunic": "git://github.com/allanhortle/tunic-theme"
   },
   "scripts": {
     "doc": "sassdoc src docs -c .sassdocrc --no-prompt"
-  },
-  "dependencies": {
-    "tunic-theme": "git://github.com/allanhortle/tunic-theme"
   }
 }
-
