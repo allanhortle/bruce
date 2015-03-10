@@ -70,10 +70,10 @@
             margin-#{$direction}: #{$i}rem;
         }
 
-        .#{$direction}#{$name} {
-            @extend %position-relative; 
-            margin-#{$direction}: #{$i}rem;
-        }
+        // .#{$direction}#{$name} {
+        //     @extend %position-relative; 
+        //     margin-#{$direction}: #{$i}rem;
+        // }
     }
 
     .hug-#{$direction} {
