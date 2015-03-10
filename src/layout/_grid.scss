@@ -5,7 +5,6 @@
 /// @group structure
 /// 
 $tunic-grid-gutter:             baseUnit(1)    !default;
-@debug 'tunic grid';
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
@@ -39,7 +38,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
 
         // Alignment
-        &.#{$grid}-middle {
+        &.#{$grid}-middle { 
             & > [class*=#{$col}] {
                 vertical-align: middle;
             }

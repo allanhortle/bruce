@@ -7,9 +7,11 @@ $tunic-rems:                    true    !default;
 $tunic-baseSize:                16      !default;
 
 
-$tunic-color: (
-    red: #e65053
-);
+$tunic-colors: (
+    'hero': #e65053,
+    'dark': grey(20),
+    'alt': grey(90)
+) !default;
 
 $tunic-fontWeights: (
     bold: 600,

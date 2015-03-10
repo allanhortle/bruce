@@ -1,0 +1,13 @@
+
+
+/// Returns a color from
+/// 
+/// @group functions
+/// @param  {number} var (50)        The level of grey from 0 to 100
+/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
+/// @return {color}                  Sass HSLA that will be compiled to hex
+/// 
+
+@function color($name) {
+    @return map-fetch($tunic-colors, $name);
+}

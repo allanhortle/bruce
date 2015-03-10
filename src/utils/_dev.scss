@@ -8,7 +8,7 @@
 //
 
 %tunic-dev-outline {
-    box-shadow: inset 0 0 2rem map-fetch($tunic-color, 'red');
+    box-shadow: inset 0 0 2rem map-fetch($tunic-colors, 'red');
 }
 
 @mixin tunic-dev($type) {

@@ -58,6 +58,10 @@
             $name: '05';
         }
 
+        @if ($i == 1) {
+            $name: '';
+        }
+
         .margin-#{$direction}#{$name} {
             margin-#{$direction}: #{$i}rem;
         }

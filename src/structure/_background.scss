@@ -1,0 +1,11 @@
+
+///
+/// Simple background colors
+///
+///
+
+@each $name, $color in $tunic-colors {
+    .background-#{$name} {
+        background-color: $color;
+    }
+}

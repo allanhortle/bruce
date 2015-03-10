@@ -7,11 +7,9 @@ $tunic-rems:                    true    !default;
 $tunic-baseSize:                16      !default;
 
 
-$tunic-colors: (
-    'hero': #e65053,
-    'dark': grey(20),
-    'alt': grey(90)
-) !default;
+$tunic-color: (
+    red: #e65053
+);
 
 $tunic-fontWeights: (
     bold: 600,
@@ -26,14 +24,6 @@ $tunic-breakpoints:(
     medium: baseUnit(64),
     small:  baseUnit(48),
     tiny:   baseUnit(30)
-);
-
-
-$tunic-directionsList: (
-    top,
-    right,
-    bottom,
-    left
 );
 
 
@@ -152,12 +142,6 @@ Markup:
         }
     }
 
-    .Table-middle {
-        td {
-            vertical-align: middle;
-        }
-    }
-
 }
 
 
@@ -178,69 +162,12 @@ Markup:
 
 
 
-/// Returns a color from
-/// 
-/// @group functions
-/// @param  {number} var (50)        The level of grey from 0 to 100
-/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
-/// @return {color}                  Sass HSLA that will be compiled to hex
-/// 
-
-@function color($name) {
-    @return map-fetch($tunic-colors, $name);
-}
-
-
-/// 
-/// returns a map of the four property shorthand
-/// 
-/// @group functions
-/// @return  {map} 
-/// 
-@function fourProps($props...) {
-    $length: length($props);
-
-    $top:       nth($props, 1);
-    $right:     nth($props, 1);
-    $bottom:    nth($props, 1);
-    $left:      nth($props, 1);
-
-    @if ($length == 2) {
-        $right:     nth($props, 2);
-        $left:      nth($props, 2);
-    }
-
-    @if ($length == 3) {
-        $right:     nth($props, 2);
-        $bottom:    nth($props, 3);
-        $left:      nth($props, 2);
-    }
-
-    @if ($length == 4) {
-        $right:     nth($props, 2);
-        $bottom:    nth($props, 3);
-        $left:      nth($props, 4);
-    }
-
-
-    @return (
-        top: $top,     
-        right: $right,   
-        bottom: $bottom,  
-        left: $left  
-    );
-}
-
-
-
-/// 
-/// Returns a grey value from 0 - 100
-/// 
-/// @group functions
-/// @param  {number} var (50)        The level of grey from 0 to 100
-/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
-/// @return {color}                  Sass HSLA that will be compiled to hex
-/// 
+/**
+ * Returns a grey value from 0 - 100
+ * @param  {number} var (50)        The level of grey from 0 to 100
+ * @param  {number} $opacity (1)    The level of opacity from 0 to 1
+ * @return {color}                  Sass HSLA that will be compiled to hex
+ */
 
 @function grey($var:50, $opacity:1) {
     @return hsla(0, 0, $var, $opacity);
@@ -387,7 +314,6 @@ Markup:
 /**
  * Returns values from nested lists
  * @link    https://github.com/jlong
- * @group functions
  * @param   {map}
  * @param   {list}  Nested keys as a list    
  * @return  {value} 
@@ -472,11 +398,14 @@ Markup:
 }
 
 
-/// 
-/// The Grid
-/// 
-/// @group structure
-/// 
+//
+// Grid
+//
+// Uses the $sizes list to create percentage based helper classes
+//
+//
+//
+
 $tunic-grid-gutter:             baseUnit(1)    !default;
 
 @mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
@@ -494,7 +423,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
 
             margin-bottom: 1rem;
 
-            @include tunic-breakpoint(small) {
+            @include tunic-breakpoint($tunic-breakpoint--small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
@@ -511,7 +440,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
 
         // Alignment
-        &.#{$grid}-middle { 
+        &.#{$grid}-middle {
             & > [class*=#{$col}] {
                 vertical-align: middle;
             }
@@ -546,7 +475,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
     }
 
-    @include tunic-breakpoint(small) {
+    @include tunic-breakpoint($tunic-breakpoint--small) {
         @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;
@@ -555,7 +484,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
     }   
 }
 
-    
+
 //
 // Hidden
 //
@@ -712,7 +641,7 @@ time, mark, audio, video
     vertical-align: middle;
 }
 
-@mixin tunic-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
+@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner') {
     .#{$wrapper} {
         @extend %l-verticalAlign;
     }
@@ -745,18 +674,6 @@ time, mark, audio, video
             }
         }
         
-    }
-}
-
-
-///
-/// Simple background colors
-///
-///
-
-@each $name, $color in $tunic-colors {
-    .background-#{$name} {
-        background-color: $color;
     }
 }
 
@@ -837,20 +754,34 @@ Tunic.Structure
         margin: 0;
     }
 
-    @each $name in $tunic-directionsList {
-        .hug-#{$name} {
-            margin-#{$name}: 0;
-        }
+    .hug-top {
+        margin-top: 0;
     }
+
+    .hug-bottom {
+        margin-bottom: 0;
+    }
+
 }
 
 
-/// 
-/// Padding Tools
-/// @group structure
-/// 
-/// 
+/* 
+Padding Tools
 
+Frequent padding combinations
+
+* `.padding, .padding2` - collapses on small screens.
+* `.padding-hard`  - Won't collapse.
+* `.padding-mobile`  - Only appears on mobile.
+
+Markup:
+<div class="padding">Padding</div>
+<div class="padding2">Padding</div>
+<div class="padding-hard">Hard Padding</div>
+<div class="padding-mobile">Mobile Padding</div>
+
+Tunic.Structure
+*/
 
 @mixin tunic-structure-padding-all {
     @include tunic-structure-padding;
@@ -858,13 +789,9 @@ Tunic.Structure
     @include tunic-structure-padding-hard;
     @include tunic-structure-padding-mobile;
     @include tunic-structure-padding-row;
-    @include tunic-structure-flush;
 }
 
-/// 
-/// Base Padding
-/// @group structure
-/// 
+
 @mixin tunic-structure-padding {
     .padding {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -873,10 +800,6 @@ Tunic.Structure
     }  
 }
 
-/// 
-/// Double Padding
-/// @group structure
-/// 
 @mixin tunic-structure-padding2 {
     .padding2 {
         @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
@@ -885,20 +808,12 @@ Tunic.Structure
     }
 }
 
-/// 
-/// Hard Padding
-/// @group structure
-/// 
 @mixin tunic-structure-padding-hard {
     .padding-hard {
         padding: baseUnit(1);
     }
 }
 
-/// 
-/// Mobile Padding
-/// @group structure
-/// 
 @mixin tunic-structure-padding-mobile {
     .padding-mobile {
         padding: baseUnit(1);
@@ -909,33 +824,11 @@ Tunic.Structure
     }
 }
 
-/// 
-/// Row Padding
-/// @group structure
-/// 
 @mixin tunic-structure-padding-row {
     .padding-row {
         padding-top: baseUnit(2);
         padding-bottom: baseUnit(2);
     }
-}
-
-@mixin tunic-structure-flush {
-
-    .flush {
-        padding: 0;
-    }
-
-    .flush-right {
-        padding-right: 0;
-    }
-
-    // @each $name in $tunic-directionsList {
-    //     @debug $name;
-    //     .flush-#{$name} {
-    //         padding-#{$name}: 0;
-    //     }
-    // }
 }
 
 
@@ -955,93 +848,191 @@ Tunic.Structure
     @extend %tunic-position-verticalMiddle;
 }
 
-%position-relative {
-    position: relative;
-}
 
-/// 
-/// Returns 4 margin props
-/// @group structure
-/// @param  {top}               top margin
-/// @param  {right}             right margin
-/// @param  {bottom}            bottom margin
-/// @param  {left}              left margin
-/// 
+// /* 
+// Content
 
-@mixin margin($props...) {
-    $propMap: fourProps($props...);
-    margin-top: map-get($propMap, top);   
-    margin-right: map-get($propMap, right);
-    margin-bottom: map-get($propMap, bottom);
-    margin-left: map-get($propMap, left);
-}
+// Way too much of the layout rest on this wrapper.  
+// **!!! Refactor**
 
-/// 
-/// Returns 4 padding props
-/// @group structure
-/// @param  {top}               top padding
-/// @param  {right}             right padding
-/// @param  {bottom}            bottom padding
-/// @param  {left}              left padding
-/// 
+// Markup:
+// <div class="l-content" style="height:240px;"> Content</div>
 
-@mixin padding($props...) {
-    $propMap: fourProps($props...);
-    padding-top: map-get($propMap, top);   
-    padding-right: map-get($propMap, right);
-    padding-bottom: map-get($propMap, bottom);
-    padding-left: map-get($propMap, left);
-}
+// Styleguide 3.3.1
+// */
+
+// .l-content {
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     width: 100%;
+//     overflow: hidden;
+//     transition: transform t($TIME_regular);
+//     min-height: 100%;
+//     position: relative;
+//     margin-left: 0;
+//     // margin-right: 240px;
+//     // transform: translateX(240px);
+//     box-shadow: inset 0 48px 0 0 $COLOR_hero;
+
+//     @include tunic-breakpoint($bp-welter) {
+//         // width: auto;
+//         transition: transform t($TIME_regular);
+//         // margin-right: 240px;
+//     }
+// }
+
+// /* 
+// Fixed
+
+// Markup:
+// <div class="relative" style="height:256px;">
+//     <div class="frame">
+//         <div class="Well Well-dark fixed-right fixed-small">
+//             .fixed-right
+//         </div>
+//         <div class="fixed scroll">
+//             <img src="https://www.fillmurray.com/g/512/512" width="100%" />
+//         </div>
+//     </div>
+// </div>
+
+// Styleguide 3.3.1
+// */
 
 
-///
-/// CSS Styles
-/// 
+// .frame {
+//     @include tunic-flood();
+// }
 
-.hug {
-    @include margin(0);
-}
 
-.flush {
-    @include padding(0);    
-}
+// .fixed {
+//     @include tunic-breakpoint($bp-feather) {
+//         box-sizing: border-box;
+//         width: auto;
+//         height: 100%;
+//         overflow: auto;
+//         position: relative;
+//     };
+    
+// }
 
-@each $direction in ('top', 'right', 'bottom', 'left') {   
+// %fixed-direction {
+//     @include tunic-breakpoint($bp-feather) {
+//         height: 100%;
+//         box-sizing: border-box;
+//     }
+// }
 
-    @for $i from 0 through 3 {
-        $name: $i;
-        @if ($i == 0) {
-            $i: .5;
-            $name: '05';
-        }
+// .fixed-right {
+//     @extend %fixed-direction;
 
-        @if ($i == 1) {
-            $name: '';
-        }
+//     @include tunic-breakpoint($bp-feather) {
+//         float: right;
+//     }
+// }
 
-        .margin-#{$direction}#{$name} {
-            margin-#{$direction}: #{$i}rem;
-        }
+// .fixed-left {
+//     @extend %fixed-direction; 
+    
+//     @include tunic-breakpoint($bp-feather) {
+//         float: left;
+//     }
+// }
 
-        .padding-#{$direction}#{$name} {
-            margin-#{$direction}: #{$i}rem;
-        }
+// .fixed-small {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 20rem;
+//     }
+// }
 
-        .#{$direction}#{$name} {
-            @extend %position-relative; 
-            margin-#{$direction}: #{$i}rem;
-        }
-    }
+// .fixed-medium {
+//     @include tunic-breakpoint($bp-feather) {
+//         width: 30rem;
+//     }
+// }
 
-    .hug-#{$direction} {
-        margin-#{$direction}: 0;
-    }
 
-    .flush-#{$direction} {
-        padding-#{$direction}: 0;
-    }
 
-}
+// .scroll {
+//     @include tunic-ios(scroll);
+//     @include tunic-flood();
+//     overflow-y: auto;
+//     overflow-x: hidden;
+
+//     &.is-toolbar {
+//         top: 3rem;
+//     }
+// }
+
+
+
+
+// /* 
+// Floats
+
+// box model floats and widths and tools.  
+
+// * `.l-left`  
+// * `.l-right`
+// * `.overflow`
+
+// Markup:
+// <div class="overflow">
+//     <img class="l-left column" src="https://www.fillmurray.com/g/128/128"/>
+//     <img class="l-right column" src="https://www.fillmurray.com/g/128/128"/>
+//     <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis repudiandae incidunt consequuntur unde cumque, quaerat harum tenetur quidem at laudantium, dolores quas ea aliquam sequi amet! Nobis, nisi hic molestias.</div>
+// </div>
+
+// Styleguide 3.3.4
+// */
+
+// @include tunic-widths();
+// @include tunic-verticalAlign();
+
+// .l-left {
+//     float: left;
+// }
+
+// .l-right {
+//     float: right;
+// }
+
+// .l-block {
+//     display: block;
+// }
+
+// .overflow {
+//     overflow: hidden;
+// }
+
+// .relative {
+//     position: relative;
+// }
+
+// .flood {
+//     @include tunic-flood();
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //
@@ -1154,7 +1145,6 @@ Tunic.Structure
             font-family: $name;
             src: url("#{$path}.eot");
             src: url("#{$path}.eot?#iefix") format("embedded-opentype"),
-                 url("#{$path}.woff2") format("woff2"),
                  url("#{$path}.woff") format("woff"),
                  url("#{$path}.ttf") format("truetype"),
                  url("#{$path}.svg##{$name}") format("svg");
@@ -1256,14 +1246,15 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 }
 
 
-/// 
-/// Returns a media query based on the content of `$bp`.
-/// 
-/// @example
-/// \@include tunic-breakPoint(small) { ... }
-/// \@include tunic-breakPoint(max-width: small) { ... }
-/// 
-/// 
+/**
+ * Returns a media query based on the content of `$bp`.
+ * On several lines if you will
+ *
+ * @example
+ * $bp: number;             @media (max-width: number)
+ * $bp: string number;      @media (string: number)
+ * $bp: number number;      @media (min-width: number) and (max-width: number)
+ */
 
 @mixin tunic-breakpoint($bp) {
     // Standard 
@@ -1326,23 +1317,6 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 }
 
 
-
-@mixin tunic-visibility() {
-    @each $key, $value in $tunic-breakpoints {
-        @include tunic-breakpoint($value) {
-            .show-#{$key} {
-                display: none !important;
-            }
-        }
-
-        @include tunic-breakpoint('max-width' $value) {
-            .hide-#{$key} {
-                display: none !important;
-            }
-        }
-    }
-}
-
 //
 // Dev tools.
 //
@@ -1352,7 +1326,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 
 %tunic-dev-outline {
-    box-shadow: inset 0 0 2rem map-fetch($tunic-colors, 'red');
+    box-shadow: inset 0 0 2rem map-fetch($tunic-color, 'red');
 }
 
 @mixin tunic-dev($type) {
