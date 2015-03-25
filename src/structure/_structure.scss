@@ -67,7 +67,7 @@
         }
 
         .padding-#{$direction}#{$name} {
-            margin-#{$direction}: #{$i}rem;
+            padding-#{$direction}: #{$i}rem;
         }
 
         // .#{$direction}#{$name} {
