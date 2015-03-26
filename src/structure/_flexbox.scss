@@ -1,11 +1,21 @@
 
-.flex-container {
+.flex {
     display: flex;
-    align-items: center;
 }
 
-.flex-grow {
-    flex-grow: 1;
+.flex-column {
+    flex-flow: column;
+}
+
+
+@for $i from 1 through 5 {
+    $name: $i;
+    @if $i == 1 {
+        $name: '';
+    }  
+    .flex-grow#{$name} {
+        flex-grow: $i;
+    }      
 }
 
 
@@ -14,11 +24,26 @@
     height: 100%;
 }
 
-.FlexGrid_pane {
+.FlexGrid_col {
     flex-grow: 1;
     position: relative;
+    width: 100%;
+    transition: 320ms;
 }
+
+.FlexGrid_pane {
+    overflow: auto;
+}
+
+.FlexGrid-shrink {
+    flex-shrink: 2;
+}
+
 
 .h-100 {
     height: 100%;
+}
+
+.pane {
+    overflow: auto;
 }
