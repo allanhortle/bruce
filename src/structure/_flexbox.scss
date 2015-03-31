@@ -33,6 +33,8 @@
 
 .FlexGrid_pane {
     overflow: auto;
+    // box-shadow inset -1px 0 grey(80);
+    border-right: 1px solid grey(80);
 }
 
 .FlexGrid-shrink {
