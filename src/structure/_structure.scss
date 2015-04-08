@@ -49,53 +49,52 @@
     @include padding(0);    
 }
 
-@each $direction in ('top', 'right', 'bottom', 'left') {
+@mixin tunic-structure {
+    @each $direction in ('top', 'right', 'bottom', 'left') {
 
-    @for $i from 0 through 3 {
-        $name: $i;
-        @if ($i == 0) {
-            $i: .5;
-            $name: '05';
-        }
-
-        @if ($i == 1) {
-            $name: '';
-        }
-
-        @if ($direction == 'top') {
-            .padding#{$name} {
-                @include padding(#{$i}rem);
+        @for $i from 0 through 3 {
+            $name: $i;
+            @if ($i == 0) {
+                $i: .5;
+                $name: '05';
             }
 
-            .margin#{$name} {
-                @include margin(#{$i}rem);
+            @if ($i == 1) {
+                $name: '';
             }
+
+            @if ($direction == 'top') {
+                .padding#{$name} {
+                    @include padding(#{$i}rem);
+                }
+
+                .margin#{$name} {
+                    @include margin(#{$i}rem);
+                }
+            }
+
+            .margin-#{$direction}#{$name} {
+                margin-#{$direction}: #{$i}rem;
+            }
+
+            .padding-#{$direction}#{$name} {
+                padding-#{$direction}: #{$i}rem;
+            }
+
+
+
+            // .#{$direction}#{$name} {
+            //     @extend %position-relative; 
+            //     margin-#{$direction}: #{$i}rem;
+            // }
         }
 
-        .margin-#{$direction}#{$name} {
-            margin-#{$direction}: #{$i}rem;
+        .hug-#{$direction} {
+            margin-#{$direction}: 0;
         }
 
-        .padding-#{$direction}#{$name} {
-            padding-#{$direction}: #{$i}rem;
+        .flush-#{$direction} {
+            padding-#{$direction}: 0;
         }
-
-
-
-        // .#{$direction}#{$name} {
-        //     @extend %position-relative; 
-        //     margin-#{$direction}: #{$i}rem;
-        // }
-    }
-
-    .hug-#{$direction} {
-        margin-#{$direction}: 0;
-    }
-
-    .flush-#{$direction} {
-        padding-#{$direction}: 0;
-    }
-
-
-
+    }    
 }
