@@ -81,6 +81,10 @@
                 padding-#{$direction}: #{$i}rem;
             }
 
+            .position-#{$direction}#{$name} {
+                #{$direction}: #{$i}rem;
+            }
+
 
 
             // .#{$direction}#{$name} {

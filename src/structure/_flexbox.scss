@@ -4,7 +4,7 @@
 }
 
 .flex-column {
-    flex-flow: column;
+    flex-direction: column;
 }
 
 
@@ -14,6 +14,10 @@
         $name: '';
     }  
     .flex-grow#{$name} {
+        flex-grow: $i;
+    } 
+
+    .flex-shrink#{$name} {
         flex-grow: $i;
     }      
 }
@@ -33,7 +37,6 @@
 
 .FlexGrid_pane {
     overflow: auto;
-    // box-shadow inset -1px 0 grey(80);
     border-right: 1px solid grey(80);
 }
 
@@ -42,7 +45,7 @@
 }
 
 
-.h-100 {
+.h100 {
     height: 100%;
 }
 
