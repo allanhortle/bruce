@@ -1,0 +1,6 @@
+
+
+@function gutterWidth($cols, $colWidth) {
+    $gutterSpace: 100 - $cols * $colWidth;
+    @return $gutterSpace / ($cols - 1);
+}
