@@ -1,7 +1,7 @@
 {
   "name": "tunic",
   "title": "Tunic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SCSS Helpers",
   "repository": {
     "type": "git",
