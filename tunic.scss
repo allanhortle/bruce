@@ -8,18 +8,19 @@
 // Functions
 @import 'src/functions/baseUnit';
 @import 'src/functions/color';
+@import 'src/functions/fourProps';
+@import 'src/functions/get-zindex';
+@import 'src/functions/gridValues';
 @import 'src/functions/invert';
 @import 'src/functions/lists';
+@import 'src/functions/map-fetch';
 @import 'src/functions/pastel';
+@import 'src/functions/power';
 @import 'src/functions/remsToPixel';
 @import 'src/functions/repeatChar';
 @import 'src/functions/stripUnits';
 @import 'src/functions/time';
 @import 'src/functions/toPixel';
-@import 'src/functions/get-zindex';
-@import 'src/functions/map-fetch';
-@import 'src/functions/fourProps';
-@import 'src/functions/gridValues';
 
 // Components
 @import 'src/components/Input';

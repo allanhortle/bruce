@@ -1,0 +1,19 @@
+
+// 
+// power
+// 
+
+@function power($number, $exp) {
+    $value: 1;
+    @if $exp > 0 {
+        @for $i from 1 through $exp {
+            $value: $value * $number;
+        }
+    }
+    @else if $exp < 0 {
+        @for $i from 1 through -$exp {
+            $value: $value / $number;
+        }
+    }
+    @return $value;
+}
