@@ -1,11 +1,11 @@
 {
-  "name": "tunic",
-  "title": "Tunic",
+  "name": "bruce",
+  "title": "Bruce",
   "version": "0.0.3",
   "description": "SCSS Helpers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/allanhortle/tunic"
+    "url": "https://github.com/allanhortle/bruce"
   },
   "keywords": [
     "SCSS",
@@ -15,9 +15,9 @@
   "author": "Allan Hortle",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/allanhortle/tunic/issues"
+    "url": "https://github.com/allanhortle/bruce/issues"
   },
-  "homepage": "https://github.com/allanhortle/tunic",
+  "homepage": "https://github.com/allanhortle/bruce",
   "devDependencies": {
     "autoprefixer-core": "^4.0.1",
     "css-mqpacker": "^2.0.0",
