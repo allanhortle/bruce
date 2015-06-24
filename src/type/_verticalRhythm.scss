@@ -8,7 +8,7 @@
 //
 //
 
-@mixin tunic-verticalRhythm($size, $rhythm) {
+@mixin bruce-verticalRhythm($size, $rhythm) {
     $fontSize: nth($rhythm, 1);
     $lineHeight: nth($rhythm, 2);
     $scaling: nth($rhythm, 3);
@@ -20,12 +20,12 @@
         $topMultipier: 1;
     }
     
-    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
-    $line: $lineHeight / tunic-power($scaling, $power);
-    $lines: floor(tunic-power($scaling, $power));
+    $font-size: (($fontSize * bruce-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / bruce-power($scaling, $power);
+    $lines: floor(bruce-power($scaling, $power));
     
-    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
-    line-height: tunic-fixed($line * $lines, 1) + em;
-    margin-bottom: tunic-fixed($line, 1) + em;
-    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+    font-size: bruce-fixed(($fontSize * bruce-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: bruce-fixed($line * $lines, 1) + em;
+    margin-bottom: bruce-fixed($line, 1) + em;
+    margin-top: bruce-fixed($topMultipier * $line, 1) + em;
 }

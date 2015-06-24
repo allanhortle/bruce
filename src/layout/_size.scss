@@ -7,7 +7,7 @@
 //
 //
 
-@mixin tunic-size($w, $h:null) {
+@mixin bruce-size($w, $h:null) {
     @if $h != null {
         width: $w;
         height: $h;  

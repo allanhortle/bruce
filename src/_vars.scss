@@ -1,19 +1,19 @@
 
-$tunic-ie:                      false   !default;
+$bruce-ie:                      false   !default;
 
-$tunic-breakpoint--small:       21em    !default;
+$bruce-breakpoint--small:       21em    !default;
 
-$tunic-rems:                    true    !default;
-$tunic-baseSize:                16      !default;
+$bruce-rems:                    true    !default;
+$bruce-baseSize:                16      !default;
 
 
-$tunic-colors: (
+$bruce-colors: (
     'hero': #e65053,
     'dark': grey(20),
     'alt': grey(90)
 ) !default;
 
-$tunic-fontWeights: (
+$bruce-fontWeights: (
     bold: 600,
     regular: 400,
     light: 300,
@@ -21,7 +21,7 @@ $tunic-fontWeights: (
 );
 
 // Default Breakpoints
-$tunic-breakpoints:(
+$bruce-breakpoints:(
     large:  baseUnit(120),
     medium: baseUnit(64),
     small:  baseUnit(48),
@@ -29,7 +29,7 @@ $tunic-breakpoints:(
 );
 
 
-$tunic-directionsList: (
+$bruce-directionsList: (
     top,
     right,
     bottom,

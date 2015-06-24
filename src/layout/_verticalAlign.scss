@@ -18,7 +18,7 @@
     vertical-align: middle;
 }
 
-@mixin tunic-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
+@mixin bruce-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
     .#{$wrapper} {
         @extend %l-verticalAlign;
     }

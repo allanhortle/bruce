@@ -7,7 +7,7 @@
 //
 //
 
-%tunic-arrow {
+%bruce-arrow {
     display: block;
     content: '';
     width: 0;
@@ -15,8 +15,8 @@
     border: 1em solid transparent;
 }
 
-@mixin tunic-arrow($width, $direction, $color) {
-    @extend %tunic-arrow; 
+@mixin bruce-arrow($width, $direction, $color) {
+    @extend %bruce-arrow; 
     border-width: $width;
     border-#{$direction}-color: $color;
 }

@@ -1,21 +1,21 @@
-@import '../tunic';
+@import '../bruce';
 
 // // $size_list:(0,1,2,3,4,5,6);
-// // @include tunic-widths($size_list);
+// // @include bruce-widths($size_list);
 
-// // @include tunic-verticalAlign();
+// // @include bruce-verticalAlign();
 
 // .notselectable{
-// 	@include tunic-behave('notselectable');
+// 	@include bruce-behave('notselectable');
 // }
 
 // .button{
-// 	@include tunic-behave('button');
+// 	@include bruce-behave('button');
 // }
 
 // .elipsis{
-// 	@include tunic-ellipsis(20px);
+// 	@include bruce-ellipsis(20px);
 // }
 // .elipsis2{
-// 	@include tunic-ellipsis(36px);
+// 	@include bruce-ellipsis(36px);
 // }

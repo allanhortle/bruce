@@ -3,20 +3,20 @@
 /// Returns a media query based on the content of `$bp`.
 /// 
 /// @example
-/// \@include tunic-breakPoint(small) { ... }
-/// \@include tunic-breakPoint(max-width: small) { ... }
+/// \@include bruce-breakPoint(small) { ... }
+/// \@include bruce-breakPoint(max-width: small) { ... }
 /// 
 /// 
 
-@mixin tunic-breakpoint($bp) {
+@mixin bruce-breakpoint($bp) {
     // Standard 
-    $item: map-get($tunic-breakpoints, $bp);
+    $item: map-get($bruce-breakpoints, $bp);
     
     @if $item {
         $bp: $item;
     }
 
-    @if $tunic-ie == true {
+    @if $bruce-ie == true {
         @content;
     } 
 
@@ -31,7 +31,7 @@
             $first:  nth($bp, 1);
             $bp: nth($bp, 2);
 
-            $item: map-get($tunic-breakpoints, $bp);
+            $item: map-get($bruce-breakpoints, $bp);
 
             @if $item {
                 $bp: $item;   
@@ -49,7 +49,7 @@
                 }
             }
             @else{
-                @warn 'tunic-breakpoint: wrong syntax';
+                @warn 'bruce-breakpoint: wrong syntax';
             }
         }
     }
@@ -62,7 +62,7 @@
 //
 //
 
-@mixin tunic-retina($dpi:2) {
+@mixin bruce-retina($dpi:2) {
     @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
         @content;
     }
@@ -70,15 +70,15 @@
 
 
 
-@mixin tunic-visibility() {
-    @each $key, $value in $tunic-breakpoints {
-        @include tunic-breakpoint($value) {
+@mixin bruce-visibility() {
+    @each $key, $value in $bruce-breakpoints {
+        @include bruce-breakpoint($value) {
             .show-#{$key} {
                 display: none !important;
             }
         }
 
-        @include tunic-breakpoint('max-width' $value) {
+        @include bruce-breakpoint('max-width' $value) {
             .hide-#{$key} {
                 display: none !important;
             }

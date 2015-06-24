@@ -7,7 +7,7 @@
 //
 //
 
-@mixin tunic-opacity($val:.5, $color:'null') {
+@mixin bruce-opacity($val:.5, $color:'null') {
 
     @if $color == 'null'{
         $ie: $val * 100;

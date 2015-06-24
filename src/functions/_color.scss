@@ -9,5 +9,5 @@
 /// 
 
 @function color($name) {
-    @return map-fetch($tunic-colors, $name);
+    @return map-fetch($bruce-colors, $name);
 }

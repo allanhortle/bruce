@@ -49,7 +49,7 @@
     @include padding(0);    
 }
 
-@mixin tunic-structure {
+@mixin bruce-structure {
     @each $direction in ('top', 'right', 'bottom', 'left') {
 
         @for $i from 0 through 3 {

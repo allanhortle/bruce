@@ -2,11 +2,11 @@
 //
 // Font Weight
 //
-// Uses $tunic-fontWeightList to return font weights
+// Uses $bruce-fontWeightList to return font weights
 //
 //
 //
 
-@mixin tunic-fontWeight($name:'regular') {
-    font-weight: map-get($tunic-fontWeights, $name);
+@mixin bruce-fontWeight($name:'regular') {
+    font-weight: map-get($bruce-fontWeights, $name);
 }

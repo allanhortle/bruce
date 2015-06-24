@@ -6,22 +6,22 @@
 /// 
 
 
-@mixin tunic-structure-padding-all {
-    @include tunic-structure-padding;
-    @include tunic-structure-padding2;
-    @include tunic-structure-padding-hard;
-    @include tunic-structure-padding-mobile;
-    @include tunic-structure-padding-row;
-    @include tunic-structure-flush;
+@mixin bruce-structure-padding-all {
+    @include bruce-structure-padding;
+    @include bruce-structure-padding2;
+    @include bruce-structure-padding-hard;
+    @include bruce-structure-padding-mobile;
+    @include bruce-structure-padding-row;
+    @include bruce-structure-flush;
 }
 
 /// 
 /// Base Padding
 /// @group structure
 /// 
-@mixin tunic-structure-padding {
+@mixin bruce-structure-padding {
     .padding {
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: baseUnit(1);
         }
     }  
@@ -31,9 +31,9 @@
 /// Double Padding
 /// @group structure
 /// 
-@mixin tunic-structure-padding2 {
+@mixin bruce-structure-padding2 {
     .padding2 {
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: baseUnit(2);
         }
     }
@@ -43,7 +43,7 @@
 /// Hard Padding
 /// @group structure
 /// 
-@mixin tunic-structure-padding-hard {
+@mixin bruce-structure-padding-hard {
     .padding-hard {
         padding: baseUnit(1);
     }
@@ -53,11 +53,11 @@
 /// Mobile Padding
 /// @group structure
 /// 
-@mixin tunic-structure-padding-mobile {
+@mixin bruce-structure-padding-mobile {
     .padding-mobile {
         padding: baseUnit(1);
         
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: 0;
         }
     }
@@ -67,14 +67,14 @@
 /// Row Padding
 /// @group structure
 /// 
-@mixin tunic-structure-padding-row {
+@mixin bruce-structure-padding-row {
     .padding-row {
         padding-top: baseUnit(2);
         padding-bottom: baseUnit(2);
     }
 }
 
-@mixin tunic-structure-flush {
+@mixin bruce-structure-flush {
 
     .flush {
         padding: 0;
@@ -84,7 +84,7 @@
         padding-right: 0;
     }
 
-    // @each $name in $tunic-directionsList {
+    // @each $name in $bruce-directionsList {
     //     @debug $name;
     //     .flush-#{$name} {
     //         padding-#{$name}: 0;

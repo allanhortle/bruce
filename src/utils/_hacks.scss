@@ -7,12 +7,12 @@
 //
 //
 
-%tunic-hack-hardware {
+%bruce-hack-hardware {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
 }
 
-@mixin tunic-hack($type) {
-    @extend %tunic-hack-#{$type};
+@mixin bruce-hack($type) {
+    @extend %bruce-hack-#{$type};
 }

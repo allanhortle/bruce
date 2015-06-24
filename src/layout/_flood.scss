@@ -7,7 +7,7 @@
 //
 //
 
-%tunic-flood {
+%bruce-flood {
     position: absolute;
     top: 0;
     left: 0;
@@ -15,6 +15,6 @@
     right: 0;
 }
 
-@mixin tunic-flood() {
-    @extend %tunic-flood;
+@mixin bruce-flood() {
+    @extend %bruce-flood;
 }

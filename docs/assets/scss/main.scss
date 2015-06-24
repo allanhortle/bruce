@@ -1,9 +1,9 @@
 /**
  * Sass utils
  */
-@import 'vendors/tunic';
+@import 'vendors/bruce';
 
-@include tunic-reset;
+@include bruce-reset;
 
 @import 'utils/variables';
 @import 'utils/functions';

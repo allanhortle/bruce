@@ -5,12 +5,12 @@
  * 
  */
 
-%tunic-position-verticalMiddle {
+%bruce-position-verticalMiddle {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 
-@mixin tunic-position-verticalMiddle() {
-    @extend %tunic-position-verticalMiddle;
+@mixin bruce-position-verticalMiddle() {
+    @extend %bruce-position-verticalMiddle;
 }

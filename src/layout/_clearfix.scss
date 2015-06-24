@@ -7,7 +7,7 @@
 //
 //
 
-%tunic-clearfix {
+%bruce-clearfix {
     &:after {
         content: '';
         display: table;
@@ -15,6 +15,6 @@
     }
 }
 
-@mixin tunic-clearfix {
-    @extend %tunic-clearfix; 
+@mixin bruce-clearfix {
+    @extend %bruce-clearfix; 
 }

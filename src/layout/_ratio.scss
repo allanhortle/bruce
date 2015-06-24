@@ -1,12 +1,12 @@
 
 /* styleguide
 name:           Ratio
-category:       Tunic => Structure
+category:       bruce => Structure
 description:    
 ----
 */
 
-@mixin tunic-ratio($width, $height) {
+@mixin bruce-ratio($width, $height) {
     &:before {
         content: '';
         display: block;

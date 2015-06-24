@@ -7,7 +7,7 @@
 //
 //
 
-@mixin tunic-fontface($lists...) {
+@mixin bruce-fontface($lists...) {
     @each $name, $path, $font-weight, $font-style in $lists {
 
 

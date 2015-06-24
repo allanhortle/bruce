@@ -7,16 +7,16 @@
 //
 //
 
-%tunic-behave-notselectable {
+%bruce-behave-notselectable {
     -webkit-touch-callout: none;  
     user-select: none;
 }
 
-%tunic-behave-button {
-    @extend %tunic-behave-notselectable; 
+%bruce-behave-button {
+    @extend %bruce-behave-notselectable; 
     cursor: pointer;
 }
 
-@mixin tunic-behave($type) {
-    @extend %tunic-behave-#{$type};
+@mixin bruce-behave($type) {
+    @extend %bruce-behave-#{$type};
 }

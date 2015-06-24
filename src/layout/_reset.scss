@@ -9,7 +9,7 @@
 //
 //
 
-$tunic-reset-elements: 
+$bruce-reset-elements: 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,8 +25,8 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 !default;
 
-@mixin tunic-reset(
-    $elements: $tunic-reset-elements
+@mixin bruce-reset(
+    $elements: $bruce-reset-elements
 ) {
     #{$elements} {
         margin: 0;

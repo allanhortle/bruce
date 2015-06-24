@@ -6,7 +6,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 
 */
 
-@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
+@mixin bruce-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
     @if ($fromLeave == null){
         $fromLeave: $fromEnter;
     }

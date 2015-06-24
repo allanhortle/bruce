@@ -13,9 +13,9 @@ Markup:
 .Media-right        - Right aligned image.
 
 */
-@mixin tunic-component-media() {
+@mixin bruce-component-media() {
     .Media {
-        @extend %tunic-clearfix;
+        @extend %bruce-clearfix;
     }
 
     .Media_body {

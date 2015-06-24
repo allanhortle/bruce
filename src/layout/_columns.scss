@@ -7,7 +7,7 @@
 //
 //
 
-@mixin tunic-columns($spacing:4px, $color:transparent) {
+@mixin bruce-columns($spacing:4px, $color:transparent) {
     border-right: $spacing solid $color;
     border-left: $spacing solid $color;
 

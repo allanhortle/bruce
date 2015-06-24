@@ -1,5 +1,5 @@
 
-%tunic-Input {
+%bruce-Input {
     display: block;
     box-sizing: border-box;
     margin-bottom: 16px;
@@ -17,6 +17,6 @@
     
 }  
 
-@mixin tunic-Input() {
-    @extend %tunic-Input; 
+@mixin bruce-Input() {
+    @extend %bruce-Input; 
 }

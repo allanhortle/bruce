@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             for (var i = dir.length - 1; i >= 0; i--) {
                 ret.push({
                     expand: true, 
-                    src: ['tunic.scss'], 
+                    src: ['bruce.scss'], 
                     dest: dir[i]
                 });
             }
@@ -25,7 +25,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {
                 files: {
-                    'tunicOld.scss': [
+                    'bruceOld.scss': [
                         'src/_vars.scss',
                         'src/**/*.scss'
                     ]
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 files: {
-                    'tunic-theme/assets/css/main.css' : 'tunic-theme/scss/main.scss'
+                    'bruce-theme/assets/css/main.css' : 'bruce-theme/scss/main.scss'
                 }
             }
         },
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
                 ]
             },
             dist: {
-                src: 'tunic-theme/assets/css/*.css'
+                src: 'bruce-theme/assets/css/*.css'
             }
         },
 
@@ -65,7 +65,7 @@ module.exports = function (grunt) {
 
         watch: {
             sass: {
-                files: ['src/**/*.scss', 'node_modules/tunic-theme/assets/**/*'],
+                files: ['src/**/*.scss', 'node_modules/bruce-theme/assets/**/*'],
                 tasks: ['default']
             }
         },
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
                 options: {
                     dest: 'docs',
                     force: true,
-                    theme: 'tunic'
+                    theme: 'bruce'
                 }
             }
         }

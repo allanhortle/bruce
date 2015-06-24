@@ -8,8 +8,8 @@
 // 
 
 @function baseUnit($val) {
-    @if ($tunic-rems) {
+    @if ($bruce-rems) {
         @return $val + 0rem;
     }
-    @return ($val * $tunic-baseSize ) + 0px;
+    @return ($val * $bruce-baseSize ) + 0px;
 }

@@ -4,11 +4,11 @@
 /// 
 /// @group structure
 /// 
-$tunic-grid-gutter:             baseUnit(1)    !default;
+$bruce-grid-gutter:             baseUnit(1)    !default;
 
-@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
+@mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
-        $gutter: $tunic-grid-gutter;
+        $gutter: $bruce-grid-gutter;
         box-sizing: border-box;
         display: table;
         width: 100%;
@@ -21,7 +21,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
 
             margin-bottom: 1rem;
 
-            @include tunic-breakpoint(small) {
+            @include bruce-breakpoint(small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
@@ -73,7 +73,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
     }
 
-    @include tunic-breakpoint(small) {
+    @include bruce-breakpoint(small) {
         @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;

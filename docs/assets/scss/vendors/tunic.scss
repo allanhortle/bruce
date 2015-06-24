@@ -1,17 +1,17 @@
 
-$tunic-ie:                      false   !default;
+$bruce-ie:                      false   !default;
 
-$tunic-breakpoint--small:       21em    !default;
+$bruce-breakpoint--small:       21em    !default;
 
-$tunic-rems:                    true    !default;
-$tunic-baseSize:                16      !default;
+$bruce-rems:                    true    !default;
+$bruce-baseSize:                16      !default;
 
 
-$tunic-color: (
+$bruce-color: (
     red: #e65053
 );
 
-$tunic-fontWeights: (
+$bruce-fontWeights: (
     bold: 600,
     regular: 400,
     light: 300,
@@ -19,7 +19,7 @@ $tunic-fontWeights: (
 );
 
 // Default Breakpoints
-$tunic-breakpoints:(
+$bruce-breakpoints:(
     large:  baseUnit(120),
     medium: baseUnit(64),
     small:  baseUnit(48),
@@ -27,7 +27,7 @@ $tunic-breakpoints:(
 );
 
 
-%tunic-Input {
+%bruce-Input {
     display: block;
     box-sizing: border-box;
     margin-bottom: 16px;
@@ -45,8 +45,8 @@ $tunic-breakpoints:(
     
 }  
 
-@mixin tunic-Input() {
-    @extend %tunic-Input; 
+@mixin bruce-Input() {
+    @extend %bruce-Input; 
 }
 
 /* 
@@ -64,9 +64,9 @@ Markup:
 .Media-right        - Right aligned image.
 
 */
-@mixin tunic-component-media() {
+@mixin bruce-component-media() {
     .Media {
-        @extend %tunic-clearfix;
+        @extend %bruce-clearfix;
     }
 
     .Media_body {
@@ -92,7 +92,7 @@ Markup:
  * 
  */
 
-@mixin tunic-component-table() {
+@mixin bruce-component-table() {
 
     %Table-base {
         margin-bottom: 32px;
@@ -104,7 +104,7 @@ Markup:
 
         font-size: .9em;
 
-        @include tunic-breakpoint(tiny) {
+        @include bruce-breakpoint(tiny) {
             font-size: 1em;
         }
 
@@ -114,13 +114,13 @@ Markup:
             vertical-align: top;
             vertical-align: middle; 
 
-            @include tunic-breakpoint(tiny) {
+            @include bruce-breakpoint(tiny) {
                 padding: 8px;
             }
         }
 
         th {
-            @include tunic-behave(notselectable);
+            @include bruce-behave(notselectable);
             color: grey(60);
             font-weight: normal;
         }
@@ -154,10 +154,10 @@ Markup:
 // 
 
 @function baseUnit($val) {
-    @if ($tunic-rems) {
+    @if ($bruce-rems) {
         @return $val + 0rem;
     }
-    @return ($val * $tunic-baseSize ) + 0px;
+    @return ($val * $bruce-baseSize ) + 0px;
 }
 
 
@@ -220,10 +220,10 @@ Markup:
  * Multiply `$rem` by `baseSize`
  * @group Functions
  * @param  {rem} $rem The rem value   
- * @param  {px}  $baseSize ($tunic-baseSize)  The factor    
+ * @param  {px}  $baseSize ($bruce-baseSize)  The factor    
  * @return {px} 
  */
-@function remsToPixel($rem, $baseSize:$tunic-baseSize) {
+@function remsToPixel($rem, $baseSize:$bruce-baseSize) {
     @return toPixel(stripUnits($rem * $baseSize));
 }
     
@@ -283,10 +283,10 @@ Markup:
 // 
 // get-zindex($component);
 // 
-// Returns the position of `$component` in `$tunic-zindexList`
+// Returns the position of `$component` in `$bruce-zindexList`
 // 
 // Markup:
-// $tunic-zindexList:(
+// $bruce-zindexList:(
 //     Button,
 //     Widget,
 //     Link
@@ -300,7 +300,7 @@ Markup:
 // 
 
 @function get-zindex($component) {
-    $list: $tunic-zindexList;
+    $list: $bruce-zindexList;
     $zindex: index($list, $component);
     @if $zindex {
         @return $zindex;
@@ -342,7 +342,7 @@ Markup:
 //
 //
 
-%tunic-clearfix {
+%bruce-clearfix {
     &:after {
         content: '';
         display: table;
@@ -350,8 +350,8 @@ Markup:
     }
 }
 
-@mixin tunic-clearfix {
-    @extend %tunic-clearfix; 
+@mixin bruce-clearfix {
+    @extend %bruce-clearfix; 
 }
 
 
@@ -363,7 +363,7 @@ Markup:
 //
 //
 
-@mixin tunic-columns($spacing:4px, $color:transparent) {
+@mixin bruce-columns($spacing:4px, $color:transparent) {
     border-right: $spacing solid $color;
     border-left: $spacing solid $color;
 
@@ -385,7 +385,7 @@ Markup:
 //
 //
 
-%tunic-flood {
+%bruce-flood {
     position: absolute;
     top: 0;
     left: 0;
@@ -393,8 +393,8 @@ Markup:
     right: 0;
 }
 
-@mixin tunic-flood() {
-    @extend %tunic-flood;
+@mixin bruce-flood() {
+    @extend %bruce-flood;
 }
 
 
@@ -406,11 +406,11 @@ Markup:
 //
 //
 
-$tunic-grid-gutter:             baseUnit(1)    !default;
+$bruce-grid-gutter:             baseUnit(1)    !default;
 
-@mixin tunic-grid($grid:'Grid', $col:'Col-', $num:12) {
+@mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
-        $gutter: $tunic-grid-gutter;
+        $gutter: $bruce-grid-gutter;
         box-sizing: border-box;
         display: table;
         width: 100%;
@@ -423,7 +423,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
 
             margin-bottom: 1rem;
 
-            @include tunic-breakpoint($tunic-breakpoint--small) {
+            @include bruce-breakpoint($bruce-breakpoint--small) {
                 display: table-cell;
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
@@ -475,7 +475,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
         }
     }
 
-    @include tunic-breakpoint($tunic-breakpoint--small) {
+    @include bruce-breakpoint($bruce-breakpoint--small) {
         @for $i from 1 through $num {
             .#{$col}#{$i} {
                 width: (100% / $num) * $i;
@@ -493,7 +493,7 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
 //
 //
 
-%tunic-hide { 
+%bruce-hide { 
     position: absolute; 
     overflow: hidden; 
     clip: rect(0 0 0 0); 
@@ -501,19 +501,19 @@ $tunic-grid-gutter:             baseUnit(1)    !default;
     margin: -1px; padding: 0; border: 0; 
 }
 
-@mixin tunic-hide() {
-    @extend %tunic-hide; 
+@mixin bruce-hide() {
+    @extend %bruce-hide; 
 }
 
 
 /* styleguide
 name:           Ratio
-category:       Tunic => Structure
+category:       bruce => Structure
 description:    
 ----
 */
 
-@mixin tunic-ratio($width, $height) {
+@mixin bruce-ratio($width, $height) {
     &:before {
         content: '';
         display: block;
@@ -531,7 +531,7 @@ description:
 //
 //
 
-$tunic-reset-elements: 
+$bruce-reset-elements: 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -547,8 +547,8 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 !default;
 
-@mixin tunic-reset(
-    $elements: $tunic-reset-elements
+@mixin bruce-reset(
+    $elements: $bruce-reset-elements
 ) {
     #{$elements} {
         margin: 0;
@@ -610,7 +610,7 @@ time, mark, audio, video
 //
 //
 
-@mixin tunic-size($w, $h:null) {
+@mixin bruce-size($w, $h:null) {
     @if $h != null {
         width: $w;
         height: $h;  
@@ -641,7 +641,7 @@ time, mark, audio, video
     vertical-align: middle;
 }
 
-@mixin tunic-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner') {
+@mixin bruce-verticalAlign($wrapper:'l-verticalAlign', $inner:'l-verticalAlign_inner') {
     .#{$wrapper} {
         @extend %l-verticalAlign;
     }
@@ -660,7 +660,7 @@ time, mark, audio, video
 //
 //
 
-@mixin tunic-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
+@mixin bruce-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
     @for $i from first($sizes) through last($sizes) {
         .l-#{$i}0 { width: percentage($i)/10   !important; }
         @if $i != 10 {
@@ -697,59 +697,59 @@ Markup:
 <h2 class="hug-top">hug-top</h2>
 <h2 class="hug-bottom">hug-bottom</h2>
 
-Tunic.Structure
+bruce.Structure
 */
 
-@mixin tunic-structure-margin {
-    @include tunic-structure-column;
-    @include tunic-structure-column2;
-    @include tunic-structure-row;
-    @include tunic-structure-row2;
-    @include tunic-structure-push;
-    @include tunic-structure-push2;
-    @include tunic-structure-hug;
+@mixin bruce-structure-margin {
+    @include bruce-structure-column;
+    @include bruce-structure-column2;
+    @include bruce-structure-row;
+    @include bruce-structure-row2;
+    @include bruce-structure-push;
+    @include bruce-structure-push2;
+    @include bruce-structure-hug;
 }
 
-@mixin tunic-structure-column {
+@mixin bruce-structure-column {
     .column {
         margin-left: baseUnit(1);
         margin-right: baseUnit(1);
     }
 }
 
-@mixin tunic-structure-column2 {
+@mixin bruce-structure-column2 {
     .column2 {
         margin-left: baseUnit(2);
         margin-right: baseUnit(2);
     }
 }
 
-@mixin tunic-structure-row {
+@mixin bruce-structure-row {
     .row {
         margin-top: baseUnit(1);
         margin-bottom: baseUnit(1);
     }
 }
 
-@mixin tunic-structure-row2 {
+@mixin bruce-structure-row2 {
     .row2 {
         margin: baseUnit(2) 0;
     }
 }
 
-@mixin tunic-structure-push {
+@mixin bruce-structure-push {
     .push {
         margin-bottom: baseUnit(1);
     }
 }
 
-@mixin tunic-structure-push2 {
+@mixin bruce-structure-push2 {
     .push2 {
         margin-bottom: baseUnit(2);
     }
 }
 
-@mixin tunic-structure-hug {
+@mixin bruce-structure-hug {
     .hug {
         margin: 0;
     }
@@ -780,51 +780,51 @@ Markup:
 <div class="padding-hard">Hard Padding</div>
 <div class="padding-mobile">Mobile Padding</div>
 
-Tunic.Structure
+bruce.Structure
 */
 
-@mixin tunic-structure-padding-all {
-    @include tunic-structure-padding;
-    @include tunic-structure-padding2;
-    @include tunic-structure-padding-hard;
-    @include tunic-structure-padding-mobile;
-    @include tunic-structure-padding-row;
+@mixin bruce-structure-padding-all {
+    @include bruce-structure-padding;
+    @include bruce-structure-padding2;
+    @include bruce-structure-padding-hard;
+    @include bruce-structure-padding-mobile;
+    @include bruce-structure-padding-row;
 }
 
 
-@mixin tunic-structure-padding {
+@mixin bruce-structure-padding {
     .padding {
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: baseUnit(1);
         }
     }  
 }
 
-@mixin tunic-structure-padding2 {
+@mixin bruce-structure-padding2 {
     .padding2 {
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: baseUnit(2);
         }
     }
 }
 
-@mixin tunic-structure-padding-hard {
+@mixin bruce-structure-padding-hard {
     .padding-hard {
         padding: baseUnit(1);
     }
 }
 
-@mixin tunic-structure-padding-mobile {
+@mixin bruce-structure-padding-mobile {
     .padding-mobile {
         padding: baseUnit(1);
         
-        @include tunic-breakpoint(map-fetch($tunic-breakpoints, tiny)) {
+        @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: 0;
         }
     }
 }
 
-@mixin tunic-structure-padding-row {
+@mixin bruce-structure-padding-row {
     .padding-row {
         padding-top: baseUnit(2);
         padding-bottom: baseUnit(2);
@@ -838,14 +838,14 @@ Tunic.Structure
  * 
  */
 
-%tunic-position-verticalMiddle {
+%bruce-position-verticalMiddle {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 
-@mixin tunic-position-verticalMiddle() {
-    @extend %tunic-position-verticalMiddle;
+@mixin bruce-position-verticalMiddle() {
+    @extend %bruce-position-verticalMiddle;
 }
 
 
@@ -876,7 +876,7 @@ Tunic.Structure
 //     // transform: translateX(240px);
 //     box-shadow: inset 0 48px 0 0 $COLOR_hero;
 
-//     @include tunic-breakpoint($bp-welter) {
+//     @include bruce-breakpoint($bp-welter) {
 //         // width: auto;
 //         transition: transform t($TIME_regular);
 //         // margin-right: 240px;
@@ -903,12 +903,12 @@ Tunic.Structure
 
 
 // .frame {
-//     @include tunic-flood();
+//     @include bruce-flood();
 // }
 
 
 // .fixed {
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         box-sizing: border-box;
 //         width: auto;
 //         height: 100%;
@@ -919,7 +919,7 @@ Tunic.Structure
 // }
 
 // %fixed-direction {
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         height: 100%;
 //         box-sizing: border-box;
 //     }
@@ -928,7 +928,7 @@ Tunic.Structure
 // .fixed-right {
 //     @extend %fixed-direction;
 
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         float: right;
 //     }
 // }
@@ -936,19 +936,19 @@ Tunic.Structure
 // .fixed-left {
 //     @extend %fixed-direction; 
     
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         float: left;
 //     }
 // }
 
 // .fixed-small {
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         width: 20rem;
 //     }
 // }
 
 // .fixed-medium {
-//     @include tunic-breakpoint($bp-feather) {
+//     @include bruce-breakpoint($bp-feather) {
 //         width: 30rem;
 //     }
 // }
@@ -956,8 +956,8 @@ Tunic.Structure
 
 
 // .scroll {
-//     @include tunic-ios(scroll);
-//     @include tunic-flood();
+//     @include bruce-ios(scroll);
+//     @include bruce-flood();
 //     overflow-y: auto;
 //     overflow-x: hidden;
 
@@ -988,8 +988,8 @@ Tunic.Structure
 // Styleguide 3.3.4
 // */
 
-// @include tunic-widths();
-// @include tunic-verticalAlign();
+// @include bruce-widths();
+// @include bruce-verticalAlign();
 
 // .l-left {
 //     float: left;
@@ -1012,7 +1012,7 @@ Tunic.Structure
 // }
 
 // .flood {
-//     @include tunic-flood();
+//     @include bruce-flood();
 // }
 
 
@@ -1043,7 +1043,7 @@ Tunic.Structure
 //
 //
 
-%tunic-arrow {
+%bruce-arrow {
     display: block;
     content: '';
     width: 0;
@@ -1051,8 +1051,8 @@ Tunic.Structure
     border: 1em solid transparent;
 }
 
-@mixin tunic-arrow($width, $direction, $color) {
-    @extend %tunic-arrow; 
+@mixin bruce-arrow($width, $direction, $color) {
+    @extend %bruce-arrow; 
     border-width: $width;
     border-#{$direction}-color: $color;
 }
@@ -1066,7 +1066,7 @@ Tunic.Structure
 //
 //
 
-@mixin tunic-opacity($val:.5, $color:'null') {
+@mixin bruce-opacity($val:.5, $color:'null') {
 
     @if $color == 'null'{
         $ie: $val * 100;
@@ -1093,14 +1093,14 @@ Tunic.Structure
 //
 //
 
-%tunic-ellipsis {
+%bruce-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-@mixin tunic-ellipsis($cutoff:null) {
-    @extend %tunic-ellipsis;
+@mixin bruce-ellipsis($cutoff:null) {
+    @extend %bruce-ellipsis;
 
     @if $cutoff != null {
         padding-right: $cutoff;      
@@ -1111,13 +1111,13 @@ Tunic.Structure
 //
 // Font Weight
 //
-// Uses $tunic-fontWeightList to return font weights
+// Uses $bruce-fontWeightList to return font weights
 //
 //
 //
 
-@mixin tunic-fontWeight($name:'regular') {
-    font-weight: map-get($tunic-fontWeights, $name);
+@mixin bruce-fontWeight($name:'regular') {
+    font-weight: map-get($bruce-fontWeights, $name);
 }
 
 
@@ -1129,7 +1129,7 @@ Tunic.Structure
 //
 //
 
-@mixin tunic-fontface($lists...) {
+@mixin bruce-fontface($lists...) {
     @each $name, $path, $font-weight, $font-style in $lists {
 
 
@@ -1164,7 +1164,7 @@ Tunic.Structure
 //
 //
 
-@mixin tunic-verticalRhythm($size, $rhythm) {
+@mixin bruce-verticalRhythm($size, $rhythm) {
     $fontSize: nth($rhythm, 1);
     $lineHeight: nth($rhythm, 2);
     $scaling: nth($rhythm, 3);
@@ -1176,14 +1176,14 @@ Tunic.Structure
         $topMultipier: 1;
     }
     
-    $font-size: (($fontSize * tunic-power($scaling, $power)) / $fontSize)+em;
-    $line: $lineHeight / tunic-power($scaling, $power);
-    $lines: floor(tunic-power($scaling, $power));
+    $font-size: (($fontSize * bruce-power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / bruce-power($scaling, $power);
+    $lines: floor(bruce-power($scaling, $power));
     
-    font-size: tunic-fixed(($fontSize * tunic-power($scaling, $power)) / $fontSize, 1)+em;
-    line-height: tunic-fixed($line * $lines, 1) + em;
-    margin-bottom: tunic-fixed($line, 1) + em;
-    margin-top: tunic-fixed($topMultipier * $line, 1) + em;
+    font-size: bruce-fixed(($fontSize * bruce-power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: bruce-fixed($line * $lines, 1) + em;
+    margin-bottom: bruce-fixed($line, 1) + em;
+    margin-top: bruce-fixed($topMultipier * $line, 1) + em;
 }
 
 /* 
@@ -1194,7 +1194,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 
 */
 
-@mixin tunic-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
+@mixin bruce-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
     @if ($fromLeave == null){
         $fromLeave: $fromEnter;
     }
@@ -1231,18 +1231,18 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 //
 
-%tunic-behave-notselectable {
+%bruce-behave-notselectable {
     -webkit-touch-callout: none;  
     user-select: none;
 }
 
-%tunic-behave-button {
-    @extend %tunic-behave-notselectable; 
+%bruce-behave-button {
+    @extend %bruce-behave-notselectable; 
     cursor: pointer;
 }
 
-@mixin tunic-behave($type) {
-    @extend %tunic-behave-#{$type};
+@mixin bruce-behave($type) {
+    @extend %bruce-behave-#{$type};
 }
 
 
@@ -1256,15 +1256,15 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
  * $bp: number number;      @media (min-width: number) and (max-width: number)
  */
 
-@mixin tunic-breakpoint($bp) {
+@mixin bruce-breakpoint($bp) {
     // Standard 
-    $item: map-get($tunic-breakpoints, $bp);
+    $item: map-get($bruce-breakpoints, $bp);
     
     @if $item {
         $bp: $item;
     }
 
-    @if $tunic-ie == true {
+    @if $bruce-ie == true {
         @content;
     } 
 
@@ -1279,7 +1279,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
             $first:  nth($bp, 1);
             $bp: nth($bp, 2);
 
-            $item: map-get($tunic-breakpoints, $bp);
+            $item: map-get($bruce-breakpoints, $bp);
 
             @if $item {
                 $bp: $item;   
@@ -1297,7 +1297,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
                 }
             }
             @else{
-                @warn 'tunic-breakpoint: wrong syntax';
+                @warn 'bruce-breakpoint: wrong syntax';
             }
         }
     }
@@ -1310,7 +1310,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 //
 
-@mixin tunic-retina($dpi:2) {
+@mixin bruce-retina($dpi:2) {
     @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
         @content;
     }
@@ -1325,12 +1325,12 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 //
 
-%tunic-dev-outline {
-    box-shadow: inset 0 0 2rem map-fetch($tunic-color, 'red');
+%bruce-dev-outline {
+    box-shadow: inset 0 0 2rem map-fetch($bruce-color, 'red');
 }
 
-@mixin tunic-dev($type) {
-    @extend %tunic-dev-#{$type};
+@mixin bruce-dev($type) {
+    @extend %bruce-dev-#{$type};
 }
 
 
@@ -1342,14 +1342,14 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 //
 
-%tunic-hack-hardware {
+%bruce-hack-hardware {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
 }
 
-@mixin tunic-hack($type) {
-    @extend %tunic-hack-#{$type};
+@mixin bruce-hack($type) {
+    @extend %bruce-hack-#{$type};
 }
 
 
@@ -1361,24 +1361,24 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 //
 //
 
-%tunic-ios-nohighlight {
+%bruce-ios-nohighlight {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-%tunic-ios-reset {
+%bruce-ios-reset {
     -webkit-appearance: none;
     border-radius: 0;
 }
 
-%tunic-ios-scroll {
+%bruce-ios-scroll {
     -webkit-overflow-scrolling: touch;
 }
 
-@mixin tunic-ios($type) {
-    @extend %tunic-ios-#{$type};
+@mixin bruce-ios($type) {
+    @extend %bruce-ios-#{$type};
 };
 
-@function tunic-power ($x, $n) {
+@function bruce-power ($x, $n) {
     $ret: 1;
     @if $n == 0 {
         @return $ret;
@@ -1397,7 +1397,7 @@ Uses the React.addons.CSSTransitionGroup syntax to create simple single property
 }
 
 
-@function tunic-fixed ($val, $places) {
-    $p: tunic-power(10, $places);
+@function bruce-fixed ($val, $places) {
+    $p: bruce-power(10, $places);
     @return floor($val * $p) / $p;
 }

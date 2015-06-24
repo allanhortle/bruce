@@ -6,14 +6,14 @@
 //
 //
 
-%tunic-ellipsis {
+%bruce-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-@mixin tunic-ellipsis($cutoff:null) {
-    @extend %tunic-ellipsis;
+@mixin bruce-ellipsis($cutoff:null) {
+    @extend %bruce-ellipsis;
 
     @if $cutoff != null {
         padding-right: $cutoff;      

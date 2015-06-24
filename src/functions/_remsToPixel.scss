@@ -3,10 +3,10 @@
  * Multiply `$rem` by `baseSize`
  * @group Functions
  * @param  {rem} $rem The rem value   
- * @param  {px}  $baseSize ($tunic-baseSize)  The factor    
+ * @param  {px}  $baseSize ($bruce-baseSize)  The factor    
  * @return {px} 
  */
-@function remsToPixel($rem, $baseSize:$tunic-baseSize) {
+@function remsToPixel($rem, $baseSize:$bruce-baseSize) {
     @return toPixel(stripUnits($rem * $baseSize));
 }
     

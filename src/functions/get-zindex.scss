@@ -2,10 +2,10 @@
 // 
 // get-zindex($component);
 // 
-// Returns the position of `$component` in `$tunic-zindexList`
+// Returns the position of `$component` in `$bruce-zindexList`
 // 
 // Markup:
-// $tunic-zindexList:(
+// $bruce-zindexList:(
 //     Button,
 //     Widget,
 //     Link
@@ -19,7 +19,7 @@
 // 
 
 @function get-zindex($component) {
-    $list: $tunic-zindexList;
+    $list: $bruce-zindexList;
     $zindex: index($list, $component);
     @if $zindex {
         @return $zindex;

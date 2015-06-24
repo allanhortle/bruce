@@ -7,10 +7,10 @@
 //
 //
 
-%tunic-dev-outline {
-    box-shadow: inset 0 0 2rem map-fetch($tunic-colors, 'red');
+%bruce-dev-outline {
+    box-shadow: inset 0 0 2rem map-fetch($bruce-colors, 'red');
 }
 
-@mixin tunic-dev($type) {
-    @extend %tunic-dev-#{$type};
+@mixin bruce-dev($type) {
+    @extend %bruce-dev-#{$type};
 }

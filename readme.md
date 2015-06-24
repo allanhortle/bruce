@@ -1,14 +1,14 @@
-# Tunic
+# bruce
 
 A utility base for Sass. Nothing Schmancy.
 
 
 ## Getting Started
 
-Tunic is just a bunch of Sass helpers. To use it just import as you like, before your real sass. 
+bruce is just a bunch of Sass helpers. To use it just import as you like, before your real sass. 
 
 ```
-@import "tunic";
+@import "bruce";
 
 @import "myActuallySass";
 @import "otherSass";

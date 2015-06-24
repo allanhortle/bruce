@@ -1,4 +1,4 @@
-@function tunic-power ($x, $n) {
+@function bruce-power ($x, $n) {
     $ret: 1;
     @if $n == 0 {
         @return $ret;
@@ -17,7 +17,7 @@
 }
 
 
-@function tunic-fixed ($val, $places) {
-    $p: tunic-power(10, $places);
+@function bruce-fixed ($val, $places) {
+    $p: bruce-power(10, $places);
     @return floor($val * $p) / $p;
 }
