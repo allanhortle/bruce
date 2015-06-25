@@ -4,10 +4,9 @@
 //
 // Uses borders to create columns
 //
-//
-//
 
 @mixin bruce-columns($spacing:4px, $color:transparent) {
+    @warn '[deprecated]: bruce-columns';
     border-right: $spacing solid $color;
     border-left: $spacing solid $color;
 

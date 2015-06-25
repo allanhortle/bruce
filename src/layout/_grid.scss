@@ -4,11 +4,10 @@
 /// 
 /// @group structure
 /// 
-$bruce-grid-gutter:             baseUnit(1)    !default;
+$gutter: 1rem !default;
 
 @mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
-        $gutter: $bruce-grid-gutter;
         box-sizing: border-box;
         display: table;
         width: 100%;

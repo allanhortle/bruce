@@ -6,6 +6,13 @@
  * @return {number}
  */
 
-@function inverse($var) {
+@function invert($var) {
     @return $var * -1;
 }
+
+@function inverse($var) {
+    @warn '[deprecated]: inverse. Use `invert()` instead';
+    @return invert($var);
+}
+
+

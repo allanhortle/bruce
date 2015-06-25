@@ -14,5 +14,6 @@
 }
 
 @mixin bruce-hack($type) {
+    @warn '[deprecated]: bruce-hack. Let the browser optimise itself';
     @extend %bruce-hack-#{$type};
 }

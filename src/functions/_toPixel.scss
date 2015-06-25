@@ -6,5 +6,6 @@
  * @return {px} 
  */
 @function toPixel($var) {
+    @warn '[deprecated]: toPixel. Use a post css instead';
     @return $var + 0px;
 }

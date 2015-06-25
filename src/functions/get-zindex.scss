@@ -15,8 +15,6 @@
 //     z-index: get-zindex(Button);
 // }
 // 
-//
-// 
 
 @function get-zindex($component) {
     $list: $bruce-zindexList;

@@ -1,4 +1,5 @@
 @function bruce-power ($x, $n) {
+    @warn '[deprecated]: bruce-power. `power()`';
     $ret: 1;
     @if $n == 0 {
         @return $ret;
@@ -18,6 +19,7 @@
 
 
 @function bruce-fixed ($val, $places) {
+    @warn '[deprecated]: bruce-power. `fixed()`';
     $p: bruce-power(10, $places);
     @return floor($val * $p) / $p;
 }

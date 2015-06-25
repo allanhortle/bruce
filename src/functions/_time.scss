@@ -1,12 +1,5 @@
 
-// 
-// Time function
-// 
-// Returns $var + ms
-// 
-//
-// 
-
 @function t($var) {
+    @warn '[deprecated]: t. Just dont be lazy';
     @return #{$var}ms;
 }

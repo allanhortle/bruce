@@ -8,11 +8,10 @@
 //
 
 @mixin bruce-opacity($val:.5, $color:'null') {
-
+    @warn '[deprecated]: bruce-opacity. Use a post css instead';
     @if $color == 'null'{
         $ie: $val * 100;
         opacity: $val;
-
         filter: alpha(opacity=#{$ie});
     }
     @else {

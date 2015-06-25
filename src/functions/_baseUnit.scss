@@ -8,6 +8,7 @@
 // 
 
 @function baseUnit($val) {
+    @warn '[deprecated]: baseUnit. Use a post css instead';
     @if ($bruce-rems) {
         @return $val + 0rem;
     }

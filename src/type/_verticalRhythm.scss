@@ -20,12 +20,12 @@
         $topMultipier: 1;
     }
     
-    $font-size: (($fontSize * bruce-power($scaling, $power)) / $fontSize)+em;
-    $line: $lineHeight / bruce-power($scaling, $power);
-    $lines: floor(bruce-power($scaling, $power));
+    $font-size: (($fontSize * power($scaling, $power)) / $fontSize)+em;
+    $line: $lineHeight / power($scaling, $power);
+    $lines: floor(power($scaling, $power));
     
-    font-size: bruce-fixed(($fontSize * bruce-power($scaling, $power)) / $fontSize, 1)+em;
-    line-height: bruce-fixed($line * $lines, 1) + em;
-    margin-bottom: bruce-fixed($line, 1) + em;
-    margin-top: bruce-fixed($topMultipier * $line, 1) + em;
+    font-size: fixed(($fontSize * power($scaling, $power)) / $fontSize, 1)+em;
+    line-height: fixed($line * $lines, 1) + em;
+    margin-bottom: fixed($line, 1) + em;
+    margin-top: fixed($topMultipier * $line, 1) + em;
 }

@@ -12,5 +12,6 @@
 }
 
 @mixin bruce-position-verticalMiddle() {
+    @warn '[deprecated]: bruce-position-verticalMiddle';
     @extend %bruce-position-verticalMiddle;
 }

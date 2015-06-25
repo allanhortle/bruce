@@ -22,10 +22,10 @@ $bruce-fontWeights: (
 
 // Default Breakpoints
 $bruce-breakpoints:(
-    large:  baseUnit(120),
-    medium: baseUnit(64),
-    small:  baseUnit(48),
-    tiny:   baseUnit(30)
+    large:  120rem,
+    medium: 64rem,
+    small:  48rem,
+    tiny:   30rem
 );
 
 

@@ -14,7 +14,6 @@
 
 @mixin bruce-ellipsis($cutoff:null) {
     @extend %bruce-ellipsis;
-
     @if $cutoff != null {
         padding-right: $cutoff;      
     }   

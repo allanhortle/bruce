@@ -7,23 +7,23 @@
 //
 //
 
-%l-verticalAlign {
+%bruce-vertical-align {
     display: table;
     height: 100%;
     width: 100%;
 }
 
-%l-verticalAlign_inner {
+%bruce-vertical-align_inner {
     display: table-cell;
     vertical-align: middle;
 }
 
 @mixin bruce-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
     .#{$wrapper} {
-        @extend %l-verticalAlign;
+        @extend %bruce-vertical-align;
     }
 
     .#{$inner} {
-        @extend %l-verticalAlign_inner;
+        @extend %bruce-vertical-align_inner;
     }
 }
