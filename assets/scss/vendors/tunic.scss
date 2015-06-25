@@ -406,7 +406,7 @@ Markup:
 //
 //
 
-$bruce-grid-gutter:             baseUnit(1)    !default;
+$bruce-grid-gutter:             1rem    !default;
 
 @mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
     .#{$grid} {
@@ -712,40 +712,40 @@ bruce.Structure
 
 @mixin bruce-structure-column {
     .column {
-        margin-left: baseUnit(1);
-        margin-right: baseUnit(1);
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 }
 
 @mixin bruce-structure-column2 {
     .column2 {
-        margin-left: baseUnit(2);
-        margin-right: baseUnit(2);
+        margin-left: 2rem;
+        margin-right: 2rem;
     }
 }
 
 @mixin bruce-structure-row {
     .row {
-        margin-top: baseUnit(1);
-        margin-bottom: baseUnit(1);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 }
 
 @mixin bruce-structure-row2 {
     .row2 {
-        margin: baseUnit(2) 0;
+        margin: 2rem 0;
     }
 }
 
 @mixin bruce-structure-push {
     .push {
-        margin-bottom: baseUnit(1);
+        margin-bottom: 1rem;
     }
 }
 
 @mixin bruce-structure-push2 {
     .push2 {
-        margin-bottom: baseUnit(2);
+        margin-bottom: 2rem;
     }
 }
 
@@ -795,7 +795,7 @@ bruce.Structure
 @mixin bruce-structure-padding {
     .padding {
         @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
-            padding: baseUnit(1);
+            padding: 1rem;
         }
     }  
 }
@@ -803,20 +803,20 @@ bruce.Structure
 @mixin bruce-structure-padding2 {
     .padding2 {
         @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
-            padding: baseUnit(2);
+            padding: 2rem;
         }
     }
 }
 
 @mixin bruce-structure-padding-hard {
     .padding-hard {
-        padding: baseUnit(1);
+        padding: 1rem;
     }
 }
 
 @mixin bruce-structure-padding-mobile {
     .padding-mobile {
-        padding: baseUnit(1);
+        padding: 1rem;
         
         @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
             padding: 0;
@@ -826,8 +826,8 @@ bruce.Structure
 
 @mixin bruce-structure-padding-row {
     .padding-row {
-        padding-top: baseUnit(2);
-        padding-bottom: baseUnit(2);
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 }
 
