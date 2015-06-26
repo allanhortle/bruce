@@ -4,6 +4,6 @@
 // 
 
 @function fixed ($val, $places) {
-    $p: bruce-power(10, $places);
+    $p: power(10, $places);
     @return floor($val * $p) / $p;
 }

@@ -5,8 +5,6 @@
 // Calculates margins, font size and line height for h1 - h4
 // $baseFontSize, $lineHeight, $scaling
 //
-//
-//
 
 @mixin bruce-verticalRhythm($size, $rhythm) {
     $fontSize: nth($rhythm, 1);
