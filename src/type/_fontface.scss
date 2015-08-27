@@ -5,7 +5,7 @@
 // Chains all your font face declarations into one include.
 //
 
-@mixin bruce-fontface($lists...) {
+@mixin bruce-fontface($lists) {
     @each $name, $path, $font-weight, $font-style in $lists {
         @if ($font-weight == null) {
             $font-weight: normal;
