@@ -6,11 +6,15 @@ var data = require('./docs/data');
 var path = require('path');
 
 module.exports = {
+    devTool: 'eval',
     entry: './docs/docs.js',
     output: {
         filename: 'bundle.js',
         path: __dirname,
         libraryTarget: 'umd'
+    },
+    resolve: {
+        extensions: ["", ".js", ".jsx"]
     },
     module: {
         loaders: [

@@ -21,6 +21,7 @@
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
     "babel-loader": "^5.3.2",
+    "bd-stampy": "^0.3.16",
     "css-mqpacker": "^4.0.0",
     "csswring": "^4.0.0",
     "grunt": "^0.4.5",
