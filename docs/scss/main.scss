@@ -1,0 +1,19 @@
+@import '../../bruce.scss';
+
+@include bruce-reset;
+
+body {
+	font-family: 'Menlo', 'Inconsolata', monospaced;
+	font-size: 13px;
+}
+
+
+.wrapper {
+	width: 40rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@import '_type.scss';
+@import '_code.scss';
+@import '_DocItem.scss';

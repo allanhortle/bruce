@@ -15,6 +15,9 @@ function createElement(Component, props) {
 
 // Client render (optional)
 if (typeof document !== 'undefined') {
+
+    var Styles = require('./scss/main.scss');
+
     var history = createBrowserHistory();
     var initialProps = JSON.parse(document.getElementById('initial-props').innerHTML)
     ReactDOM.render(

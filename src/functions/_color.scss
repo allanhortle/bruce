@@ -4,8 +4,15 @@
 /// 
 /// @group functions
 /// @return {color}         uses `map-fetch()` to return the value of `$name` from `$bruce-colors` 
+/// @example
+/// .class {
+///		background-color: color('red');
+/// }
+/// @example
+/// .class {
+///		background-color: color('red');
+/// }
 /// 
-
 @function color($name) {
     @return map-fetch($bruce-colors, $name);
 }

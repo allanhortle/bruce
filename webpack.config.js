@@ -1,7 +1,7 @@
 // webpack.config.js
 var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin')
 var data = require('./docs/data');
-
+var webpack = require('webpack');
 
 var path = require('path');
 
@@ -19,12 +19,17 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, loader: 'babel-loader' },
-            { test: /\.json$/, loader: 'json-loader' }
+            { test: /\.json$/, loader: 'json-loader' },
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            }
 
         ]
     },
 
     plugins: [
-        new StaticSiteGeneratorPlugin('bundle.js', data.routes, data)
+        new StaticSiteGeneratorPlugin('bundle.js', data.routes, data),
+        new webpack.NoErrorsPlugin()
     ]
 }

@@ -5,7 +5,7 @@ import DocItem from './DocItem.jsx';
 var Index = React.createClass({
     render: function () {
         return (
-            <main>
+            <main className="wrapper">
                 {this.props.data.map((item, key) => <DocItem key={key} {...item}/>)}
             </main>
         )
