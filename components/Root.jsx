@@ -14,6 +14,7 @@ var Root = React.createClass({
             <html>
                 <head>
                     <title>{this.props.title}</title>
+                    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
                 </head>
                 <body>
                     <div id="app">
