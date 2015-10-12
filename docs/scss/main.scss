@@ -17,3 +17,20 @@ body {
 @import '_type.scss';
 @import '_code.scss';
 @import '_DocItem.scss';
+
+.Table {
+	width: 100%;
+	margin: 1rem 0;
+
+	td {
+		padding: .5rem;
+	}
+
+	tr {
+		border-top: 1px solid grey(80);
+
+		&:first-child {
+			border: none; 
+		}
+	}
+}

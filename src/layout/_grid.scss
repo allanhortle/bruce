@@ -3,7 +3,9 @@
 /// The Grid
 /// 
 /// @group structure
-/// 
+/// @todo make table/float/flex versions
+
+
 $gutter: 1rem !default;
 
 @mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {

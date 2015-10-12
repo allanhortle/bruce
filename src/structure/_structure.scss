@@ -63,6 +63,8 @@
                 $name: '';
             }
 
+
+            // Apply the all sided rule just once.
             @if ($direction == 'top') {
                 .padding#{$name} {
                     @include padding(#{$i}rem);

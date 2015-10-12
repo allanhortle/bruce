@@ -9,6 +9,7 @@ var DocItem = React.createClass({
             context: {name, code, type},
             description,
             example,
+            todo,
             group,
             parameter
         } = this.props;
@@ -19,6 +20,7 @@ var DocItem = React.createClass({
 
 
                 {example && example.map(data => <Example {...data}/>)}
+                {todo && todo.map(data => <div>Todo: {data}</div>)}
 
                 {this.renderParameters()}
             </div>
@@ -27,7 +29,7 @@ var DocItem = React.createClass({
     renderParameters() {
         var {parameter} = this.props;
         if (parameter) {
-            return <table>
+            return <table className="Table">
                 <tbody>{parameter.map(this.renderParameterRows)}</tbody>
             </table>;
         }

@@ -1,10 +1,6 @@
-
-/* styleguide
-name:           Ratio
-category:       bruce => Structure
-description:    
-----
-*/
+///
+/// Ratio
+/// 
 
 @mixin bruce-ratio($width, $height) {
     &:before {

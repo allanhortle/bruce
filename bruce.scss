@@ -3,10 +3,14 @@
 //
 // Base
 //
+
 @import 'src/vars';
 
+
+//
 // Functions
-@import 'src/functions/baseUnit';
+//
+
 @import 'src/functions/color';
 @import 'src/functions/fixed';
 @import 'src/functions/fourProps';
@@ -17,21 +21,15 @@
 @import 'src/functions/map-fetch';
 @import 'src/functions/pastel';
 @import 'src/functions/power';
-@import 'src/functions/remsToPixel';
 @import 'src/functions/repeatChar';
 @import 'src/functions/stripUnits';
-@import 'src/functions/time';
-@import 'src/functions/toPixel';
-
-// Components
-@import 'src/components/Input';
-@import 'src/components/Media';
-@import 'src/components/Table';
 
 
-// Layout
+//
+// Structure
+// 
+
 @import 'src/layout/clearfix';
-@import 'src/layout/columns';
 @import 'src/layout/flood';
 @import 'src/layout/float';
 @import 'src/layout/grid';
@@ -48,37 +46,48 @@
     @include bruce-widths;
 }
 
+@import 'src/structure/flexbox'; // This is just all kinds of broken;
+@import 'src/structure/structure'; //    | Merge these three. 
+@import 'src/structure/padding';   // <- | Find out what needs to be turfed	
+@import 'src/structure/margin';    //    | 
+@import 'src/utils/breakpoints';
 
+//
+// Typography
+//
 
-
-// Structure
-@import 'src/structure/structure';
-@import 'src/structure/flexbox';
-@import 'src/structure/padding';
-@import 'src/structure/margin';
-@import 'src/structure/position';
-
-// Style
-@import 'src/style/arrow';
-@import 'src/style/opacity';
-
-// Type
 @import 'src/type/ellipsis';
 @import 'src/type/fontface';
 @import 'src/type/fontWeight';
 @import 'src/type/verticalRhythm';
 
 
-// Utils
+//
+// Tidbits
+//
+
 @import 'src/utils/animations';
 @import 'src/utils/behaviours';
-@import 'src/utils/breakpoints';
-@import 'src/utils/hacks';
 @import 'src/utils/ios';
+
+
+//
+// Components
+//
+
+@import 'src/components/Input';
+@import 'src/components/Media';
+@import 'src/components/Table';
+@import 'src/style/arrow';
+
+
+// Deprecated
+@import 'src/structure/position';
+@import 'src/functions/baseUnit';
+@import 'src/utils/hacks';
+@import 'src/style/opacity';
 @import 'src/utils/maths';
-
-
-
-
-
-
+@import 'src/functions/remsToPixel';
+@import 'src/functions/time';
+@import 'src/functions/toPixel';
+@import 'src/layout/columns';
