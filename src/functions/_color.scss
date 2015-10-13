@@ -1,18 +1,18 @@
 
 ///
-/// Returns a color from
+/// Returns a color from `$bruce-colors`
 /// 
 /// @group functions
-/// @return {color}         uses `map-fetch()` to return the value of `$name` from `$bruce-colors` 
-/// @example
-/// .class {
-///		background-color: color('red');
-/// }
+/// @link http://github.com/allanhortle/bruce/src/functions/_color.scss
+/// @require {variable} bruce-colors
+/// @parameter {string} $name - uses `map-fetch()` to return the value of `$name` from `$bruce-colors` 
+/// @return {string}
 /// @example
 /// .class {
 ///		background-color: color('red');
 /// }
 /// 
+
 @function color($name) {
     @return map-fetch($bruce-colors, $name);
 }

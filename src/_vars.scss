@@ -7,6 +7,13 @@ $bruce-rems:                    true    !default;
 $bruce-baseSize:                16      !default;
 
 
+///
+/// Definition of color
+/// 
+/// @name bruce-colors
+/// @group variables
+/// 
+
 $bruce-colors: (
     'hero': #e65053,
     'dark': grey(20),
