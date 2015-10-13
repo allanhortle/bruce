@@ -26,11 +26,15 @@ body {
 		padding: .5rem;
 	}
 
-	tr {
-		border-top: 1px solid grey(80);
-
-		&:first-child {
-			border: none; 
+	tbody {
+		tr {
+			border-top: 1px solid grey(80);
 		}
+	}
+
+	th {
+		font-weight: 600;
+		text-align: left;
+		padding: .5rem;
 	}
 }

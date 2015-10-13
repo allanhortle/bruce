@@ -1,6 +1,7 @@
 // components/DocItem.jsx
 var React = require('react');
 import Example from './Example';
+import Usage from './Usage';
 
 var DocItem = React.createClass({
     render: function () {
@@ -17,6 +18,7 @@ var DocItem = React.createClass({
             <div id={name} className="DocItem">
                 <h2><a href={`/#${name}`}>{name} <em><small>{type}</small></em></a></h2>
                 <p>{description}</p>
+                <Usage {...this.props} />
 
 
                 {example && example.map(data => <Example {...data}/>)}
@@ -30,6 +32,11 @@ var DocItem = React.createClass({
         var {parameter} = this.props;
         if (parameter) {
             return <table className="Table">
+                <thead>
+                    <th className="w20">Params</th>
+                    <th className="w20">Type</th>
+                    <th className="">Description</th>
+                </thead>
                 <tbody>{parameter.map(this.renderParameterRows)}</tbody>
             </table>;
         }
