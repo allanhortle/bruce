@@ -2,6 +2,14 @@
 
 @include bruce-reset;
 
+$bruce-colors: (
+    'blue': #6CA6CE,
+    'green': #86C797,
+    'yellow': #E1AE69,
+    'orange': #E1865A,
+    'red': #C55B4E
+);
+
 body {
 	font-family: 'Menlo', 'Inconsolata', monospaced;
 	font-size: 13px;

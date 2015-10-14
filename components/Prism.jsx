@@ -93,7 +93,6 @@ var _ = {
   },
 
   tokenize: function(text, grammar, language) {
-    console.log(text,grammar, language);
     var Token = _.Token;
 
     var strarr = [text];
@@ -224,6 +223,7 @@ Token.reactify = function(o) {
 
 _.languages.css = {
   'comment': /\/\*[\w\W]*?\*\//g,
+  'variable': /\$[a-zA-Z0-9_-]+/g,
   'atrule': {
     pattern: /@[\w-]+?.*?(;|(?=\s*{))/gi,
     inside: {
@@ -236,7 +236,8 @@ _.languages.css = {
   'string': /("|')(\\?.)*?\1/g,
   'important': /\B!important\b/gi,
   'ignore': /&(lt|gt|amp);/gi,
-  'punctuation': /[\{\};:]/g
+  'punctuation': /[\{\};:]/g,
+  'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g
 };
 
 var Prism = React.createClass({
