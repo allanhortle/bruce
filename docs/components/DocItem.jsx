@@ -6,7 +6,6 @@ import Usage from './Usage';
 
 var DocItem = React.createClass({
     render: function () {
-        console.log(this.props);
         var {
             context: {name, code, type},
             description,
@@ -34,9 +33,11 @@ var DocItem = React.createClass({
         if (parameter) {
             return <table className="Table">
                 <thead>
-                    <th className="w20">Params</th>
-                    <th className="w20">Type</th>
-                    <th className="">Description</th>
+                    <tr>
+                        <th className="w20">Params</th>
+                        <th className="w20">Type</th>
+                        <th className="">Description</th>
+                    </tr>
                 </thead>
                 <tbody>{parameter.map(this.renderParameterRows)}</tbody>
             </table>;

@@ -21,6 +21,14 @@ a {
 
 .language-css {
 	.string {
-		color: #5D9BFF;
+		color: color('green');
+	}
+
+	.variable {
+		color: color('orange');
 	}
 }
+
+
+@debug 'RADICAL';
+
