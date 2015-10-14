@@ -1,5 +1,7 @@
 var React = require('react');
 
+import Prism from './Prism';
+
 module.exports = (props) => {
-    return <pre>{props.code}</pre>;
+    return <pre><Prism language="css">{props.code}</Prism></pre>;
 };

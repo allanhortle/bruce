@@ -1,4 +1,6 @@
 var React = require('react');
+import Prism from './Prism';
+
 
 function renderParams(parameter) {
 	if(!parameter) {
@@ -9,15 +11,18 @@ function renderParams(parameter) {
 
 module.exports = (props) => {
 	var {context: {type, name}, parameter,} = props;
-	console.log(type);
+	var code = '';
 	switch (type) {
 		case 'function':
-			return <pre>{`${name}(${renderParams(parameter)});`}</pre>;
+			code = `${name}(${renderParams(parameter)});`;
+			break;
 		case 'mixin':
-			return <pre>{`@include ${name}(${renderParams(parameter)});`}</pre>;
+			code = `@include ${name}(${renderParams(parameter)});`;
+			break;
 		case 'variable':
-			return <pre>{`$${name}: ;`}</pre>;
-		default:
-			return <span></span>;
+			code = `$${name}: ;`;
+			break;
 	}
+
+	return <pre><Prism language="css">{code}</Prism></pre>
 };
