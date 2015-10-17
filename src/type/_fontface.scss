@@ -1,9 +1,17 @@
 
-//
-// Font Face
-//
-// Chains all your font face declarations into one include.
-//
+///
+/// Chains all your font face declarations into one include.
+/// @group typography
+/// @param {list: $name, $path, $font-weight, $font-style} $lists
+/// @example
+///     @include bruce-fontface((
+///         ('ProximaNova'          'fonts/proxima-nova/proximanova-light'      100),
+///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regular'    300),
+///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regitalic'  300   italic),
+///         ('ProximaNova'          'fonts/proxima-nova/proximanova-bold'       600),
+///         ('Glyphicons'           'fonts/glyphicons-regular'),
+///         ('GlyphiconsHalflings'  'fonts/glyphicons-halflings-regular')
+///     ));
 
 @mixin bruce-fontface($lists) {
     @each $name, $path, $font-weight, $font-style in $lists {

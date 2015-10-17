@@ -41,10 +41,19 @@ a {
 }
 
 pre {
+	@include bruce-ios('scroll');
 	@extend %code;
+	overflow: auto;
 	padding: 1rem;
 	margin: 1rem 0;
 	tab-size: 4;
+
+	.type {
+		color: color('comment');
+		position: relative;
+	    top: -0.5rem;
+    	float: right;
+	}
 }
 
 .Markdown {

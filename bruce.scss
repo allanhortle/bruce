@@ -1,10 +1,10 @@
-@import 'src/functions/grey';
+@import 'src/functions/_grey';
 
 //
 // Base
 //
 
-@import 'src/vars';
+@import 'src/_vars';
 
 
 //
@@ -36,7 +36,7 @@
 @import 'src/structure/hide';
 @import 'src/structure/ratio';
 @import 'src/structure/reset';
-@import 'src/structure/size';
+@import 'src/structure/_size.scss';
 @import 'src/structure/verticalAlign';
 @import 'src/structure/widths';
 

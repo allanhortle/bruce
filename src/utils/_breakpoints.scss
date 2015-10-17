@@ -1,12 +1,28 @@
 
 /// 
 /// Returns a media query based on the content of `$bp`.
-/// 
+/// @group utils
+/// @param {string|value|list} $breakpoint
+/// @content
 /// @example
-///     @include bruce-breakPoint('small') { ... }
-///     @include bruce-breakPoint(max-width: small) { ... }
+///     .class {
+///         font-size: 1rem;
+///         
+///         @include bruce-breakpoint('small') {
+///             font-size: 2rem;
+///         }
+///     
+///         @include bruce-breakpoint(40em) {
+///             font-size: 3rem;
+///         }
+///     
+///         @include bruce-breakpoint(max-width: 40em) {
+///             font-size: 4rem;
+///         }
+///     
+///     }
 /// 
-/// 
+
 
 @mixin bruce-breakpoint($bp) {
     // Standard 

@@ -10,15 +10,14 @@ $bruce-baseSize:                16      !default;
 ///
 /// Definition of color
 /// 
-/// @name bruce-colors
 /// @group variables
-/// 
-
+/// @type list
 $bruce-colors: (
     'hero': #e65053,
     'dark': grey(20),
     'alt': grey(90)
 ) !default;
+
 
 $bruce-fontWeights: (
     bold: 600,
@@ -27,16 +26,26 @@ $bruce-fontWeights: (
     thin: 100
 );
 
-// Default Breakpoints
+///
+/// Default breakpoints
+/// 
+/// @group variables
+/// @type list
+///
 $bruce-breakpoints:(
-    large:  120rem,
-    medium: 64rem,
-    small:  48rem,
-    tiny:   30rem
+    'large':  120rem,
+    'medium': 64rem,
+    'small':  48rem,
+    'tiny':   30rem
 );
 
-
-$bruce-directionsList: (
+///
+/// Directions
+/// 
+/// @group variables
+/// @type list
+///
+$bruce-directions: (
     top,
     right,
     bottom,

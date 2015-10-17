@@ -1,9 +1,25 @@
 
 ///
-/// Widths
-///
-/// Uses the $sizes list to create percentage based helper classes
-///
+/// Uses the $sizes list to create a series of percentage based helper classes 
+/// at intervals of 5%. Defaults are from 0 to 100.
+/// @group structure
+/// @param {list} $sizes [(0 1 2 3 4 5 6 7 8 9 10)]
+/// @example scss
+///     @include bruce-widths(1 2);
+/// @example css
+///     .w10 {
+///       width: 10% !important;
+///     }
+///     .w15 {
+///       width: 15% !important;
+///     }
+///     .w20 {
+///       width: 20% !important;
+///     }
+///     .w25 {
+///       width: 25% !important;
+///     }
+
 
 @mixin bruce-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
     @for $i from first($sizes) through last($sizes) {

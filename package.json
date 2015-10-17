@@ -52,7 +52,6 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "doc": "sassdoc src docs -c .sassdocrc --no-prompt",
     "webpack": "webpack --progress --colors",
     "dev": "webpack-dev-server --progress --colors",
     "start": "npm run dev"

@@ -1,10 +1,4 @@
 
-/// 
-/// Padding Tools
-/// @group structure
-/// 
-/// 
-
 
 @mixin bruce-structure-padding-all {
     @include bruce-structure-padding;
@@ -15,10 +9,7 @@
     @include bruce-structure-flush;
 }
 
-/// 
-/// Base Padding
-/// @group structure
-/// 
+
 @mixin bruce-structure-padding {
     .padding {
         @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
@@ -27,10 +18,7 @@
     }  
 }
 
-/// 
-/// Double Padding
-/// @group structure
-/// 
+
 @mixin bruce-structure-padding2 {
     .padding2 {
         @include bruce-breakpoint(map-fetch($bruce-breakpoints, tiny)) {
@@ -39,20 +27,14 @@
     }
 }
 
-/// 
-/// Hard Padding
-/// @group structure
-/// 
+
 @mixin bruce-structure-padding-hard {
     .padding-hard {
         padding: 1rem;
     }
 }
 
-/// 
-/// Mobile Padding
-/// @group structure
-/// 
+
 @mixin bruce-structure-padding-mobile {
     .padding-mobile {
         padding: 1rem;
@@ -63,10 +45,6 @@
     }
 }
 
-/// 
-/// Row Padding
-/// @group structure
-/// 
 @mixin bruce-structure-padding-row {
     .padding-row {
         padding-top: 2rem;
@@ -84,7 +62,7 @@
         padding-right: 0;
     }
 
-    // @each $name in $bruce-directionsList {
+    // @each $name in $bruce-directions {
     //     @debug $name;
     //     .flush-#{$name} {
     //         padding-#{$name}: 0;

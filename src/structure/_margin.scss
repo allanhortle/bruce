@@ -75,7 +75,7 @@ bruce.Structure
         margin: 0;
     }
 
-    @each $name in $bruce-directionsList {
+    @each $name in $bruce-directions {
         .hug-#{$name} {
             margin-#{$name}: 0;
         }

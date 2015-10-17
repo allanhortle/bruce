@@ -1,22 +1,19 @@
 
-//
-// Arrow
-//
-// Trangle borders
-//
-//
-//
+///
+/// Uses borders to make triangles
+/// @group utils
+/// @output SHOW
+/// @param {value} $width 
+/// @param {string} $direction
+/// @param {color} $color
+///
 
-%bruce-arrow {
+@mixin bruce-arrow($width, $direction, $color) {
     display: block;
     content: '';
     width: 0;
     height: 0;
     border: 1em solid transparent;
-}
-
-@mixin bruce-arrow($width, $direction, $color) {
-    @extend %bruce-arrow; 
     border-width: $width;
     border-#{$direction}-color: $color;
 }

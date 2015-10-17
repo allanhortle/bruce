@@ -1,13 +1,4 @@
 
-///
-/// Reset
-///
-/// http://meyerweb.com/eric/tools/css/reset/ 
-/// v2.0 | 20110126
-/// License: none (public domain)
-///
-///
-///
 
 $bruce-reset-elements: 
 html, body, div, span, applet, object, iframe,
@@ -24,6 +15,16 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 !default;
+
+///
+/// The Meyer reset. Can take a custom list of elements for padding and margin removal.
+/// @group structure
+/// @link http://www.meyerweb.com/eric/tools/css/reset/ The Meyer reset
+/// @link http://www.meyerweb.com/eric/tools/css/reset/ The Meyer reset
+/// @param {list} $elements ['all elements']
+///
+///
+
 
 @mixin bruce-reset(
     $elements: $bruce-reset-elements

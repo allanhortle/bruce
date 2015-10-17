@@ -2,11 +2,11 @@ var React = require('react');
 import Prism from './Prism';
 
 module.exports = (props) => {
-	var {code, type, line: {start, end}} = props;
-	var codeString = props.code || '';
-	if(code && type === 'mixin' && end - start < 10) {
+	var {code, type, line: {start, end}} = props.context;
+	var codeString = props.context.code || '';
+	if(props.output === 'SHOW' && code && type === 'mixin' && end - start < 10) {
 		return <div>
-			<h3>Content</h3>
+			<h3>Output</h3>
 			<pre><Prism language="css">{codeString.replace('\n', '').replace(/^ {4}/gm, '') || ''}</Prism></pre>
 		</div>
 	}

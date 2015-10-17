@@ -1,10 +1,35 @@
-/* 
 
-Single Property Animation
-
-Uses the React.addons.CSSTransitionGroup syntax to create simple single property animations.
-
-*/
+///  
+/// Uses the React.addons.CSSTransitionGroup syntax 
+/// to create simple single property animations.
+/// @group utils
+/// @param {string} $name
+/// @param {string} $duration
+/// @param {string} $prop
+/// @param {string} $fromEnter
+/// @param {string} $toEnter
+/// @param {string} $fromLeave
+/// @param {string} $toLeave
+/// @example
+///    // scss
+///    @include bruce-singlePropAnimation('fade', 300ms, opacity, 0, 1);
+///    
+///    // css
+///    .fade-enter {
+///        opacity: 0;   
+///    }
+///    .fade-enter.fade-enter-active {
+///        transition: all 300ms;
+///        opacity: 1;
+///    }
+///    .fade-leave {
+///        transition: all 300ms;
+///        opacity: 1;
+///    }
+///    .fade-leave.fade-leave-active {
+///        opacity: 0;
+///    }
+///
 
 @mixin bruce-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
     @if ($fromLeave == null){

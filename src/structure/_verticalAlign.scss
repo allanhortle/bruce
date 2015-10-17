@@ -1,11 +1,5 @@
 
-///
-/// Vertical Align
-///
-/// Vertical Align tools
-///
-/// @todo add more types of vertial aligns
-///
+
 
 %bruce-vertical-align {
     display: table;
@@ -18,12 +12,21 @@
     vertical-align: middle;
 }
 
-@mixin bruce-verticalAlign($wrapper:'VerticalAlign', $inner:'VerticalAlign_inner') {
-    .#{$wrapper} {
+
+///
+/// Table based vertical align
+/// @group structure
+/// @param {string} $wrapperClass
+/// @param {string} $innerClass
+/// @todo add more types of vertial aligns
+///
+
+@mixin bruce-verticalAlign($wrapperClass:'VerticalAlign', $innerClass:'VerticalAlign_inner') {
+    .#{$wrapperClass} {
         @extend %bruce-vertical-align;
     }
 
-    .#{$inner} {
+    .#{$innerClass} {
         @extend %bruce-vertical-align_inner;
     }
 }

@@ -5,10 +5,7 @@
 /// 
 /// Returns 4 margin props
 /// @group structure
-/// @param  {top}               top margin
-/// @param  {right}             right margin
-/// @param  {bottom}            bottom margin
-/// @param  {left}              left margin
+/// @param {list} $props
 /// 
 
 @mixin margin($props) {
@@ -22,14 +19,11 @@
 /// 
 /// Returns 4 padding props
 /// @group structure
-/// @param  {top}               top padding
-/// @param  {right}             right padding
-/// @param  {bottom}            bottom padding
-/// @param  {left}              left padding
+/// @param {list} $props
 /// 
 
-@mixin padding($props...) {
-    $propMap: fourProps($props...);
+@mixin padding($props) {
+    $propMap: fourProps($props);
     padding-top: map-get($propMap, top);   
     padding-right: map-get($propMap, right);
     padding-bottom: map-get($propMap, bottom);

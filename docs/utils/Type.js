@@ -2,7 +2,8 @@ function render(props) {
 	var {name, type, parameter} = props;
 	var returns = (props.return) ? props.return.type : '';
 	var code = '';
-	switch (type) {
+	var contextType = (props.context) ? props.context.type : type;
+	switch (contextType) {
 		case 'function':
 			code = `${name}(${renderParams(parameter)})${renderReturns(returns)}`;
 			break;
@@ -10,8 +11,9 @@ function render(props) {
 			code = `@include ${name}(${renderParams(parameter)});`;
 			break;
 		case 'variable':
-			code = `$${name};`;
+			code = `$${name}: <${type}>`;
 			break;
+
 	}
 
 	return code;

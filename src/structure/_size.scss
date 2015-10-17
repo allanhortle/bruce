@@ -1,19 +1,23 @@
-
-//
-// Flood
-//
-// One declaration for width and height 
-//
-//
-//
-
-@mixin bruce-size($w, $h:null) {
-    @if $h != null {
-        width: $w;
-        height: $h;  
+///
+/// One declaration for width and height 
+///
+/// @group structure
+/// @param {value} $width
+/// @param {value} $height [null]
+/// @example 
+///		.code {
+/// 		@include size(20px);
+///			// width: 20px;
+///			// height: 20px;
+/// 	}
+///
+@mixin bruce-size($width, $height:null) {
+    @if $height != null {
+        width: $width;
+        height: $height;  
     } 
     @else {
-        width: $w;
-        height: $w;
+        width: $width;
+        height: $width;
     }
 }
