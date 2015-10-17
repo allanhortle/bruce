@@ -6,7 +6,7 @@ export default (props) => {
 	var {context: {type, name}, parameter} = props;
 	return (
 		<pre>
-			<Prism language="css">{Type({...props, name, type, parameter})}</Prism>
+			<Prism language="css">{Type({...props, name, parameter})}</Prism>
 		</pre>
 	);
 };

@@ -228,6 +228,7 @@ _.languages.css = {
   'comment': /\/\/.*/g,
   'function': /[a-zA-Z0-9_-][\w-]*(?=\()/,
   'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g,
+  'type-annotation': /(?:<)([\w\|\$, -:]*)(?:>)/g,
   'variable': /\$[a-zA-Z0-9_-]+/g,
   'atrule': /@[\w-]*/g,
   'url': /url\((["']?).*?\1\)/gi,
@@ -238,8 +239,7 @@ _.languages.css = {
   'string': /("|')(\\?.)*?\1/g,
   'important': /\B!important\b/gi,
   'ignore': /&(lt|gt|amp);/gi,
-  'punctuation': /[\{\};:]/g,
-  'type-annotation': /(?:<)(\w*)(?:>)/
+  'punctuation': /[\{\};:]/g
 };
 
 var Prism = React.createClass({
