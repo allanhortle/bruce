@@ -1,7 +1,10 @@
 // components/DocItem.jsx
-var React = require('react');
+import React from 'react';
 import Example from './Example';
 import Usage from './Usage';
+import Segment from './Segment';
+import Require from './Require';
+import Markdown from './Markdown';
 
 
 var DocItem = React.createClass({
@@ -16,39 +19,16 @@ var DocItem = React.createClass({
         } = this.props;
         return (
             <div id={name} className="DocItem">
-                <h2><a href={`/#${name}`}>{name} <em><small>{type}</small></em></a></h2>
-                <p>{description}</p>
+                <h2 className="DocItem_heading"><a href={`/#${name}`}>{name} <em><small>{type}</small></em></a></h2>
+                <Markdown data={description}/>
                 <Usage {...this.props} />
 
+                <Segment title="Examples" data={example}><Example /></Segment>
+                <Segment title="Uses" data={this.props.require}><Require /></Segment>
+                {todo && todo.map((data, key) => <div key={key}>Todo: {data}</div>)}
 
-                {example && example.map(data => <Example {...data}/>)}
-                {todo && todo.map(data => <div>Todo: {data}</div>)}
-
-                {this.renderParameters()}
             </div>
         )
-    },
-    renderParameters() {
-        var {parameter} = this.props;
-        if (parameter) {
-            return <table className="Table">
-                <thead>
-                    <tr>
-                        <th className="w20">Params</th>
-                        <th className="w20">Type</th>
-                        <th className="">Description</th>
-                    </tr>
-                </thead>
-                <tbody>{parameter.map(this.renderParameterRows)}</tbody>
-            </table>;
-        }
-    },
-    renderParameterRows(row, key) {
-        return <tr key={key}>
-            <td>{row.name}</td>
-            <td>{row.type}</td>
-            <td>{row.description}</td>
-        </tr>
     }
 })
 

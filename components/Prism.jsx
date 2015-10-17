@@ -200,14 +200,14 @@ var Token = _.Token = function(type, content) {
   this.content = content;
 };
 
-Token.reactify = function(o) {
+Token.reactify = function(o, key) {
   if (typeof o == 'string') {
     return o;
   }
 
   if (Array.isArray(o)) {
-    return o.map(function(element) {
-      return Token.reactify(element);
+    return o.map(function(element, key) {
+      return Token.reactify(element, key);
     });
   }
 
@@ -218,26 +218,26 @@ Token.reactify = function(o) {
     attributes.spellcheck = true;
   }
 
+  attributes.key = key;
+
   return React.DOM.span(attributes, Token.reactify(o.content));
 };
 
 _.languages.css = {
   'comment': /\/\*[\w\W]*?\*\//g,
+  'function': /[a-zA-Z0-9_-][\w-]*(?=\()/,
   'variable': /\$[a-zA-Z0-9_-]+/g,
-  'atrule': {
-    pattern: /@[\w-]+?.*?(;|(?=\s*{))/gi,
-    inside: {
-      'punctuation': /[;:]/g
-    }
-  },
+  'atrule': /@[\w-]*/g,
   'url': /url\((["']?).*?\1\)/gi,
-  'selector': /[^\{\}\s][^\{\};]*(?=\s*\{)/g,
+  // 'selector': /[^()@\{\}\s][^\{\};]*(?=\s*\{)/g,
+  'selector': /^([\.#&%])(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)\s?/g,
   'property': /(\b|\B)[\w-]+(?=\s*:)/ig,
   'string': /("|')(\\?.)*?\1/g,
   'important': /\B!important\b/gi,
   'ignore': /&(lt|gt|amp);/gi,
   'punctuation': /[\{\};:]/g,
-  'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g
+  'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g,
+  'type-annotation': /(?:<)(\w*)(?:>)/
 };
 
 var Prism = React.createClass({

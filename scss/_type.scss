@@ -1,16 +1,27 @@
 
 
 h1 {
-	font-size: 2em;
+	font-size: 4em;
+	margin-bottom: 1em;
 }
 
 h2 {
 	font-size: 2em;
-	margin: 1rem 0;
+	margin-bottom: 1rem ;
+	padding-top: 1rem ;
+}
+
+h3 {
+	font-size: 1.2em;
+	margin: 2em 0 1em 0;
 }
 
 small {
 	font-size: .6em;
+}
+
+strong {
+	font-weight: bold;
 }
 
 a {
@@ -18,17 +29,49 @@ a {
 	text-decoration: none;
 }
 
-
-.language-css {
-	.string {
-		color: color('green');
+.Link {
+	color: color('blue');
+	&:hover {
+		text-decoration: underline;
 	}
+}
 
-	.variable {
-		color: color('orange');
+%code {
+	background-color: grey(20);
+	color: grey(90);
+}
+
+pre {
+	@extend %code;
+	padding: 1rem;
+	margin: 1rem 0;
+	tab-size: 4;
+}
+
+.Markdown {
+	code {
+		// @extend %code;
+		background-color: grey(86);
+		padding: .125rem .25rem;
+    	border-radius: 3px;
+	}
+}
+
+@mixin syntax($name, $color) {
+	.#{$name} {
+		color: color($color);
 	}
 }
 
 
-@debug 'RADICAL';
+.language-css {
+	@include syntax('string', 			'green');
+	@include syntax('variable',			'orange');
+	@include syntax('selector',			'yellow');
+	@include syntax('property',			'red');
+	@include syntax('atrule',			'red');
+	@include syntax('function',			'red');
+	@include syntax('type-annotation',	'blue');
+	// @include syntax('punctuation',		'white');
+}
 
