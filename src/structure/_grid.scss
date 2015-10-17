@@ -1,14 +1,14 @@
-
-/// 
-/// The Grid
-/// 
+///
+/// Table grid
+///
 /// @group structure
+/// @param {string} $grid
 /// @todo make table/float/flex versions
-
-
-$gutter: 1rem !default;
+///
 
 @mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
+    $gutter: 1rem !default;
+
     .#{$grid} {
         box-sizing: border-box;
         display: table;

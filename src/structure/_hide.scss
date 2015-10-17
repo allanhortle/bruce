@@ -1,20 +1,13 @@
-    
-//
-// Hidden
-//
-// Uses positioing to hide but not remove
-//
-//
-//
 
-%bruce-hide { 
+///
+/// Uses positioing to hide but not remove
+/// @group structure
+///
+
+@mixin bruce-hide() {
     position: absolute; 
     overflow: hidden; 
     clip: rect(0 0 0 0); 
     height: 1px; width: 1px; 
     margin: -1px; padding: 0; border: 0; 
-}
-
-@mixin bruce-hide() {
-    @extend %bruce-hide; 
 }

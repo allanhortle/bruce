@@ -215,7 +215,7 @@ Token.reactify = function(o, key) {
     className: 'token ' + o.type
   }
   if (o.type == 'comment') {
-    attributes.spellcheck = true;
+    attributes.spellCheck = true;
   }
 
   attributes.key = key;

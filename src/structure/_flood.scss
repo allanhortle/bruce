@@ -1,20 +1,13 @@
 
-//
-// Flood
-//
-// Absolutley position an element as far as it's containing elements bounds
-//
-//
-//
+///
+/// Absolutely position an element to it's containing bounds.
+///
+/// @group structure
 
-%bruce-flood {
+@mixin bruce-flood() {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-}
-
-@mixin bruce-flood() {
-    @extend %bruce-flood;
 }

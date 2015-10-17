@@ -1,5 +1,8 @@
 ///
-/// Ratio
+/// Uses `:before` to create a fixed ratio for the element
+/// @group structure
+/// @param {number} $width 
+/// @param {number} $height 
 /// 
 
 @mixin bruce-ratio($width, $height) {

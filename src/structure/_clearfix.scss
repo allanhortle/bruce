@@ -1,16 +1,14 @@
 
-//
-// Clearfix
-//
+///
+/// `:after` pseudo element clearfix 
+///
+/// @group structure
+///
 
-%bruce-clearfix {
+@mixin bruce-clearfix {
     &:after {
         content: '';
         display: table;
         clear: both;
     }
-}
-
-@mixin bruce-clearfix {
-    @extend %bruce-clearfix; 
 }
