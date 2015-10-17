@@ -1,32 +1,7 @@
 
-
 /// 
 /// Returns a grey value from 0 - 100
 /// 
-/// @group functions
-/// @param  {number} var (50)        The level of grey from 0 to 100
-/// @param  {number} $opacity (1)    The level of opacity from 0 to 1
-/// @return {color}                  Sass HSLA that will be compiled to hex
-/// 
-
 @function grey($var:50, $opacity:1) {
     @return hsla(0, 0, $var, $opacity);
 }
-
-
-
-
-
-// @access	Access of the documented item	—
-// @alias	Whether the documented item is an alias of another item	—
-// @example	Example for the documented item	—
-// @group	Group the documented item belongs to	—
-// @link	Link related to the documented item	@source
-// @name	Name of the documented item	—
-// @output	Output from the documented mixin	—
-// @parameter	Parameters from the documented mixin or function	@param, @arg, @argument
-// @property	Property of the documented map	@prop
-// @require	Requirements from the documented item	@requires
-// @return	Return from the documented function	@returns
-// @todo	Things to do related to the documented item	—
-// @type	Describes the type of a variable	—

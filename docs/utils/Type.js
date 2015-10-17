@@ -28,7 +28,7 @@ function renderParams(parameter) {
 	if(!parameter) {
 		return '';
 	}
-	return parameter.map(ii => `$${ii.name}: <${ii.type}>`).join(', ');
+	return parameter.map(ii => `$${ii.name}:${ii.default || ''} <${ii.type}>`).join(', ');
 }
 
 export default render;

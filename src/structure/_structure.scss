@@ -11,8 +11,8 @@
 /// @param  {left}              left margin
 /// 
 
-@mixin margin($props...) {
-    $propMap: fourProps($props...);
+@mixin margin($props) {
+    $propMap: fourProps($props);
     margin-top: map-get($propMap, top);   
     margin-right: map-get($propMap, right);
     margin-bottom: map-get($propMap, bottom);

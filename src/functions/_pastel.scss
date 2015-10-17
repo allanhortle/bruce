@@ -1,10 +1,16 @@
 
 /// 
-/// pastel($var, $des:10, $light:10);
 /// 
-/// Lightens and desaturates a color
+/// Pastelizes a color by lightening and desaturating
 /// 
+/// @group functions
+/// @param {color} $base
+/// @param {number} $desaturate [10]
+/// @param {number} $lighten [10]
+/// @example
+///		pastel(#ff0000); // => #f53d3d
+///		pastel(#ff0000, 25, 25); // => #ef8f8f
 
-@function pastel($var, $des:10, $light:10) {
-    @return lighten(desaturate($var, $des), $light);
+@function pastel($var, $desaturate:10, $lighten:10) {
+    @return lighten(desaturate($var, $desaturate), $lighten);
 }

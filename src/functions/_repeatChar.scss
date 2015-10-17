@@ -1,16 +1,20 @@
 
-// 
-// repeatChar($char, $ammount);
-// 
-// Repeats a character by an ammount
-// 
-//
-// 
-
-@function repeatChar($char, $ammount) {
-    $a: $char;
+/// 
+/// Repeats a character by an ammount
+/// 
+/// @group functions
+/// @param  {string} $character
+/// @param  {number} $ammount
+/// @return {string} 
+/// @example
+///		.class:before {
+///			content: repeatChar('.', 100)
+///		}
+///
+@function repeatChar($character, $ammount) {
+    $a: $character;
     @for $i from 0 through $ammount {        
-        $a: $a + $char;
+        $a: $a + $character;
     }
     @return $a;
 }

@@ -1,17 +1,23 @@
 
 /// 
-/// power
+/// Returns `$number` to the power of `$exponent`
+/// @group functions
+/// @param  {number} $number
+/// @param  {number} $exponent
+/// @return {number} 
+/// @example
+///     power(10, 2); // => 100
 /// 
 
-@function power($number, $exp) {
+@function power($number, $exponent) {
     $value: 1;
-    @if $exp > 0 {
-        @for $i from 1 through $exp {
+    @if $exponent > 0 {
+        @for $i from 1 through $exponent {
             $value: $value * $number;
         }
     }
-    @else if $exp < 0 {
-        @for $i from 1 through -$exp {
+    @else if $exponent < 0 {
+        @for $i from 1 through -$exponent {
             $value: $value / $number;
         }
     }

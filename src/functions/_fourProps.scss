@@ -1,11 +1,15 @@
 
 /// 
-/// returns a map of the four property shorthand
+/// Returns a named map of the four property shorthand
 /// 
 /// @group functions
-/// @return  {map} 
+/// @param {list} $props
+/// @return {map} 
+/// @example 
+///     fourProps(1px 2px 3px 4px)  // => (top: 1px, right: 2px, bottom: 3px, left: 4px)
+///     fourProps(1rem 2rem)        // => (top: 1rem, right: 2rem, bottom: 1rem, left: 2rem)
 /// 
-@function fourProps($props...) {
+@function fourProps($props) {
     $length: length($props);
 
     $top:       nth($props, 1);

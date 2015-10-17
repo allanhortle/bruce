@@ -224,19 +224,21 @@ Token.reactify = function(o, key) {
 };
 
 _.languages.css = {
-  'comment': /\/\*[\w\W]*?\*\//g,
+  // 'comment': /\/\*[\w\W]*?\*\//g,
+  'comment': /\/\/.*/g,
   'function': /[a-zA-Z0-9_-][\w-]*(?=\()/,
+  'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g,
   'variable': /\$[a-zA-Z0-9_-]+/g,
   'atrule': /@[\w-]*/g,
   'url': /url\((["']?).*?\1\)/gi,
   // 'selector': /[^()@\{\}\s][^\{\};]*(?=\s*\{)/g,
-  'selector': /^([\.#&%])(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)\s?/g,
+  'selector': /([\.#&%])(-?[_a-zA-Z]+[_a-zA-Z0-9-:]*)\s?/g,
   'property': /(\b|\B)[\w-]+(?=\s*:)/ig,
+  'number': /\d+(\.?)(\d+)?(\w+)?/g,
   'string': /("|')(\\?.)*?\1/g,
   'important': /\B!important\b/gi,
   'ignore': /&(lt|gt|amp);/gi,
   'punctuation': /[\{\};:]/g,
-  'color': /(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g,
   'type-annotation': /(?:<)(\w*)(?:>)/
 };
 

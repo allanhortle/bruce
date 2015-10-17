@@ -1,9 +1,15 @@
 
-// 
-// fixed
-// 
+/// 
+/// Rounds a number to a fixed ammount of decimal places
+/// @param {number} $val
+/// @param {number} $places
+/// @return {number}
+/// @group functions
+/// @example
+///		fixed(20.123, 2); // => 20.12
+///
 
 @function fixed ($val, $places) {
     $p: power(10, $places);
-    @return floor($val * $p) / $p;
+    @return round($val * $p) / $p;
 }

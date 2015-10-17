@@ -2,7 +2,6 @@
 
 h1 {
 	font-size: 4em;
-	margin-bottom: 1em;
 }
 
 h2 {
@@ -72,6 +71,9 @@ pre {
 	@include syntax('atrule',			'red');
 	@include syntax('function',			'red');
 	@include syntax('type-annotation',	'blue');
+	@include syntax('number',			'blue');
+	@include syntax('color',			'blue');
+	@include syntax('comment',			'comment');
 	// @include syntax('punctuation',		'white');
 }
 

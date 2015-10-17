@@ -1,0 +1,12 @@
+
+/// 
+/// Selects the first item in a list
+/// 
+/// @group functions
+/// @param {list} $list
+/// @return {value}
+/// 
+
+@function first($list) {
+    @return nth($list, 1);
+}

@@ -1,6 +1,7 @@
 
 
 @function gutterWidth($cols, $colWidth) {
+	@warn '[deprecated]: baseUnit. Use a post css instead';
     $gutterSpace: 100 - $cols * $colWidth;
     @return $gutterSpace / ($cols - 1);
 }

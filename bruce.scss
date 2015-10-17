@@ -12,12 +12,12 @@
 //
 
 @import 'src/functions/color';
+@import 'src/functions/first';
 @import 'src/functions/fixed';
 @import 'src/functions/fourProps';
 @import 'src/functions/get-zindex';
-@import 'src/functions/gridValues';
 @import 'src/functions/invert';
-@import 'src/functions/lists';
+@import 'src/functions/last';
 @import 'src/functions/map-fetch';
 @import 'src/functions/pastel';
 @import 'src/functions/power';
@@ -29,16 +29,16 @@
 // Structure
 // 
 
-@import 'src/layout/clearfix';
-@import 'src/layout/flood';
-@import 'src/layout/float';
-@import 'src/layout/grid';
-@import 'src/layout/hide';
-@import 'src/layout/ratio';
-@import 'src/layout/reset';
-@import 'src/layout/size';
-@import 'src/layout/verticalAlign';
-@import 'src/layout/widths';
+@import 'src/structure/clearfix';
+@import 'src/structure/flood';
+@import 'src/structure/float';
+@import 'src/structure/grid';
+@import 'src/structure/hide';
+@import 'src/structure/ratio';
+@import 'src/structure/reset';
+@import 'src/structure/size';
+@import 'src/structure/verticalAlign';
+@import 'src/structure/widths';
 
 @mixin bruce-box-model() {
     @include bruce-structure;
@@ -83,6 +83,7 @@
 
 
 // Deprecated
+@import 'src/functions/gridValues';
 @import 'src/structure/position';
 @import 'src/functions/baseUnit';
 @import 'src/utils/hacks';
@@ -91,4 +92,4 @@
 @import 'src/functions/remsToPixel';
 @import 'src/functions/time';
 @import 'src/functions/toPixel';
-@import 'src/layout/columns';
+@import 'src/structure/columns';

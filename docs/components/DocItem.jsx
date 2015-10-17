@@ -4,6 +4,7 @@ import Example from './Example';
 import Usage from './Usage';
 import Segment from './Segment';
 import Require from './Require';
+import UsedBy from './UsedBy';
 import Markdown from './Markdown';
 
 
@@ -25,6 +26,7 @@ var DocItem = React.createClass({
 
                 <Segment title="Examples" data={example}><Example /></Segment>
                 <Segment title="Uses" data={this.props.require}><Require /></Segment>
+                <Segment title="Used By" data={this.props.usedBy}><UsedBy /></Segment>
                 {todo && todo.map((data, key) => <div key={key}>Todo: {data}</div>)}
 
             </div>
