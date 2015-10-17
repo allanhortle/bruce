@@ -1,25 +1,45 @@
 @import '../../bruce.scss';
 
 @include bruce-reset;
+@include bruce-box-sizing;
 
 $bruce-colors: (
     'blue': #6CA6CE,
     'green': #86C797,
     'yellow': #E1AE69,
     'orange': #E1865A,
+    'white': #e6e6e6,
     'red': #C55B4E
 );
 
 body {
 	font-family: 'Menlo', 'Inconsolata', monospaced;
 	font-size: 13px;
+	line-height: 1.6;
 }
 
 
 .wrapper {
-	width: 40rem;
+	width: 60rem;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 2rem;
+}
+
+.Navigation {
+	position: fixed;
+	width: 16rem;
+	padding-top: 1rem;
+	padding-right: 2rem;
+	background-color: white;
+
+	ul {
+		margin-bottom: 1rem;
+	}
+}
+
+.Content {
+	margin-left: 16rem;
 }
 
 @import '_type.scss';

@@ -3,8 +3,8 @@
 /// Returns a media query based on the content of `$bp`.
 /// 
 /// @example
-/// \@include bruce-breakPoint(small) { ... }
-/// \@include bruce-breakPoint(max-width: small) { ... }
+///     @include bruce-breakPoint('small') { ... }
+///     @include bruce-breakPoint(max-width: small) { ... }
 /// 
 /// 
 

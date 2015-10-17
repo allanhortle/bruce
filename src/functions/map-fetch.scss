@@ -4,8 +4,11 @@
 /// @link    https://github.com/jlong
 /// @group   functions
 /// @param   {map}
-/// @param   {list}  Nested keys as a list    
+/// @param   {list} $map    
+/// @param   {list} $keys    
 /// @return  {value} 
+/// @example
+///     map-fetch($myNestedMap, 'key' 'deeperKey' $variableKey);
 /// 
 @function map-fetch($map, $keys) {
     $key: nth($keys, 1);

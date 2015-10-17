@@ -7,10 +7,10 @@ import routes from './routes.jsx';
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-import data from './data.json';
+var sassdocs = require("!!sassdoc-loader!../bruce.scss");
 
 function createElement(Component, props) {
-    return <Component {...props} data={data} />
+    return <Component {...props} data={sassdocs} />
 }
 
 // Client render (optional)

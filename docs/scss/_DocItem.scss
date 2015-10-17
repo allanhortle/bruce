@@ -1,5 +1,10 @@
 
 
 .DocItem {
-	margin: 6rem 0;
+	padding-bottom: 4rem;
+	border-bottom: 1px solid grey(80);
+}
+
+.DocItem_heading {
+	padding-top: 4rem;
 }
