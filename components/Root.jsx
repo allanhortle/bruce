@@ -21,7 +21,7 @@ var Root = React.createClass({
                         {React.cloneElement(this.props.children, this.props.data)}
                     </div>
                     <script id='initial-props' type='application/json' dangerouslySetInnerHTML={initialProps} />
-                    <script src='bundle.js' />
+                    <script src='main.bundle.js' />
                 </body>
             </html>
         )

@@ -223,7 +223,7 @@ Token.reactify = function(o, key) {
   return React.DOM.span(attributes, Token.reactify(o.content));
 };
 
-_.languages.css = {
+_.languages.scss = {
   // 'comment': /\/\*[\w\W]*?\*\//g,
   'comment': /\/\/.*/g,
   'function': /[a-zA-Z0-9_-][\w-]*(?=\()/,
@@ -242,6 +242,40 @@ _.languages.css = {
   'punctuation': /[\{\};:]/g
 };
 
+_.languages.html = {
+  'comment': /\/\/.*/g,
+  'prolog': /<\?[\w\W]+?\?>/,
+  'doctype': /<!DOCTYPE[\w\W]+?>/,
+  'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
+  'tag': {
+    pattern: /<\/?[^\s>\/=.]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
+    inside: {
+      'tag': {
+        pattern: /^<\/?[^\s>\/]+/i,
+        inside: {
+          'punctuation': /^<\/?/,
+          'namespace': /^[^\s>\/:]+:/
+        }
+      },
+      'attr-value': {
+        pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
+        inside: {
+          'punctuation': /[=>"']/
+        }
+      },
+      'punctuation': /\/?>/,
+      'attr-name': {
+        pattern: /[^\s>\/]+/,
+        inside: {
+          'namespace': /^[^\s>\/:]+:/
+        }
+      }
+
+    }
+  },
+  'entity': /&#?[\da-z]{1,8};/i
+}
+
 var Prism = React.createClass({
   statics: {
     _: _
@@ -252,7 +286,7 @@ var Prism = React.createClass({
     };
   },
   render: function() {
-    var grammar = _.languages[this.props.language];
+    var grammar = _.languages[this.props.language] || _.languages.scss;
     return (
       <div className={'language-' + this.props.language}>
         {Token.reactify(_.tokenize(this.props.children, grammar))}
