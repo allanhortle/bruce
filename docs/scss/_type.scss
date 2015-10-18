@@ -71,7 +71,12 @@ pre {
 	}
 }
 
+.t-muted {
+	opacity: .6;
+}
 
+
+.language-scss,
 .language-css {
 	@include syntax('string', 			'green');
 	@include syntax('variable',			'orange');
@@ -86,3 +91,13 @@ pre {
 	// @include syntax('punctuation',		'white');
 }
 
+.language-html {
+	@include syntax('attr-value', 		'green');
+	@include syntax('tag',				'yellow');
+	@include syntax('comment',			'comment');
+
+	.attr-name + .attr-value .punctuation:first-of-type {
+		color: color('yellow')
+	}
+	// @include syntax('punctuation',		'white');
+}

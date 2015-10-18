@@ -7,29 +7,38 @@ var path = require('path');
 
 module.exports = {
     devTool: 'eval',
-    entry: './docs/docs.js',
+    entry: {
+        main: './docs/docs.js'
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: __dirname,
         libraryTarget: 'umd'
     },
     resolve: {
-        extensions: ["", ".js", ".jsx"]
+        extensions: ["", ".js", ".jsx"],
     },
     module: {
         loaders: [
-            { test: /\.jsx?$/, loader: 'babel-loader' },
-            { test: /\.json$/, loader: 'json-loader' },
+            { 
+                test: /\.jsx?$/, 
+                loader: 'babel-loader', 
+                include: [
+                    path.resolve(__dirname, "docs")
+                ]
+            },
+            { 
+                test: /\.json$/, 
+                loader: 'json-loader' 
+            },
             {
                 test: /\.scss$/,
                 loaders: ["style", "css", "sass"]
             }
-
         ]
     },
-
     plugins: [
-        new StaticSiteGeneratorPlugin('bundle.js', data.routes, data),
+        new StaticSiteGeneratorPlugin('main.bundle.js', data.routes, data),
         new webpack.NoErrorsPlugin()
     ]
 }

@@ -31,7 +31,9 @@ var DocItem = React.createClass({
                 <OutputExample {...this.props} />
                 <Segment title="Uses" data={this.props.require}><Require /></Segment>
                 <Segment title="Used By" data={this.props.usedBy}><UsedBy /></Segment>
-                {todo && todo.map((data, key) => <div key={key}>Todo: {data}</div>)}
+                <div className="t-muted">
+                    {todo && todo.map((data, key) => <div key={key}>Todo: {data}</div>)}
+                </div>
 
             </div>
         )

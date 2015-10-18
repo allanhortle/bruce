@@ -2,11 +2,22 @@
 /// Table grid
 ///
 /// @group structure
-/// @param {string} $grid
-/// @todo make table/float/flex versions
-///
+/// @param {string} $grid ['Grid']
+/// @param {string} $column ['Col-']
+/// @param {number} $number [12]
+/// @todo make float/flex versions
+/// @example scss
+///    @include bruce-grid();
+/// @example html
+///     <div class="Grid">
+///         <div class="Col-3"></div> // 1/4
+///         <div class="Col-3"></div> // 1/4
+///         <div class="Col-"></div>  // Remaining Space
+///     </div>   
 
-@mixin bruce-grid($grid:'Grid', $col:'Col-', $num:12) {
+
+
+@mixin bruce-grid($grid:'Grid', $col:'Col-', $number:12) {
     $gutter: 1rem !default;
 
     .#{$grid} {
@@ -75,9 +86,9 @@
     }
 
     @include bruce-breakpoint(small) {
-        @for $i from 1 through $num {
+        @for $i from 1 through $number {
             .#{$col}#{$i} {
-                width: (100% / $num) * $i;
+                width: (100% / $number) * $i;
             }
         }  
     }   

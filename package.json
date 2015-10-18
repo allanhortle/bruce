@@ -40,6 +40,7 @@
     "marked": "^0.3.5",
     "node-sass": "^3.3.3",
     "postcss": "^5.0.8",
+    "raw-loader": "^0.5.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
@@ -52,8 +53,11 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "webpack": "webpack --progress --colors",
+    "build": "webpack --progress --colors --config webpack.production.config.js",
     "dev": "webpack-dev-server --progress --colors",
     "start": "npm run dev"
+  },
+  "dependencies": {
+    "exports-loader": "^0.6.2"
   }
 }

@@ -7,7 +7,7 @@ module.exports = (props) => {
     	<div>    		
     		<pre key={props.id}>
     			<span className="type">{props.type}</span>
-    			<Prism language="css">{props.code}</Prism>
+    			<Prism language={props.type}>{props.code}</Prism>
     		</pre>
     	</div>
 	);
