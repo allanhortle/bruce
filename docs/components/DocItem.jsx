@@ -10,6 +10,7 @@ import OutputExample from './OutputExample';
 import Markdown from './Markdown';
 
 
+
 var DocItem = React.createClass({
     render: function () {
         var {
@@ -18,7 +19,8 @@ var DocItem = React.createClass({
             example,
             todo,
             group,
-            parameter
+            parameter,
+            styleguide
         } = this.props;
         return (
             <div id={name} className="DocItem">
@@ -29,6 +31,7 @@ var DocItem = React.createClass({
                 <Segment title="Example" data={example}><Example /></Segment>
                 <CodeSegment title="Default" data={value} />
                 <OutputExample {...this.props} />
+                
                 <Segment title="Uses" data={this.props.require}><Require /></Segment>
                 <Segment title="Used By" data={this.props.usedBy}><UsedBy /></Segment>
                 <div className="t-muted">

@@ -54,7 +54,7 @@
   },
   "scripts": {
     "build": "webpack --progress --colors --config webpack.production.config.js",
-    "dev": "webpack-dev-server --progress --colors",
+    "dev": "webpack-dev-server --no-info",
     "start": "npm run dev"
   },
   "dependencies": {

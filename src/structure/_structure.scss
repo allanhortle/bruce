@@ -43,6 +43,41 @@
     @include padding(0);    
 }
 
+
+
+/* 
+    margin
+
+    .margin-[direction <top|bottom|left|right|row|column>][value <05|2|3>]
+    
+
+    Markup: 
+    <div class="margin">all margins 1rem</div>
+    <div class="margin2">all margins 2rem</div>
+    <div class="margin-left3">left margin 3rem</div>
+    <div class="margin-right05">right margin .5rem</div>
+    <div class="margin-row">top and bottom margin 1rem</div>
+    <div class="margin-column">left and right margin 1rem</div>
+
+    Styleguide: styles.margin
+*/
+/* 
+    padding
+
+    .padding-[direction <top|bottom|left|right|row|column>][value <05|2|3>]
+
+
+    Markup: 
+    <div class="padding">all padding 1rem</div>
+    <div class="padding2">all padding 2rem</div>
+    <div class="padding-left3">left padding 3rem</div>
+    <div class="padding-right05">right padding .5rem</div>
+    <div class="padding-row">top and bottom padding 1rem</div>
+    <div class="padding-column">left and right padding 1rem</div>
+
+    Styleguide: styles.padding
+*/
+
 @mixin bruce-structure {
     @each $direction in ('top', 'right', 'bottom', 'left') {
 
@@ -68,7 +103,8 @@
                     @include margin(#{$i}rem);
                 }
             }
-
+            
+            
             .margin-#{$direction}#{$name} {
                 margin-#{$direction}: #{$i}rem;
             }
@@ -81,12 +117,22 @@
                 #{$direction}: #{$i}rem;
             }
 
+            .padding-row#{$name} {
+                @include padding(#{$i}rem 0);
+            }
+            
+            .margin-row#{$name} {
+                @include margin(#{$i}rem 0);
+            }
 
+            .padding-column#{$name} {
+                @include padding(0 #{$i}rem);
+            }
+            
+            .margin-column#{$name} {
+                @include margin(0 #{$i}rem);
+            }
 
-            // .#{$direction}#{$name} {
-            //     @extend %position-relative; 
-            //     margin-#{$direction}: #{$i}rem;
-            // }
         }
 
         .hug-#{$direction} {

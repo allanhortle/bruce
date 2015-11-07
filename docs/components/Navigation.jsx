@@ -15,12 +15,19 @@ function renderItem(item, key) {
 	return <li key={key}><a href={`#${item.context.name}`}>{item.context.name}</a></li>
 }
 
+function renderStyle(item, key) {
+	return <li key={key}><a href={`#${item.header}`}>{item.header}</a></li>
+}
+
 
 export default (props) => {
-	var groups = groupBy(props, 'group[0]');
+	var docs = groupBy(props.docs, 'group[0]');
     return (
         <ul className="Navigation left">
-        	{map(groups, renderGroup)}
+        	<li key="styleguide"><strong><a href="#styleguide">styleguide</a></strong></li>
+        	<ul>{map(props.styleguide.sections, renderStyle)}</ul>
+        	
+        	{map(docs, renderGroup)}
         </ul>
     )
 }

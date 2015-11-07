@@ -6,7 +6,7 @@
 /// @link http://github.com/allanhortle/bruce/src/functions/_color.scss
 /// @require {variable} bruce-colors
 /// @parameter {string} $name - uses `map-fetch()` to return the value of `$name` from `$bruce-colors` 
-/// @return {string}
+/// @return {string}s
 /// @example
 /// .class {
 ///		background-color: color('red');
