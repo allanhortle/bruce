@@ -8,14 +8,17 @@ import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 var sassdocs = require("!!sassdoc-loader!../bruce.scss");
+var styleguide = require("!!raw!kss!sass!./styleguide.scss");
+// console.log(styleguide);
 
 function createElement(Component, props) {
-    return <Component {...props} data={sassdocs} />
+    return <Component {...props} data={{docs:sassdocs, styleguide: styleguide}} />
 }
 
 // Client render (optional)
 if (typeof document !== 'undefined') {
 
+    var Styles = require('./styleguide.scss');
     var Styles = require('./scss/main.scss');
 
     var history = createBrowserHistory();
