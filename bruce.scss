@@ -36,7 +36,7 @@
 @import 'src/structure/hide';
 @import 'src/structure/ratio';
 @import 'src/structure/reset';
-@import 'src/structure/size.scss';
+@import 'src/structure/size';
 @import 'src/structure/verticalAlign';
 @import 'src/structure/widths';
 
@@ -51,7 +51,7 @@
 @import 'src/structure/padding';   // <- | Find out what needs to be turfed	
 @import 'src/structure/margin';    //    | 
 @import 'src/utils/breakpoints';
-@import 'src/structure/boxsizing';
+@import 'src/structure/boxSizing';
 
 //
 // Typography
