@@ -1,0 +1,54 @@
+
+// @warn 'flexbox is deprecated.'
+// .flex {
+//     display: flex;
+// }
+
+// .flex-column {
+//     flex-direction: column;
+// }
+
+
+// @for $i from 1 through 5 {
+//     $name: $i;
+//     @if $i == 1 {
+//         $name: '';
+//     }  
+//     .flex-grow#{$name} {
+//         flex-grow: $i;
+//     } 
+
+//     .flex-shrink#{$name} {
+//         flex-grow: $i;
+//     }      
+// }
+
+
+// .FlexGrid {
+//     display: flex;
+//     height: 100%;
+// }
+
+// .FlexGrid_col {
+//     flex-grow: 1;
+//     position: relative;
+//     width: 100%;
+//     transition: 320ms;
+// }
+
+// .FlexGrid_pane {
+//     overflow: auto;
+// }
+
+// .FlexGrid-shrink {
+//     flex-shrink: 2;
+// }
+
+
+// .h100 {
+//     height: 100%;
+// }
+
+// .pane {
+//     overflow: auto;
+// }
