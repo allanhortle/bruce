@@ -2,6 +2,7 @@
 
 @include bruce-reset;
 @include bruce-box-sizing;
+@include bruce-widths;
 
 $bruce-colors: (
     'blue': #6CA6CE,
@@ -32,7 +33,9 @@ body {
 	position: fixed;
 	width: 16rem;
 	padding-top: 1rem;
-	padding-right: 2rem;
+	top: 0;
+	bottom: 0;
+	overflow: auto;
 	background-color: white;
 
 	ul {

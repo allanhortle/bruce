@@ -1,0 +1,37 @@
+/* 
+    flexbox
+
+    Description
+    .flex-column
+    .flex-grow[value <1-5>]
+    .flex-shrink[value <1-5>]
+
+    Markup: 
+    <div class="flex">
+        <div class="flex-grow2">flex-grow2</div>
+        <div class="flex-grow">flex-grow</div>
+        <div class="flex-grow">flex-grow</div>
+    </div>
+
+    Styleguide: classes.flexbox
+*/
+@mixin bruce-classes-flexbox() {
+    
+    .flex-column {
+        flex-direction: column;
+    }
+
+    @for $i from 1 through 5 {
+        $name: $i;
+        @if $i == 1 {
+            $name: '';
+        }  
+        .flex-grow#{$name} {
+            flex-grow: $i;
+        } 
+
+        .flex-shrink#{$name} {
+            flex-shrink: $i;
+        }      
+    }
+}

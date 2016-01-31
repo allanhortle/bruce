@@ -22,6 +22,7 @@ bruce.Structure
 */
 
 @mixin bruce-structure-margin {
+    @warn '[deprecated]: bruce-structure-margin. Use bruce-classes instead';
     @include bruce-structure-column;
     @include bruce-structure-column2;
     @include bruce-structure-row;
@@ -32,6 +33,7 @@ bruce.Structure
 }
 
 @mixin bruce-structure-column {
+    @warn '[deprecated]: bruce-structure-column. Use bruce-classes instead';
     .column {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -39,6 +41,7 @@ bruce.Structure
 }
 
 @mixin bruce-structure-column2 {
+    @warn '[deprecated]: bruce-structure-column2. Use bruce-classes instead';
     .column2 {
         margin-left: 2rem;
         margin-right: 2rem;
@@ -46,6 +49,7 @@ bruce.Structure
 }
 
 @mixin bruce-structure-row {
+    @warn '[deprecated]: bruce-structure-row. Use bruce-classes instead';
     .row {
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -53,24 +57,28 @@ bruce.Structure
 }
 
 @mixin bruce-structure-row2 {
+    @warn '[deprecated]: bruce-structure-row2. Use bruce-classes instead';
     .row2 {
         margin: 2rem 0;
     }
 }
 
 @mixin bruce-structure-push {
+    @warn '[deprecated]: bruce-structure-push. Use bruce-classes instead';
     .push {
         margin-bottom: 1rem;
     }
 }
 
 @mixin bruce-structure-push2 {
+    @warn '[deprecated]: bruce-structure-push2. Use bruce-classes instead';
     .push2 {
         margin-bottom: 2rem;
     }
 }
 
 @mixin bruce-structure-hug {
+    @warn '[deprecated]: bruce-structure-hug. Use bruce-classes instead';
     .hug {
         margin: 0;
     }

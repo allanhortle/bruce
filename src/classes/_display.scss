@@ -1,0 +1,26 @@
+/* 
+    display
+
+    Description
+    .<inline|inline-block|block|flex> 
+
+    Markup: 
+    <div class="inline">inline</div>
+    <div class="inline-block">inline-block</div>
+    <div class="block">block</div>
+    <div class="flex">flex</div>
+
+    Styleguide: classes.display
+*/
+@mixin bruce-classes-display {
+    @each $name in (
+        inline,
+        inline-block,
+        block,
+        flex
+    ) {
+        .#{$name} {
+            display: $name;
+        }
+    }
+}

@@ -36,20 +36,18 @@
 @import 'src/structure/hide';
 @import 'src/structure/ratio';
 @import 'src/structure/reset';
-@import 'src/structure/size.scss';
+@import 'src/structure/size';
 @import 'src/structure/verticalAlign';
 @import 'src/structure/widths';
 
 @mixin bruce-box-model() {
+	@warn '[deprecated]: bruce-box-model. ';
     @include bruce-structure;
     @include bruce-float;
     @include bruce-widths;
 }
 
-@import 'src/structure/flexbox'; // This is just all kinds of broken;
-@import 'src/structure/structure'; //    | Merge these three. 
-@import 'src/structure/padding';   // <- | Find out what needs to be turfed	
-@import 'src/structure/margin';    //    | 
+
 @import 'src/utils/breakpoints';
 @import 'src/structure/boxsizing';
 
@@ -71,6 +69,18 @@
 @import 'src/utils/behaviours';
 @import 'src/utils/ios';
 
+//
+// Classes
+//
+
+@import 'src/classes/flexbox';
+@import 'src/classes/structure';
+@import 'src/classes/display';
+@mixin bruce-classes() {
+	@include bruce-classes-structure;
+	@include bruce-classes-display;
+	@include bruce-classes-flexbox;
+}
 
 //
 // Components
@@ -83,6 +93,8 @@
 
 
 // Deprecated
+@import 'src/structure/margin';
+@import 'src/structure/padding';
 @import 'src/functions/gridValues';
 @import 'src/structure/position';
 @import 'src/functions/baseUnit';

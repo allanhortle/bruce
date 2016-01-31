@@ -1,6 +1,3 @@
-%position-relative {
-    position: relative;
-}
 
 /// 
 /// Returns 4 margin props
@@ -30,26 +27,10 @@
     padding-left: map-get($propMap, left);
 }
 
-
-///
-/// CSS Styles
-/// 
-
-.hug {
-    @include margin(0);
-}
-
-.flush {
-    @include padding(0);    
-}
-
-
-
 /* 
     margin
 
-    .margin-[direction <top|bottom|left|right|row|column>][value <05|2|3>]
-    
+    .margin-[direction <top|bottom|left|right|row|column>][value <05|2|3>]    
 
     Markup: 
     <div class="margin">all margins 1rem</div>
@@ -66,7 +47,6 @@
 
     .padding-[direction <top|bottom|left|right|row|column>][value <05|2|3>]
 
-
     Markup: 
     <div class="padding">all padding 1rem</div>
     <div class="padding2">all padding 2rem</div>
@@ -78,7 +58,8 @@
     Styleguide: styles.padding
 */
 
-@mixin bruce-structure {
+@mixin bruce-classes-structure {
+
     @each $direction in ('top', 'right', 'bottom', 'left') {
 
         @for $i from 0 through 3 {
@@ -142,5 +123,13 @@
         .flush-#{$direction} {
             padding-#{$direction}: 0;
         }
-    }    
+    }
+
+    .hug {
+        @include margin(0);
+    }
+
+    .flush {
+        @include padding(0);    
+    }  
 }

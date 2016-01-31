@@ -3,10 +3,9 @@
 /// structure classes for floating
 ///
 /// @group structure
-/// @output SHOW
 
 @mixin bruce-float() {
-    @warn '.left & right will soon be deprecated. Use float-left & float-right instead';
+    @warn '[deprecated]: .left & .right. Use float-left & float-right instead';
 
     /* 
         float
@@ -18,15 +17,14 @@
         <div class="float-right box"> float right</div>
 
         Styleguide: float
-    */
-   
+    */   
 
     .float-left,
     .left {
         float: left;
     }
 
-    .float-left,
+    .float-right,
     .right {
         float: right;
     }
