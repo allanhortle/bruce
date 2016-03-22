@@ -76,10 +76,12 @@
 @import 'src/classes/flexbox';
 @import 'src/classes/structure';
 @import 'src/classes/display';
+@import 'src/classes/position';
 @mixin bruce-classes() {
-	@include bruce-classes-structure;
-	@include bruce-classes-display;
-	@include bruce-classes-flexbox;
+    @include bruce-classes-display;
+    @include bruce-classes-position;
+    @include bruce-classes-structure;
+    @include bruce-classes-flexbox;
 }
 
 //

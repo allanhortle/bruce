@@ -1,0 +1,42 @@
+/* 
+    position
+
+    Description
+    .<absolute|relative|fixed> 
+    .<top|right|bottom|left><number>
+
+    Styleguide: classes.position
+*/
+@mixin bruce-classes-position {
+    @each $name in (
+        absolute,
+        relative,
+        fixed
+    ) {
+        .#{$name} {
+            position: $name;
+        }
+    }
+
+    @each $direction in ('top', 'right', 'bottom', 'left') {
+
+        @for $i from 0 through 3 {
+            $name: $i;
+            @if ($i == 0) {
+                $i: .5;
+                $name: '05';
+            }
+
+            @if ($i == 1) {
+                $name: '';
+            }
+
+            .#{$direction}#{$name} {
+                #{$direction}: #{$i}rem;
+            }
+
+        }
+
+    }
+
+}
