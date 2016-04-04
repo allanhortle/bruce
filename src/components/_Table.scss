@@ -6,7 +6,7 @@
 @mixin bruce-component-table() {
 
     %Table-base {
-        margin-bottom: 32px;
+        margin-bottom: 2rem;
         width: 100%;
         border-spacing: 0;
         border-collapse: collapse;
@@ -21,13 +21,10 @@
 
         th,
         td {
-            padding: 4px;
+            padding: 1rem;
             vertical-align: top;
             vertical-align: middle; 
 
-            @include bruce-breakpoint(tiny) {
-                padding: 8px;
-            }
         }
 
         th {
@@ -56,6 +53,12 @@
     .Table-middle {
         td {
             vertical-align: middle;
+        }
+    }
+
+    .Table-tight {
+        td {
+            padding: .5rem;
         }
     }
 
