@@ -15,7 +15,7 @@ Markup:
 */
 @mixin bruce-component-media() {
     .Media {
-        @extend %bruce-clearfix;
+        @include bruce-clearfix;
     }
 
     .Media_body {
