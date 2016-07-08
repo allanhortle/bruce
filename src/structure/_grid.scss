@@ -92,11 +92,11 @@
 
         @include bruce-breakpoint(small) {
             @for $i from 1 through $number {
+                // column widths
                 & > .#{$col}#{$i} {
                     width: (100% / $number) * $i;
                 }
-            }
-            @for $i from 1 through $number {
+                // pushing and pulling columns
                 & > .#{$col}push#{$i} {
                     position: relative;
                     left: (100% / $number) * $i;
