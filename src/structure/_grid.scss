@@ -38,17 +38,24 @@
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
                 margin: 0;
-            }
             
-            &:first-child {
-                border-left: 0;
-            }
+                &:first-child {
+                    border-left: 0;
+                }
 
-            &:last-child {
-                border-right: 0;
+                &:last-child {
+                    border-right: 0;
+                }
+
+                // nullify quashed borders on pushed and pulled cols
+                &[class*="#{$col}push"],
+                &[class*="#{$col}pull"] {
+                    border-right: $gutter solid transparent;
+                    border-left: $gutter solid transparent;
+                }
             }
         }
-
+      
         // Alignment
         &.#{$grid}-middle { 
             & > [class*=#{$col}] {
@@ -67,7 +74,6 @@
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
                 margin-bottom: $gutter / 2;
-                
             }
         }
 
@@ -83,13 +89,30 @@
                 border: 0;
             }
         }
-    }
 
-    @include bruce-breakpoint(small) {
-        @for $i from 1 through $number {
-            .#{$col}#{$i} {
-                width: (100% / $number) * $i;
+        @include bruce-breakpoint(small) {
+            @for $i from 1 through $number {
+                & > .#{$col}#{$i} {
+                    width: (100% / $number) * $i;
+                }
             }
-        }  
-    }   
+            @for $i from 1 through $number {
+                & > .#{$col}push#{$i} {
+                    position: relative;
+                    left: (100% / $number) * $i;
+                }
+                & > .#{$col}pull#{$i} {
+                    position: relative;
+                    right: (100% / $number) * $i;
+                }
+                // quash borders on correct sides of swapped 2 column grids
+                & > .#{$col}#{$i}.#{$col}push#{$number - $i} {
+                    border-right: 0;
+                }
+                & > .#{$col}#{$i}.#{$col}pull#{$number - $i} {
+                    border-left: 0;
+                }
+            }
+        }   
+    }
 }
