@@ -2,19 +2,19 @@
     position
 
     Description
-    .<absolute|relative|fixed> 
+    .position<Absolute|Relative|Fixed> 
     .<top|right|bottom|left><number>
 
     Styleguide: classes.position
 */
 @mixin bruce-classes-position {
     @each $name in (
-        absolute,
-        relative,
-        fixed
+        Absolute,
+        Relative,
+        Fixed
     ) {
-        .#{$name} {
-            position: $name;
+        .position#{$name} {
+            position: to-lower-case($name);
         }
     }
 
