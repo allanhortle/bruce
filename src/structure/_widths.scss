@@ -20,18 +20,38 @@
 ///       width: 25% !important;
 ///     }
 
+@mixin bruce-generateWidth($suffix, $index) {
+
+    .w#{capitalize($suffix)}#{$index}0,
+    .width#{capitalize($suffix)}#{$index}0 {
+        width: percentage($index) / 10 !important; 
+    }
+
+    @if $index != 10 {
+        .w#{$index}5,
+        .width#{capitalize($suffix)}#{$index}5 { 
+            width: percentage($index) / 10 + 5 !important; 
+        }
+    }
+
+    @if $index == 0 {
+        .w#{$index}0,
+        .width#{capitalize($suffix)}#{$index}0 {
+            width: 1% !important;
+        }
+    } 
+}
+
 @mixin bruce-widths($sizes:(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) {
     @for $i from first($sizes) through last($sizes) {
-        .w#{$i}0 { width: percentage($i)/10 !important; }
-        @if $i != 10 {
-            .w#{$i}5 { 
-                width: percentage($i)/10+5 !important; 
+        
+        @each $breakpointName, $breakpointSize in $bruce-breakpoints {
+            @include bruce-breakpoint($breakpointSize) {
+                @include bruce-generateWidth($breakpointName, $i);
             }
         }
-        @if $i == 0 {
-            .w#{$i}0 {
-                width: 1% !important;
-            }
-        }        
+
+        @include bruce-generateWidth('', $i);
+    
     }
 }
