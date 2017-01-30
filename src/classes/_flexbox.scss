@@ -17,7 +17,7 @@
 */
 @mixin bruce-classes-flexbox() {
     
-    .flex-column {
+    .flexColumn {
         flex-direction: column;
     }
 
@@ -26,11 +26,11 @@
         @if $i == 1 {
             $name: '';
         }  
-        .flex-grow#{$name} {
+        .flexGrow#{$name} {
             flex-grow: $i;
         } 
 
-        .flex-shrink#{$name} {
+        .flexShrink#{$name} {
             flex-shrink: $i;
         }      
     }

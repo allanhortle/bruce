@@ -5,23 +5,23 @@
 /// @group structure
 
 @mixin bruce-float() {
-    /* 
+    /*
         float
 
-        .float-<left|right>
+        .float<Left|Right>
 
-        Markup: 
-        <div class="float-left box">float left</div>
-        <div class="float-right box"> float right</div>
+        Markup:
+        <div class="floatLeft box">float left</div>
+        <div class="floatRight box"> float right</div>
 
         Styleguide: float
-    */   
+    */
 
-    .float-left {
+    .floatLeft {
         float: left;
     }
 
-    .float-right {
+    .floatRight {
         float: right;
     }
 }

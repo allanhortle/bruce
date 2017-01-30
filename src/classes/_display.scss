@@ -6,7 +6,7 @@
 
     Markup: 
     <div class="inline">inline</div>
-    <div class="inline-block">inline-block</div>
+    <div class="inlineBlock">inline-block</div>
     <div class="block">block</div>
     <div class="flex">flex</div>
 
@@ -15,7 +15,7 @@
 @mixin bruce-classes-display {
     @each $name in (
         inline,
-        inline-block,
+        inlineBlock,
         block,
         flex
     ) {
