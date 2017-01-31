@@ -1,0 +1,18 @@
+
+///
+/// Returns a color from `$bruce-colors`
+///
+/// @group functions
+/// @link http://github.com/allanhortle/bruce/src/functions/_font.scss
+/// @require {variable} bruce-fonts
+/// @parameter {string} $name - uses `map-fetch()` to return the value of `$name` from `$bruce-fonts`
+/// @return {string}s
+/// @example
+/// .class {
+///		font-family: fonts('body');
+/// }
+///
+
+@function font($name) {
+    @return map-fetch($bruce-fonts, $name);
+}
