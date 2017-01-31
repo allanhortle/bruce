@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    devTool: 'eval',
+    devtool: 'source-map',
     entry: {
         main: './docs/docs.js'
     },
@@ -18,18 +18,21 @@ module.exports = {
     resolve: {
         extensions: ["", ".js", ".jsx"],
     },
+    resolveLoader: {
+        modulesDirectories: ['lib', 'node_modules'],
+    },
     module: {
         loaders: [
-            { 
-                test: /\.jsx?$/, 
-                loader: 'babel-loader', 
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
                 include: [
                     path.resolve(__dirname, "docs")
                 ]
             },
-            { 
-                test: /\.json$/, 
-                loader: 'json-loader' 
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             },
             {
                 test: /\.scss$/,

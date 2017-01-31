@@ -1,12 +1,13 @@
-/* 
+/*
     flexbox
 
     Description
+
     .flex-column
     .flex-grow[value <1-5>]
     .flex-shrink[value <1-5>]
 
-    Markup: 
+    Markup:
     <div class="flex">
         <div class="flex-grow2">flex-grow2</div>
         <div class="flex-grow">flex-grow</div>
@@ -16,7 +17,7 @@
     Styleguide: classes.flexbox
 */
 @mixin bruce-classes-flexbox() {
-    
+
     .flexColumn {
         flex-direction: column;
     }
@@ -25,13 +26,13 @@
         $name: $i;
         @if $i == 1 {
             $name: '';
-        }  
+        }
         .flexGrow#{$name} {
             flex-grow: $i;
-        } 
+        }
 
         .flexShrink#{$name} {
             flex-shrink: $i;
-        }      
+        }
     }
 }
