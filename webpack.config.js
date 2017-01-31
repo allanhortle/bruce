@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: __dirname,
+        path: path.resolve(__dirname, "docs"),
         libraryTarget: 'umd'
     },
     resolve: {
