@@ -8,7 +8,7 @@ import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 var sassdocs = require("!!sassdoc-loader!../bruce.scss");
-var styleguide = require("!!raw!kss!sass!./styleguide.scss");
+var styleguide = require("!!raw!kss-loader!sass!./styleguide.scss");
 // console.log(styleguide);
 
 function createElement(Component, props) {
@@ -24,7 +24,7 @@ if (typeof document !== 'undefined') {
     var history = createBrowserHistory();
     var initialProps = JSON.parse(document.getElementById('initial-props').innerHTML);
     ReactDOM.render(
-        <Router history={history} createElement={createElement}>{routes}</Router>, 
+        <Router history={history} createElement={createElement}>{routes}</Router>,
         document.getElementById('app')
     );
 }

@@ -13,6 +13,7 @@ import Markdown from './Markdown';
 
 var DocItem = React.createClass({
     render: function () {
+        // console.log(context);
         var {
             context: {name, code, type, value},
             description,
@@ -31,7 +32,7 @@ var DocItem = React.createClass({
                 <Segment title="Example" data={example}><Example /></Segment>
                 <CodeSegment title="Default" data={value} />
                 <OutputExample {...this.props} />
-                
+
                 <Segment title="Uses" data={this.props.require}><Require /></Segment>
                 <Segment title="Used By" data={this.props.usedBy}><UsedBy /></Segment>
                 <div className="t-muted">

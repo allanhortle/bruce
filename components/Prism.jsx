@@ -201,8 +201,13 @@ var Token = _.Token = function(type, content) {
 };
 
 Token.reactify = function(o, key) {
+
   if (typeof o == 'string') {
     return o;
+  }
+
+  if(!o) {
+    return <span key={key}/>;
   }
 
   if (Array.isArray(o)) {
