@@ -11,10 +11,11 @@
 // Functions
 //
 
-@import 'src/functions/color';
 @import 'src/functions/capitalize';
+@import 'src/functions/color';
 @import 'src/functions/first';
 @import 'src/functions/fixed';
+@import 'src/functions/font';
 @import 'src/functions/fourProps';
 @import 'src/functions/get-zindex';
 @import 'src/functions/invert';
@@ -28,7 +29,7 @@
 
 //
 // Structure
-// 
+//
 
 @import 'src/structure/clearfix';
 @import 'src/structure/float';
