@@ -1,8 +1,8 @@
 
 
-$bruce-reset-elements: 
+$bruce-reset-elements:
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+h1, h2, h3, h4, h5, h6, p, blockquote, button, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -30,11 +30,11 @@ time, mark, audio, video
     $elements: $bruce-reset-elements
 ) {
     #{$elements} {
-        margin: 0;
-        padding: 0;
         border: 0;
         font-size: 100%;
         font: inherit;
+        margin: 0;
+        padding: 0;
         vertical-align: baseline;
     }
 
@@ -42,7 +42,7 @@ time, mark, audio, video
     aside,
     details,
     figcaption,
-    figure,    
+    figure,
     footer,
     header,
     hgroup,
