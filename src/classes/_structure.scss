@@ -99,19 +99,19 @@
             }
 
             .paddingRow#{$name} {
-                @include padding(#{$i}rem 0);
+                @include padding(#{$i}rem null);
             }
 
             .marginRow#{$name} {
-                @include margin(#{$i}rem 0);
+                @include margin(#{$i}rem null);
             }
 
             .paddingColumn#{$name} {
-                @include padding(0 #{$i}rem);
+                @include padding(null #{$i}rem);
             }
 
             .marginColumn#{$name} {
-                @include margin(0 #{$i}rem);
+                @include margin(null #{$i}rem);
             }
 
             .margin#{$direction}Auto {
