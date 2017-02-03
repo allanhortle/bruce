@@ -1,0 +1,23 @@
+/*
+    text
+
+    Description
+    .text<Left|Right|Center|Justify|Start|End>
+
+    Styleguide: classes.position
+*/
+
+@mixin bruce-classes-text {
+    @each $name in (
+        Left,
+        Right,
+        Center,
+        Justify,
+        Start,
+        End
+    ) {
+        .text#{$name} {
+            text-align: to-lower-case($name);
+        }
+    }
+}

@@ -79,11 +79,13 @@
 @import 'src/classes/structure';
 @import 'src/classes/display';
 @import 'src/classes/position';
+@import 'src/classes/text';
 @mixin bruce-classes() {
     @include bruce-classes-display;
     @include bruce-classes-position;
     @include bruce-classes-structure;
     @include bruce-classes-flexbox;
+    @include bruce-classes-text;
 }
 
 //
