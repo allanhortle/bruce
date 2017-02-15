@@ -13,18 +13,18 @@
 ///         <div class="Col-3"></div> // 1/4
 ///         <div class="Col-3"></div> // 1/4
 ///         <div class="Col-"></div>  // Remaining Space
-///     </div>   
+///     </div>
 
 
 
-@mixin bruce-grid($grid:'Grid', $col:'Col-', $number:12) {
+@mixin bruce-grid($grid:'Grid', $col:'Column', $number:12) {
     $gutter: 1rem !default;
 
     .#{$grid} {
         box-sizing: border-box;
         display: table;
         width: 100%;
-        table-layout: fixed;        
+        table-layout: fixed;
 
         & > [class*=#{$col}] {
             box-sizing: border-box;
@@ -38,7 +38,7 @@
                 border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
                 margin: 0;
-            
+
                 &:first-child {
                     border-left: 0;
                 }
@@ -48,16 +48,16 @@
                 }
 
                 // nullify quashed borders on pushed and pulled cols
-                &[class*="#{$col}push"],
-                &[class*="#{$col}pull"] {
+                &[class*="#{$col}-push"],
+                &[class*="#{$col}-pull"] {
                     border-right: $gutter solid transparent;
                     border-left: $gutter solid transparent;
                 }
             }
         }
-      
+
         // Alignment
-        &.#{$grid}-middle { 
+        &.#{$grid}-middle {
             & > [class*=#{$col}] {
                 vertical-align: middle;
             }
@@ -80,7 +80,7 @@
         &.#{$grid}-tighter {
             & > [class*=#{$col}] {
                 border-width: $gutter / 4;
-                margin-bottom: $gutter / 4;                
+                margin-bottom: $gutter / 4;
             }
         }
 
@@ -93,26 +93,26 @@
         @include bruce-breakpoint(small) {
             @for $i from 1 through $number {
                 // column widths
-                & > .#{$col}#{$i} {
+                & > .#{$col}-#{$i} {
                     width: (100% / $number) * $i;
                 }
                 // pushing and pulling columns
-                & > .#{$col}push#{$i} {
+                & > .#{$col}-push#{$i} {
                     position: relative;
                     left: (100% / $number) * $i;
                 }
-                & > .#{$col}pull#{$i} {
+                & > .#{$col}-pull#{$i} {
                     position: relative;
                     right: (100% / $number) * $i;
                 }
                 // quash borders on correct sides of swapped 2 column grids
-                & > .#{$col}#{$i}.#{$col}push#{$number - $i} {
+                & > .#{$col}#{$i}.#{$col}-push#{$number - $i} {
                     border-right: 0;
                 }
-                & > .#{$col}#{$i}.#{$col}pull#{$number - $i} {
+                & > .#{$col}#{$i}.#{$col}-pull#{$number - $i} {
                     border-left: 0;
                 }
             }
-        }   
+        }
     }
 }
