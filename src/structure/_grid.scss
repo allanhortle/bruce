@@ -9,34 +9,32 @@
 /// @example scss
 ///    @include bruce-grid();
 /// @example html
-///     <div class="Grid">
+///     <div class='Grid'>
 ///         <div class="Col-3"></div> // 1/4
 ///         <div class="Col-3"></div> // 1/4
 ///         <div class="Col-"></div>  // Remaining Space
 ///     </div>
 
 
-
-@mixin bruce-grid($grid:'Grid', $col:'Column', $number:12) {
+@mixin bruce-grid($grid: 'Grid', $col: 'Column', $number: 12) {
     $gutter: 1rem !default;
 
     .#{$grid} {
         box-sizing: border-box;
         display: table;
-        width: 100%;
         table-layout: fixed;
+        width: 100%;
 
         & > [class*=#{$col}] {
             box-sizing: border-box;
             display: block;
+            margin-bottom: 1rem;
             vertical-align: top;
 
-            margin-bottom: 1rem;
-
             @include bruce-breakpoint(small) {
-                display: table-cell;
-                border-right: $gutter solid transparent;
                 border-left: $gutter solid transparent;
+                border-right: $gutter solid transparent;
+                display: table-cell;
                 margin: 0;
 
                 &:first-child {
@@ -48,14 +46,15 @@
                 }
 
                 // nullify quashed borders on pushed and pulled cols
-                &[class*="#{$col}-push"],
-                &[class*="#{$col}-pull"] {
-                    border-right: $gutter solid transparent;
+                &[class*='#{$col}-push'],
+                &[class*='#{$col}-pull'] {
                     border-left: $gutter solid transparent;
+                    border-right: $gutter solid transparent;
                 }
             }
         }
 
+        //
         // Alignment
         &.#{$grid}-middle {
             & > [class*=#{$col}] {
@@ -69,7 +68,22 @@
             }
         }
 
+        //
         // Sizing
+        &.#{$grid}-large {
+            & > [class*=#{$col}] {
+                border-width: $gutter * 2;
+                margin-bottom: $gutter * 2;
+            }
+        }
+
+        &.#{$grid}-larger {
+            & > [class*=#{$col}] {
+                border-width: $gutter * 4;
+                margin-bottom: $gutter * 4;
+            }
+        }
+
         &.#{$grid}-tight {
             & > [class*=#{$col}] {
                 border-width: $gutter / 2;
@@ -92,24 +106,29 @@
 
         @include bruce-breakpoint(small) {
             @for $i from 1 through $number {
+
                 // column widths
                 & > .#{$col}-#{$i} {
                     width: (100% / $number) * $i;
                 }
+
                 // pushing and pulling columns
                 & > .#{$col}-push#{$i} {
-                    position: relative;
                     left: (100% / $number) * $i;
+                    position: relative;
                 }
+
                 & > .#{$col}-pull#{$i} {
                     position: relative;
                     right: (100% / $number) * $i;
                 }
+
                 // quash borders on correct sides of swapped 2 column grids
-                & > .#{$col}#{$i}.#{$col}-push#{$number - $i} {
+                & > .#{$col}-#{$i}.#{$col}-push#{$number - $i} {
                     border-right: 0;
                 }
-                & > .#{$col}#{$i}.#{$col}-pull#{$number - $i} {
+
+                & > .#{$col}-#{$i}.#{$col}-pull#{$number - $i} {
                     border-left: 0;
                 }
             }
