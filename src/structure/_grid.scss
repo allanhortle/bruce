@@ -1,136 +1,94 @@
 ///
 /// Table grid
 ///
-/// @group structure
-/// @param {string} $grid ['Grid']
-/// @param {string} $column ['Col-']
-/// @param {number} $number [12]
-/// @todo make float/flex versions
-/// @example scss
-///    @include bruce-grid();
-/// @example html
-///     <div class='Grid'>
-///         <div class="Col-3"></div> // 1/4
-///         <div class="Col-3"></div> // 1/4
-///         <div class="Col-"></div>  // Remaining Space
-///     </div>
 
+@mixin BruceGridWidths($number) {
+    display: table-cell;
+    margin: 0;
 
-@mixin bruce-grid($grid: 'Grid', $col: 'Column', $number: 12) {
-    $gutter: 1rem !default;
+    &-paddingMega {
+        border-left: 4rem solid transparent;
+        border-right: 4rem solid transparent;
+    }
 
-    .#{$grid} {
+    &-paddingKilo {
+        border-left: 2rem solid transparent;
+        border-right: 2rem solid transparent;
+    }
+
+    &-padding {
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
+    }
+
+    &-paddingMilli {
+        border-left: .5rem solid transparent;
+        border-right: .5rem solid transparent;
+    }
+
+    &:first-child {
+        border-left: 0;
+    }
+
+    &:last-child {
+        border-right: 0;
+    }
+
+    // column widths
+    @for $i from 1 through $number {
+        &-#{$i} {
+            width: (100% / $number) * $i;
+
+            // quash borders on correct sides of swapped 2 column grids
+            &-push#{$number - $i} {
+                border-right: 0;
+            }
+
+            &-pull#{$number - $i} {
+                border-left: 0;
+            }
+        }
+
+        // pushing and pulling columns
+        &-push#{$i} {
+            left: (100% / $number) * $i;
+            position: relative;
+        }
+
+        &-pull#{$i} {
+            position: relative;
+            right: (100% / $number) * $i;
+        }
+    }
+}
+
+@mixin BruceGrid($name: 'Grid', $number: 12) {
+    .#{$name} {
         box-sizing: border-box;
         display: table;
         table-layout: fixed;
         width: 100%;
 
-        & > [class*=#{$col}] {
+        &-auto {
+            table-layout: auto;
+        }
+
+        &_column {
             box-sizing: border-box;
             display: block;
-            margin-bottom: 1rem;
             vertical-align: top;
 
-            @include bruce-breakpoint(small) {
-                border-left: $gutter solid transparent;
-                border-right: $gutter solid transparent;
-                display: table-cell;
-                margin: 0;
-
-                &:first-child {
-                    border-left: 0;
-                }
-
-                &:last-child {
-                    border-right: 0;
-                }
-
-                // nullify quashed borders on pushed and pulled cols
-                &[class*='#{$col}-push'],
-                &[class*='#{$col}-pull'] {
-                    border-left: $gutter solid transparent;
-                    border-right: $gutter solid transparent;
-                }
+            @include bruce-breakpoint('small') {
+                @include BruceGridWidths($number);
             }
-        }
 
-        //
-        // Alignment
-        &.#{$grid}-middle {
-            & > [class*=#{$col}] {
-                vertical-align: middle;
+            &-always {
+                @include BruceGridWidths($number);
             }
-        }
 
-        &.#{$grid}-bottom {
-            & > [class*=#{$col}] {
-                vertical-align: bottom;
-            }
-        }
-
-        //
-        // Sizing
-        &.#{$grid}-large {
-            & > [class*=#{$col}] {
-                border-width: $gutter * 2;
-                margin-bottom: $gutter * 2;
-            }
-        }
-
-        &.#{$grid}-larger {
-            & > [class*=#{$col}] {
-                border-width: $gutter * 4;
-                margin-bottom: $gutter * 4;
-            }
-        }
-
-        &.#{$grid}-tight {
-            & > [class*=#{$col}] {
-                border-width: $gutter / 2;
-                margin-bottom: $gutter / 2;
-            }
-        }
-
-        &.#{$grid}-tighter {
-            & > [class*=#{$col}] {
-                border-width: $gutter / 4;
-                margin-bottom: $gutter / 4;
-            }
-        }
-
-        &.#{$grid}-flush {
-            & > [class*=#{$col}] {
-                border: 0;
-            }
-        }
-
-        @include bruce-breakpoint(small) {
-            @for $i from 1 through $number {
-
-                // column widths
-                & > .#{$col}-#{$i} {
-                    width: (100% / $number) * $i;
-                }
-
-                // pushing and pulling columns
-                & > .#{$col}-push#{$i} {
-                    left: (100% / $number) * $i;
-                    position: relative;
-                }
-
-                & > .#{$col}-pull#{$i} {
-                    position: relative;
-                    right: (100% / $number) * $i;
-                }
-
-                // quash borders on correct sides of swapped 2 column grids
-                & > .#{$col}-#{$i}.#{$col}-push#{$number - $i} {
-                    border-right: 0;
-                }
-
-                & > .#{$col}-#{$i}.#{$col}-pull#{$number - $i} {
-                    border-left: 0;
-                }
+            &-shrink {
+                white-space: nowrap;
+                width: 1px;
             }
         }
 
