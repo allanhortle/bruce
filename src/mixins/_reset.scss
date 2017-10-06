@@ -26,7 +26,7 @@ time, mark, audio, video
 ///
 
 
-@mixin bruce-reset(
+@mixin BruceReset(
     $elements: $bruce-reset-elements
 ) {
     #{$elements} {

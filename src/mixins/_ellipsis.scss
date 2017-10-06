@@ -6,15 +6,13 @@
 /// @param {value} $cutoff
 ///
 
-@mixin bruce-ellipsis($cutoff:null) {
-    @extend %bruce-ellipsis;
-    @if $cutoff != null {
-        padding-right: $cutoff;      
-    }   
-}
-
-%bruce-ellipsis {
+@mixin BruceEllipsis($cutoff: null) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @if $cutoff != null {
+        padding-right: $cutoff;
+    }
 }
+

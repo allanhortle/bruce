@@ -1,0 +1,90 @@
+$true-terminal-output: true;
+@import './node_modules/sass-true/sass/true';
+@import 'bruce';
+
+$bruce-colors: (
+    'foo': #bada55
+);
+
+// _capitalize.scss
+@include describe('capitalize') {
+    @include it('makes the first character uppercase') {
+        @include assert-equal(capitalize('foo'), 'Foo');
+    }
+}
+
+// _color.scss
+@include describe('color') {
+    @include it('fetches a color from $bruce-color') {
+        @include assert-equal(color('foo'), #bada55);
+    }
+}
+
+// _first.scss
+@include describe('first') {
+    @include it('Selects the first item in a list') {
+        @include assert-equal(first('foo' 'bar'), 'foo');
+        @include assert-unequal(first('foo' 'bar'), 'bar');
+    }
+}
+
+// _fixed.scss
+@include describe('fixed') {
+    @include it('Rounds a number to a fixed ammount of decimal places') {
+        @include assert-equal(fixed(1.234567, 2), 1.23);
+    }
+}
+
+// _font.scss
+// _fourProps.scss
+@include describe('fourProps') {
+    @include it('Returns a named map of the four property shorthand') {
+        @include assert-equal(map-get(fourProps(1rem), 'top'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem), 'right'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem), 'bottom'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem), 'left'), 1rem);
+
+        @include assert-equal(map-get(fourProps(1rem 2rem), 'top'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem), 'right'), 2rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem), 'bottom'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem), 'left'), 2rem);
+
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem), 'top'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem), 'right'), 2rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem), 'bottom'), 3rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem), 'left'), 2rem);
+
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem 4rem), 'top'), 1rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem 4rem), 'right'), 2rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem 4rem), 'bottom'), 3rem);
+        @include assert-equal(map-get(fourProps(1rem 2rem 3rem 4rem), 'left'), 4rem);
+
+    }
+}
+// _grey.scss
+// _invert.scss
+// _last.scss
+// _mapGetIn.scss
+// _pastel.scss
+// _power.scss
+// _repeatChar.scss
+// _stripUnits.scss
+// _zindex.scss
+
+
+
+// _animations.scss
+// _boxSizing.scss
+// _breakpoints.scss
+// _clearfix.scss
+// _directionModifiers.scss
+// _ellipsis.scss
+// _flood.scss
+// _fontface.scss
+// _grid.scss
+// _hide.scss
+// _ratio.scss
+// _reset.scss
+// _size.scss
+
+@include report(false, true);

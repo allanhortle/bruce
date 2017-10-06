@@ -1,0 +1,29 @@
+
+///
+/// Returns the position of `$component` in `$bruce-zindexList`
+///
+/// @group   functions
+/// @param   {string} $component
+/// @return  {number}
+/// @example
+/// 	$bruce-zindex:(
+/// 	    'Button',
+/// 	    'Widget',
+/// 	    'Link'
+/// 	);
+///
+/// 	.Button {
+///     	z-index: zindex('Button'); // => 1
+/// 	}
+///
+
+@function zindex($component) {
+    $list: $bruce-zindex;
+    $zindex: index($list, $component);
+    @if $zindex {
+        @return $zindex;
+    }
+
+    @warn 'zindex(): There is no item "#{$component}" in $bruce-zindex; choose one of: #{$list}';
+    @return null;
+}

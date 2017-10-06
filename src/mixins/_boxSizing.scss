@@ -1,0 +1,21 @@
+
+///
+/// A sensible box-sizing inherit
+///
+/// @group structure
+/// @output SHOW
+
+@mixin BruceBoxSizing {
+    html {
+        box-sizing: border-box;
+    }
+
+    * {
+        box-sizing: inherit;
+
+        &:before,
+        &:after {
+            box-sizing: inherit;
+        }
+    }
+}

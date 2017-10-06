@@ -5,10 +5,10 @@
 /// @group structure
 /// @output SHOW
 
-@mixin bruce-flood() {
-    position: absolute;
-    top: 0;
-    left: 0;
+@mixin BruceFlood() {
     bottom: 0;
+    left: 0;
+    position: absolute;
     right: 0;
+    top: 0;
 }

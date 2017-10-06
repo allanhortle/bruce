@@ -20,6 +20,7 @@
   "homepage": "https://github.com/allanhortle/bruce",
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
+    "ava": "^0.22.0",
     "babel-loader": "^5.3.2",
     "bd-stampy": "^0.3.16",
     "css-loader": "^0.19.0",
@@ -46,6 +47,7 @@
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
     "sass-loader": "^3.0.0",
+    "sass-true": "^3.0.1",
     "sassdoc": "^2.1.15",
     "sassdoc-loader": "^0.0.2",
     "static-site-generator-webpack-plugin": "^1.2.0",
