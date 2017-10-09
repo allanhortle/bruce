@@ -1,0 +1,84 @@
+
+///
+/// Adds Spruce modifiers for direction based rules
+///
+/// @group mixins
+/// @param {list} $name
+/// @param {string} $prop
+/// @param {list} $size
+/// @return {map}
+/// @example
+///
+/// .Text {
+///     @include BruceDirectionModifiers('margin' 'Giga', 'margin', 1rem 2rem);
+/// }
+///
+/// // Will Produce:
+///
+/// .Text-marginGiga {
+///   margin-top: 1rem;
+///   margin-right: 2rem;
+///   margin-bottom: 1rem;
+///   margin-left: 2rem;
+/// }
+///
+/// .Text-marginColumnGiga {
+///   margin-left: 2rem;
+///   margin-right: 2rem;
+/// }
+///
+/// .Text-marginRowGiga {
+///   margin-top: 1rem;
+///   margin-bottom: 1rem;
+/// }
+///
+/// .Text-marginTopGiga {
+///   margin-top: 1rem;
+/// }
+///
+/// .Text-marginRightGiga {
+///   margin-right: 1rem;
+/// }
+///
+/// .Text-marginBottomGiga {
+///   margin-bottom: 1rem;
+/// }
+///
+/// .Text-marginLeftGiga {
+///   margin-left: 1rem;
+/// }
+
+
+@mixin BruceDirectionModifiers($name, $prop, $sizes) {
+    $sides: fourProps($sizes);
+    $prefix: nth($name, 1);
+    $suffix: '';
+
+    @if(length($name) == 2) {
+        $suffix: nth($name, 2);
+    }
+
+    &-#{$prefix}#{$suffix} {
+        #{$prop}-top: map-get($sides, 'top');
+        #{$prop}-right: map-get($sides, 'right');
+        #{$prop}-bottom: map-get($sides, 'bottom');
+        #{$prop}-left: map-get($sides, 'left');
+    }
+
+    &-#{$prefix}Column#{$suffix} {
+        #{$prop}-left: map-get($sides, 'left');
+        #{$prop}-right: map-get($sides, 'right');
+    }
+
+    &-#{$prefix}Row#{$suffix} {
+        #{$prop}-top: map-get($sides, 'top');
+        #{$prop}-bottom: map-get($sides, 'bottom');
+    }
+
+    @each $Direction in ('Top', 'Right', 'Bottom', 'Left') {
+        $direction: to_lower_case($Direction);
+        &-#{$prefix}#{$Direction}#{$suffix} {
+            #{$prop}-#{$direction}: map-get($sides, 'top');
+        }
+    }
+}

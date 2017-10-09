@@ -1,0 +1,16 @@
+
+///
+/// Returns values from nested lists
+/// @group   functions
+/// @param   {list} $map
+/// @param   {list} $keys
+/// @return  {value}
+/// @example
+///     mapGetIn($myNestedMap, 'key' 'deeperKey' $variableKey);
+///
+@function mapGetIn($map, $keys) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}

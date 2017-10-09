@@ -1,5 +1,5 @@
 
-/// 
+///
 /// Inverts a number
 ///
 /// @group functions
@@ -7,15 +7,10 @@
 /// @return {number}
 /// @example
 /// 	invert(1); // => -1
-/// 
+///
 
 @function invert($var) {
     @return $var * -1;
-}
-
-@function inverse($var) {
-    @warn '[deprecated]: inverse. Use `invert()` instead';
-    @return invert($var);
 }
 
 

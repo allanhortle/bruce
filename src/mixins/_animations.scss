@@ -1,6 +1,6 @@
 
-///  
-/// Uses the React.addons.CSSTransitionGroup syntax 
+///
+/// Uses the React.addons.CSSTransitionGroup syntax
 /// to create simple single property animations.
 /// @group utils
 /// @param {string} $name
@@ -13,10 +13,10 @@
 /// @example
 ///    // scss
 ///    @include bruce-singlePropAnimation('fade', 300ms, opacity, 0, 1);
-///    
+///
 ///    // css
 ///    .fade-enter {
-///        opacity: 0;   
+///        opacity: 0;
 ///    }
 ///    .fade-enter.fade-enter-active {
 ///        transition: all 300ms;
@@ -31,12 +31,12 @@
 ///    }
 ///
 
-@mixin bruce-singlePropAnimation($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave:null, $toLeave:null) {
-    @if ($fromLeave == null){
+@mixin BruceAnimationSingleProperty($name, $duration, $prop, $fromEnter, $toEnter, $fromLeave: null, $toLeave: null) {
+    @if ($fromLeave == null) {
         $fromLeave: $fromEnter;
     }
 
-    @if ($toLeave == null){
+    @if ($toLeave == null) {
         $toLeave: $toEnter;
     }
 
@@ -44,13 +44,13 @@
         #{$prop}: #{$fromEnter};
 
         &.#{$name}-enter-active {
-            transition: all $duration;
+            transition: $prop $duration;
             #{$prop}: #{$toEnter};
         }
     }
 
     .#{$name}-leave {
-        transition: all $duration;
+        transition: $prop $duration;
         #{$prop}: #{$fromLeave};
 
         &.#{$name}-leave-active {

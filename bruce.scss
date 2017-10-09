@@ -1,11 +1,25 @@
-@import 'src/functions/_grey';
 
-//
-// Base
-//
+///
+/// Definition of color
+///
+/// @group variables
+/// @type list
+$bruce-colors: () !default;
+$bruce-fonts: () !default;
+$bruce-zindex: () !default;
 
-@import 'src/_vars';
-
+///
+/// Default breakpoints
+///
+/// @group variables
+/// @type list
+///
+$bruce-breakpoints:(
+    'large':  120rem,
+    'medium': 64rem,
+    'small':  48rem,
+    'tiny':   30rem
+);
 
 //
 // Functions
@@ -17,97 +31,32 @@
 @import 'src/functions/fixed';
 @import 'src/functions/font';
 @import 'src/functions/fourProps';
-@import 'src/functions/get-zindex';
+@import 'src/functions/grey';
 @import 'src/functions/invert';
 @import 'src/functions/last';
-@import 'src/functions/map-fetch';
+@import 'src/functions/mapGetIn';
 @import 'src/functions/pastel';
 @import 'src/functions/power';
 @import 'src/functions/repeatChar';
 @import 'src/functions/stripUnits';
+@import 'src/functions/zindex';
 
 
 //
-// Structure
+// Mixins
 //
 
-@import 'src/structure/clearfix';
-@import 'src/structure/float';
-@import 'src/structure/flood';
-@import 'src/structure/grid';
-@import 'src/structure/hide';
-@import 'src/structure/ratio';
-@import 'src/structure/reset';
-@import 'src/structure/size';
-@import 'src/structure/verticalAlign';
-@import 'src/structure/widths';
+@import 'src/mixins/animations';
+@import 'src/mixins/boxSizing';
+@import 'src/mixins/breakpoints';
+@import 'src/mixins/clearfix';
+@import 'src/mixins/directionModifiers';
+@import 'src/mixins/ellipsis';
+@import 'src/mixins/flood';
+@import 'src/mixins/fontface';
+@import 'src/mixins/grid';
+@import 'src/mixins/hide';
+@import 'src/mixins/ratio';
+@import 'src/mixins/reset';
+@import 'src/mixins/size';
 
-@mixin bruce-box-model() {
-	@warn '[deprecated]: bruce-box-model. ';
-    @include bruce-structure;
-    @include bruce-float;
-    @include bruce-widths;
-}
-
-
-@import 'src/utils/breakpoints';
-@import 'src/structure/boxSizing';
-
-//
-// Typography
-//
-
-@import 'src/type/ellipsis';
-@import 'src/type/fontface';
-@import 'src/type/fontWeight';
-@import 'src/type/verticalRhythm';
-
-
-//
-// Tidbits
-//
-
-@import 'src/utils/animations';
-@import 'src/utils/behaviours';
-@import 'src/utils/ios';
-
-//
-// Classes
-//
-
-@import 'src/classes/flexbox';
-@import 'src/classes/structure';
-@import 'src/classes/display';
-@import 'src/classes/position';
-@import 'src/classes/text';
-@mixin bruce-classes() {
-    @include bruce-classes-display;
-    @include bruce-classes-position;
-    @include bruce-classes-structure;
-    @include bruce-classes-flexbox;
-    @include bruce-classes-text;
-}
-
-//
-// Components
-//
-
-@import 'src/components/Input';
-@import 'src/components/Media';
-@import 'src/components/Table';
-@import 'src/style/arrow';
-
-
-// Deprecated
-@import 'src/structure/margin';
-@import 'src/structure/padding';
-@import 'src/functions/gridValues';
-@import 'src/structure/position';
-@import 'src/functions/baseUnit';
-@import 'src/utils/hacks';
-@import 'src/style/opacity';
-@import 'src/utils/maths';
-@import 'src/functions/remsToPixel';
-@import 'src/functions/time';
-@import 'src/functions/toPixel';
-@import 'src/structure/columns';

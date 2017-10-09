@@ -4,7 +4,7 @@
 /// @group typography
 /// @param {list: $name, $path, $font-weight, $font-style} $lists
 /// @example
-///     @include bruce-fontface((
+///     @include BruceFontFace((
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-light'      100),
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regular'    300),
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regitalic'  300   italic),
@@ -13,7 +13,7 @@
 ///         ('GlyphiconsHalflings'  'fonts/glyphicons-halflings-regular')
 ///     ));
 
-@mixin bruce-fontface($lists) {
+@mixin BruceFontFace($lists) {
     @each $name, $path, $font-weight, $font-style in $lists {
         @if ($font-weight == null) {
             $font-weight: normal;
@@ -22,7 +22,7 @@
         @if ($font-style == null) {
             $font-style: normal;
         }
-        
+
         @font-face {
             font-family: $name;
             src: url("#{$path}.eot");
@@ -34,5 +34,5 @@
             font-weight: $font-weight;
             font-style: $font-style;
         }
-    }   
+    }
 }

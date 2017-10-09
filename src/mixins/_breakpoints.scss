@@ -1,5 +1,5 @@
 
-/// 
+///
 /// Returns a media query based on the content of `$bp`.
 /// @group utils
 /// @param {string|value|list} $breakpoint
@@ -7,39 +7,39 @@
 /// @example
 ///     .class {
 ///         font-size: 1rem;
-///         
+///
 ///         @include bruce-breakpoint('small') {
 ///             font-size: 2rem;
 ///         }
-///     
+///
 ///         @include bruce-breakpoint(40em) {
 ///             font-size: 3rem;
 ///         }
-///     
+///
 ///         @include bruce-breakpoint(max-width: 40em) {
 ///             font-size: 4rem;
 ///         }
-///     
+///
 ///     }
-/// 
+///
 
 
-@mixin bruce-breakpoint($bp) {
-    // Standard 
+@mixin BruceBreakpoint($bp) {
+    // Standard
     $item: map-get($bruce-breakpoints, $bp);
-    
+
     @if $item {
         $bp: $item;
     }
 
     @if $bruce-ie == true {
         @content;
-    } 
+    }
 
     @else {
         @if type-of($bp) == 'number'{
-            @media (min-width: #{$bp})  { 
-                @content; 
+            @media (min-width: #{$bp})  {
+                @content;
             }
         }
 
@@ -50,53 +50,22 @@
             $item: map-get($bruce-breakpoints, $bp);
 
             @if $item {
-                $bp: $item;   
+                $bp: $item;
             }
 
 
             @if type-of($first) == 'string'{
-                @media (#{$first}: #{$bp}) { 
-                    @content; 
+                @media (#{$first}: #{$bp}) {
+                    @content;
                 }
             }
             @elseif type-of($first) == 'number'{
-                @media (min-width: #{$first}) and (max-width: #{$bp}) { 
-                    @content; 
+                @media (min-width: #{$first}) and (max-width: #{$bp}) {
+                    @content;
                 }
             }
             @else{
                 @warn 'bruce-breakpoint: wrong syntax';
-            }
-        }
-    }
-}
-
-
-//
-// Retina Breakpoint
-//
-//
-//
-
-@mixin bruce-retina($dpi:2) {
-    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: 192dppx) { 
-        @content;
-    }
-}
-
-
-
-@mixin bruce-visibility() {
-    @each $key, $value in $bruce-breakpoints {
-        @include bruce-breakpoint($value) {
-            .show-#{$key} {
-                display: none !important;
-            }
-        }
-
-        @include bruce-breakpoint('max-width' $value) {
-            .hide-#{$key} {
-                display: none !important;
             }
         }
     }

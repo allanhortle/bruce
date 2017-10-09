@@ -1,23 +1,22 @@
 ///
-/// One declaration for width and height 
+/// One declaration for width and height
 ///
 /// @group structure
 /// @param {value} $width
 /// @param {value} $height [null]
-/// @example 
+/// @example
 ///		.code {
 /// 		@include size(20px);
 ///			// width: 20px;
 ///			// height: 20px;
 /// 	}
 ///
-@mixin bruce-size($width, $height:null) {
+@mixin BruceSize($width, $height: null) {
     @if $height != null {
+        height: $height;
         width: $width;
-        height: $height;  
-    } 
-    @else {
-        width: $width;
+    } @else {
         height: $width;
+        width: $width;
     }
 }
