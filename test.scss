@@ -1,9 +1,15 @@
-$true-terminal-output: true;
+// $true-terminal-output: true;
 @import './node_modules/sass-true/sass/true';
 @import 'bruce';
 
 $bruce-colors: (
     'foo': #bada55
+);
+
+$bruce-zindex: (
+    'foo',
+    'bar',
+    'baz'
 );
 
 // _capitalize.scss
@@ -36,6 +42,8 @@ $bruce-colors: (
 }
 
 // _font.scss
+// TODO: find out how to use asset/output/expected
+
 // _fourProps.scss
 @include describe('fourProps') {
     @include it('Returns a named map of the four property shorthand') {
@@ -62,16 +70,77 @@ $bruce-colors: (
     }
 }
 // _grey.scss
+@include test-module('functions/grey') {
+    @include test('grey returns an equivalent grey rgb value from 0 - 100') {
+        @include assert-equal(grey(0), black);
+        @include assert-equal(grey(100), white);
+        @include assert-equal('#{grey(21)}', '#363636');
+    }
+}
+
 // _invert.scss
+@include test-module('functions/invert') {
+    @include test('will invert the sign of a number') {
+        @include assert-equal(invert(-1), 1);
+        @include assert-equal(invert(1), -1);
+    }
+}
+
 // _last.scss
+@include test-module('functions/last') {
+    @include test('will take the last from a list') {
+        @include assert-equal(last(1 2 3 4), 4);
+    }
+}
+
 // _mapGetIn.scss
+@include test-module('functions/mapGetIn') {
+    @include test('will get deep values from a list') {
+        @include assert-equal(mapGetIn(('a': ('b': ('c': 1))), 'a' 'b' 'c'), 1);
+    }
+}
+
 // _pastel.scss
+@include test-module('functions/pastel') {
+    @include test('will lighten and desaturate a color') {
+        @include assert-equal('#{pastel(#f00)}', '#f53d3d');
+        @include assert-equal('#{pastel(#f00, 25, 25)}', '#ef8f8f');
+    }
+}
+
 // _power.scss
+@include test-module('functions/power') {
+    @include test('Returns `$number` to the power of `$exponent`') {
+        @include assert-equal(power(10, 2), 100);
+    }
+}
+
 // _repeatChar.scss
+@include test-module('functions/repeatChar') {
+    @include test('Repeats a character by an ammount') {
+        @include assert-equal(repeatChar('#', 5), '#####');
+    }
+}
+
 // _stripUnits.scss
+@include test-module('functions/stripUnits') {
+    @include test('Strips the value suffix') {
+        @include assert-equal(stripUnits(2rem), 2);
+        @include assert-equal(stripUnits(15px), 15);
+        @include assert-equal(stripUnits(15.5em), 15.5);
+    }
+}
+
 // _zindex.scss
+@include test-module('functions/zindex') {
+    @include test('Returns the position of `$component` in `$bruce-zindexList`') {
+        @include assert-equal(zindex('foo'), 1);
+        @include assert-equal(zindex('bar'), 2);
+        @include assert-equal(zindex('baz'), 3);
+    }
+}
 
-
+// TODO: mixins
 
 // _animations.scss
 // _boxSizing.scss
@@ -87,4 +156,4 @@ $bruce-colors: (
 // _reset.scss
 // _size.scss
 
-@include report(false, true);
+@include report(true, true);

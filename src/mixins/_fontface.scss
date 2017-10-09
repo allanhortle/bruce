@@ -4,7 +4,7 @@
 /// @group typography
 /// @param {list: $name, $path, $font-weight, $font-style} $lists
 /// @example
-///     @include bruce-fontface((
+///     @include BruceFontFace((
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-light'      100),
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regular'    300),
 ///         ('ProximaNova'          'fonts/proxima-nova/proximanova-regitalic'  300   italic),
