@@ -32,10 +32,6 @@
         $bp: $item;
     }
 
-    @if $bruce-ie == true {
-        @content;
-    }
-
     @else {
         @if type-of($bp) == 'number'{
             @media (min-width: #{$bp})  {
