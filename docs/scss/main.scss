@@ -1,8 +1,6 @@
 @import '../../bruce.scss';
 
-@include bruce-reset;
-@include bruce-box-sizing;
-@include bruce-widths;
+@include BruceReset;
 
 $bruce-colors: (
     'blue': #6CA6CE,
@@ -48,7 +46,7 @@ body {
 }
 
 .Example {
-	@include bruce-clearfix;
+	@include BruceClearfix;
 	background-color: grey(90);
 	margin-top: -1rem;
 	padding: 1rem;

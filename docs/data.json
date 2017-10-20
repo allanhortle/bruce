@@ -31,21 +31,7 @@
     "file": {
       "path": "functions/_capitalize.scss",
       "name": "_capitalize.scss"
-    },
-    "usedBy": [
-      {
-        "description": "\nUses the $sizes list to create a series of percentage based helper classes \nat intervals of 5%. Defaults are from 0 to 100.\n",
-        "context": {
-          "type": "mixin",
-          "name": "bruce-generateWidth",
-          "code": "\n\n    .w#{capitalize($suffix)}#{$index}0,\n    .width#{capitalize($suffix)}#{$index}0 {\n        width: percentage($index) / 10 !important; \n    }\n\n    @if $index != 10 {\n        .w#{$index}5,\n        .width#{capitalize($suffix)}#{$index}5 { \n            width: percentage($index) / 10 + 5 !important; \n        }\n    }\n\n    @if $index == 0 {\n        .w#{$index}0,\n        .width#{capitalize($suffix)}#{$index}0 {\n            width: 1% !important;\n        }\n    } \n",
-          "line": {
-            "start": 23,
-            "end": 43
-          }
-        }
-      }
-    ]
+    }
   },
   {
     "description": "\nReturns a color from `$bruce-colors`\n\n",
@@ -56,7 +42,7 @@
     "context": {
       "type": "function",
       "name": "color",
-      "code": "\n    @return map-fetch($bruce-colors, $name);\n",
+      "code": "\n    @return mapGetIn($bruce-colors, $name);\n",
       "line": {
         "start": 16,
         "end": 18
@@ -74,12 +60,7 @@
     "require": [
       {
         "type": "function",
-        "name": "map-fetch"
-      },
-      {
-        "type": "variable",
-        "name": "bruce-colors",
-        "external": false
+        "name": "mapGetIn"
       }
     ],
     "parameter": [
@@ -189,6 +170,54 @@
     }
   },
   {
+    "description": "\nReturns a color from `$bruce-colors`\n\n",
+    "commentRange": {
+      "start": 2,
+      "end": 14
+    },
+    "context": {
+      "type": "function",
+      "name": "font",
+      "code": "\n    @return map-fetch($bruce-fonts, $name);\n",
+      "line": {
+        "start": 16,
+        "end": 18
+      }
+    },
+    "group": [
+      "functions"
+    ],
+    "link": [
+      {
+        "url": "http://github.com/allanhortle/bruce/src/functions/_font.scss",
+        "caption": ""
+      }
+    ],
+    "require": [],
+    "parameter": [
+      {
+        "type": "string",
+        "name": "name",
+        "description": "uses `map-fetch()` to return the value of `$name` from `$bruce-fonts`"
+      }
+    ],
+    "return": {
+      "type": "string",
+      "description": "s"
+    },
+    "example": [
+      {
+        "type": "scss",
+        "code": ".class {\n\tfont-family: fonts('body');\n}"
+      }
+    ],
+    "access": "public",
+    "file": {
+      "path": "functions/_font.scss",
+      "name": "_font.scss"
+    }
+  },
+  {
     "description": "\nReturns a named map of the four property shorthand\n\n",
     "commentRange": {
       "start": 2,
@@ -229,70 +258,18 @@
     },
     "usedBy": [
       {
-        "description": "\nReturns 4 margin props\n",
+        "description": "\nAdds Spruce modifiers for direction based rules\n\n",
         "context": {
           "type": "mixin",
-          "name": "margin",
-          "code": "\n    $propMap: fourProps($props);\n    margin-bottom: map-get($propMap, bottom);\n    margin-left: map-get($propMap, left);\n    margin-right: map-get($propMap, right);\n    margin-top: map-get($propMap, top);\n",
+          "name": "BruceDirectionModifiers",
+          "code": "\n    $sides: fourProps($sizes);\n    $prefix: nth($name, 1);\n    $suffix: '';\n\n    @if(length($name) == 2) {\n        $suffix: nth($name, 2);\n    }\n\n    &-#{$prefix}#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-right: map-get($sides, 'right');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n        #{$prop}-left: map-get($sides, 'left');\n    }\n\n    &-#{$prefix}Column#{$suffix} {\n        #{$prop}-left: map-get($sides, 'left');\n        #{$prop}-right: map-get($sides, 'right');\n    }\n\n    &-#{$prefix}Row#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n    }\n\n    @each $Direction in ('Top', 'Right', 'Bottom', 'Left') {\n        $direction: to_lower_case($Direction);\n        &-#{$prefix}#{$Direction}#{$suffix} {\n            #{$prop}-#{$direction}: map-get($sides, 'top');\n        }\n    }\n",
           "line": {
-            "start": 8,
-            "end": 14
-          }
-        }
-      },
-      {
-        "description": "\nReturns 4 padding props\n",
-        "context": {
-          "type": "mixin",
-          "name": "padding",
-          "code": "\n    $propMap: fourProps($props);\n    padding-bottom: map-get($propMap, bottom);\n    padding-left: map-get($propMap, left);\n    padding-right: map-get($propMap, right);\n    padding-top: map-get($propMap, top);\n",
-          "line": {
-            "start": 22,
-            "end": 28
+            "start": 51,
+            "end": 84
           }
         }
       }
     ]
-  },
-  {
-    "description": "\nReturns the position of `$component` in `$bruce-zindexList`\n\n",
-    "commentRange": {
-      "start": 2,
-      "end": 18
-    },
-    "context": {
-      "type": "function",
-      "name": "get-zindex",
-      "code": "\n    $list: $bruce-zindexList;\n    $zindex: index($list, $component);\n    @if $zindex {\n        @return $zindex;\n    }\n\n    @warn 'get-zindex(): There is no item \"#{$component}\" in this list; choose one of: #{$list}';\n    @return null;    \n",
-      "line": {
-        "start": 20,
-        "end": 29
-      }
-    },
-    "group": [
-      "functions"
-    ],
-    "parameter": [
-      {
-        "type": "string",
-        "name": "component"
-      }
-    ],
-    "return": {
-      "type": "number"
-    },
-    "example": [
-      {
-        "type": "scss",
-        "code": "$bruce-zindexList:(\n    'Button',\n    'Widget',\n    'Link'\n);\n\n.Button {\n   \tz-index: get-zindex('Button'); // => 1\n}"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "functions/_get-zindex.scss",
-      "name": "_get-zindex.scss"
-    }
   },
   {
     "description": "\nReturns a grey value from 0 - 100\n",
@@ -412,23 +389,17 @@
     "description": "\nReturns values from nested lists\n",
     "commentRange": {
       "start": 2,
-      "end": 11
+      "end": 10
     },
     "context": {
       "type": "function",
-      "name": "map-fetch",
-      "code": "\n    $key: nth($keys, 1);\n    $length: length($keys);\n    $value: map-get($map, $key);\n    @if ($length > 1) {\n        $rest: ();\n        @for $i from 2 through $length {\n            $rest: append($rest, nth($keys, $i))\n        }\n        @return map-fetch($value, $rest)\n    } @else {\n        @return $value;\n    }\n",
+      "name": "mapGetIn",
+      "code": "\n    @each $key in $keys {\n        $map: map-get($map, $key);\n    }\n    @return $map;\n",
       "line": {
-        "start": 12,
-        "end": 25
+        "start": 11,
+        "end": 16
       }
     },
-    "link": [
-      {
-        "url": "https://github.com/jlong",
-        "caption": ""
-      }
-    ],
     "group": [
       "functions"
     ],
@@ -448,14 +419,14 @@
     "example": [
       {
         "type": "scss",
-        "code": "map-fetch($myNestedMap, 'key' 'deeperKey' $variableKey);"
+        "code": "mapGetIn($myNestedMap, 'key' 'deeperKey' $variableKey);"
       }
     ],
     "access": "public",
     "require": [],
     "file": {
-      "path": "functions/_map-fetch.scss",
-      "name": "_map-fetch.scss"
+      "path": "functions/_mapGetIn.scss",
+      "name": "_mapGetIn.scss"
     },
     "usedBy": [
       {
@@ -463,7 +434,7 @@
         "context": {
           "type": "function",
           "name": "color",
-          "code": "\n    @return map-fetch($bruce-colors, $name);\n",
+          "code": "\n    @return mapGetIn($bruce-colors, $name);\n",
           "line": {
             "start": 16,
             "end": 18
@@ -586,7 +557,7 @@
     "context": {
       "type": "function",
       "name": "repeatChar",
-      "code": "\n    $a: $character;\n    @for $i from 0 through $ammount {        \n        $a: $a + $character;\n    }\n    @return $a;\n",
+      "code": "\n    $repeat: '';\n    @for $i from 0 through $ammount - 1 {\n        $repeat: $repeat + $character;\n    }\n    @return $repeat;\n",
       "line": {
         "start": 14,
         "end": 20
@@ -656,589 +627,62 @@
     }
   },
   {
-    "description": "\nReturns 4 margin props\n",
+    "description": "\nReturns the position of `$component` in `$bruce-zindexList`\n\n",
     "commentRange": {
       "start": 2,
-      "end": 6
+      "end": 18
     },
     "context": {
-      "type": "mixin",
-      "name": "margin",
-      "code": "\n    $propMap: fourProps($props);\n    margin-bottom: map-get($propMap, bottom);\n    margin-left: map-get($propMap, left);\n    margin-right: map-get($propMap, right);\n    margin-top: map-get($propMap, top);\n",
+      "type": "function",
+      "name": "zindex",
+      "code": "\n    $list: $bruce-zindex;\n    $zindex: index($list, $component);\n    @if $zindex {\n        @return $zindex;\n    }\n\n    @warn 'zindex(): There is no item \"#{$component}\" in $bruce-zindex; choose one of: #{$list}';\n    @return null;\n",
       "line": {
-        "start": 8,
-        "end": 14
+        "start": 20,
+        "end": 29
       }
     },
     "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "list",
-        "name": "props"
-      }
-    ],
-    "access": "public",
-    "require": [
-      {
-        "type": "function",
-        "name": "fourProps"
-      }
-    ],
-    "file": {
-      "path": "classes/_structure.scss",
-      "name": "_structure.scss"
-    }
-  },
-  {
-    "description": "\nReturns 4 padding props\n",
-    "commentRange": {
-      "start": 16,
-      "end": 20
-    },
-    "context": {
-      "type": "mixin",
-      "name": "padding",
-      "code": "\n    $propMap: fourProps($props);\n    padding-bottom: map-get($propMap, bottom);\n    padding-left: map-get($propMap, left);\n    padding-right: map-get($propMap, right);\n    padding-top: map-get($propMap, top);\n",
-      "line": {
-        "start": 22,
-        "end": 28
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "list",
-        "name": "props"
-      }
-    ],
-    "access": "public",
-    "require": [
-      {
-        "type": "function",
-        "name": "fourProps"
-      }
-    ],
-    "file": {
-      "path": "classes/_structure.scss",
-      "name": "_structure.scss"
-    }
-  },
-  {
-    "description": "\nA sensible box-sizing inherit\n\n",
-    "commentRange": {
-      "start": 2,
-      "end": 6
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-box-sizing",
-      "code": "\n    html {\n      box-sizing: border-box;\n    }\n    *, *:before, *:after {\n      box-sizing: inherit;\n    }    \n",
-      "line": {
-        "start": 8,
-        "end": 15
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "output": "SHOW",
-    "access": "public",
-    "file": {
-      "path": "structure/_boxSizing.scss",
-      "name": "_boxSizing.scss"
-    }
-  },
-  {
-    "description": "\n`:after` pseudo element clearfix \n\n",
-    "commentRange": {
-      "start": 2,
-      "end": 6
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-clearfix",
-      "code": "\n    &:after {\n        content: '';\n        display: table;\n        clear: both;\n    }\n",
-      "line": {
-        "start": 8,
-        "end": 14
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "access": "public",
-    "file": {
-      "path": "structure/_clearfix.scss",
-      "name": "_clearfix.scss"
-    }
-  },
-  {
-    "description": "\nstructure classes for floating\n\n",
-    "commentRange": {
-      "start": 2,
-      "end": 5
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-float",
-      "code": "\n    /*\n        float\n\n        .float<Left|Right>\n\n        Markup:\n        <div class=\"floatLeft box\">float left</div>\n        <div class=\"floatRight box\"> float right</div>\n\n        Styleguide: float\n    */\n\n    .floatLeft {\n        float: left;\n    }\n\n    .floatRight {\n        float: right;\n    }\n",
-      "line": {
-        "start": 7,
-        "end": 27
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "access": "public",
-    "file": {
-      "path": "structure/_float.scss",
-      "name": "_float.scss"
-    }
-  },
-  {
-    "description": "\nAbsolutely position an element to it's containing bounds.\n\n",
-    "commentRange": {
-      "start": 2,
-      "end": 6
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-flood",
-      "code": "\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n",
-      "line": {
-        "start": 8,
-        "end": 14
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "output": "SHOW",
-    "access": "public",
-    "file": {
-      "path": "structure/_flood.scss",
-      "name": "_flood.scss"
-    }
-  },
-  {
-    "description": "\nTable grid\n\n",
-    "commentRange": {
-      "start": 1,
-      "end": 16
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-grid",
-      "code": "\n    $gutter: 1rem !default;\n\n    .#{$grid} {\n        box-sizing: border-box;\n        display: table;\n        width: 100%;\n        table-layout: fixed;        \n\n        & > [class*=#{$col}] {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            margin-bottom: 1rem;\n\n            @include bruce-breakpoint(small) {\n                display: table-cell;\n                border-right: $gutter solid transparent;\n                border-left: $gutter solid transparent;\n                margin: 0;\n            \n                &:first-child {\n                    border-left: 0;\n                }\n\n                &:last-child {\n                    border-right: 0;\n                }\n\n                // nullify quashed borders on pushed and pulled cols\n                &[class*=\"#{$col}push\"],\n                &[class*=\"#{$col}pull\"] {\n                    border-right: $gutter solid transparent;\n                    border-left: $gutter solid transparent;\n                }\n            }\n        }\n      \n        // Alignment\n        &.#{$grid}-middle { \n            & > [class*=#{$col}] {\n                vertical-align: middle;\n            }\n        }\n\n        &.#{$grid}-bottom {\n            & > [class*=#{$col}] {\n                vertical-align: bottom;\n            }\n        }\n\n        // Sizing\n        &.#{$grid}-tight {\n            & > [class*=#{$col}] {\n                border-width: $gutter / 2;\n                margin-bottom: $gutter / 2;\n            }\n        }\n\n        &.#{$grid}-tighter {\n            & > [class*=#{$col}] {\n                border-width: $gutter / 4;\n                margin-bottom: $gutter / 4;                \n            }\n        }\n\n        &.#{$grid}-flush {\n            & > [class*=#{$col}] {\n                border: 0;\n            }\n        }\n\n        @include bruce-breakpoint(small) {\n            @for $i from 1 through $number {\n                // column widths\n                & > .#{$col}#{$i} {\n                    width: (100% / $number) * $i;\n                }\n                // pushing and pulling columns\n                & > .#{$col}push#{$i} {\n                    position: relative;\n                    left: (100% / $number) * $i;\n                }\n                & > .#{$col}pull#{$i} {\n                    position: relative;\n                    right: (100% / $number) * $i;\n                }\n                // quash borders on correct sides of swapped 2 column grids\n                & > .#{$col}#{$i}.#{$col}push#{$number - $i} {\n                    border-right: 0;\n                }\n                & > .#{$col}#{$i}.#{$col}pull#{$number - $i} {\n                    border-left: 0;\n                }\n            }\n        }   \n    }\n",
-      "line": {
-        "start": 18,
-        "end": 118
-      }
-    },
-    "group": [
-      "structure"
+      "functions"
     ],
     "parameter": [
       {
         "type": "string",
-        "name": "grid",
-        "default": "'Grid'"
-      },
-      {
-        "type": "string",
-        "name": "column",
-        "default": "'Col-'"
-      },
-      {
-        "type": "number",
-        "name": "number",
-        "default": "12"
+        "name": "component"
       }
     ],
-    "todo": [
-      "make float/flex versions"
-    ],
+    "return": {
+      "type": "number"
+    },
     "example": [
       {
         "type": "scss",
-        "code": "@include bruce-grid();"
-      },
-      {
-        "type": "html",
-        "code": "<div class=\"Grid\">\n    <div class=\"Col-3\"></div> // 1/4\n    <div class=\"Col-3\"></div> // 1/4\n    <div class=\"Col-\"></div>  // Remaining Space\n</div>"
-      }
-    ],
-    "access": "public",
-    "require": [
-      {
-        "type": "mixin",
-        "name": "bruce-breakpoint"
-      }
-    ],
-    "file": {
-      "path": "structure/_grid.scss",
-      "name": "_grid.scss"
-    }
-  },
-  {
-    "description": "\nUses positioing to hide but not remove\n",
-    "commentRange": {
-      "start": 2,
-      "end": 5
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-hide",
-      "code": "\n    position: absolute; \n    overflow: hidden; \n    clip: rect(0 0 0 0); \n    height: 1px; width: 1px; \n    margin: -1px; padding: 0; border: 0; \n",
-      "line": {
-        "start": 7,
-        "end": 13
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "structure/_hide.scss",
-      "name": "_hide.scss"
-    }
-  },
-  {
-    "description": "\nUses `:before` to create a fixed ratio for the element\n",
-    "commentRange": {
-      "start": 1,
-      "end": 6
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-ratio",
-      "code": "\n    &:before {\n        content: '';\n        display: block;\n        padding-top: $height / $width * 100%;\n    }\n",
-      "line": {
-        "start": 8,
-        "end": 14
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "number",
-        "name": "width"
-      },
-      {
-        "type": "number",
-        "name": "height"
+        "code": "$bruce-zindex:(\n    'Button',\n    'Widget',\n    'Link'\n);\n\n.Button {\n   \tz-index: zindex('Button'); // => 1\n}"
       }
     ],
     "access": "public",
     "require": [],
     "file": {
-      "path": "structure/_ratio.scss",
-      "name": "_ratio.scss"
+      "path": "functions/_zindex.scss",
+      "name": "_zindex.scss"
     }
   },
   {
-    "description": "\nThe Meyer reset. Can take a custom list of elements for padding and margin removal.\n",
-    "commentRange": {
-      "start": 19,
-      "end": 26
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-reset",
-      "code": "\n    #{$elements} {\n        margin: 0;\n        padding: 0;\n        border: 0;\n        font-size: 100%;\n        font: inherit;\n        vertical-align: baseline;\n    }\n\n    article,\n    aside,\n    details,\n    figcaption,\n    figure,    \n    footer,\n    header,\n    hgroup,\n    menu,\n    nav,\n    section {\n        display: block;\n    }\n\n    body {\n        line-height: 1;\n    }\n\n    ol,\n    ul {\n        list-style: none;\n    }\n\n    blockquote,\n    q {\n        quotes: none;\n    }\n\n    blockquote:before,\n    blockquote:after,\n    q:before,\n    q:after {\n        content: '';\n        content: none;\n    }\n\n    table {\n        border-collapse: collapse;\n        border-spacing: 0;\n    }\n",
-      "line": {
-        "start": 28,
-        "end": 81
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "link": [
-      {
-        "url": "http://www.meyerweb.com/eric/tools/css/reset/",
-        "caption": "The Meyer reset"
-      },
-      {
-        "url": "http://www.meyerweb.com/eric/tools/css/reset/",
-        "caption": "The Meyer reset"
-      }
-    ],
-    "parameter": [
-      {
-        "type": "list",
-        "name": "elements",
-        "default": "'all elements'"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "structure/_reset.scss",
-      "name": "_reset.scss"
-    }
-  },
-  {
-    "description": "\nOne declaration for width and height \n\n",
-    "commentRange": {
-      "start": 1,
-      "end": 13
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-size",
-      "code": "\n    @if $height != null {\n        width: $width;\n        height: $height;  \n    } \n    @else {\n        width: $width;\n        height: $width;\n    }\n",
-      "line": {
-        "start": 14,
-        "end": 23
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "value",
-        "name": "width"
-      },
-      {
-        "type": "value",
-        "name": "height",
-        "default": "null"
-      }
-    ],
-    "example": [
-      {
-        "type": "scss",
-        "code": ".code {\n\t@include size(20px);\n\t// width: 20px;\n\t// height: 20px;\n}"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "structure/_size.scss",
-      "name": "_size.scss"
-    }
-  },
-  {
-    "description": "\nTable based vertical align\n",
-    "commentRange": {
-      "start": 16,
-      "end": 22
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-verticalAlign",
-      "code": "\n    .#{$wrapperClass} {\n        @extend %bruce-vertical-align;\n    }\n\n    .#{$innerClass} {\n        @extend %bruce-vertical-align_inner;\n    }\n",
-      "line": {
-        "start": 24,
-        "end": 32
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "string",
-        "name": "wrapperClass"
-      },
-      {
-        "type": "string",
-        "name": "innerClass"
-      }
-    ],
-    "todo": [
-      "add more types of vertial aligns"
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "structure/_verticalAlign.scss",
-      "name": "_verticalAlign.scss"
-    }
-  },
-  {
-    "description": "\nUses the $sizes list to create a series of percentage based helper classes \nat intervals of 5%. Defaults are from 0 to 100.\n",
-    "commentRange": {
-      "start": 2,
-      "end": 21
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-generateWidth",
-      "code": "\n\n    .w#{capitalize($suffix)}#{$index}0,\n    .width#{capitalize($suffix)}#{$index}0 {\n        width: percentage($index) / 10 !important; \n    }\n\n    @if $index != 10 {\n        .w#{$index}5,\n        .width#{capitalize($suffix)}#{$index}5 { \n            width: percentage($index) / 10 + 5 !important; \n        }\n    }\n\n    @if $index == 0 {\n        .w#{$index}0,\n        .width#{capitalize($suffix)}#{$index}0 {\n            width: 1% !important;\n        }\n    } \n",
-      "line": {
-        "start": 23,
-        "end": 43
-      }
-    },
-    "group": [
-      "structure"
-    ],
-    "parameter": [
-      {
-        "type": "list",
-        "name": "sizes",
-        "default": "(0 1 2 3 4 5 6 7 8 9 10)"
-      }
-    ],
-    "example": [
-      {
-        "type": "scss",
-        "code": "@include bruce-widths(1 2);"
-      },
-      {
-        "type": "css",
-        "code": ".w10 {\n  width: 10% !important;\n}\n.w15 {\n  width: 15% !important;\n}\n.w20 {\n  width: 20% !important;\n}\n.w25 {\n  width: 25% !important;\n}"
-      }
-    ],
-    "access": "public",
-    "require": [
-      {
-        "type": "function",
-        "name": "capitalize"
-      }
-    ],
-    "file": {
-      "path": "structure/_widths.scss",
-      "name": "_widths.scss"
-    }
-  },
-  {
-    "description": "\nApplies the relevant styles to implement `text-overflow: ellipsis`.\n`$cutoff` allows the user to shrink in the space between the edge and...\n",
-    "commentRange": {
-      "start": 2,
-      "end": 7
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-ellipsis",
-      "code": "\n    @extend %bruce-ellipsis;\n    @if $cutoff != null {\n        padding-right: $cutoff;      \n    }   \n",
-      "line": {
-        "start": 9,
-        "end": 14
-      }
-    },
-    "group": [
-      "typography"
-    ],
-    "parameter": [
-      {
-        "type": "value",
-        "name": "cutoff"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "type/_ellipsis.scss",
-      "name": "_ellipsis.scss"
-    }
-  },
-  {
-    "description": "\nChains all your font face declarations into one include.\n",
-    "commentRange": {
-      "start": 2,
-      "end": 14
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-fontface",
-      "code": "\n    @each $name, $path, $font-weight, $font-style in $lists {\n        @if ($font-weight == null) {\n            $font-weight: normal;\n        }\n\n        @if ($font-style == null) {\n            $font-style: normal;\n        }\n        \n        @font-face {\n            font-family: $name;\n            src: url(\"#{$path}.eot\");\n            src: url(\"#{$path}.eot?#iefix\") format(\"embedded-opentype\"),\n                 url(\"#{$path}.woff2\") format(\"woff2\"),\n                 url(\"#{$path}.woff\") format(\"woff\"),\n                 url(\"#{$path}.ttf\") format(\"truetype\"),\n                 url(\"#{$path}.svg##{$name}\") format(\"svg\");\n            font-weight: $font-weight;\n            font-style: $font-style;\n        }\n    }   \n",
-      "line": {
-        "start": 16,
-        "end": 38
-      }
-    },
-    "group": [
-      "typography"
-    ],
-    "parameter": [
-      {
-        "type": "list: $name, $path, $font-weight, $font-style",
-        "name": "lists"
-      }
-    ],
-    "example": [
-      {
-        "type": "scss",
-        "code": "@include bruce-fontface((\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-light'      100),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-regular'    300),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-regitalic'  300   italic),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-bold'       600),\n    ('Glyphicons'           'fonts/glyphicons-regular'),\n    ('GlyphiconsHalflings'  'fonts/glyphicons-halflings-regular')\n));"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "type/_fontface.scss",
-      "name": "_fontface.scss"
-    }
-  },
-  {
-    "description": "\nUses borders to make triangles\n",
-    "commentRange": {
-      "start": 2,
-      "end": 9
-    },
-    "context": {
-      "type": "mixin",
-      "name": "bruce-arrow",
-      "code": "\n    display: block;\n    content: '';\n    width: 0;\n    height: 0;\n    border: 1em solid transparent;\n    border-width: $width;\n    border-#{$direction}-color: $color;\n",
-      "line": {
-        "start": 11,
-        "end": 19
-      }
-    },
-    "group": [
-      "utils"
-    ],
-    "output": "SHOW",
-    "parameter": [
-      {
-        "type": "value",
-        "name": "width"
-      },
-      {
-        "type": "string",
-        "name": "direction"
-      },
-      {
-        "type": "color",
-        "name": "color"
-      }
-    ],
-    "access": "public",
-    "require": [],
-    "file": {
-      "path": "style/_arrow.scss",
-      "name": "_arrow.scss"
-    }
-  },
-  {
-    "description": " \nUses the React.addons.CSSTransitionGroup syntax \nto create simple single property animations.\n",
+    "description": "\nUses the React.addons.CSSTransitionGroup syntax\nto create simple single property animations.\n",
     "commentRange": {
       "start": 2,
       "end": 32
     },
     "context": {
       "type": "mixin",
-      "name": "bruce-singlePropAnimation",
-      "code": "\n    @if ($fromLeave == null){\n        $fromLeave: $fromEnter;\n    }\n\n    @if ($toLeave == null){\n        $toLeave: $toEnter;\n    }\n\n    .#{$name}-enter {\n        #{$prop}: #{$fromEnter};\n\n        &.#{$name}-enter-active {\n            transition: all $duration;\n            #{$prop}: #{$toEnter};\n        }\n    }\n\n    .#{$name}-leave {\n        transition: all $duration;\n        #{$prop}: #{$fromLeave};\n\n        &.#{$name}-leave-active {\n            #{$prop}: #{$toLeave};\n        }\n    }\n",
+      "name": "BruceAnimationSingleProperty",
+      "code": "\n    @if ($fromLeave == null) {\n        $fromLeave: $fromEnter;\n    }\n\n    @if ($toLeave == null) {\n        $toLeave: $toEnter;\n    }\n\n    .#{$name}-enter {\n        #{$prop}: #{$fromEnter};\n\n        &.#{$name}-enter-active {\n            transition: $prop $duration;\n            #{$prop}: #{$toEnter};\n        }\n    }\n\n    .#{$name}-leave {\n        transition: $prop $duration;\n        #{$prop}: #{$fromLeave};\n\n        &.#{$name}-leave-active {\n            #{$prop}: #{$toLeave};\n        }\n    }\n",
       "line": {
         "start": 34,
         "end": 60
       }
     },
     "group": [
-      "utils"
+      "mixin"
     ],
     "parameter": [
       {
@@ -1273,14 +717,39 @@
     "example": [
       {
         "type": "scss",
-        "code": "// scss\n@include bruce-singlePropAnimation('fade', 300ms, opacity, 0, 1);\n\n// css\n.fade-enter {\n    opacity: 0;   \n}\n.fade-enter.fade-enter-active {\n    transition: all 300ms;\n    opacity: 1;\n}\n.fade-leave {\n    transition: all 300ms;\n    opacity: 1;\n}\n.fade-leave.fade-leave-active {\n    opacity: 0;\n}"
+        "code": "// scss\n@include bruce-singlePropAnimation('fade', 300ms, opacity, 0, 1);\n\n// css\n.fade-enter {\n    opacity: 0;\n}\n.fade-enter.fade-enter-active {\n    transition: all 300ms;\n    opacity: 1;\n}\n.fade-leave {\n    transition: all 300ms;\n    opacity: 1;\n}\n.fade-leave.fade-leave-active {\n    opacity: 0;\n}"
       }
     ],
     "access": "public",
     "require": [],
     "file": {
-      "path": "utils/_animations.scss",
+      "path": "mixins/_animations.scss",
       "name": "_animations.scss"
+    }
+  },
+  {
+    "description": "\nA sensible box-sizing inherit\n\n",
+    "commentRange": {
+      "start": 2,
+      "end": 6
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceBoxSizing",
+      "code": "\n    html {\n        box-sizing: border-box;\n    }\n\n    * {\n        box-sizing: inherit;\n\n        &:before,\n        &:after {\n            box-sizing: inherit;\n        }\n    }\n",
+      "line": {
+        "start": 8,
+        "end": 21
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "output": "SHOW",
+    "access": "public",
+    "file": {
+      "path": "mixins/_boxSizing.scss",
+      "name": "_boxSizing.scss"
     }
   },
   {
@@ -1291,15 +760,15 @@
     },
     "context": {
       "type": "mixin",
-      "name": "bruce-breakpoint",
-      "code": "\n    // Standard \n    $item: map-get($bruce-breakpoints, $bp);\n    \n    @if $item {\n        $bp: $item;\n    }\n\n    @if $bruce-ie == true {\n        @content;\n    } \n\n    @else {\n        @if type-of($bp) == 'number'{\n            @media (min-width: #{$bp})  { \n                @content; \n            }\n        }\n\n        @if type-of($bp) == 'list'{\n            $first:  nth($bp, 1);\n            $bp: nth($bp, 2);\n\n            $item: map-get($bruce-breakpoints, $bp);\n\n            @if $item {\n                $bp: $item;   \n            }\n\n\n            @if type-of($first) == 'string'{\n                @media (#{$first}: #{$bp}) { \n                    @content; \n                }\n            }\n            @elseif type-of($first) == 'number'{\n                @media (min-width: #{$first}) and (max-width: #{$bp}) { \n                    @content; \n                }\n            }\n            @else{\n                @warn 'bruce-breakpoint: wrong syntax';\n            }\n        }\n    }\n",
+      "name": "BruceBreakpoint",
+      "code": "\n    // Standard\n    $item: map-get($bruce-breakpoints, $bp);\n\n    @if $item {\n        $bp: $item;\n    }\n\n    @if $bruce-ie == true {\n        @content;\n    }\n\n    @else {\n        @if type-of($bp) == 'number'{\n            @media (min-width: #{$bp})  {\n                @content;\n            }\n        }\n\n        @if type-of($bp) == 'list'{\n            $first:  nth($bp, 1);\n            $bp: nth($bp, 2);\n\n            $item: map-get($bruce-breakpoints, $bp);\n\n            @if $item {\n                $bp: $item;\n            }\n\n\n            @if type-of($first) == 'string'{\n                @media (#{$first}: #{$bp}) {\n                    @content;\n                }\n            }\n            @elseif type-of($first) == 'number'{\n                @media (min-width: #{$first}) and (max-width: #{$bp}) {\n                    @content;\n                }\n            }\n            @else{\n                @warn 'bruce-breakpoint: wrong syntax';\n            }\n        }\n    }\n",
       "line": {
         "start": 26,
         "end": 72
       }
     },
     "group": [
-      "utils"
+      "mixin"
     ],
     "parameter": [
       {
@@ -1311,139 +780,380 @@
     "example": [
       {
         "type": "scss",
-        "code": ".class {\n    font-size: 1rem;\n    \n    @include bruce-breakpoint('small') {\n        font-size: 2rem;\n    }\n\n    @include bruce-breakpoint(40em) {\n        font-size: 3rem;\n    }\n\n    @include bruce-breakpoint(max-width: 40em) {\n        font-size: 4rem;\n    }\n\n}"
+        "code": ".class {\n    font-size: 1rem;\n\n    @include bruce-breakpoint('small') {\n        font-size: 2rem;\n    }\n\n    @include bruce-breakpoint(40em) {\n        font-size: 3rem;\n    }\n\n    @include bruce-breakpoint(max-width: 40em) {\n        font-size: 4rem;\n    }\n\n}"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_breakpoints.scss",
+      "name": "_breakpoints.scss"
+    },
+    "usedBy": [
+      {
+        "description": "\nCreate a table grid\n",
+        "context": {
+          "type": "mixin",
+          "name": "BruceGrid",
+          "code": "\n    .#{$name} {\n        box-sizing: border-box;\n        display: table;\n        table-layout: fixed;\n        width: 100%;\n\n        &-auto {\n            table-layout: auto;\n        }\n\n        &_column {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            @include BruceBreakpoint('small') {\n                @include BruceGridWidths($number);\n            }\n\n            &-always {\n                @include BruceGridWidths($number);\n            }\n\n            &-shrink {\n                white-space: nowrap;\n                width: 1px;\n            }\n        }\n\n        @content;\n    }\n",
+          "line": {
+            "start": 71,
+            "end": 103
+          }
+        }
+      }
+    ]
+  },
+  {
+    "description": "\n`:after` pseudo element clearfix\n\n",
+    "commentRange": {
+      "start": 2,
+      "end": 6
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceClearfix",
+      "code": "\n    &:after {\n        clear: both;\n        content: '';\n        display: table;\n    }\n",
+      "line": {
+        "start": 8,
+        "end": 14
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "access": "public",
+    "file": {
+      "path": "mixins/_clearfix.scss",
+      "name": "_clearfix.scss"
+    }
+  },
+  {
+    "description": "\nAdds Spruce modifiers for direction based rules\n\n",
+    "commentRange": {
+      "start": 2,
+      "end": 49
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceDirectionModifiers",
+      "code": "\n    $sides: fourProps($sizes);\n    $prefix: nth($name, 1);\n    $suffix: '';\n\n    @if(length($name) == 2) {\n        $suffix: nth($name, 2);\n    }\n\n    &-#{$prefix}#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-right: map-get($sides, 'right');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n        #{$prop}-left: map-get($sides, 'left');\n    }\n\n    &-#{$prefix}Column#{$suffix} {\n        #{$prop}-left: map-get($sides, 'left');\n        #{$prop}-right: map-get($sides, 'right');\n    }\n\n    &-#{$prefix}Row#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n    }\n\n    @each $Direction in ('Top', 'Right', 'Bottom', 'Left') {\n        $direction: to_lower_case($Direction);\n        &-#{$prefix}#{$Direction}#{$suffix} {\n            #{$prop}-#{$direction}: map-get($sides, 'top');\n        }\n    }\n",
+      "line": {
+        "start": 51,
+        "end": 84
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "list",
+        "name": "name"
+      },
+      {
+        "type": "string",
+        "name": "prop"
+      },
+      {
+        "type": "list",
+        "name": "size"
+      }
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": "\n.Text {\n    @include BruceDirectionModifiers('margin' 'Giga', 'margin', 1rem 2rem);\n}\n\n// Will Produce:\n\n.Text-marginGiga {\n  margin-top: 1rem;\n  margin-right: 2rem;\n  margin-bottom: 1rem;\n  margin-left: 2rem;\n}\n\n.Text-marginColumnGiga {\n  margin-left: 2rem;\n  margin-right: 2rem;\n}\n\n.Text-marginRowGiga {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n}\n\n.Text-marginTopGiga {\n  margin-top: 1rem;\n}\n\n.Text-marginRightGiga {\n  margin-right: 1rem;\n}\n\n.Text-marginBottomGiga {\n  margin-bottom: 1rem;\n}\n\n.Text-marginLeftGiga {\n  margin-left: 1rem;\n}"
       }
     ],
     "access": "public",
     "require": [
       {
-        "type": "variable",
-        "name": "bruce-breakpoints"
+        "type": "function",
+        "name": "fourProps"
       }
     ],
     "file": {
-      "path": "utils/_breakpoints.scss",
-      "name": "_breakpoints.scss"
-    },
-    "usedBy": [
-      {
-        "description": "\nTable grid\n\n",
-        "context": {
-          "type": "mixin",
-          "name": "bruce-grid",
-          "code": "\n    $gutter: 1rem !default;\n\n    .#{$grid} {\n        box-sizing: border-box;\n        display: table;\n        width: 100%;\n        table-layout: fixed;        \n\n        & > [class*=#{$col}] {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            margin-bottom: 1rem;\n\n            @include bruce-breakpoint(small) {\n                display: table-cell;\n                border-right: $gutter solid transparent;\n                border-left: $gutter solid transparent;\n                margin: 0;\n            \n                &:first-child {\n                    border-left: 0;\n                }\n\n                &:last-child {\n                    border-right: 0;\n                }\n\n                // nullify quashed borders on pushed and pulled cols\n                &[class*=\"#{$col}push\"],\n                &[class*=\"#{$col}pull\"] {\n                    border-right: $gutter solid transparent;\n                    border-left: $gutter solid transparent;\n                }\n            }\n        }\n      \n        // Alignment\n        &.#{$grid}-middle { \n            & > [class*=#{$col}] {\n                vertical-align: middle;\n            }\n        }\n\n        &.#{$grid}-bottom {\n            & > [class*=#{$col}] {\n                vertical-align: bottom;\n            }\n        }\n\n        // Sizing\n        &.#{$grid}-tight {\n            & > [class*=#{$col}] {\n                border-width: $gutter / 2;\n                margin-bottom: $gutter / 2;\n            }\n        }\n\n        &.#{$grid}-tighter {\n            & > [class*=#{$col}] {\n                border-width: $gutter / 4;\n                margin-bottom: $gutter / 4;                \n            }\n        }\n\n        &.#{$grid}-flush {\n            & > [class*=#{$col}] {\n                border: 0;\n            }\n        }\n\n        @include bruce-breakpoint(small) {\n            @for $i from 1 through $number {\n                // column widths\n                & > .#{$col}#{$i} {\n                    width: (100% / $number) * $i;\n                }\n                // pushing and pulling columns\n                & > .#{$col}push#{$i} {\n                    position: relative;\n                    left: (100% / $number) * $i;\n                }\n                & > .#{$col}pull#{$i} {\n                    position: relative;\n                    right: (100% / $number) * $i;\n                }\n                // quash borders on correct sides of swapped 2 column grids\n                & > .#{$col}#{$i}.#{$col}push#{$number - $i} {\n                    border-right: 0;\n                }\n                & > .#{$col}#{$i}.#{$col}pull#{$number - $i} {\n                    border-left: 0;\n                }\n            }\n        }   \n    }\n",
-          "line": {
-            "start": 18,
-            "end": 118
-          }
-        }
-      }
-    ]
+      "path": "mixins/_directionModifiers.scss",
+      "name": "_directionModifiers.scss"
+    }
   },
   {
-    "description": "\nDefinition of color\n\n",
+    "description": "\nApplies the relevant styles to implement `text-overflow: ellipsis`.\n`$cutoff` allows the user to shrink in the space between the edge and...\n",
     "commentRange": {
-      "start": 10,
+      "start": 2,
+      "end": 7
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceEllipsis",
+      "code": "\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n\n    @if $cutoff != null {\n        padding-right: $cutoff;\n    }\n",
+      "line": {
+        "start": 9,
+        "end": 17
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "value",
+        "name": "cutoff"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_ellipsis.scss",
+      "name": "_ellipsis.scss"
+    }
+  },
+  {
+    "description": "\nAbsolutely position an element to it's containing bounds.\n\n",
+    "commentRange": {
+      "start": 2,
+      "end": 6
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceFlood",
+      "code": "\n    bottom: 0;\n    left: 0;\n    position: absolute;\n    right: 0;\n    top: 0;\n",
+      "line": {
+        "start": 8,
+        "end": 14
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "output": "SHOW",
+    "access": "public",
+    "file": {
+      "path": "mixins/_flood.scss",
+      "name": "_flood.scss"
+    }
+  },
+  {
+    "description": "\nChains all your font face declarations into one include.\n",
+    "commentRange": {
+      "start": 2,
       "end": 14
     },
     "context": {
-      "type": "variable",
-      "name": "bruce-colors",
-      "value": "(\n    'hero': #e65053,\n    'dark': grey(20),\n    'alt': grey(90)\n)",
-      "scope": "default",
+      "type": "mixin",
+      "name": "BruceFontFace",
+      "code": "\n    @each $name, $path, $font-weight, $font-style in $lists {\n        @if ($font-weight == null) {\n            $font-weight: normal;\n        }\n\n        @if ($font-style == null) {\n            $font-style: normal;\n        }\n\n        @font-face {\n            font-family: $name;\n            src: url(\"#{$path}.eot\");\n            src: url(\"#{$path}.eot?#iefix\") format(\"embedded-opentype\"),\n                 url(\"#{$path}.woff2\") format(\"woff2\"),\n                 url(\"#{$path}.woff\") format(\"woff\"),\n                 url(\"#{$path}.ttf\") format(\"truetype\"),\n                 url(\"#{$path}.svg##{$name}\") format(\"svg\");\n            font-weight: $font-weight;\n            font-style: $font-style;\n        }\n    }\n",
       "line": {
-        "start": 15,
-        "end": 19
+        "start": 16,
+        "end": 38
       }
     },
     "group": [
-      "variables"
+      "mixin"
     ],
-    "type": "list",
-    "access": "public",
-    "file": {
-      "path": "_vars.scss",
-      "name": "_vars.scss"
-    },
-    "usedBy": [
+    "parameter": [
       {
-        "description": "\nReturns a color from `$bruce-colors`\n\n",
-        "context": {
-          "type": "function",
-          "name": "color",
-          "code": "\n    @return map-fetch($bruce-colors, $name);\n",
-          "line": {
-            "start": 16,
-            "end": 18
-          }
-        }
+        "type": "list: $name, $path, $font-weight, $font-style",
+        "name": "lists"
       }
-    ]
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": "@include BruceFontFace((\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-light'      100),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-regular'    300),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-regitalic'  300   italic),\n    ('ProximaNova'          'fonts/proxima-nova/proximanova-bold'       600),\n    ('Glyphicons'           'fonts/glyphicons-regular'),\n    ('GlyphiconsHalflings'  'fonts/glyphicons-halflings-regular')\n));"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_fontface.scss",
+      "name": "_fontface.scss"
+    }
   },
   {
-    "description": "\nDefault breakpoints\n\n",
+    "description": "\nCreate a table grid\n",
     "commentRange": {
-      "start": 29,
-      "end": 34
+      "start": 64,
+      "end": 69
     },
     "context": {
-      "type": "variable",
-      "name": "bruce-breakpoints",
-      "value": "(\n    'large':  120rem,\n    'medium': 64rem,\n    'small':  48rem,\n    'tiny':   30rem\n)",
-      "scope": "private",
+      "type": "mixin",
+      "name": "BruceGrid",
+      "code": "\n    .#{$name} {\n        box-sizing: border-box;\n        display: table;\n        table-layout: fixed;\n        width: 100%;\n\n        &-auto {\n            table-layout: auto;\n        }\n\n        &_column {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            @include BruceBreakpoint('small') {\n                @include BruceGridWidths($number);\n            }\n\n            &-always {\n                @include BruceGridWidths($number);\n            }\n\n            &-shrink {\n                white-space: nowrap;\n                width: 1px;\n            }\n        }\n\n        @content;\n    }\n",
       "line": {
-        "start": 35,
-        "end": 40
+        "start": 71,
+        "end": 103
       }
     },
     "group": [
-      "variables"
+      "mixin"
     ],
-    "type": "list",
-    "access": "public",
-    "file": {
-      "path": "_vars.scss",
-      "name": "_vars.scss"
-    },
-    "usedBy": [
+    "parameter": [
       {
-        "description": "\nReturns a media query based on the content of `$bp`.\n",
-        "context": {
-          "type": "mixin",
-          "name": "bruce-breakpoint",
-          "code": "\n    // Standard \n    $item: map-get($bruce-breakpoints, $bp);\n    \n    @if $item {\n        $bp: $item;\n    }\n\n    @if $bruce-ie == true {\n        @content;\n    } \n\n    @else {\n        @if type-of($bp) == 'number'{\n            @media (min-width: #{$bp})  { \n                @content; \n            }\n        }\n\n        @if type-of($bp) == 'list'{\n            $first:  nth($bp, 1);\n            $bp: nth($bp, 2);\n\n            $item: map-get($bruce-breakpoints, $bp);\n\n            @if $item {\n                $bp: $item;   \n            }\n\n\n            @if type-of($first) == 'string'{\n                @media (#{$first}: #{$bp}) { \n                    @content; \n                }\n            }\n            @elseif type-of($first) == 'number'{\n                @media (min-width: #{$first}) and (max-width: #{$bp}) { \n                    @content; \n                }\n            }\n            @else{\n                @warn 'bruce-breakpoint: wrong syntax';\n            }\n        }\n    }\n",
-          "line": {
-            "start": 26,
-            "end": 72
-          }
-        }
+        "type": "string",
+        "name": "name"
+      },
+      {
+        "type": "number",
+        "name": "number"
       }
-    ]
+    ],
+    "access": "public",
+    "content": "",
+    "require": [
+      {
+        "type": "mixin",
+        "name": "BruceBreakpoint"
+      }
+    ],
+    "file": {
+      "path": "mixins/_grid.scss",
+      "name": "_grid.scss"
+    }
   },
   {
-    "description": "\nDirections\n\n",
+    "description": "\nUses positioing to hide but not remove\n",
     "commentRange": {
-      "start": 42,
-      "end": 47
+      "start": 2,
+      "end": 5
     },
     "context": {
-      "type": "variable",
-      "name": "bruce-directions",
-      "value": "(\n    top,\n    right,\n    bottom,\n    left\n)",
-      "scope": "private",
+      "type": "mixin",
+      "name": "BruceHide",
+      "code": "\n    border: 0;\n    clip: rect(0 0 0 0);\n    height: 1px;\n    margin: -1px;\n    overflow: hidden;\n    padding: 0;\n    position: absolute;\n    width: 1px;\n",
       "line": {
-        "start": 48,
-        "end": 53
+        "start": 7,
+        "end": 16
       }
     },
     "group": [
-      "variables"
+      "mixin"
     ],
-    "type": "list",
     "access": "public",
+    "require": [],
     "file": {
-      "path": "_vars.scss",
-      "name": "_vars.scss"
+      "path": "mixins/_hide.scss",
+      "name": "_hide.scss"
+    }
+  },
+  {
+    "description": "\nUses `:before` to create a fixed ratio for the element\n",
+    "commentRange": {
+      "start": 1,
+      "end": 6
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceRatio",
+      "code": "\n    &:before {\n        content: '';\n        display: block;\n        padding-top: $height / $width * 100%;\n    }\n",
+      "line": {
+        "start": 8,
+        "end": 14
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "number",
+        "name": "width"
+      },
+      {
+        "type": "number",
+        "name": "height"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_ratio.scss",
+      "name": "_ratio.scss"
+    }
+  },
+  {
+    "description": "\nThe Meyer reset. Can take a custom list of elements for padding and margin removal.\n",
+    "commentRange": {
+      "start": 19,
+      "end": 26
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceReset",
+      "code": "\n    #{$elements} {\n        border: 0;\n        font-size: 100%;\n        font: inherit;\n        margin: 0;\n        padding: 0;\n        vertical-align: baseline;\n    }\n\n    article,\n    aside,\n    details,\n    figcaption,\n    figure,\n    footer,\n    header,\n    hgroup,\n    menu,\n    nav,\n    section {\n        display: block;\n    }\n\n    body {\n        line-height: 1;\n    }\n\n    ol,\n    ul {\n        list-style: none;\n    }\n\n    blockquote,\n    q {\n        quotes: none;\n    }\n\n    blockquote:before,\n    blockquote:after,\n    q:before,\n    q:after {\n        content: '';\n        content: none;\n    }\n\n    table {\n        border-collapse: collapse;\n        border-spacing: 0;\n    }\n",
+      "line": {
+        "start": 28,
+        "end": 81
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "link": [
+      {
+        "url": "http://www.meyerweb.com/eric/tools/css/reset/",
+        "caption": "The Meyer reset"
+      },
+      {
+        "url": "http://www.meyerweb.com/eric/tools/css/reset/",
+        "caption": "The Meyer reset"
+      }
+    ],
+    "parameter": [
+      {
+        "type": "list",
+        "name": "elements",
+        "default": "'all elements'"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_reset.scss",
+      "name": "_reset.scss"
+    }
+  },
+  {
+    "description": "\nOne declaration for width and height\n\n",
+    "commentRange": {
+      "start": 1,
+      "end": 13
+    },
+    "context": {
+      "type": "mixin",
+      "name": "BruceSize",
+      "code": "\n    @if $height != null {\n        height: $height;\n        width: $width;\n    } @else {\n        height: $width;\n        width: $width;\n    }\n",
+      "line": {
+        "start": 14,
+        "end": 22
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "value",
+        "name": "width"
+      },
+      {
+        "type": "value",
+        "name": "height",
+        "default": "null"
+      }
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": ".code {\n\t@include size(20px);\n\t// width: 20px;\n\t// height: 20px;\n}"
+      }
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "mixins/_size.scss",
+      "name": "_size.scss"
     }
   }
 ]

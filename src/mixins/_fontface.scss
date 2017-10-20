@@ -1,7 +1,7 @@
 
 ///
 /// Chains all your font face declarations into one include.
-/// @group typography
+/// @group mixin
 /// @param {list: $name, $path, $font-weight, $font-style} $lists
 /// @example
 ///     @include BruceFontFace((

@@ -24,9 +24,7 @@ export default (props) => {
 	var docs = groupBy(props.docs, 'group[0]');
     return (
         <ul className="Navigation floatLeft">
-        	<li key="styleguide"><strong><a href="#styleguide">classes</a></strong></li>
         	<ul>{map(props.styleguide.sections, renderStyle)}</ul>
-
         	{map(docs, renderGroup)}
         </ul>
     )

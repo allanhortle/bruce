@@ -56,7 +56,7 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "build": "webpack --progress --colors --config webpack.production.config.js",
+    "build": "node docs/generate.js && webpack --progress --colors --config webpack.production.config.js",
     "dev": "webpack-dev-server --no-info",
     "start": "npm run dev"
   },

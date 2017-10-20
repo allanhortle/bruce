@@ -1,6 +1,4 @@
-///
-/// Table grid
-///
+
 
 @mixin BruceGridWidths($number) {
     display: table-cell;
@@ -62,6 +60,14 @@
     }
 }
 
+
+///
+/// Create a table grid
+/// @group mixin
+/// @param {string} $name
+/// @param {number} $number
+///
+
 @mixin BruceGrid($name: 'Grid', $number: 12) {
     .#{$name} {
         box-sizing: border-box;
@@ -78,7 +84,7 @@
             display: block;
             vertical-align: top;
 
-            @include bruce-breakpoint('small') {
+            @include BruceBreakpoint('small') {
                 @include BruceGridWidths($number);
             }
 

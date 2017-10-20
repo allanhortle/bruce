@@ -1,8 +1,5 @@
 @import '../bruce';
 
-@include bruce-box-sizing;
-@include bruce-float;
-@include bruce-hide;
-@include bruce-reset;
-@include bruce-classes;
-@include bruce-widths;
+@include BruceBoxSizing;
+@include BruceHide;
+@include BruceReset;

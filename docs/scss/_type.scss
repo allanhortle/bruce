@@ -41,7 +41,6 @@ a {
 }
 
 pre {
-	@include bruce-ios('scroll');
 	@extend %code;
 	overflow: auto;
 	padding: 1rem;
