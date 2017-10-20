@@ -5,7 +5,7 @@
 /// @group functions
 /// @link http://github.com/allanhortle/bruce/src/functions/_font.scss
 /// @require {variable} bruce-fonts
-/// @parameter {string} $name - uses `map-fetch()` to return the value of `$name` from `$bruce-fonts`
+/// @parameter {string} $name - uses `mapGetIn()` to return the value of `$name` from `$bruce-fonts`
 /// @return {string}s
 /// @example
 /// .class {
@@ -14,5 +14,5 @@
 ///
 
 @function font($name) {
-    @return map-fetch($bruce-fonts, $name);
+    @return mapGetIn($bruce-fonts, $name);
 }
