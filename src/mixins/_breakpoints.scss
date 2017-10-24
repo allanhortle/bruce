@@ -1,6 +1,6 @@
 
 ///
-/// Returns a media query based on the content of `$bp`.
+/// Returns a media query based on the content of `$breakpoint`.
 /// @group mixin
 /// @param {string|value|list} $breakpoint
 /// @content
@@ -8,15 +8,19 @@
 ///     .class {
 ///         font-size: 1rem;
 ///
-///         @include bruce-breakpoint('small') {
+///         @include BruceBreakpoint('small') {
 ///             font-size: 2rem;
 ///         }
 ///
-///         @include bruce-breakpoint(40em) {
+///         @include BruceBreakpoint(40em) {
 ///             font-size: 3rem;
 ///         }
 ///
-///         @include bruce-breakpoint(max-width: 40em) {
+///         @include BruceBreakpoint(max-width 40em) {
+///             font-size: 4rem;
+///         }
+///
+///         @include BruceBreakpoint(20em 40em) {
 ///             font-size: 4rem;
 ///         }
 ///
@@ -24,45 +28,38 @@
 ///
 
 
-@mixin BruceBreakpoint($bp) {
-    // Standard
-    $item: map-get($bruce-breakpoints, $bp);
-
-    @if $item {
-        $bp: $item;
+@mixin BruceBreakpoint($breakpoint) {
+    @if map-has-key($bruce-breakpoints, $breakpoint) {
+        $breakpoint: map-get($bruce-breakpoints, $breakpoint);
     }
 
-    @else {
-        @if type-of($bp) == 'number'{
-            @media (min-width: #{$bp})  {
+    @if type-of($breakpoint) == 'number'{
+        @media (min-width: #{$breakpoint})  {
+            @content;
+        }
+    }
+
+    @if type-of($breakpoint) == 'list' {
+        $first: nth($breakpoint, 1);
+        $breakpoint: nth($breakpoint, 2);
+
+        @if map-has-key($bruce-breakpoints, $breakpoint) {
+            $breakpoint: map-get($bruce-breakpoints, $breakpoint);
+        }
+
+
+        @if type-of($first) == 'string' {
+            @media (#{$first}: #{$breakpoint}) {
                 @content;
             }
         }
-
-        @if type-of($bp) == 'list'{
-            $first:  nth($bp, 1);
-            $bp: nth($bp, 2);
-
-            $item: map-get($bruce-breakpoints, $bp);
-
-            @if $item {
-                $bp: $item;
+        @elseif type-of($first) == 'number' {
+            @media (min-width: #{$first}) and (max-width: #{$breakpoint}) {
+                @content;
             }
-
-
-            @if type-of($first) == 'string'{
-                @media (#{$first}: #{$bp}) {
-                    @content;
-                }
-            }
-            @elseif type-of($first) == 'number'{
-                @media (min-width: #{$first}) and (max-width: #{$bp}) {
-                    @content;
-                }
-            }
-            @else{
-                @warn 'bruce-breakpoint: wrong syntax';
-            }
+        }
+        @else {
+            @warn 'bruce-breakpoint: wrong syntax';
         }
     }
 }
