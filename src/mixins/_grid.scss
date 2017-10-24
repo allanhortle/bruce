@@ -64,40 +64,37 @@
 ///
 /// Create a table grid
 /// @group mixin
-/// @param {string} $name
 /// @param {number} $number
 ///
 
-@mixin BruceGrid($name: 'Grid', $number: 12) {
-    .#{$name} {
-        box-sizing: border-box;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
+@mixin BruceGrid($number: 12) {
+    box-sizing: border-box;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
 
-        &-auto {
-            table-layout: auto;
-        }
-
-        &_column {
-            box-sizing: border-box;
-            display: block;
-            vertical-align: top;
-
-            @include BruceBreakpoint('small') {
-                @include BruceGridWidths($number);
-            }
-
-            &-always {
-                @include BruceGridWidths($number);
-            }
-
-            &-shrink {
-                white-space: nowrap;
-                width: 1px;
-            }
-        }
-
-        @content;
+    &-auto {
+        table-layout: auto;
     }
+
+    &_column {
+        box-sizing: border-box;
+        display: block;
+        vertical-align: top;
+
+        @include BruceBreakpoint('small') {
+            @include BruceGridWidths($number);
+        }
+
+        &-always {
+            @include BruceGridWidths($number);
+        }
+
+        &-shrink {
+            white-space: nowrap;
+            width: 1px;
+        }
+    }
+
+    @content;
 }
