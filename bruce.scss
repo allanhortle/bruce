@@ -1,25 +1,9 @@
 
-///
-/// Definition of color
-///
-/// @group variables
-/// @type list
 $bruce-colors: () !default;
 $bruce-fonts: () !default;
 $bruce-zindex: () !default;
+$bruce-breakpoints:() !default;
 
-///
-/// Default breakpoints
-///
-/// @group variables
-/// @type list
-///
-$bruce-breakpoints:(
-    'large':  120rem,
-    'medium': 64rem,
-    'small':  48rem,
-    'tiny':   30rem
-);
 
 //
 // Functions
