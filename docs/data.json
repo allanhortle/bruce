@@ -178,7 +178,7 @@
     "context": {
       "type": "function",
       "name": "font",
-      "code": "\n    @return map-fetch($bruce-fonts, $name);\n",
+      "code": "\n    @return mapGetIn($bruce-fonts, $name);\n",
       "line": {
         "start": 16,
         "end": 18
@@ -193,12 +193,17 @@
         "caption": ""
       }
     ],
-    "require": [],
+    "require": [
+      {
+        "type": "function",
+        "name": "mapGetIn"
+      }
+    ],
     "parameter": [
       {
         "type": "string",
         "name": "name",
-        "description": "uses `map-fetch()` to return the value of `$name` from `$bruce-fonts`"
+        "description": "uses `mapGetIn()` to return the value of `$name` from `$bruce-fonts`"
       }
     ],
     "return": {
@@ -264,8 +269,8 @@
           "name": "BruceDirectionModifiers",
           "code": "\n    $sides: fourProps($sizes);\n    $prefix: nth($name, 1);\n    $suffix: '';\n\n    @if(length($name) == 2) {\n        $suffix: nth($name, 2);\n    }\n\n    &-#{$prefix}#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-right: map-get($sides, 'right');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n        #{$prop}-left: map-get($sides, 'left');\n    }\n\n    &-#{$prefix}Column#{$suffix} {\n        #{$prop}-left: map-get($sides, 'left');\n        #{$prop}-right: map-get($sides, 'right');\n    }\n\n    &-#{$prefix}Row#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n    }\n\n    @each $Direction in ('Top', 'Right', 'Bottom', 'Left') {\n        $direction: to_lower_case($Direction);\n        &-#{$prefix}#{$Direction}#{$suffix} {\n            #{$prop}-#{$direction}: map-get($sides, 'top');\n        }\n    }\n",
           "line": {
-            "start": 51,
-            "end": 84
+            "start": 50,
+            "end": 83
           }
         }
       }
@@ -435,6 +440,18 @@
           "type": "function",
           "name": "color",
           "code": "\n    @return mapGetIn($bruce-colors, $name);\n",
+          "line": {
+            "start": 16,
+            "end": 18
+          }
+        }
+      },
+      {
+        "description": "\nReturns a color from `$bruce-colors`\n\n",
+        "context": {
+          "type": "function",
+          "name": "font",
+          "code": "\n    @return mapGetIn($bruce-fonts, $name);\n",
           "line": {
             "start": 16,
             "end": 18
@@ -753,18 +770,18 @@
     }
   },
   {
-    "description": "\nReturns a media query based on the content of `$bp`.\n",
+    "description": "\nReturns a media query based on the content of `$breakpoint`.\n",
     "commentRange": {
       "start": 2,
-      "end": 24
+      "end": 28
     },
     "context": {
       "type": "mixin",
       "name": "BruceBreakpoint",
-      "code": "\n    // Standard\n    $item: map-get($bruce-breakpoints, $bp);\n\n    @if $item {\n        $bp: $item;\n    }\n\n    @if $bruce-ie == true {\n        @content;\n    }\n\n    @else {\n        @if type-of($bp) == 'number'{\n            @media (min-width: #{$bp})  {\n                @content;\n            }\n        }\n\n        @if type-of($bp) == 'list'{\n            $first:  nth($bp, 1);\n            $bp: nth($bp, 2);\n\n            $item: map-get($bruce-breakpoints, $bp);\n\n            @if $item {\n                $bp: $item;\n            }\n\n\n            @if type-of($first) == 'string'{\n                @media (#{$first}: #{$bp}) {\n                    @content;\n                }\n            }\n            @elseif type-of($first) == 'number'{\n                @media (min-width: #{$first}) and (max-width: #{$bp}) {\n                    @content;\n                }\n            }\n            @else{\n                @warn 'bruce-breakpoint: wrong syntax';\n            }\n        }\n    }\n",
+      "code": "\n    @if map-has-key($bruce-breakpoints, $breakpoint) {\n        $breakpoint: map-get($bruce-breakpoints, $breakpoint);\n    }\n\n    @if type-of($breakpoint) == 'number'{\n        @media (min-width: #{$breakpoint})  {\n            @content;\n        }\n    }\n\n    @if type-of($breakpoint) == 'list' {\n        $first: nth($breakpoint, 1);\n        $breakpoint: nth($breakpoint, 2);\n\n        @if map-has-key($bruce-breakpoints, $breakpoint) {\n            $breakpoint: map-get($bruce-breakpoints, $breakpoint);\n        }\n\n\n        @if type-of($first) == 'string' {\n            @media (#{$first}: #{$breakpoint}) {\n                @content;\n            }\n        }\n        @elseif type-of($first) == 'number' {\n            @media (min-width: #{$first}) and (max-width: #{$breakpoint}) {\n                @content;\n            }\n        }\n        @else {\n            @warn 'bruce-breakpoint: wrong syntax';\n        }\n    }\n",
       "line": {
-        "start": 26,
-        "end": 72
+        "start": 30,
+        "end": 65
       }
     },
     "group": [
@@ -780,7 +797,7 @@
     "example": [
       {
         "type": "scss",
-        "code": ".class {\n    font-size: 1rem;\n\n    @include bruce-breakpoint('small') {\n        font-size: 2rem;\n    }\n\n    @include bruce-breakpoint(40em) {\n        font-size: 3rem;\n    }\n\n    @include bruce-breakpoint(max-width: 40em) {\n        font-size: 4rem;\n    }\n\n}"
+        "code": ".class {\n    font-size: 1rem;\n\n    @include BruceBreakpoint('small') {\n        font-size: 2rem;\n    }\n\n    @include BruceBreakpoint(40em) {\n        font-size: 3rem;\n    }\n\n    @include BruceBreakpoint(max-width 40em) {\n        font-size: 4rem;\n    }\n\n    @include BruceBreakpoint(20em 40em) {\n        font-size: 4rem;\n    }\n\n}"
       }
     ],
     "access": "public",
@@ -795,10 +812,10 @@
         "context": {
           "type": "mixin",
           "name": "BruceGrid",
-          "code": "\n    .#{$name} {\n        box-sizing: border-box;\n        display: table;\n        table-layout: fixed;\n        width: 100%;\n\n        &-auto {\n            table-layout: auto;\n        }\n\n        &_column {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            @include BruceBreakpoint('small') {\n                @include BruceGridWidths($number);\n            }\n\n            &-always {\n                @include BruceGridWidths($number);\n            }\n\n            &-shrink {\n                white-space: nowrap;\n                width: 1px;\n            }\n        }\n\n        @content;\n    }\n",
+          "code": "\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_column {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        @include BruceBreakpoint('small') {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-always {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n",
           "line": {
-            "start": 71,
-            "end": 103
+            "start": 70,
+            "end": 100
           }
         }
       }
@@ -832,15 +849,15 @@
     "description": "\nAdds Spruce modifiers for direction based rules\n\n",
     "commentRange": {
       "start": 2,
-      "end": 49
+      "end": 48
     },
     "context": {
       "type": "mixin",
       "name": "BruceDirectionModifiers",
       "code": "\n    $sides: fourProps($sizes);\n    $prefix: nth($name, 1);\n    $suffix: '';\n\n    @if(length($name) == 2) {\n        $suffix: nth($name, 2);\n    }\n\n    &-#{$prefix}#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-right: map-get($sides, 'right');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n        #{$prop}-left: map-get($sides, 'left');\n    }\n\n    &-#{$prefix}Column#{$suffix} {\n        #{$prop}-left: map-get($sides, 'left');\n        #{$prop}-right: map-get($sides, 'right');\n    }\n\n    &-#{$prefix}Row#{$suffix} {\n        #{$prop}-top: map-get($sides, 'top');\n        #{$prop}-bottom: map-get($sides, 'bottom');\n    }\n\n    @each $Direction in ('Top', 'Right', 'Bottom', 'Left') {\n        $direction: to_lower_case($Direction);\n        &-#{$prefix}#{$Direction}#{$suffix} {\n            #{$prop}-#{$direction}: map-get($sides, 'top');\n        }\n    }\n",
       "line": {
-        "start": 51,
-        "end": 84
+        "start": 50,
+        "end": 83
       }
     },
     "group": [
@@ -975,25 +992,21 @@
     "description": "\nCreate a table grid\n",
     "commentRange": {
       "start": 64,
-      "end": 69
+      "end": 68
     },
     "context": {
       "type": "mixin",
       "name": "BruceGrid",
-      "code": "\n    .#{$name} {\n        box-sizing: border-box;\n        display: table;\n        table-layout: fixed;\n        width: 100%;\n\n        &-auto {\n            table-layout: auto;\n        }\n\n        &_column {\n            box-sizing: border-box;\n            display: block;\n            vertical-align: top;\n\n            @include BruceBreakpoint('small') {\n                @include BruceGridWidths($number);\n            }\n\n            &-always {\n                @include BruceGridWidths($number);\n            }\n\n            &-shrink {\n                white-space: nowrap;\n                width: 1px;\n            }\n        }\n\n        @content;\n    }\n",
+      "code": "\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_column {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        @include BruceBreakpoint('small') {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-always {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n",
       "line": {
-        "start": 71,
-        "end": 103
+        "start": 70,
+        "end": 100
       }
     },
     "group": [
       "mixin"
     ],
     "parameter": [
-      {
-        "type": "string",
-        "name": "name"
-      },
       {
         "type": "number",
         "name": "number"
