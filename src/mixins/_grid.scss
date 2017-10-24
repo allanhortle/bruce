@@ -1,6 +1,6 @@
 
 
-@mixin BruceGridWidths($number) {
+@mixin BruceGridWidths($number, $name) {
     display: table-cell;
     margin: 0;
 
@@ -38,11 +38,11 @@
             width: (100% / $number) * $i;
 
             // quash borders on correct sides of swapped 2 column grids
-            &-push#{$number - $i} {
+            &#{$name}-push#{$number - $i} {
                 border-right: 0;
             }
 
-            &-pull#{$number - $i} {
+            &#{$name}-pull#{$number - $i} {
                 border-left: 0;
             }
         }
@@ -83,11 +83,11 @@
         vertical-align: top;
 
         @include BruceBreakpoint('small') {
-            @include BruceGridWidths($number);
+            @include BruceGridWidths($number, &);
         }
 
         &-always {
-            @include BruceGridWidths($number);
+            @include BruceGridWidths($number, &);
         }
 
         &-shrink {
