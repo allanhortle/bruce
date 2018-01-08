@@ -1,0 +1,15 @@
+///
+/// Generate a spruce peer relationship
+/// @group mixin
+/// @param {string} $name
+///
+@mixin SprucePeer($name: null) {
+    @if $name != null {
+        &--#{$name} {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+}

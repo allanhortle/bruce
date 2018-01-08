@@ -1,0 +1,15 @@
+///
+/// Generate a spruce modifier relationship
+/// @group mixin
+/// @param {string} $name
+///
+@mixin SpruceModifier($name: null) {
+    @if $name != null {
+        &-#{$name} {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+}

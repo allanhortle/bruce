@@ -43,4 +43,8 @@ $bruce-breakpoints:() !default;
 @import 'src/mixins/ratio';
 @import 'src/mixins/reset';
 @import 'src/mixins/size';
+@import 'src/mixins/spruceChild';
+@import 'src/mixins/spruceComponent';
+@import 'src/mixins/spruceModifier';
+@import 'src/mixins/sprucePeer';
 

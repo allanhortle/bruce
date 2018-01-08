@@ -1,0 +1,15 @@
+///
+/// Generate a spruce component
+/// @group mixin
+/// @param {string} $name
+///
+@mixin SpruceComponent($name: null) {
+    @if $name != null {
+        .#{$name} {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+}

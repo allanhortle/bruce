@@ -1,0 +1,15 @@
+///
+/// Generate a spruce child relationship
+/// @group mixin
+/// @param {string} $name
+///
+@mixin SpruceChild($name: null) {
+    @if $name != null {
+        &_#{$name} {
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+}
