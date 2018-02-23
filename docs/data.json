@@ -812,9 +812,9 @@
         "context": {
           "type": "mixin",
           "name": "BruceGrid",
-          "code": "\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_column {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        @include BruceBreakpoint('small') {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-always {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n",
+          "code": "\n  .#{$name} {\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_item {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        &-paddingMega {\n            border-left: 4rem solid transparent;\n            border-right: 4rem solid transparent;\n        }\n\n        &-paddingKilo {\n            border-left: 2rem solid transparent;\n            border-right: 2rem solid transparent;\n        }\n\n        &-padding {\n            border-left: 1rem solid transparent;\n            border-right: 1rem solid transparent;\n        }\n\n        &-paddingMilli {\n            border-left: .5rem solid transparent;\n            border-right: .5rem solid transparent;\n        }\n\n        &:first-child {\n            border-left: 0;\n        }\n\n        &:last-child {\n            border-right: 0;\n        }\n\n        @include BruceGridWidths($number, \".#{$name}_item\", \"-always\");\n        @include BruceBreakpoint('small') {\n          @include BruceGridWidths($number, \".#{$name}_item\");\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n  }\n",
           "line": {
-            "start": 70,
+            "start": 43,
             "end": 100
           }
         }
@@ -991,15 +991,15 @@
   {
     "description": "\nCreate a table grid\n",
     "commentRange": {
-      "start": 64,
-      "end": 68
+      "start": 37,
+      "end": 41
     },
     "context": {
       "type": "mixin",
       "name": "BruceGrid",
-      "code": "\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_column {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        @include BruceBreakpoint('small') {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-always {\n            @include BruceGridWidths($number, &);\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n",
+      "code": "\n  .#{$name} {\n    box-sizing: border-box;\n    display: table;\n    table-layout: fixed;\n    width: 100%;\n\n    &-auto {\n        table-layout: auto;\n    }\n\n    &_item {\n        box-sizing: border-box;\n        display: block;\n        vertical-align: top;\n\n        &-paddingMega {\n            border-left: 4rem solid transparent;\n            border-right: 4rem solid transparent;\n        }\n\n        &-paddingKilo {\n            border-left: 2rem solid transparent;\n            border-right: 2rem solid transparent;\n        }\n\n        &-padding {\n            border-left: 1rem solid transparent;\n            border-right: 1rem solid transparent;\n        }\n\n        &-paddingMilli {\n            border-left: .5rem solid transparent;\n            border-right: .5rem solid transparent;\n        }\n\n        &:first-child {\n            border-left: 0;\n        }\n\n        &:last-child {\n            border-right: 0;\n        }\n\n        @include BruceGridWidths($number, \".#{$name}_item\", \"-always\");\n        @include BruceBreakpoint('small') {\n          @include BruceGridWidths($number, \".#{$name}_item\");\n        }\n\n        &-shrink {\n            white-space: nowrap;\n            width: 1px;\n        }\n    }\n\n    @content;\n  }\n",
       "line": {
-        "start": 70,
+        "start": 43,
         "end": 100
       }
     },
@@ -1167,6 +1167,134 @@
     "file": {
       "path": "mixins/_size.scss",
       "name": "_size.scss"
+    }
+  },
+  {
+    "description": "\nGenerate a spruce child relationship\n",
+    "commentRange": {
+      "start": 1,
+      "end": 5
+    },
+    "context": {
+      "type": "mixin",
+      "name": "SpruceChild",
+      "code": "\n    @if $name != null {\n        &_#{$name} {\n            @content;\n        }\n    }\n    @else {\n        @content;\n    }\n",
+      "line": {
+        "start": 6,
+        "end": 15
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "string",
+        "name": "name"
+      }
+    ],
+    "access": "public",
+    "content": "",
+    "require": [],
+    "file": {
+      "path": "mixins/_spruceChild.scss",
+      "name": "_spruceChild.scss"
+    }
+  },
+  {
+    "description": "\nGenerate a spruce component\n",
+    "commentRange": {
+      "start": 1,
+      "end": 5
+    },
+    "context": {
+      "type": "mixin",
+      "name": "SpruceComponent",
+      "code": "\n    @if $name != null {\n        .#{$name} {\n            @content;\n        }\n    }\n    @else {\n        @content;\n    }\n",
+      "line": {
+        "start": 6,
+        "end": 15
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "string",
+        "name": "name"
+      }
+    ],
+    "access": "public",
+    "content": "",
+    "require": [],
+    "file": {
+      "path": "mixins/_spruceComponent.scss",
+      "name": "_spruceComponent.scss"
+    }
+  },
+  {
+    "description": "\nGenerate a spruce modifier relationship\n",
+    "commentRange": {
+      "start": 1,
+      "end": 5
+    },
+    "context": {
+      "type": "mixin",
+      "name": "SpruceModifier",
+      "code": "\n    @if $name != null {\n        &-#{$name} {\n            @content;\n        }\n    }\n    @else {\n        @content;\n    }\n",
+      "line": {
+        "start": 6,
+        "end": 15
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "string",
+        "name": "name"
+      }
+    ],
+    "access": "public",
+    "content": "",
+    "require": [],
+    "file": {
+      "path": "mixins/_spruceModifier.scss",
+      "name": "_spruceModifier.scss"
+    }
+  },
+  {
+    "description": "\nGenerate a spruce peer relationship\n",
+    "commentRange": {
+      "start": 1,
+      "end": 5
+    },
+    "context": {
+      "type": "mixin",
+      "name": "SprucePeer",
+      "code": "\n    @if $name != null {\n        &--#{$name} {\n            @content;\n        }\n    }\n    @else {\n        @content;\n    }\n",
+      "line": {
+        "start": 6,
+        "end": 15
+      }
+    },
+    "group": [
+      "mixin"
+    ],
+    "parameter": [
+      {
+        "type": "string",
+        "name": "name"
+      }
+    ],
+    "access": "public",
+    "content": "",
+    "require": [],
+    "file": {
+      "path": "mixins/_sprucePeer.scss",
+      "name": "_sprucePeer.scss"
     }
   }
 ]
