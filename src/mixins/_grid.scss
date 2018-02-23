@@ -1,65 +1,37 @@
+@mixin BruceGridWidths($number, $base, $name) {
 
-
-@mixin BruceGridWidths($number, $name) {
-    display: table-cell;
-    margin: 0;
-
-    &-paddingMega {
-        border-left: 4rem solid transparent;
-        border-right: 4rem solid transparent;
-    }
-
-    &-paddingKilo {
-        border-left: 2rem solid transparent;
-        border-right: 2rem solid transparent;
-    }
-
-    &-padding {
-        border-left: 1rem solid transparent;
-        border-right: 1rem solid transparent;
-    }
-
-    &-paddingMilli {
-        border-left: .5rem solid transparent;
-        border-right: .5rem solid transparent;
-    }
-
-    &:first-child {
-        border-left: 0;
-    }
-
-    &:last-child {
-        border-right: 0;
+    #{$name} {
+        display: table-cell;
+        margin: 0;
     }
 
     // column widths
     @for $i from 1 through $number {
-        &-#{$i} {
+        #{$name}-#{$i} {
             width: (100% / $number) * $i;
 
             // quash borders on correct sides of swapped 2 column grids
-            &#{$name}-push#{$number - $i} {
+            #{$base}-push#{$number - $i} {
                 border-right: 0;
             }
 
-            &#{$name}-pull#{$number - $i} {
+            #{$base}-pull#{$number - $i} {
                 border-left: 0;
             }
         }
 
         // pushing and pulling columns
-        &-push#{$i} {
+        #{$base}-push#{$i} {
             left: (100% / $number) * $i;
             position: relative;
         }
 
-        &-pull#{$i} {
+        #{$base}-pull#{$i} {
             position: relative;
             right: (100% / $number) * $i;
         }
     }
 }
-
 
 ///
 /// Create a table grid
@@ -67,7 +39,8 @@
 /// @param {number} $number
 ///
 
-@mixin BruceGrid($number: 12) {
+@mixin BruceGrid($name: 'Grid', $number: 12) {
+  .#{$name} {
     box-sizing: border-box;
     display: table;
     table-layout: fixed;
@@ -77,17 +50,37 @@
         table-layout: auto;
     }
 
-    &_column {
+    &_item {
         box-sizing: border-box;
         display: block;
         vertical-align: top;
 
-        @include BruceBreakpoint('small') {
-            @include BruceGridWidths($number, &);
+        &-paddingMega {
+            border-left: 4rem solid transparent;
+            border-right: 4rem solid transparent;
         }
 
-        &-always {
-            @include BruceGridWidths($number, &);
+        &-paddingKilo {
+            border-left: 2rem solid transparent;
+            border-right: 2rem solid transparent;
+        }
+
+        &-padding {
+            border-left: 1rem solid transparent;
+            border-right: 1rem solid transparent;
+        }
+
+        &-paddingMilli {
+            border-left: .5rem solid transparent;
+            border-right: .5rem solid transparent;
+        }
+
+        &:first-child {
+            border-left: 0;
+        }
+
+        &:last-child {
+            border-right: 0;
         }
 
         &-shrink {
@@ -95,6 +88,14 @@
             width: 1px;
         }
     }
+  }
 
+  @include BruceGridWidths($number, ".#{$name}_item", ".#{$name}_item-always.#{$name}_item");
+  @include BruceBreakpoint('small') {
+    @include BruceGridWidths($number, ".#{$name}_item", ".#{$name}_item");
+  }
+
+  .#{$name} {
     @content;
+  }
 }
