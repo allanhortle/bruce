@@ -56,26 +56,6 @@
         display: block;
         vertical-align: top;
 
-        &-paddingMega {
-            border-left: 4rem solid transparent;
-            border-right: 4rem solid transparent;
-        }
-
-        &-paddingKilo {
-            border-left: 2rem solid transparent;
-            border-right: 2rem solid transparent;
-        }
-
-        &-padding {
-            border-left: 1rem solid transparent;
-            border-right: 1rem solid transparent;
-        }
-
-        &-paddingMilli {
-            border-left: .5rem solid transparent;
-            border-right: .5rem solid transparent;
-        }
-
         &:first-child {
             border-left: 0;
         }
