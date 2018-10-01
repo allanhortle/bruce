@@ -12,6 +12,10 @@
     "Sass",
     "CSS"
   ],
+  "files": [
+    "src",
+    "bruce.scss"
+  ],
   "author": "Allan Hortle",
   "license": "ISC",
   "bugs": {
