@@ -53,7 +53,7 @@
                 @content;
             }
         }
-        @elseif type-of($first) == 'number' {
+        @else if type-of($first) == 'number' {
             @media (min-width: #{$first}) and (max-width: #{$breakpoint}) {
                 @content;
             }
