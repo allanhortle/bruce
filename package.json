@@ -42,7 +42,7 @@
     "json-loader": "^0.5.3",
     "jsonfile": "^2.2.2",
     "kss": "2.1.0",
-    "lodash": "^3.10.1",
+    "lodash": "4.17.5",
     "marked": "^0.3.5",
     "node-sass": "^3.3.3",
     "postcss": "^5.0.8",
